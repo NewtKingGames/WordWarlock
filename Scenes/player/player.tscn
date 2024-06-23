@@ -171,7 +171,7 @@ shape = SubResource("CapsuleShape2D_j7h4y")
 script = ExtResource("7_aw5ht")
 
 [node name="CastingText" type="Label" parent="."]
-modulate = Color(0.85098, 0.65098, 0.521569, 1)
+modulate = Color(0.85098, 0.294118, 0.270588, 1)
 offset_left = -33.0
 offset_top = -42.0
 offset_right = 37.0
