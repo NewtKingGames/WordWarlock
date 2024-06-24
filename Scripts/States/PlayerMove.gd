@@ -6,11 +6,7 @@ class_name PlayerMove
 
 
 func Enter():
-	print("Entering move state")
 	character_animated_sprite_2d.play("walk")
-
-func Exit():
-	print("Exiting move")
 	
 func Update(_delta: float):
 	var direction = Input.get_vector("left", "right", "up", "down")

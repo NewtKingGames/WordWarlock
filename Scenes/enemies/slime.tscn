@@ -77,8 +77,11 @@ script = ExtResource("5_h57eh")
 [node name="RecevingDamage" type="Node" parent="StateMachine"]
 
 [node name="SlimeAttackArea" type="Area2D" parent="."]
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeAttackArea"]
 position = Vector2(0, -7)
-scale = Vector2(0.548575, -0.880293)
+scale = Vector2(0.792337, -0.977859)
 shape = SubResource("CircleShape2D_spwkb")
+
+[connection signal="body_entered" from="SlimeAttackArea" to="." method="_on_slime_attack_area_body_entered"]
