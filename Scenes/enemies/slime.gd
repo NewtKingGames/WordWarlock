@@ -22,5 +22,4 @@ func _process(delta):
 func _on_slime_attack_area_body_entered(body):
 	# TODO - could reconsider having the attack be a state?
 	if body is Player:
-		print("Colliding with player")
 		body.hit(10, velocity.normalized())

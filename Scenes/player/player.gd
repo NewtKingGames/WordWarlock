@@ -26,6 +26,7 @@ func _physics_process(delta):
 
 func hit(damage_number: float, damage_direction: Vector2):
 	if can_take_damage:
+		Globals.player_health -= damage_number
 		can_take_damage = false
 		taking_damage = true
 		invulnerability_timer.start()

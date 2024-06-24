@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=9 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
 [ext_resource type="Script" path="res://scenes/CharacterProjectiles.gd" id="3_av28w"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="4_0of1q"]
+[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="4_aaijt"]
 [ext_resource type="Texture2D" uid="uid://5purwjc683qc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/full tilemap.png" id="4_wcbua"]
 [ext_resource type="PackedScene" uid="uid://ooxyv5avybtt" path="res://Scenes/enemies/slime.tscn" id="5_8hhxu"]
 
@@ -224,6 +225,7 @@ position = Vector2(338, 220)
 zoom = Vector2(4, 4)
 process_callback = 0
 position_smoothing_enabled = true
+script = ExtResource("4_aaijt")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.45
