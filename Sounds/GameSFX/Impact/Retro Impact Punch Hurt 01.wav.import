@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://hh5emhxlvdrf"
+path="res://.godot/imported/Retro Impact Punch Hurt 01.wav-cee24125f1215ebc8e698f32a94b08f4.sample"
+
+[deps]
+
+source_file="res://Sounds/GameSFX/Impact/Retro Impact Punch Hurt 01.wav"
+dest_files=["res://.godot/imported/Retro Impact Punch Hurt 01.wav-cee24125f1215ebc8e698f32a94b08f4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

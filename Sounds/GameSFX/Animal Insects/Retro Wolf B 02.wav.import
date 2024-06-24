@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dklxw1gtkg56t"
+path="res://.godot/imported/Retro Wolf B 02.wav-998d491c45f1d679d9bc7d024d67bece.sample"
+
+[deps]
+
+source_file="res://Sounds/GameSFX/Animal Insects/Retro Wolf B 02.wav"
+dest_files=["res://.godot/imported/Retro Wolf B 02.wav-998d491c45f1d679d9bc7d024d67bece.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

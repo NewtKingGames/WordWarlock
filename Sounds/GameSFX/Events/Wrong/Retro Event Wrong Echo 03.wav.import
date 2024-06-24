@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btg12sx6f8ber"
+path="res://.godot/imported/Retro Event Wrong Echo 03.wav-22121b70771fd6f5242287034eb19e95.sample"
+
+[deps]
+
+source_file="res://Sounds/GameSFX/Events/Wrong/Retro Event Wrong Echo 03.wav"
+dest_files=["res://.godot/imported/Retro Event Wrong Echo 03.wav-22121b70771fd6f5242287034eb19e95.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

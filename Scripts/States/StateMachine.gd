@@ -1,7 +1,9 @@
 extends Node
+class_name StateMachine
 
 @export var initial_state: State
 var current_state : State
+# Dictionary of states, keyed by the state node name
 var states : Dictionary = {}
 
 func _ready():
@@ -28,11 +30,24 @@ func _input(event):
 		current_state.Handle_Input(event)
 	
 	
-func on_child_transition(state, new_state_name):
-	print("transitioning!")
+func on_child_transition(state: State, new_state_name: String):
 	if state != current_state:
 		return
 	
+	var new_state = states.get(new_state_name.to_lower())
+	if !new_state:
+		return
+	
+	if current_state:
+		current_state.Exit()
+
+	new_state.Enter()
+	current_state = new_state
+
+# Special transition for state changes from outside the characters control like damage
+func on_outside_transition(new_state_name: String):
+	if current_state.name.to_lower() == new_state_name.to_lower():
+		return
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
 		return

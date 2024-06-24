@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ccaj71lguiagm"
+path="res://.godot/imported/Retro Vehicle Car 03.wav-6ead03efa596f36970969a78f2c6765a.sample"
+
+[deps]
+
+source_file="res://Sounds/GameSFX/Vehicles/Retro Vehicle Car 03.wav"
+dest_files=["res://.godot/imported/Retro Vehicle Car 03.wav-6ead03efa596f36970969a78f2c6765a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

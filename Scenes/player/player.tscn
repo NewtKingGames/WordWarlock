@@ -1,13 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=34 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_435rg"]
 [ext_resource type="Script" path="res://Scenes/player/player.gd" id="1_gp0yp"]
 [ext_resource type="Script" path="res://Scripts/States/PlayerIdle.gd" id="2_66bxp"]
 [ext_resource type="Texture2D" uid="uid://p6chnoentvn7" path="res://Sprites/Mages Character Pack by RgsDev/Mage 2/16x16 Mage 2.png" id="4_fvahh"]
-[ext_resource type="Script" path="res://Scripts/States/Move.gd" id="4_kdlvy"]
+[ext_resource type="Script" path="res://Scripts/States/PlayerMove.gd" id="4_gmyaw"]
 [ext_resource type="Script" path="res://Scripts/States/Cast.gd" id="5_lstil"]
+[ext_resource type="Script" path="res://Scripts/States/damage.gd" id="6_e403r"]
 [ext_resource type="Script" path="res://Scripts/SpellCaster.gd" id="7_aw5ht"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="8_n785n"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3534"]
 atlas = ExtResource("4_fvahh")
@@ -16,6 +18,14 @@ region = Rect2(0, 384, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3p8d"]
 atlas = ExtResource("4_fvahh")
 region = Rect2(64, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fplit"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn381"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(0, 320, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8vf6"]
 atlas = ExtResource("4_fvahh")
@@ -84,6 +94,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fplit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn381")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fplit")
+}],
+"loop": false,
+"name": &"damage",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_m8vf6")
 }, {
 "duration": 1.0,
@@ -137,7 +161,69 @@ radius = 7.0
 
 [sub_resource type="Theme" id="Theme_oa0th"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_p2rtu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.25]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.24]
+}
+
+[sub_resource type="Animation" id="Animation_ukjto"]
+resource_name = "light_flicker"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.1, 0.3, 0.242857, 0.185714, 0.128571]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.24, 0.45, 0.5, 0.1, 0.24]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6648b"]
+_data = {
+"RESET": SubResource("Animation_p2rtu"),
+"light_flicker": SubResource("Animation_ukjto")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 29
 script = ExtResource("1_gp0yp")
 
@@ -149,15 +235,18 @@ initial_state = NodePath("Move")
 script = ExtResource("2_66bxp")
 
 [node name="Move" type="Node" parent="StateMachine"]
-script = ExtResource("4_kdlvy")
+script = ExtResource("4_gmyaw")
 
 [node name="Cast" type="Node" parent="StateMachine"]
 script = ExtResource("5_lstil")
 
+[node name="Damage" type="Node" parent="StateMachine"]
+script = ExtResource("6_e403r")
+
 [node name="CharacterAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -16)
 sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"cast_spell"
+animation = &"damage"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -166,6 +255,14 @@ scale = Vector2(1, 0.60263)
 shape = SubResource("CapsuleShape2D_j7h4y")
 
 [node name="Timers" type="Node" parent="."]
+
+[node name="InvulnerabilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
+[node name="StunlockTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
 
 [node name="SpellCaster" type="Node" parent="."]
 script = ExtResource("7_aw5ht")
@@ -182,4 +279,20 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -10)
+color = Color(1, 0.631373, 0.101961, 1)
+energy = 0.25
+texture = ExtResource("9_h1ujj")
+texture_scale = 0.24
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
+libraries = {
+"": SubResource("AnimationLibrary_6648b")
+}
+autoplay = "light_flicker"
+
 [connection signal="CastSpell" from="StateMachine/Cast" to="SpellCaster" method="_on_cast_cast_spell"]
+[connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
+[connection signal="timeout" from="Timers/StunlockTimer" to="." method="_on_stunlock_timer_timeout"]
+[connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]

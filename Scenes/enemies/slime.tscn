@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://ooxyv5avybtt"]
+
+[ext_resource type="Texture2D" uid="uid://cv8iq6fbf1h6g" path="res://Sprites/slime_green.png" id="1_ib7ob"]
+[ext_resource type="Script" path="res://Scenes/enemies/slime.gd" id="1_un4ex"]
+[ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="3_7xhfc"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="4_rkoo3"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_chase.gd" id="5_h57eh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2x3w"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v8xx"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e08j5"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4xxj"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_udn2c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2x3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v8xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e08j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4xxj")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eaulm"]
+height = 39.0096
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_spwkb"]
+
+[node name="Slime" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 23
+script = ExtResource("1_un4ex")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_udn2c")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.510008
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.96046e-08, -7)
+scale = Vector2(0.555941, 0.410156)
+shape = SubResource("CapsuleShape2D_eaulm")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_7xhfc")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_rkoo3")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("5_h57eh")
+
+[node name="RecevingDamage" type="Node" parent="StateMachine"]
+
+[node name="SlimeAttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeAttackArea"]
+position = Vector2(0, -7)
+scale = Vector2(0.548575, -0.880293)
+shape = SubResource("CircleShape2D_spwkb")
