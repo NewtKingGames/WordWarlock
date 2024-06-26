@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=42 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_435rg"]
 [ext_resource type="Script" path="res://Scenes/player/player.gd" id="1_gp0yp"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="8_n785n"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
 [ext_resource type="Script" path="res://Scenes/player/AimingLine.gd" id="12_en663"]
+[ext_resource type="AudioStream" uid="uid://86bl4nq6ymup" path="res://Sounds/possible_damage_two.wav" id="13_0r2mo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3534"]
 atlas = ExtResource("4_fvahh")
@@ -345,6 +346,12 @@ libraries = {
 "": SubResource("AnimationLibrary_6648b")
 }
 autoplay = "light_flicker"
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="DamageNoise" type="AudioStreamPlayer2D" parent="Sounds"]
+position = Vector2(1, -8)
+stream = ExtResource("13_0r2mo")
 
 [connection signal="CastSpell" from="StateMachine/Cast" to="SpellCaster" method="_on_cast_cast_spell"]
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

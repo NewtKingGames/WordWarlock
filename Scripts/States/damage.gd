@@ -2,7 +2,11 @@ extends State
 
 @onready var player = $"../.."
 @onready var character_animated_sprite = $"../../CharacterAnimatedSprite2D"
+@onready var damage_noise: AudioStreamPlayer2D = $"../../Sounds/DamageNoise"
 
+func Enter():
+	# TODO - fix this audio player only playing audio track in left ear channel...
+	damage_noise.play()
 
 func Exit():
 	player.taking_damage = false
