@@ -21,5 +21,6 @@ func _process(delta):
 
 func _on_slime_attack_area_body_entered(body):
 	# TODO - could reconsider having the attack be a state?
+	#^If you do, you should have the slime stop moving temporarily
 	if body is Player:
 		body.hit(10, velocity.normalized())

@@ -96,7 +96,7 @@ _data = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_crf43")
 autoplay = "default"
-frame_progress = 0.482959
+frame_progress = 0.215546
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 2.0
