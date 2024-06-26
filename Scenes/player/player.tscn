@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=40 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_435rg"]
 [ext_resource type="Script" path="res://Scenes/player/player.gd" id="1_gp0yp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/States/Cast.gd" id="5_lstil"]
 [ext_resource type="Script" path="res://Scripts/States/damage.gd" id="6_e403r"]
 [ext_resource type="Script" path="res://Scripts/SpellCaster.gd" id="7_aw5ht"]
+[ext_resource type="Script" path="res://Scenes/player/Death.gd" id="7_ntvts"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="8_n785n"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
 
@@ -26,6 +27,26 @@ region = Rect2(0, 256, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jn381"]
 atlas = ExtResource("4_fvahh")
 region = Rect2(0, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgl85"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(0, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_un5j2"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(64, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq4fo"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(128, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq8md"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(192, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jslj2"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(256, 320, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8vf6"]
 atlas = ExtResource("4_fvahh")
@@ -105,6 +126,26 @@ animations = [{
 "loop": false,
 "name": &"damage",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgl85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_un5j2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq4fo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq8md")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jslj2")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -243,11 +284,16 @@ script = ExtResource("5_lstil")
 [node name="Damage" type="Node" parent="StateMachine"]
 script = ExtResource("6_e403r")
 
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("7_ntvts")
+
 [node name="CharacterAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -16)
 sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"damage"
+animation = &"death"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -8)
