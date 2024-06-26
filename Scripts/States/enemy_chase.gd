@@ -6,3 +6,10 @@ func Update(_delta):
 	if direction.length() > 100:
 		Transitioned.emit(self, "idle")
 	enemy.velocity = direction.normalized() * 30
+
+
+
+func _on_slime_attack_area_body_entered(body: Node2D):
+	if body is Player:
+		body.hit(10, enemy.velocity.normalized())
+		Transitioned.emit(self, "attack")

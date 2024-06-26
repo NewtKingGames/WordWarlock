@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ooxyv5avybtt"]
+[gd_scene load_steps=14 format=3 uid="uid://ooxyv5avybtt"]
 
 [ext_resource type="Texture2D" uid="uid://cv8iq6fbf1h6g" path="res://Sprites/slime_green.png" id="1_ib7ob"]
 [ext_resource type="Script" path="res://Scenes/enemies/slime.gd" id="1_un4ex"]
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="3_7xhfc"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="4_rkoo3"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_chase.gd" id="5_h57eh"]
+[ext_resource type="Script" path="res://Scenes/enemies/Node.gd" id="6_xgaof"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2x3w"]
 atlas = ExtResource("1_ib7ob")
@@ -76,6 +77,9 @@ script = ExtResource("5_h57eh")
 
 [node name="RecevingDamage" type="Node" parent="StateMachine"]
 
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_xgaof")
+
 [node name="SlimeAttackArea" type="Area2D" parent="."]
 collision_layer = 4
 
@@ -84,4 +88,11 @@ position = Vector2(0, -7)
 scale = Vector2(0.792337, -0.977859)
 shape = SubResource("CircleShape2D_spwkb")
 
-[connection signal="body_entered" from="SlimeAttackArea" to="." method="_on_slime_attack_area_body_entered"]
+[node name="Timers" type="Node" parent="."]
+
+[node name="AttackCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="body_entered" from="SlimeAttackArea" to="StateMachine/Chase" method="_on_slime_attack_area_body_entered"]
+[connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_attack_cooldown_timer_timeout"]

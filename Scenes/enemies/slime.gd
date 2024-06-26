@@ -16,11 +16,3 @@ func _process(delta):
 		animated_sprite_2d.flip_h = true
 	animated_sprite_2d.play("walk")
 	move_and_slide()
-	
-
-
-func _on_slime_attack_area_body_entered(body):
-	# TODO - could reconsider having the attack be a state?
-	#^If you do, you should have the slime stop moving temporarily
-	if body is Player:
-		body.hit(10, velocity.normalized())
