@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="3_7xhfc"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="4_rkoo3"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_chase.gd" id="5_h57eh"]
-[ext_resource type="Script" path="res://Scenes/enemies/Node.gd" id="6_xgaof"]
+[ext_resource type="Script" path="res://Scenes/enemies/EnemyAttackState.gd" id="6_kf4tb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2x3w"]
 atlas = ExtResource("1_ib7ob")
@@ -75,10 +75,10 @@ script = ExtResource("4_rkoo3")
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource("5_h57eh")
 
-[node name="RecevingDamage" type="Node" parent="StateMachine"]
+[node name="RecevingDamageTODO" type="Node" parent="StateMachine"]
 
 [node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource("6_xgaof")
+script = ExtResource("6_kf4tb")
 
 [node name="SlimeAttackArea" type="Area2D" parent="."]
 collision_layer = 4

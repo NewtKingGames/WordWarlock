@@ -1,12 +1,11 @@
 extends Area2D
 
+var direction: Vector2 = Vector2.UP
+var speed: float = 10
 
-func _ready():
-	pass
+func _update(delta):
+	position += direction*speed*delta
 
-func _update(_delta):
-	pass
-
-func _on_body_entered(body):
+func _on_body_entered(body: Node2D):
 	print("Fireball hit something!")
 	print(body)

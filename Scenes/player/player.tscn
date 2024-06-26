@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=41 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_435rg"]
 [ext_resource type="Script" path="res://Scenes/player/player.gd" id="1_gp0yp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scenes/player/Death.gd" id="7_ntvts"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="8_n785n"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
+[ext_resource type="Script" path="res://Scenes/player/AimingLine.gd" id="12_en663"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3534"]
 atlas = ExtResource("4_fvahh")
@@ -268,6 +269,13 @@ _data = {
 collision_mask = 29
 script = ExtResource("1_gp0yp")
 
+[node name="AimingLine" type="Line2D" parent="."]
+position = Vector2(1, -8)
+points = PackedVector2Array(0, 0)
+width = 1.0
+default_color = Color(1, 0.415686, 0.196078, 1)
+script = ExtResource("12_en663")
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_435rg")
 initial_state = NodePath("Move")
@@ -342,3 +350,4 @@ autoplay = "light_flicker"
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="." method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
+[connection signal="spell_cast" from="SpellCaster" to="." method="_on_spell_caster_spell_cast"]
