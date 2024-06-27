@@ -1,7 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bivf388fm7ku2"]
+[gd_scene load_steps=11 format=3 uid="uid://bivf388fm7ku2"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/fireball.gd" id="1_d0fq5"]
 [ext_resource type="Texture2D" uid="uid://da0bavei3vuwr" path="res://Sprites/Mages Character Pack by RgsDev/Mage 2/16x16 Mage 2 attacks.png" id="1_qd28e"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="3_s3q8o"]
+[ext_resource type="AudioStream" uid="uid://ctelf2jh6lbem" path="res://Sounds/GameSFX/Explosion/Retro Explosion Short 01.wav" id="4_20to5"]
+[ext_resource type="AudioStream" uid="uid://c4gs0oawuiu1r" path="res://Sounds/GameSFX/Impact/Retro Impact 20.wav" id="5_my61c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pdytb"]
+radius = 7.26748
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g07pr"]
 atlas = ExtResource("1_qd28e")
@@ -32,19 +38,34 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pdytb"]
-
 [node name="Fireball" type="Area2D"]
+scale = Vector2(4, 4)
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_d0fq5")
+speed = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.762435, 0.505527)
+shape = SubResource("CircleShape2D_pdytb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2vh2g")
-frame_progress = 0.69751
+autoplay = "default"
+frame_progress = 0.717145
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.722396, 0.65304)
-shape = SubResource("CircleShape2D_pdytb")
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.905882, 0.388235, 0.0352941, 1)
+energy = 0.6
+texture = ExtResource("3_s3q8o")
+texture_scale = 0.7
+
+[node name="EmitNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_20to5")
+autoplay = true
+
+[node name="ImpactNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_my61c")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="ImpactNoise" to="." method="_on_impact_noise_finished"]

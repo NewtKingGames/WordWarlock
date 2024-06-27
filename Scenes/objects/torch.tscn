@@ -101,6 +101,7 @@ frame_progress = 0.906179
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 2.0
+shadow_enabled = true
 texture = ExtResource("2_807d4")
 texture_scale = 0.1
 

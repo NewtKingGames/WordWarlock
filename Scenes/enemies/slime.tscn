@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ooxyv5avybtt"]
+[gd_scene load_steps=19 format=3 uid="uid://ooxyv5avybtt"]
 
 [ext_resource type="Texture2D" uid="uid://cv8iq6fbf1h6g" path="res://Sprites/slime_green.png" id="1_ib7ob"]
 [ext_resource type="Script" path="res://Scenes/enemies/slime.gd" id="1_un4ex"]
@@ -6,6 +6,23 @@
 [ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="4_rkoo3"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_chase.gd" id="5_h57eh"]
 [ext_resource type="Script" path="res://Scenes/enemies/EnemyAttackState.gd" id="6_kf4tb"]
+[ext_resource type="Script" path="res://Scripts/States/EnemyDamage.gd" id="6_min30"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arm7j"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8etya"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07e2r"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8gdh"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(0, 48, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2x3w"]
 atlas = ExtResource("1_ib7ob")
@@ -25,6 +42,23 @@ region = Rect2(72, 24, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_udn2c"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arm7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8etya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07e2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8gdh")
+}],
+"loop": false,
+"name": &"damage",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o2x3w")
@@ -57,9 +91,10 @@ script = ExtResource("1_un4ex")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_udn2c")
-animation = &"walk"
+animation = &"damage"
 autoplay = "walk"
-frame_progress = 0.510008
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.96046e-08, -7)
@@ -76,7 +111,8 @@ script = ExtResource("4_rkoo3")
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource("5_h57eh")
 
-[node name="RecevingDamageTODO" type="Node" parent="StateMachine"]
+[node name="Damage" type="Node" parent="StateMachine"]
+script = ExtResource("6_min30")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_kf4tb")
@@ -95,5 +131,10 @@ shape = SubResource("CircleShape2D_spwkb")
 wait_time = 0.6
 one_shot = true
 
+[node name="StunlockTimer" type="Timer" parent="Timers"]
+wait_time = 0.4
+one_shot = true
+
 [connection signal="body_entered" from="SlimeAttackArea" to="StateMachine/Chase" method="_on_slime_attack_area_body_entered"]
 [connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_attack_cooldown_timer_timeout"]
+[connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]

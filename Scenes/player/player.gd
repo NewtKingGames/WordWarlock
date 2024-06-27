@@ -2,9 +2,10 @@ extends CharacterBody2D
 class_name Player
 
 # TODO reconsile name between, spell cast and spell shot
-signal spell_shot(spell_name: String)
+signal spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name: String)
 
 @onready var character_animated_sprite: AnimatedSprite2D = $CharacterAnimatedSprite2D
+@onready var light_occluder_2d = $LightOccluder2D
 @onready var invulnerability_timer: Timer = $Timers/InvulnerabilityTimer
 @onready var stunlock_timer: Timer = $Timers/StunlockTimer
 @onready var state_machine: StateMachine = $StateMachine
@@ -17,6 +18,7 @@ var aiming_spell: bool = true
 
 var knockback_direction: Vector2 = Vector2.ZERO
 @export var knockback_speed: float = 100
+@export var spell_spawn_distance: float = 100 # Distance away from the player the spell will spawn
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
@@ -28,15 +30,22 @@ func _physics_process(delta):
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
 		if Input.is_action_just_pressed("cast_spell"):
 			# TODO - change how we're passing spell information around
-			spell_shot.emit("FIREBALL")
+			# Get vector the player is looking towards
+			var spell_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
+			# Put the spell from the aiming origin + some distance the player is looking
+			# we have to add global_position and the relative distance aiming_line is away from the player
+			var spell_position: Vector2 = (global_position + aiming_line.position) + spell_direction*spell_spawn_distance
+			spell_shot.emit(spell_position, spell_direction, "FIREBALL")
 			aiming_spell = false
 	# Only flip sprite when player is moving from direct input
 	if not taking_damage:
 		if aiming_spell:
 			if get_local_mouse_position().x > 0:
 				character_animated_sprite.flip_h = false
+				light_occluder_2d.scale.x = 1
 			else:
 				character_animated_sprite.flip_h = true
+				light_occluder_2d.scale.x = -1
 		else:
 			if velocity.x > 0:
 				character_animated_sprite.flip_h = false

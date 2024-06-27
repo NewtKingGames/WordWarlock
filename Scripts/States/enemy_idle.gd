@@ -9,4 +9,5 @@ func Update(_delta: float):
 	var direction = player.global_position - enemy.global_position
 	if direction.length() <= 400:
 		Transitioned.emit(self, "chase")
+	enemy.animated_sprite_2d.play("walk")
 

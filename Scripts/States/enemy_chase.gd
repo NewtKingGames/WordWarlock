@@ -6,6 +6,7 @@ func Update(_delta):
 	if direction.length() > 400:
 		Transitioned.emit(self, "idle")
 	enemy.velocity = direction.normalized() * enemy.walk_speed
+	enemy.animated_sprite_2d.play("walk")
 
 
 
