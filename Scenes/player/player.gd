@@ -10,7 +10,7 @@ signal spell_shot(spell_name: String)
 @onready var state_machine: StateMachine = $StateMachine
 @onready var aiming_line = $AimingLine
 
-const walk_speed: float = 90
+const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
 var aiming_spell: bool = true

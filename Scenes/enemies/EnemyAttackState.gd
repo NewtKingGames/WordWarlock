@@ -19,7 +19,7 @@ func _on_attack_cooldown_timer_timeout():
 	# If the player is nearby transition to chase
 	# If the player is somehow far away transition to idle
 	var direction: Vector2 = player.global_position - enemy.global_position
-	if direction.length() <= 100:
+	if direction.length() <= 400:
 		Transitioned.emit(self, "chase")
 	else:
 		Transitioned.emit(self, "idle")

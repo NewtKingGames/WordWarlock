@@ -49,6 +49,7 @@ height = 39.0096
 [sub_resource type="CircleShape2D" id="CircleShape2D_spwkb"]
 
 [node name="Slime" type="CharacterBody2D"]
+scale = Vector2(4, 4)
 collision_layer = 4
 collision_mask = 23
 script = ExtResource("1_un4ex")

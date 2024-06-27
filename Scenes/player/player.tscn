@@ -267,6 +267,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+scale = Vector2(4, 4)
 collision_mask = 29
 script = ExtResource("1_gp0yp")
 
@@ -299,10 +300,8 @@ script = ExtResource("7_ntvts")
 [node name="CharacterAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -16)
 sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
-frame = 4
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -8)
@@ -347,7 +346,7 @@ libraries = {
 }
 autoplay = "light_flicker"
 
-[node name="Sounds" type="Node" parent="."]
+[node name="Sounds" type="Node2D" parent="."]
 
 [node name="DamageNoise" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(1, -8)
