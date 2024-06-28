@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ooxyv5avybtt"]
+[gd_scene load_steps=31 format=3 uid="uid://ooxyv5avybtt"]
 
 [ext_resource type="Texture2D" uid="uid://cv8iq6fbf1h6g" path="res://Sprites/slime_green.png" id="1_ib7ob"]
 [ext_resource type="Script" path="res://Scenes/enemies/slime.gd" id="1_un4ex"]
@@ -45,6 +45,22 @@ region = Rect2(24, 0, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdb22"]
 atlas = ExtResource("3_aesov")
 region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teldr"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8btt"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcim4"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql14c"]
+atlas = ExtResource("1_ib7ob")
+region = Rect2(72, 24, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2x3w"]
 atlas = ExtResource("1_ib7ob")
@@ -103,6 +119,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_teldr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8btt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcim4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql14c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_o2x3w")
 }, {
 "duration": 1.0,
@@ -124,6 +157,9 @@ height = 39.0096
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spwkb"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ajr77"]
+polygon = PackedVector2Array(-5, -14.75, 0, -15.25, 5, -15, 7, -4, 7.25, 0, -7, 0, -7, -3.5, -4.5, -5.75, -5.25, -14.5)
+
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(4, 4)
 collision_layer = 4
@@ -135,7 +171,7 @@ walk_speed = 100.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_udn2c")
-animation = &"death"
+animation = &"idle"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -181,6 +217,9 @@ wait_time = 0.4
 one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ajr77")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Death" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="SlimeAttackArea" to="StateMachine/Chase" method="_on_slime_attack_area_body_entered"]

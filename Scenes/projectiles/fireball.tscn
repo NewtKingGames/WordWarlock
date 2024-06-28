@@ -52,11 +52,12 @@ shape = SubResource("CircleShape2D_pdytb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2vh2g")
 autoplay = "default"
-frame_progress = 0.572644
+frame_progress = 0.689279
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.905882, 0.388235, 0.0352941, 1)
 energy = 0.6
+shadow_enabled = true
 texture = ExtResource("3_s3q8o")
 texture_scale = 0.7
 

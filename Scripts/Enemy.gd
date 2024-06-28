@@ -15,6 +15,7 @@ func _ready():
 func hit(damage: float):
 	health -= damage
 	if health <= 0:
+		print("orc dying")
 		state_machine.on_outside_transition("death")
 	else:
 		state_machine.on_outside_transition("damage")
