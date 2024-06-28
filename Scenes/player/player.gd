@@ -75,6 +75,6 @@ func _on_stunlock_timer_timeout():
 	taking_damage = false
 
 
-# TODO whole lot more to do here with regards to creating the spell in game
+# TODO JUST PASS THE ACTUAL spell script or scene??? Level might not even have to care about which spell it is
 func _on_spell_caster_spell_cast(spell_name):
 	aiming_spell = true

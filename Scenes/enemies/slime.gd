@@ -1,7 +1,6 @@
 extends EnemyClass
 class_name Slime
 
-@export var walk_speed: float = 100
 
 
 #func _ready():

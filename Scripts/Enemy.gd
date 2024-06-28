@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name EnemyClass
 
 @export var health: float
-@export var speed: float
+@export var walk_speed: float
 var player: Player
 # This relies on every enemy having a child node "StateMachine"
 @onready var state_machine: StateMachine = $StateMachine
@@ -13,5 +13,8 @@ func _ready():
 	player = get_tree().get_first_node_in_group("player")
 
 func hit(damage: float):
-	print("the enemy is hit!!")
-	state_machine.on_outside_transition("damage")
+	health -= damage
+	if health <= 0:
+		state_machine.on_outside_transition("death")
+	else:
+		state_machine.on_outside_transition("damage")
