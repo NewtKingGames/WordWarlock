@@ -13,8 +13,6 @@ func _ready():
 	player.connect("spell_shot", _on_player_spell_shot)
 	
 func _on_player_spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name: String):
-	print("overall level casting spell")
-	print(spell_name)
 	# it'd be great to have a way to make this spell spawning generic rather than if statements
 	if spell_name == "FIREBALL":
 		var spell: Fireball = fireball_scene.instantiate()

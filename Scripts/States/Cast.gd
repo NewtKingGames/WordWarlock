@@ -23,11 +23,9 @@ func Enter():
 	cast_string = ""
 	casting_text_label.text = cast_string
 	casting_text_label.visible = true
-	print("Entering Cast state")
 
 func Exit():
 	casting_text_label.visible = false
-	print("Exiting cast")
 	
 func Update(_delta: float):
 	# Player Casting Spell

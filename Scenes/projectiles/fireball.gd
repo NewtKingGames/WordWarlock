@@ -19,12 +19,10 @@ func _on_body_entered(body: Node2D):
 	if has_hit:
 		return
 	has_hit = true
-	print("Fireball hit something!")
 	if body is EnemyClass:
-		print("Hit enemy!")
 		body.hit(10) # TODO add constant file with these values
 	else:
-		print("structure")
+		pass
 	# disable properties, play explosion stuff then delete the object
 	impact_noise.play()
 	animated_sprite_2d.visible = false
