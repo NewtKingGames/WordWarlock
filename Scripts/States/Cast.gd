@@ -1,18 +1,22 @@
 extends State
 class_name Cast
 
-signal CastSpell(spell_string: String) 
+signal CastSpell(spell_string: String)
+
+var rng = RandomNumberGenerator.new()
 
 @onready var character_animated_sprite_2d: AnimatedSprite2D = $"../../CharacterAnimatedSprite2D"
 @onready var casting_text_label = $"../../CastingText"
 
-
+# TODO Change the audio on these to be more magical rather than a type writer
+var typing_noises: Array
 var regex: RegEx = RegEx.new()
 var cast_string: String = ""
 
 func _ready():
 	# this currently doesn't allow space bar
 	regex.compile("[a-zA-Z]")
+	typing_noises = $"../../Sounds/TypingSounds".get_children()
 
 func Enter():
 	character_animated_sprite_2d.play("cast_spell")
@@ -42,5 +46,4 @@ func Handle_Input(_event: InputEvent):
 	if regex.search(event_string) and event_string.length() == 1 and not _event.is_echo() and _event.is_pressed():
 		cast_string += event_string
 		casting_text_label.text = cast_string
-		
-		
+		typing_noises[rng.randi_range(0,2)].play()

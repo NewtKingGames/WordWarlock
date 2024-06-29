@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=46 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_435rg"]
 [ext_resource type="Script" path="res://Scenes/player/player.gd" id="1_gp0yp"]
@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
 [ext_resource type="Script" path="res://Scenes/player/AimingLine.gd" id="12_en663"]
 [ext_resource type="AudioStream" uid="uid://86bl4nq6ymup" path="res://Sounds/possible_damage_two.wav" id="13_0r2mo"]
+[ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="14_x12ab"]
+[ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="15_7do8n"]
+[ext_resource type="AudioStream" uid="uid://bjvichsn4626q" path="res://Sounds/typewriterthree.mp3" id="16_303c8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3534"]
 atlas = ExtResource("4_fvahh")
@@ -354,6 +357,17 @@ autoplay = "light_flicker"
 [node name="DamageNoise" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(1, -8)
 stream = ExtResource("13_0r2mo")
+
+[node name="TypingSounds" type="Node2D" parent="Sounds"]
+
+[node name="TypingNoiseOne" type="AudioStreamPlayer2D" parent="Sounds/TypingSounds"]
+stream = ExtResource("14_x12ab")
+
+[node name="TypingNoiseTwo" type="AudioStreamPlayer2D" parent="Sounds/TypingSounds"]
+stream = ExtResource("15_7do8n")
+
+[node name="TypingNoiseThree" type="AudioStreamPlayer2D" parent="Sounds/TypingSounds"]
+stream = ExtResource("16_303c8")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_dtka1")

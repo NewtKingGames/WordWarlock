@@ -769,7 +769,6 @@ script = ExtResource("4_aaijt")
 position = Vector2(0, 1)
 stream = ExtResource("8_4k5dg")
 volume_db = -26.684
-autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(5, 244)
@@ -796,7 +795,7 @@ position = Vector2(2012, 1247)
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Orc" parent="Enemies" instance=ExtResource("9_ewlr1")]
-position = Vector2(1387, 846)
+position = Vector2(-5, 532)
 
 [node name="Slime" parent="Enemies" instance=ExtResource("5_8hhxu")]
-position = Vector2(1002, 1335)
+position = Vector2(314, 1339)
