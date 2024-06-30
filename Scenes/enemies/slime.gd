@@ -10,7 +10,7 @@ class_name Slime
 func _process(delta):
 	# Flip Sprite
 	if velocity.x > 0:
-		animated_sprite_2d.flip_h = false
+		enemy_sprite.flip_h = false
 	elif velocity.x < 0:
-		animated_sprite_2d.flip_h = true
+		enemy_sprite.flip_h = true
 	move_and_slide()

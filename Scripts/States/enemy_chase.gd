@@ -10,7 +10,7 @@ func Update(_delta):
 
 
 
-func _on_slime_attack_area_body_entered(body: Node2D):
+func _on_attack_area_body_entered(body: Node2D):
 	if body is Player:
-		body.hit(10, enemy.velocity.normalized())
+		#body.hit(10, enemy.velocity.normalized()) TODO delete
 		Transitioned.emit(self, "attack")

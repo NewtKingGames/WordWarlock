@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dtnnc2owp2ldg"]
+[gd_scene load_steps=51 format=3 uid="uid://dtnnc2owp2ldg"]
 
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_2a0p5"]
 [ext_resource type="Script" path="res://Scenes/enemies/orc.gd" id="1_2jtsc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://25wb76d4ff51" path="res://Sprites/Tiny RPG Character Asset Pack v1.02 -Free Soldier&Orc 2/Orc/Orc/Orc-Hurt.png" id="2_mj0nu"]
 [ext_resource type="Texture2D" uid="uid://d328wl8qqo5e2" path="res://Sprites/Tiny RPG Character Asset Pack v1.02 -Free Soldier&Orc 2/Orc/Orc/Orc-Walk.png" id="2_rmh0a"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_chase.gd" id="4_kcyu5"]
+[ext_resource type="Script" path="res://Scripts/States/EnemyAttackWithAnimState.gd" id="5_8heqk"]
 [ext_resource type="Script" path="res://Scripts/States/EnemyDamage.gd" id="5_hbc64"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_death.gd" id="6_yn0dc"]
 [ext_resource type="Texture2D" uid="uid://c5esrryhu7djm" path="res://Sprites/Tiny RPG Character Asset Pack v1.02 -Free Soldier&Orc 2/Orc/Orc/Orc-Death.png" id="9_ul80t"]
@@ -145,7 +146,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lrlf6")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 8.0
 }, {
@@ -157,6 +158,12 @@ animations = [{
 "texture": SubResource("AtlasTexture_p6bgs")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_p6bgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnqhj")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mnqhj")
 }, {
 "duration": 1.0,
@@ -164,7 +171,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"damage",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -242,12 +249,119 @@ height = 20.5
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_stbka"]
 radius = 6.25
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y65se"]
+
+[sub_resource type="Animation" id="Animation_36xl6"]
+resource_name = "walk"
+length = 0.80001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vbjhr"]
+resource_name = "idle"
+length = 0.60001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fp4rm"]
+resource_name = "hurt"
+length = 0.30001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_gwpva"]
+resource_name = "attack"
+length = 0.60001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_6i4hn"]
+resource_name = "death"
+length = 0.50001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 4), Vector2i(3, 4), Vector2i(2, 5), Vector2i(3, 5)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_56l80"]
+_data = {
+"attack": SubResource("Animation_gwpva"),
+"damage": SubResource("Animation_fp4rm"),
+"death": SubResource("Animation_6i4hn"),
+"idle": SubResource("Animation_vbjhr"),
+"walk": SubResource("Animation_36xl6")
+}
+
 [node name="Orc" type="CharacterBody2D"]
 scale = Vector2(4, 4)
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_2jtsc")
-health = 30.0
+health = 10.0
 walk_speed = 150.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -261,6 +375,7 @@ script = ExtResource("1_wdoqw")
 script = ExtResource("4_kcyu5")
 
 [node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("5_8heqk")
 
 [node name="Damage" type="Node" parent="StateMachine"]
 script = ExtResource("5_hbc64")
@@ -269,16 +384,19 @@ script = ExtResource("5_hbc64")
 script = ExtResource("6_yn0dc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_qk4iu")
-animation = &"death"
+animation = &"damage"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_guh2t")
 
-[node name="OrcAttackArea" type="Area2D" parent="."]
+[node name="SwingArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OrcAttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea"]
 position = Vector2(14.25, -3.5)
 rotation = -0.352706
 shape = SubResource("CapsuleShape2D_stbka")
@@ -291,5 +409,30 @@ debug_color = Color(0.917647, 0.2, 0, 0.419608)
 [node name="StunlockTimer" type="Timer" parent="Timers"]
 wait_time = 0.2
 
+[node name="AttackCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+scale = Vector2(1.98423, 1.9863)
+shape = SubResource("CircleShape2D_y65se")
+debug_color = Color(0.190496, 0.639321, 0.168529, 0.42)
+
+[node name="EnemySprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vobdq")
+hframes = 8
+vframes = 6
+frame = 43
+
+[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_56l80")
+}
+autoplay = "idle"
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Death" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
+[connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_attack_cooldown_timer_timeout"]
+[connection signal="body_entered" from="AttackArea" to="StateMachine/Chase" method="_on_attack_area_body_entered"]
