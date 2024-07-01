@@ -1,0 +1,128 @@
+[gd_scene load_steps=18 format=3 uid="uid://dpasd44up13gs"]
+
+[ext_resource type="Script" path="res://Scripts/Projectiles/Spells/IceBall.gd" id="1_l724t"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="2_n20hp"]
+[ext_resource type="Texture2D" uid="uid://ckia7x8dpa05y" path="res://Sprites/Spells/Ice/Burst of ice.png" id="3_mxrc7"]
+[ext_resource type="Texture2D" uid="uid://c1gb3ubtx12g3" path="res://Sprites/Spells/Ice/Ball of ice.png" id="3_yonrg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_137c7"]
+atlas = ExtResource("3_yonrg")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdn6i"]
+atlas = ExtResource("3_yonrg")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wwrm"]
+atlas = ExtResource("3_yonrg")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hapa"]
+atlas = ExtResource("3_yonrg")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3ejj"]
+atlas = ExtResource("3_mxrc7")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e42ry"]
+atlas = ExtResource("3_mxrc7")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fka40"]
+atlas = ExtResource("3_mxrc7")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mik8l"]
+atlas = ExtResource("3_mxrc7")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6f2o"]
+atlas = ExtResource("3_mxrc7")
+region = Rect2(0, 512, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8si2r"]
+atlas = ExtResource("3_mxrc7")
+region = Rect2(0, 640, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1e0d"]
+atlas = ExtResource("3_mxrc7")
+region = Rect2(0, 768, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kwq7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_137c7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdn6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wwrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hapa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3ejj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e42ry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fka40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mik8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6f2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8si2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1e0d")
+}],
+"loop": false,
+"name": &"impact",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jw3xp"]
+
+[node name="IceBall" type="Area2D" node_paths=PackedStringArray("impact_sound", "spell_emit_sound")]
+collision_layer = 2
+collision_mask = 28
+script = ExtResource("1_l724t")
+spell_speed = 100.0
+impact_sound = NodePath("ImpactNoise")
+spell_damage = 10
+spell_name = "ICE BALL"
+spell_emit_sound = NodePath("EmitNoise")
+
+[node name="EmitNoise" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ImpactNoise" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.478431, 0.670588, 1, 1)
+texture = ExtResource("2_n20hp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.75, -0.5)
+sprite_frames = SubResource("SpriteFrames_kwq7q")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.75, 0.5)
+scale = Vector2(1.58118, 1.50285)
+shape = SubResource("CircleShape2D_jw3xp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

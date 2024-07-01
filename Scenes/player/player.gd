@@ -15,6 +15,7 @@ const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
 var aiming_spell: bool = true
+var cast_spell_name: String = "FIREBALL" # TODO change this to be a Spell type itself?
 
 var knockback_direction: Vector2 = Vector2.ZERO
 @export var knockback_speed: float = 100
@@ -35,7 +36,7 @@ func _physics_process(delta):
 			# Put the spell from the aiming origin + some distance the player is looking
 			# we have to add global_position and the relative distance aiming_line is away from the player
 			var spell_position: Vector2 = (global_position + aiming_line.position) + spell_direction*spell_spawn_distance
-			spell_shot.emit(spell_position, spell_direction, "FIREBALL")
+			spell_shot.emit(spell_position, spell_direction, cast_spell_name)
 			aiming_spell = false
 	# Only flip sprite when player is moving from direct input
 	if not taking_damage:
@@ -78,3 +79,4 @@ func _on_stunlock_timer_timeout():
 # TODO JUST PASS THE ACTUAL spell script or scene??? Level might not even have to care about which spell it is
 func _on_spell_caster_spell_cast(spell_name):
 	aiming_spell = true
+	cast_spell_name = spell_name
