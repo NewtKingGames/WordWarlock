@@ -15,7 +15,7 @@ const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
 var aiming_spell: bool = true
-var cast_spell_name: String = "FIREBALL" # TODO change this to be a Spell type itself?
+var cast_spell_name: String = "ICE SHIELD" # TODO change this to be a Spell type itself?
 
 var knockback_direction: Vector2 = Vector2.ZERO
 @export var knockback_speed: float = 100
@@ -31,11 +31,20 @@ func _physics_process(delta):
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
 		if Input.is_action_just_pressed("cast_spell"):
 			# TODO - change how we're passing spell information around
-			# Get vector the player is looking towards
-			var spell_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
-			# Put the spell from the aiming origin + some distance the player is looking
-			# we have to add global_position and the relative distance aiming_line is away from the player
-			var spell_position: Vector2 = (global_position + aiming_line.position) + spell_direction*spell_spawn_distance
+			# TODO SOME SPELLS DONT NEED GLOBAL POSITION THEY NEED TO SPAWN ON THE PLAYER
+			# there is almost certainly going to be a better way in the future to do this, but for now these spells will never make it to the level scene
+			var spell_position: Vector2
+			var spell_direction: Vector2
+			# TODO switch this from being hardcoded
+			if cast_spell_name == "FIREBALL":
+				# Put the spell from the aiming origin + some distance the player is looking
+				# we have to add global_position and the relative distance aiming_line is away from the player
+				spell_position = (global_position + aiming_line.position) + spell_direction*spell_spawn_distance
+				# Get vector the player is looking towards
+				spell_direction = (get_global_mouse_position() - global_position).normalized()
+			if cast_spell_name == "ICE SHIELD":
+				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player
+				spell_direction = Vector2.ZERO
 			spell_shot.emit(spell_position, spell_direction, cast_spell_name)
 			aiming_spell = false
 	# Only flip sprite when player is moving from direct input

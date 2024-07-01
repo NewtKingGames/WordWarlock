@@ -22,7 +22,7 @@ func _on_player_spell_shot(spell_position: Vector2, spell_direction: Vector2, sp
 		self.add_child(spell)
 	if spell_name == "ICE SHIELD":
 		var spell: IceShield = ice_wall_scene.instantiate()
-		spell.position = player.position
+		spell.position = spell_position
 		# Does this make sense?
 		player.add_child(spell)
 

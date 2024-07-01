@@ -278,7 +278,7 @@ collision_mask = 29
 script = ExtResource("1_gp0yp")
 
 [node name="AimingLine" type="Line2D" parent="."]
-position = Vector2(1, -8)
+position = Vector2(0, 0.25)
 points = PackedVector2Array(0, 0)
 width = 1.0
 default_color = Color(1, 0.415686, 0.196078, 1)
@@ -304,13 +304,13 @@ script = ExtResource("6_e403r")
 script = ExtResource("7_ntvts")
 
 [node name="CharacterAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -16)
+position = Vector2(0, -7.75)
 sprite_frames = SubResource("SpriteFrames_brvva")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -8)
+position = Vector2(0, 0.25)
 scale = Vector2(1, 0.60263)
 shape = SubResource("CapsuleShape2D_j7h4y")
 
@@ -329,10 +329,10 @@ script = ExtResource("7_aw5ht")
 
 [node name="CastingText" type="Label" parent="."]
 modulate = Color(0.85098, 0.294118, 0.270588, 1)
-offset_left = -33.0
-offset_top = -42.0
-offset_right = 37.0
-offset_bottom = -19.0
+offset_left = -34.0
+offset_top = -33.75
+offset_right = 36.0
+offset_bottom = -10.75
 theme = SubResource("Theme_oa0th")
 theme_override_fonts/font = ExtResource("8_n785n")
 theme_override_font_sizes/font_size = 8
@@ -340,7 +340,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0, -10)
+position = Vector2(-1, -1.75)
 color = Color(1, 0.631373, 0.101961, 1)
 energy = 0.25
 texture = ExtResource("9_h1ujj")
@@ -353,6 +353,7 @@ libraries = {
 autoplay = "light_flicker"
 
 [node name="Sounds" type="Node2D" parent="."]
+position = Vector2(-1, 8.25)
 
 [node name="DamageNoise" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(1, -8)
@@ -370,6 +371,7 @@ stream = ExtResource("15_7do8n")
 stream = ExtResource("16_303c8")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-1, 8.25)
 occluder = SubResource("OccluderPolygon2D_dtka1")
 
 [connection signal="CastSpell" from="StateMachine/Cast" to="SpellCaster" method="_on_cast_cast_spell"]

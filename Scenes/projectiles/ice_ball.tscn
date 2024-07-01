@@ -98,6 +98,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_jw3xp"]
 
 [node name="IceBall" type="Area2D" node_paths=PackedStringArray("impact_sound", "spell_emit_sound")]
+scale = Vector2(0.3, 0.3)
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_l724t")
