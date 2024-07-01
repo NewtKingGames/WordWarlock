@@ -45,3 +45,13 @@ func Handle_Input(_event: InputEvent):
 		cast_string += event_string
 		casting_text_label.text = cast_string
 		typing_noises[rng.randi_range(0,2)].play()
+	elif _event.is_action_pressed("space") and cast_string.length() > 1:
+		cast_string += " "
+		casting_text_label.text = cast_string
+		typing_noises[rng.randi_range(0,2)].play()
+	elif _event.is_action_pressed("backspace") and cast_string.length() > 1:
+		cast_string = cast_string.left(cast_string.length() - 1)
+		casting_text_label.text = cast_string
+		typing_noises[rng.randi_range(0,2)].play()
+		
+		

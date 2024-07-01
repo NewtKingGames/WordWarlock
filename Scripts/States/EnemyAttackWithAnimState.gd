@@ -7,11 +7,12 @@ func Enter():
 	enemy.animated_sprite_2d.play("attack")
 
 func _on_attack_cooldown_timer_timeout():
-	print("within the extending class")
-	# If the player is nearby transition to chase
-	# If the player is somehow far away transition to idle
-	var direction: Vector2 = player.global_position - enemy.global_position
-	if direction.length() <= 400:
-		Transitioned.emit(self, "chase")
+	# TODO consider tracking the player being close to the player either through signals and booleans or just using pixels directly
+	if enemy.attack_area.overlaps_body(player):
+		Transitioned.emit(self, "attack")
 	else:
-		Transitioned.emit(self, "idle")
+		var direction: Vector2 = player.global_position - enemy.global_position
+		if direction.length() <= 400:
+			Transitioned.emit(self, "chase")
+		else:
+			Transitioned.emit(self, "idle")

@@ -2,7 +2,7 @@ extends State
 class_name EnemyState
 
 var player: Player
-@onready var enemy:  = $"../.."
+@onready var enemy: EnemyClass = $"../.."
 
 
 
