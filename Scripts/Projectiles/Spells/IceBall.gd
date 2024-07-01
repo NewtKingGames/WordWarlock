@@ -1,13 +1,22 @@
 extends ProjectileSpell
 class_name IceBall
 
-# This spell is just going to be a simple Area2D which rotates itself
 
+signal ice_ball_destroyed()
+
+# Used in IceShield spell
+var has_hit: bool = false
 
 func _on_body_entered(body):
-	# TODO call parent method, but we need to figure out how to let the animation here finish out first before the parent function disables the visuals
-	if body is EnemyClass:
-		print("Hit an enemy")
-	else:
-		print("hit something else")
+	if has_hit:
+		return
+	has_hit = true
+	spell_hit_body(body)
 	animated_sprite_2d.play("impact")
+	collision_shape_2d.disabled = true
+	point_light_2d.visible = false
+
+
+func _on_animated_sprite_2d_animation_finished():
+	ice_ball_destroyed.emit()
+	queue_free()

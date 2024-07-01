@@ -1,8 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dpasd44up13gs"]
+[gd_scene load_steps=20 format=3 uid="uid://dpasd44up13gs"]
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/Spells/IceBall.gd" id="1_l724t"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="2_n20hp"]
+[ext_resource type="AudioStream" uid="uid://bifwe0fa1e3s" path="res://Sounds/ice-magic-summon.mp3" id="2_uq3ox"]
 [ext_resource type="Texture2D" uid="uid://ckia7x8dpa05y" path="res://Sprites/Spells/Ice/Burst of ice.png" id="3_mxrc7"]
+[ext_resource type="AudioStream" uid="uid://dtlh64ofs1dlk" path="res://Sounds/ice-magic-arrow-trimmed.mp3" id="3_t1bat"]
 [ext_resource type="Texture2D" uid="uid://c1gb3ubtx12g3" path="res://Sprites/Spells/Ice/Ball of ice.png" id="3_yonrg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_137c7"]
@@ -92,7 +94,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"impact",
-"speed": 15.0
+"speed": 20.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jw3xp"]
@@ -109,17 +111,23 @@ spell_name = "ICE BALL"
 spell_emit_sound = NodePath("EmitNoise")
 
 [node name="EmitNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_uq3ox")
 
 [node name="ImpactNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t1bat")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.478431, 0.670588, 1, 1)
+energy = 1.2
 texture = ExtResource("2_n20hp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0.75, -0.5)
 sprite_frames = SubResource("SpriteFrames_kwq7q")
+animation = &"impact"
 autoplay = "default"
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.75, 0.5)
@@ -127,3 +135,4 @@ scale = Vector2(1.58118, 1.50285)
 shape = SubResource("CircleShape2D_jw3xp")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -21,6 +21,3 @@ func spell_hit_body(body: Node2D):
 	else:
 		pass
 	impact_sound.play()
-	animated_sprite_2d.visible = false
-	collision_shape_2d.disabled = true
-	point_light_2d.visible = false
