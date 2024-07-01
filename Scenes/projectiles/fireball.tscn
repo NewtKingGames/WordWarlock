@@ -38,12 +38,15 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Fireball" type="Area2D"]
+[node name="Fireball" type="Area2D" node_paths=PackedStringArray("impact_sound", "spell_emit_sound")]
 scale = Vector2(4, 4)
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_d0fq5")
-speed = 600.0
+spell_speed = 500.0
+impact_sound = NodePath("ImpactNoise")
+spell_name = "FIREBALL"
+spell_emit_sound = NodePath("EmitNoise")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.762435, 0.505527)
@@ -52,7 +55,7 @@ shape = SubResource("CircleShape2D_pdytb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2vh2g")
 autoplay = "default"
-frame_progress = 0.310547
+frame_progress = 0.850077
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.905882, 0.388235, 0.0352941, 1)
@@ -65,7 +68,7 @@ texture_scale = 0.7
 stream = ExtResource("4_20to5")
 autoplay = true
 
-[node name="ImpactNoise" type="AudioStreamPlayer" parent="."]
+[node name="ImpactNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_my61c")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

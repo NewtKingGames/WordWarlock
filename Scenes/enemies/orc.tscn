@@ -196,7 +196,7 @@ debug_color = Color(0.190496, 0.639321, 0.168529, 0.42)
 texture = ExtResource("1_vobdq")
 hframes = 8
 vframes = 6
-frame = 8
+frame = 19
 
 [node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

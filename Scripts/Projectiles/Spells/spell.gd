@@ -1,11 +1,9 @@
 extends Area2D
+class_name Spell
 
+@export var spell_name: String
+@export var spell_emit_sound: AudioStreamPlayer2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	spell_emit_sound.play()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

@@ -19,10 +19,8 @@ func _ready():
 func _physics_process(delta):
 	# Solution to flip the character when it changes direction on the x axis
 	if velocity.x > 0 and previous_velocity.x < 0:
-		print("Enemy just started moving right")
 		scale.x = -4
 	if velocity.x < 0 and previous_velocity.x > 0:
-		print("Enemy just started moving left")
 		scale.x = -4
 	
 	# only set previous velocity to nonzero x values

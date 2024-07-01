@@ -4,7 +4,6 @@ extends Node
 #Preloaded spells
 var fireball_scene: PackedScene = preload("res://Scenes/projectiles/fireball.tscn")
 
-
 var player: Player
 
 
