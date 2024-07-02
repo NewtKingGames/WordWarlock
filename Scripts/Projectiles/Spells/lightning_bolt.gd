@@ -12,3 +12,5 @@ func _ready():
 
 func strike_enemy():
 	spell_hit_body(enemy)
+	
+

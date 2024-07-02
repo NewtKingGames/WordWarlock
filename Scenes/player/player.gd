@@ -45,6 +45,10 @@ func _physics_process(delta):
 			if cast_spell_name == "ICE SHIELD":
 				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player
 				spell_direction = Vector2.ZERO
+			if cast_spell_name == "THUNDERSTORM":
+				print("casting thunderstrom")
+				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player
+				spell_direction = Vector2.ZERO
 			spell_shot.emit(spell_position, spell_direction, cast_spell_name)
 			aiming_spell = false
 	# Only flip sprite when player is moving from direct input

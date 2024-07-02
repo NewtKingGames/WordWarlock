@@ -108,8 +108,11 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkg2y"]
 
-[node name="LightningBolt" type="Area2D"]
+[node name="LightningBolt" type="Area2D" node_paths=PackedStringArray("impact_sound")]
 script = ExtResource("1_2hlcw")
+impact_sound = NodePath("ImpactNoise")
+spell_damage = 10
+spell_name = "LIGHTNING BOLT"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_fymju")

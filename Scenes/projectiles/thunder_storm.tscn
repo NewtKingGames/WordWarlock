@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dckxqlekvhmhw"]
+
+[ext_resource type="Script" path="res://Scripts/Projectiles/Spells/thunder_storm.gd" id="1_lmr8m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f62hc"]
+
+[node name="ThunderStorm" type="Area2D" node_paths=PackedStringArray("spell_emit_sound")]
+script = ExtResource("1_lmr8m")
+num_lightning_bolts = 5
+spell_name = "THUNDERSTORM"
+spell_emit_sound = NodePath("EmitNoise")
+
+[node name="EmitNoise" type="AudioStreamPlayer2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f62hc")

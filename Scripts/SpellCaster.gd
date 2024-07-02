@@ -16,5 +16,7 @@ func _on_cast_cast_spell(spell_string):
 			spell_cast.emit("FIREBALL")
 		"ICE SHIELD": # facing anit pattern of having some spells spawned by the level while others should really just go to the player. Would it make sense to have the level add a child to the player node?
 			spell_cast.emit("ICE SHIELD")
+		"THUNDERSTORM":
+			
 		_:
 			print("default case")
