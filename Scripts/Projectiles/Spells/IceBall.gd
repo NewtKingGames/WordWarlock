@@ -1,10 +1,10 @@
 extends ProjectileSpell
-class_name IceBall
+class_name IceBall # Used in IceShield spell 
 
+@onready var animated_sprite_2d = $AnimatedSprite2D
 
 signal ice_ball_destroyed()
 
-# Used in IceShield spell
 var has_hit: bool = false
 
 func _on_body_entered(body):

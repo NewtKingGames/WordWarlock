@@ -1,0 +1,136 @@
+[gd_scene load_steps=15 format=3 uid="uid://bucpnup78o2ba"]
+
+[ext_resource type="Script" path="res://Scripts/Projectiles/Spells/lightning_bolt.gd" id="1_2hlcw"]
+[ext_resource type="Texture2D" uid="uid://b5smhlcfn7y11" path="res://Sprites/Spells/Thunder.png" id="1_fymju"]
+
+[sub_resource type="Animation" id="Animation_oi4in"]
+resource_name = "lightning_strike"
+length = 0.53334
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.266667, 0.533333),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"strike_enemy"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xyq1v"]
+_data = {
+"lightning_strike": SubResource("Animation_oi4in")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cremf"]
+atlas = ExtResource("1_fymju")
+region = Rect2(0, 0, 64, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kneuw"]
+atlas = ExtResource("1_fymju")
+region = Rect2(64, 0, 64, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41r4p"]
+atlas = ExtResource("1_fymju")
+region = Rect2(128, 0, 64, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mulgr"]
+atlas = ExtResource("1_fymju")
+region = Rect2(192, 0, 64, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5txg"]
+atlas = ExtResource("1_fymju")
+region = Rect2(256, 0, 64, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh5uw"]
+atlas = ExtResource("1_fymju")
+region = Rect2(320, 0, 64, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysd64"]
+atlas = ExtResource("1_fymju")
+region = Rect2(384, 0, 64, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32uq8"]
+atlas = ExtResource("1_fymju")
+region = Rect2(448, 0, 64, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qf7h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cremf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kneuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41r4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mulgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5txg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh5uw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysd64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32uq8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkg2y"]
+
+[node name="LightningBolt" type="Area2D"]
+script = ExtResource("1_2hlcw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fymju")
+hframes = 8
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xyq1v")
+}
+
+[node name="EmitNoise" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ImpactNoise" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_5qf7h")
+frame = 7
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rkg2y")
+disabled = true

@@ -14,7 +14,7 @@ signal spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name:
 const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
-var aiming_spell: bool = true
+var aiming_spell: bool = false
 var cast_spell_name: String = "ICE SHIELD" # TODO change this to be a Spell type itself?
 
 var knockback_direction: Vector2 = Vector2.ZERO
