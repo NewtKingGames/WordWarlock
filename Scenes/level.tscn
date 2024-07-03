@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=14 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
 [ext_resource type="Script" path="res://scenes/CharacterProjectiles.gd" id="3_av28w"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://5purwjc683qc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/full tilemap.png" id="4_wcbua"]
 [ext_resource type="PackedScene" uid="uid://ooxyv5avybtt" path="res://Scenes/enemies/slime.tscn" id="5_8hhxu"]
 [ext_resource type="AudioStream" uid="uid://d4d06aodmun8p" path="res://Sounds/TemporaryGameMusic.mp3" id="6_vetb2"]
+[ext_resource type="PackedScene" uid="uid://bc1sate60syol" path="res://Scenes/enemies/flying_bat.tscn" id="9_crbd0"]
 [ext_resource type="PackedScene" uid="uid://dtnnc2owp2ldg" path="res://Scenes/enemies/orc.tscn" id="9_ewlr1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lncbs"]
@@ -769,7 +770,7 @@ script = ExtResource("4_aaijt")
 [node name="TEMPORARYLevelMusic" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(-0.5, 1)
 stream = ExtResource("6_vetb2")
-volume_db = -5.0
+volume_db = -11.985
 autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
@@ -802,8 +803,17 @@ position = Vector2(2257, 1250)
 [node name="Orc" parent="Enemies" instance=ExtResource("9_ewlr1")]
 position = Vector2(2654, 1356)
 
+[node name="FlyingBat" parent="Enemies" instance=ExtResource("9_crbd0")]
+position = Vector2(1174, 1336)
+
 [node name="Slime" parent="Enemies" instance=ExtResource("5_8hhxu")]
-position = Vector2(1586, 1481)
+position = Vector2(1302, 1291)
 
 [node name="Slime2" parent="Enemies" instance=ExtResource("5_8hhxu")]
-position = Vector2(1283, 1219)
+position = Vector2(1504, 1316)
+
+[node name="Slime3" parent="Enemies" instance=ExtResource("5_8hhxu")]
+position = Vector2(1033, 1262)
+
+[node name="Slime4" parent="Enemies" instance=ExtResource("5_8hhxu")]
+position = Vector2(1271, 1421)

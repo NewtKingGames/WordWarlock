@@ -4,7 +4,7 @@ class_name EnemyIdle
 
 
 func Update(_delta: float):
-	# TODO add how the slime will move randomly
+	# Could add enemy random directions
 	enemy.velocity = Vector2.ZERO
 	var direction = player.global_position - enemy.global_position
 	if direction.length() <= enemy.chase_distance:

@@ -10,14 +10,17 @@ var enemy: EnemyClass
 
 func _ready():
 	animation_player.play("lightning_strike")
+	super._ready()
 
 func _process(_delta):
 	# Have the lightning bolt follow the enemy
+	if enemy == null:
+		return
 	position.x = enemy.position.x
 
 func strike_enemy():
 	spell_hit_body(enemy)
+
+func _on_emit_noise_finished():
 	lightning_bolt_destroyed.emit()
 	queue_free()
-	
-

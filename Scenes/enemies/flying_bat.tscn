@@ -1,0 +1,232 @@
+[gd_scene load_steps=28 format=3 uid="uid://bc1sate60syol"]
+
+[ext_resource type="Script" path="res://Scenes/enemies/flying_bat.gd" id="1_5jpfr"]
+[ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_8eawt"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="2_ruas4"]
+[ext_resource type="Script" path="res://Scenes/enemies/EnemyAttackProjectileState.gd" id="4_2rbe8"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_chase_projectile.gd" id="4_ecimm"]
+[ext_resource type="Script" path="res://Scripts/States/EnemyDamage.gd" id="5_8jw7v"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_death.gd" id="6_mnese"]
+[ext_resource type="Texture2D" uid="uid://d3awdqjlwiamr" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/enemies/flying creature/fly_anim_spritesheet.png" id="7_j5c8r"]
+[ext_resource type="Texture2D" uid="uid://54y84b6wu55u" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/enemies/flying creature/fly_anim_spritesheet copy.png" id="8_y5k3v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t7ool"]
+
+[sub_resource type="Animation" id="Animation_dtmd2"]
+resource_name = "fly"
+length = 0.500013
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 2]
+}
+
+[sub_resource type="Animation" id="Animation_6v1y0"]
+resource_name = "fly_attack"
+length = 0.333342
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_cx31f"]
+resource_name = "fly"
+length = 0.333342
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nvric"]
+_data = {
+"attack": SubResource("Animation_6v1y0"),
+"chase": SubResource("Animation_cx31f"),
+"idle": SubResource("Animation_dtmd2")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hofi"]
+atlas = ExtResource("7_j5c8r")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d42j"]
+atlas = ExtResource("7_j5c8r")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bmc2"]
+atlas = ExtResource("7_j5c8r")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2e3cc"]
+atlas = ExtResource("7_j5c8r")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1rio"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(0, 10, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_344xu"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(16, 10, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqfqk"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(32, 10, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljaov"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(48, 10, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs0qs"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(64, 10, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5wjw"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(80, 10, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfqag"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(96, 10, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlmfs"]
+atlas = ExtResource("8_y5k3v")
+region = Rect2(112, 10, 16, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rv4tt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hofi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1d42j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bmc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2e3cc")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1rio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_344xu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqfqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljaov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs0qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5wjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfqag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlmfs")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 8.0
+}]
+
+[node name="FlyingBat" type="CharacterBody2D"]
+scale = Vector2(4, 4)
+collision_layer = 4
+collision_mask = 19
+script = ExtResource("1_5jpfr")
+attack_distance_to_enter = 200.0
+attack_distance_to_exit = 300.0
+health = 20.0
+walk_speed = 250.0
+chase_distance = 400.0
+knock_back_magnitude = 100.0
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_8eawt")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("2_ruas4")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("4_ecimm")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("4_2rbe8")
+
+[node name="Damage" type="Node" parent="StateMachine"]
+script = ExtResource("5_8jw7v")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("6_mnese")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.609554, 0.609554)
+shape = SubResource("CircleShape2D_t7ool")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="StunlockTimer" type="Timer" parent="Timers"]
+
+[node name="AttackCooldownTimer" type="Timer" parent="Timers"]
+
+[node name="EnemySprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+texture = ExtResource("8_y5k3v")
+hframes = 8
+frame = 3
+
+[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nvric")
+}
+autoplay = "chase"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0.75, 3.5)
+sprite_frames = SubResource("SpriteFrames_rv4tt")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.598066

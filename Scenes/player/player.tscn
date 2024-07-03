@@ -328,7 +328,7 @@ one_shot = true
 script = ExtResource("7_aw5ht")
 
 [node name="CastingText" type="Label" parent="."]
-modulate = Color(0.85098, 0.294118, 0.270588, 1)
+z_index = 1
 offset_left = -34.0
 offset_top = -33.75
 offset_right = 36.0

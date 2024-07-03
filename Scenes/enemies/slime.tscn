@@ -103,10 +103,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m0k21"]
 _data = {
+"chase": SubResource("Animation_hyr4v"),
 "damage": SubResource("Animation_83bdg"),
 "death": SubResource("Animation_2i1ov"),
-"idle": SubResource("Animation_ysxon"),
-"walk": SubResource("Animation_hyr4v")
+"idle": SubResource("Animation_ysxon")
 }
 
 [node name="Slime" type="CharacterBody2D"]

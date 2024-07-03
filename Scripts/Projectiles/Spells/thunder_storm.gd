@@ -16,30 +16,32 @@ var is_first_run: bool = true
 func _physics_process(delta):
 	# This needs to be done within physics_processs since we are using overlaps with
 	if is_first_run:
-		# TODO add some fun delay so the lightning isn't all at once
 		var enemies_in_zone: Array[EnemyClass] = get_enemies_in_zone()
 		if enemies_in_zone[0] == null:
 			# No enemies nearby
 			queue_free()
-		for enemy: EnemyClass in enemies_in_zone:
-			if enemy != null:
-				spawn_lightning_bolt(enemy)
+		spawn_lightning_bolts(enemies_in_zone, max_num_lightning_bolts)
 	is_first_run = false
 
 
 func spawn_lightning_bolts(enemies: Array[EnemyClass], number_lightning_bolts: int):
-	pass
+	for enemy: EnemyClass in enemies:
+		if enemy != null:
+			spawn_lightning_bolt(enemy)
+			# Random delay between .1 and .2 seconds before spanwing the next bolt
+			await get_tree().create_timer(randf_range(0.1, 0.4)).timeout
 
 func spawn_lightning_bolt(enemy: EnemyClass):
 	var lightning_bolt: LightningBolt = lightning_bolt_scene.instantiate()
 	lightning_bolt.connect("lightning_bolt_destroyed", _on_lightning_bolt_destroyed)
 	lightning_bolt.enemy = enemy
-	lightning_bolt.position = enemy.global_position + Vector2.UP * 120# TODO MOVE IT ABOVE
+	lightning_bolt.position = enemy.global_position + Vector2.UP * 120
 	lightning_bolts.add_child(lightning_bolt)
 
 func _on_lightning_bolt_destroyed():
 	num_lightning_bolts_destroyed+=1
 	if num_lightning_bolts_spawned == num_lightning_bolts_destroyed:
+		await get_tree().create_timer(2).timeout
 		queue_free()
 
 func get_enemies_in_zone() -> Array[EnemyClass]:
@@ -50,5 +52,8 @@ func get_enemies_in_zone() -> Array[EnemyClass]:
 		if over_lapping_body is EnemyClass:
 			overlapping_enemies[num_lightning_bolts_spawned] = over_lapping_body
 			num_lightning_bolts_spawned+=1
+			# Break out of for loop if we've found the max number of enemies
+			if num_lightning_bolts_spawned >= max_num_lightning_bolts:
+				break
 	return overlapping_enemies
 	
