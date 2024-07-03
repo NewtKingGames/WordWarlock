@@ -804,7 +804,7 @@ position = Vector2(2257, 1250)
 position = Vector2(2654, 1356)
 
 [node name="FlyingBat" parent="Enemies" instance=ExtResource("9_crbd0")]
-position = Vector2(1174, 1336)
+position = Vector2(2620, 1930)
 
 [node name="Slime" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(1302, 1291)

@@ -7,6 +7,9 @@ var rng = RandomNumberGenerator.new()
 
 @onready var character_animated_sprite_2d: AnimatedSprite2D = $"../../CharacterAnimatedSprite2D"
 @onready var casting_text_label = $"../../CastingText"
+@onready var slow_mo_sound_enter = $"../../Sounds/SlowMoSoundEnter"
+@onready var slow_mo_sound_exit = $"../../Sounds/SlowMoSoundExit"
+
 
 # TODO Change the audio on these to be more magical rather than a type writer
 var typing_noises: Array
@@ -23,9 +26,17 @@ func Enter():
 	cast_string = ""
 	casting_text_label.text = cast_string
 	casting_text_label.visible = true
+	# Start bullet time 
+	Engine.time_scale = 0.5
+	slow_mo_sound_enter.play()
+	slow_mo_sound_exit.stop()
 
 func Exit():
 	casting_text_label.visible = false
+	# Undo bullet time
+	Engine.time_scale = 1
+	slow_mo_sound_enter.stop()
+	slow_mo_sound_exit.play()
 	
 func Update(_delta: float):
 	# Player Casting Spell

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=48 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="1_435rg"]
 [ext_resource type="Script" path="res://Scenes/player/player.gd" id="1_gp0yp"]
@@ -16,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="14_x12ab"]
 [ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="15_7do8n"]
 [ext_resource type="AudioStream" uid="uid://bjvichsn4626q" path="res://Sounds/typewriterthree.mp3" id="16_303c8"]
+[ext_resource type="AudioStream" uid="uid://cflbq30q41o63" path="res://Sounds/SlowMotionSoundOne.mp3" id="17_a3c3c"]
+[ext_resource type="AudioStream" uid="uid://dy36jfhg03i0e" path="res://Sounds/SlowMotionExitSound.mp3" id="18_5p2br"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3534"]
 atlas = ExtResource("4_fvahh")
@@ -369,6 +371,12 @@ stream = ExtResource("15_7do8n")
 
 [node name="TypingNoiseThree" type="AudioStreamPlayer2D" parent="Sounds/TypingSounds"]
 stream = ExtResource("16_303c8")
+
+[node name="SlowMoSoundEnter" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("17_a3c3c")
+
+[node name="SlowMoSoundExit" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("18_5p2br")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(-1, 8.25)
