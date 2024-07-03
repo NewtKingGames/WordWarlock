@@ -1,5 +1,5 @@
 extends ProjectileSpell
-class_name Fireball
+class_name Fireball # This keeps reporting "Hidiing global script class" it resolves the error when I just retype it..
 
 var has_hit: bool = false
 

@@ -4,6 +4,7 @@ extends Node
 #Preloaded spells
 var fireball_scene: PackedScene = preload("res://Scenes/projectiles/fireball.tscn")
 var ice_wall_scene: PackedScene = preload("res://Scenes/projectiles/ice_shield.tscn")
+var thunderstorm_scene: PackedScene = preload("res://Scenes/projectiles/thunder_storm.tscn")
 var player: Player
 
 
@@ -23,6 +24,10 @@ func _on_player_spell_shot(spell_position: Vector2, spell_direction: Vector2, sp
 	if spell_name == "ICE SHIELD":
 		var spell: IceShield = ice_wall_scene.instantiate()
 		spell.position = spell_position
-		# Does this make sense?
+		# Does this make sense? Feels hardcoded to add it to the player
 		player.add_child(spell)
+	if spell_name == "THUNDERSTORM":
+		var spell: Thunderstorm = thunderstorm_scene.instantiate()
+		spell.position = spell_position
+		self.add_child(spell)
 

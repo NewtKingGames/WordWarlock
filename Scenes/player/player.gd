@@ -14,8 +14,8 @@ signal spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name:
 const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
-var aiming_spell: bool = false
-var cast_spell_name: String = "ICE SHIELD" # TODO change this to be a Spell type itself?
+var aiming_spell: bool = true
+var cast_spell_name: String = "THUNDERSTORM" # TODO change this to be a Spell type itself?
 
 var knockback_direction: Vector2 = Vector2.ZERO
 @export var knockback_speed: float = 100
@@ -43,11 +43,11 @@ func _physics_process(delta):
 				# Get vector the player is looking towards
 				spell_direction = (get_global_mouse_position() - global_position).normalized()
 			if cast_spell_name == "ICE SHIELD":
-				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player
+				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player and is a child of the player
 				spell_direction = Vector2.ZERO
 			if cast_spell_name == "THUNDERSTORM":
 				print("casting thunderstrom")
-				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player
+				spell_position = global_position # This spell needs to spawn directly on the player, but it is not a child of the player
 				spell_direction = Vector2.ZERO
 			spell_shot.emit(spell_position, spell_direction, cast_spell_name)
 			aiming_spell = false

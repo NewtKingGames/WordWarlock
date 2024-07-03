@@ -3,14 +3,21 @@
 [ext_resource type="Script" path="res://Scripts/Projectiles/Spells/thunder_storm.gd" id="1_lmr8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f62hc"]
+size = Vector2(300, 200)
 
 [node name="ThunderStorm" type="Area2D" node_paths=PackedStringArray("spell_emit_sound")]
+scale = Vector2(0.695119, 0.673015)
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_lmr8m")
-num_lightning_bolts = 5
+max_num_lightning_bolts = 6
 spell_name = "THUNDERSTORM"
 spell_emit_sound = NodePath("EmitNoise")
 
 [node name="EmitNoise" type="AudioStreamPlayer2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5.81069, 5.01069)
 shape = SubResource("RectangleShape2D_f62hc")
+
+[node name="LightningBolts" type="Node" parent="."]
