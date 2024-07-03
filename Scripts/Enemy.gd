@@ -4,6 +4,7 @@ class_name EnemyClass
 @export var health: float
 @export var walk_speed: float
 @export var chase_distance: float
+@export var knock_back_magnitude: float
 var player: Player
 # This relies on every enemy having a child node "StateMachine"
 @onready var state_machine: StateMachine = $StateMachine

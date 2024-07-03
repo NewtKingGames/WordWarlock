@@ -117,6 +117,7 @@ script = ExtResource("1_un4ex")
 health = 20.0
 walk_speed = 100.0
 chase_distance = 400.0
+knock_back_magnitude = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.96046e-08, -7)
@@ -153,7 +154,6 @@ shape = SubResource("CircleShape2D_spwkb")
 [node name="Timers" type="Node" parent="."]
 
 [node name="AttackCooldownTimer" type="Timer" parent="Timers"]
-wait_time = 0.6
 one_shot = true
 
 [node name="StunlockTimer" type="Timer" parent="Timers"]

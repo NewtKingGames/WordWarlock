@@ -13,6 +13,6 @@ func orc_swing():
 	if swing_area.overlaps_body(player):
 		print("Hit player!")
 		var direction: Vector2 = (player.global_position - global_position).normalized()
-		player.hit(10, direction)
+		player.hit(10, direction*knock_back_magnitude)
 	else:
 		print("missed player")

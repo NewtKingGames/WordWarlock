@@ -18,7 +18,7 @@ var aiming_spell: bool = true
 var cast_spell_name: String = "FIREBALL" # TODO change this to be a Spell type itself?
 
 var knockback_direction: Vector2 = Vector2.ZERO
-@export var knockback_speed: float = 100
+@export var knockback_speed: float = 100 # TODO DELETE
 @export var spell_spawn_distance: float = 100 # Distance away from the player the spell will spawn
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
@@ -74,7 +74,7 @@ func hit(damage_number: float, damage_direction: Vector2):
 		taking_damage = true
 		invulnerability_timer.start()
 		stunlock_timer.start()
-		knockback_direction = damage_direction
+		knockback_direction = damage_direction # TODO YOU BROKE KNOCKBACK!
 		# TODO - check if performing the globals player health check here is problematic with signals, wondering if the signal needs to be sent from globals
 		if Globals.player_health > 0:
 			state_machine.on_outside_transition("damage")

@@ -14,7 +14,7 @@ func Exit():
 
 func Update(_delta: float):
 	character_animated_sprite.play("damage")
-	player.velocity = player.knockback_direction * player.knockback_speed
+	player.velocity = player.knockback_direction
 
 
 func _on_stunlock_timer_timeout():

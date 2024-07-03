@@ -102,8 +102,9 @@ frame_progress = 0.906179
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 2.0
 shadow_enabled = true
+shadow_filter = 1
 texture = ExtResource("2_807d4")
-texture_scale = 0.1
+texture_scale = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

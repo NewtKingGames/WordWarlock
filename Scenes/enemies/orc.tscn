@@ -145,6 +145,7 @@ script = ExtResource("1_2jtsc")
 health = 60.0
 walk_speed = 200.0
 chase_distance = 400.0
+knock_back_magnitude = 200.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_2a0p5")

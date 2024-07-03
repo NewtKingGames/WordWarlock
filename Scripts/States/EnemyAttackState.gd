@@ -7,7 +7,7 @@ class_name EnemyAttackState
 
 
 func Enter():
-	player.hit(10, enemy.velocity.normalized())
+	player.hit(10, enemy.velocity.normalized() * enemy.knock_back_magnitude)
 	enemy.velocity = Vector2.ZERO
 	attack_cooldown_timer.start()
 	# TODO play some kind of animation to convey it hit you
