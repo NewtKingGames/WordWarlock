@@ -140,9 +140,11 @@ _data = {
 scale = Vector2(4, 4)
 collision_layer = 4
 collision_mask = 31
+safe_margin = 1.0
 script = ExtResource("1_2jtsc")
-health = 10.0
-walk_speed = 150.0
+health = 60.0
+walk_speed = 200.0
+chase_distance = 400.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_2a0p5")
@@ -182,7 +184,7 @@ debug_color = Color(0.917647, 0.2, 0, 0.419608)
 wait_time = 0.2
 
 [node name="AttackCooldownTimer" type="Timer" parent="Timers"]
-wait_time = 0.8
+wait_time = 1.2
 one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="."]

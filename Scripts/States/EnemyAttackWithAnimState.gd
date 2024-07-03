@@ -12,7 +12,7 @@ func _on_attack_cooldown_timer_timeout():
 		Transitioned.emit(self, "attack")
 	else:
 		var direction: Vector2 = player.global_position - enemy.global_position
-		if direction.length() <= 400:
+		if direction.length() <= enemy.chase_distance:
 			Transitioned.emit(self, "chase")
 		else:
 			Transitioned.emit(self, "idle")
