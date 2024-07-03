@@ -14,10 +14,13 @@ var lightning_bolt_scene: PackedScene = preload("res://Scenes/projectiles/lightn
 var is_first_run: bool = true
 
 func _physics_process(delta):
-	# This needs to be done within physics_process, could possibly use signals?
+	# This needs to be done within physics_processs since we are using overlaps with
 	if is_first_run:
 		# TODO add some fun delay so the lightning isn't all at once
 		var enemies_in_zone: Array[EnemyClass] = get_enemies_in_zone()
+		if enemies_in_zone[0] == null:
+			# No enemies nearby
+			queue_free()
 		for enemy: EnemyClass in enemies_in_zone:
 			if enemy != null:
 				spawn_lightning_bolt(enemy)

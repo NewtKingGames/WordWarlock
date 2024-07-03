@@ -9,7 +9,6 @@ signal lightning_bolt_destroyed()
 var enemy: EnemyClass
 
 func _ready():
-	print("Lightning bolt has spawned, todo add some timer")
 	animation_player.play("lightning_strike")
 
 func _process(_delta):
@@ -17,7 +16,6 @@ func _process(_delta):
 	position.x = enemy.position.x
 
 func strike_enemy():
-	print("Striking enemy!")
 	spell_hit_body(enemy)
 	lightning_bolt_destroyed.emit()
 	queue_free()

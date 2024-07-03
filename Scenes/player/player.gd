@@ -15,7 +15,7 @@ const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
 var aiming_spell: bool = true
-var cast_spell_name: String = "THUNDERSTORM" # TODO change this to be a Spell type itself?
+var cast_spell_name: String = "FIREBALL" # TODO change this to be a Spell type itself?
 
 var knockback_direction: Vector2 = Vector2.ZERO
 @export var knockback_speed: float = 100
