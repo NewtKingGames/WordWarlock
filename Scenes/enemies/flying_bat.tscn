@@ -229,4 +229,4 @@ position = Vector2(0.75, 3.5)
 sprite_frames = SubResource("SpriteFrames_rv4tt")
 animation = &"new_animation"
 autoplay = "new_animation"
-frame_progress = 0.598066
+frame_progress = 0.485511

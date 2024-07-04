@@ -1,6 +1,6 @@
 extends Node
 
-# TODO - theres probably more information we want to emit, but this works for now
+# TODO - Pass the actual spell we cast rather than the string
 signal spell_cast(spell_name: String)
 
 # TODO see if you can get enums to work or define the enum in the spell as well to avoid hard coded strings?

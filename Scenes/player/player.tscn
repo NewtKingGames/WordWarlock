@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="15_7do8n"]
 [ext_resource type="AudioStream" uid="uid://bjvichsn4626q" path="res://Sounds/typewriterthree.mp3" id="16_303c8"]
 [ext_resource type="AudioStream" uid="uid://cflbq30q41o63" path="res://Sounds/SlowMotionSoundOne.mp3" id="17_a3c3c"]
-[ext_resource type="AudioStream" uid="uid://dy36jfhg03i0e" path="res://Sounds/SlowMotionExitSound.mp3" id="18_5p2br"]
+[ext_resource type="AudioStream" uid="uid://cgbqoopf3bu0a" path="res://Sounds/SlowMotionSoundExit.mp3" id="18_7bffb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3534"]
 atlas = ExtResource("4_fvahh")
@@ -376,7 +376,7 @@ stream = ExtResource("16_303c8")
 stream = ExtResource("17_a3c3c")
 
 [node name="SlowMoSoundExit" type="AudioStreamPlayer2D" parent="Sounds"]
-stream = ExtResource("18_5p2br")
+stream = ExtResource("18_7bffb")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(-1, 8.25)

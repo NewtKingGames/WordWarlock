@@ -2,16 +2,15 @@ extends Spell
 class_name Thunderstorm
 # Hits X number of random enemies around the player with a lightning_bolt spell
 
-
 @export var max_num_lightning_bolts: int
-var num_lightning_bolts_spawned: int = 0
-var num_lightning_bolts_destroyed: int = 0
 @onready var lightning_bolts = $LightningBolts
-
-
 var lightning_bolt_scene: PackedScene = preload("res://Scenes/projectiles/lightning_bolt.tscn")
 
+var num_lightning_bolts_spawned: int = 0
+var num_lightning_bolts_destroyed: int = 0
 var is_first_run: bool = true
+
+
 
 func _physics_process(delta):
 	# This needs to be done within physics_processs since we are using overlaps with
@@ -56,4 +55,3 @@ func get_enemies_in_zone() -> Array[EnemyClass]:
 			if num_lightning_bolts_spawned >= max_num_lightning_bolts:
 				break
 	return overlapping_enemies
-	

@@ -5,14 +5,16 @@ class_name EnemyClass
 @export var walk_speed: float
 @export var chase_distance: float
 @export var knock_back_magnitude: float
-var player: Player
 # This relies on every enemy having a child node "StateMachine"
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animated_sprite_2d: AnimationPlayer = $EnemyAnimationPlayer
 @onready var enemy_sprite: Sprite2D = $EnemySprite2D
 @onready var attack_area: Area2D = $AttackArea
 
-# have to track when the enemy flipped rather than setting the scale everytime
+
+var player: Player
+
+# have to track when the enemy flipped rather than setting the scale to -x everytime
 var previous_velocity: Vector2 = Vector2(1,0)
 
 func _ready():

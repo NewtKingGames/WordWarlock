@@ -3,13 +3,12 @@ class_name Cast
 
 signal CastSpell(spell_string: String)
 
-var rng = RandomNumberGenerator.new()
-
 @onready var character_animated_sprite_2d: AnimatedSprite2D = $"../../CharacterAnimatedSprite2D"
 @onready var casting_text_label = $"../../CastingText"
 @onready var slow_mo_sound_enter = $"../../Sounds/SlowMoSoundEnter"
 @onready var slow_mo_sound_exit = $"../../Sounds/SlowMoSoundExit"
 
+var rng = RandomNumberGenerator.new()
 
 # TODO Change the audio on these to be more magical rather than a type writer
 var typing_noises: Array

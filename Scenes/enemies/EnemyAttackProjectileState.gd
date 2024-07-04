@@ -5,4 +5,4 @@ func Enter():
 	print("Entered attack")
 	
 func Update(delta: float):
-	pass
+	var vector_to_player: Vector2 = player.global_position - enemy.global_position
