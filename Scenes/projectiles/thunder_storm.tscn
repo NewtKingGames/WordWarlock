@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dckxqlekvhmhw"]
 
-[ext_resource type="Script" path="res://Scripts/Projectiles/Spells/thunder_storm.gd" id="1_lmr8m"]
+[ext_resource type="Script" path="res://Scripts/Spells/thunder_storm.gd" id="1_lmr8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f62hc"]
 size = Vector2(300, 200)

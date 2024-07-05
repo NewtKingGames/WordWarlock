@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://dpasd44up13gs"]
 
-[ext_resource type="Script" path="res://Scripts/Projectiles/Spells/IceBall.gd" id="1_l724t"]
+[ext_resource type="Script" path="res://Scripts/Spells/ice_ball.gd" id="1_l724t"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="2_n20hp"]
 [ext_resource type="AudioStream" uid="uid://bifwe0fa1e3s" path="res://Sounds/ice-magic-summon.mp3" id="2_uq3ox"]
 [ext_resource type="Texture2D" uid="uid://ckia7x8dpa05y" path="res://Sprites/Spells/Ice/Burst of ice.png" id="3_mxrc7"]

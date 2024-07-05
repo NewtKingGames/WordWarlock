@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bucpnup78o2ba"]
 
-[ext_resource type="Script" path="res://Scripts/Projectiles/Spells/lightning_bolt.gd" id="1_2hlcw"]
+[ext_resource type="Script" path="res://Scripts/Spells/lightning_bolt.gd" id="1_2hlcw"]
 [ext_resource type="Texture2D" uid="uid://b5smhlcfn7y11" path="res://Sprites/Spells/Thunder.png" id="1_fymju"]
 [ext_resource type="AudioStream" uid="uid://wpweftso7r7" path="res://Sounds/LightningSoundOne.mp3" id="3_40whe"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="4_bh5o0"]
@@ -121,9 +121,9 @@ animations = [{
 
 [node name="LightningBolt" type="Area2D" node_paths=PackedStringArray("impact_sound", "spell_emit_sound")]
 script = ExtResource("1_2hlcw")
-impact_sound = NodePath("ImpactNoise")
 spell_damage = 10
 spell_name = "LIGHTNING BOLT"
+impact_sound = NodePath("ImpactNoise")
 spell_emit_sound = NodePath("EmitNoise")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
-[ext_resource type="Script" path="res://scenes/CharacterProjectiles.gd" id="3_av28w"]
+[ext_resource type="Script" path="res://scenes/character_projectiles.gd" id="3_av28w"]
 [ext_resource type="Texture2D" uid="uid://dvsjgq018tmb2" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/full spritesheet.png" id="3_kbgx4"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="4_0of1q"]
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="4_aaijt"]
@@ -759,7 +759,7 @@ layer_3/tile_data = PackedInt32Array(983057, 458752, 6, 983062, 524288, 6, 98305
 
 [node name="Player" parent="." instance=ExtResource("1_qycxy")]
 unique_name_in_owner = true
-position = Vector2(1279, 803)
+position = Vector2(3153, 1978)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.4, 1.4)
@@ -774,6 +774,7 @@ volume_db = -11.985
 autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 position = Vector2(5, 244)
 energy = 0.7
 blend_mode = 1

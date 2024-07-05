@@ -3,8 +3,6 @@ class_name EnemyChaseProjectileState
 
 func Enter():
 	enemy.animated_sprite_2d.play("chase")
-	print("within enemy chase enter")
-
 
 func Update(Delta):
 	var vector_to_player: Vector2 = player.global_position - enemy.global_position

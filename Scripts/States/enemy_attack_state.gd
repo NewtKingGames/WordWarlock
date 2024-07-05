@@ -5,11 +5,13 @@ class_name EnemyAttackState
 @onready var attack_cooldown_timer = $"../../Timers/AttackCooldownTimer"
 
 func Enter():
+	print("parent attack")
 	player.hit(10, enemy.velocity.normalized() * enemy.knock_back_magnitude)
 	enemy.velocity = Vector2.ZERO
 	attack_cooldown_timer.start()
 
 func _on_attack_cooldown_timer_timeout():
+	print("attack cooldown")
 	# If the player is nearby transition to chase
 	# If the player is somehow far away transition to idle
 	var direction: Vector2 = player.global_position - enemy.global_position

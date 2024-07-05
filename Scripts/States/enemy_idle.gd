@@ -1,8 +1,6 @@
 extends EnemyState
 class_name EnemyIdle
 
-
-
 func Update(_delta: float):
 	# Could add enemy random directions
 	enemy.velocity = Vector2.ZERO
