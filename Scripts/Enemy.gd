@@ -35,6 +35,7 @@ func _physics_process(delta):
 func hit(damage: float):
 	health -= damage
 	if health <= 0:
+		print("health of enemy went down to 0")
 		state_machine.on_outside_transition("death")
 	else:
 		state_machine.on_outside_transition("damage")

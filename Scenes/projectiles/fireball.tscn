@@ -44,9 +44,9 @@ collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_d0fq5")
 spell_speed = 500.0
-impact_sound = NodePath("ImpactNoise")
 spell_damage = 20
 spell_name = "FIREBALL"
+impact_sound = NodePath("ImpactNoise")
 spell_emit_sound = NodePath("EmitNoise")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

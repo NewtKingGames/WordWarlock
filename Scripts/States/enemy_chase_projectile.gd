@@ -4,7 +4,7 @@ class_name EnemyChaseProjectileState
 func Enter():
 	enemy.animated_sprite_2d.play("chase")
 
-func Update(Delta):
+func Update(_delta):
 	var vector_to_player: Vector2 = player.global_position - enemy.global_position
 	if vector_to_player.length() > enemy.chase_distance:
 		Transitioned.emit(self, "idle")

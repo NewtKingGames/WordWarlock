@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bc1sate60syol"]
+[gd_scene load_steps=30 format=3 uid="uid://bc1sate60syol"]
 
 [ext_resource type="Script" path="res://Scenes/enemies/flying_bat.gd" id="1_5jpfr"]
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_8eawt"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/States/enemy_death.gd" id="6_mnese"]
 [ext_resource type="Texture2D" uid="uid://d3awdqjlwiamr" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/enemies/flying creature/fly_anim_spritesheet.png" id="7_j5c8r"]
 [ext_resource type="Texture2D" uid="uid://54y84b6wu55u" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/enemies/flying creature/fly_anim_spritesheet copy.png" id="8_y5k3v"]
+[ext_resource type="Texture2D" uid="uid://dvjro8lqbpv3o" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_spritesheet.png" id="10_3ui33"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t7ool"]
 
@@ -42,10 +43,89 @@ tracks/0/path = NodePath("EnemySprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0833333, 0.166667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 3, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyDeathSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4oago"]
+resource_name = "death"
+length = 0.625013
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyDeathSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.416667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyDeathSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 3, 2]
+"values": [0, 1, 2, 3]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.416667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_dtmd2"]
@@ -70,6 +150,7 @@ tracks/0/keys = {
 _data = {
 "attack": SubResource("Animation_6v1y0"),
 "chase": SubResource("Animation_cx31f"),
+"death": SubResource("Animation_4oago"),
 "idle": SubResource("Animation_dtmd2")
 }
 
@@ -170,17 +251,18 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="FlyingBat" type="CharacterBody2D"]
+[node name="FlyingBat" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(4, 4)
 collision_layer = 4
 collision_mask = 19
 script = ExtResource("1_5jpfr")
-attack_distance_to_enter = 200.0
-attack_distance_to_exit = 300.0
-health = 20.0
-walk_speed = 250.0
-chase_distance = 400.0
-knock_back_magnitude = 100.0
+attack_distance_to_enter = 300.0
+attack_distance_to_exit = 400.0
+bat_spit_speed = 200.0
+health = 1.0
+walk_speed = 100.0
+chase_distance = 600.0
+knock_back_magnitude = 10.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_8eawt")
@@ -209,13 +291,13 @@ shape = SubResource("CircleShape2D_t7ool")
 
 [node name="StunlockTimer" type="Timer" parent="Timers"]
 
-[node name="AttackCooldownTimer" type="Timer" parent="Timers"]
+[node name="SpitAttackCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
 
 [node name="EnemySprite2D" type="Sprite2D" parent="."]
 position = Vector2(2, 0)
 texture = ExtResource("8_y5k3v")
 hframes = 8
-frame = 4
 
 [node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -230,3 +312,11 @@ sprite_frames = SubResource("SpriteFrames_rv4tt")
 animation = &"new_animation"
 autoplay = "new_animation"
 frame_progress = 0.687902
+
+[node name="EnemyDeathSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("10_3ui33")
+hframes = 4
+frame = 3
+
+[connection signal="timeout" from="Timers/SpitAttackCooldownTimer" to="StateMachine/Attack" method="_on_spit_attack_cooldown_timer_timeout"]

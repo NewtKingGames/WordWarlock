@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=15 format=3 uid="uid://bldyigqbdrbpm"]
 
+[ext_resource type="Script" path="res://Scenes/enemy_projectiles.gd" id="1_pvngr"]
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
 [ext_resource type="Script" path="res://scenes/character_projectiles.gd" id="3_av28w"]
 [ext_resource type="Texture2D" uid="uid://dvsjgq018tmb2" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/full spritesheet.png" id="3_kbgx4"]
@@ -739,6 +740,9 @@ sources/1 = SubResource("TileSetAtlasSource_xwn44")
 [node name="Level" type="Node2D"]
 position = Vector2(0, 2)
 
+[node name="EnemyProjectiles" type="Node" parent="."]
+script = ExtResource("1_pvngr")
+
 [node name="CharacterProjectiles" type="Node" parent="."]
 script = ExtResource("3_av28w")
 
@@ -774,7 +778,6 @@ volume_db = -11.985
 autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 position = Vector2(5, 244)
 energy = 0.7
 blend_mode = 1

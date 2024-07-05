@@ -11,7 +11,6 @@ func Enter():
 	attack_cooldown_timer.start()
 
 func _on_attack_cooldown_timer_timeout():
-	print("attack cooldown")
 	# If the player is nearby transition to chase
 	# If the player is somehow far away transition to idle
 	var direction: Vector2 = player.global_position - enemy.global_position

@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://bw1vvvf02xdb7"]
+
+[ext_resource type="Texture2D" uid="uid://djugw2k3qblt8" path="res://Sprites/Spells/Energy ball/EnergyBall.png" id="1_c32ov"]
+[ext_resource type="Script" path="res://Scenes/enemies/bat_spit.gd" id="1_o8l0w"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="2_05m7k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hismr"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wud4p"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05r1w"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akb4l"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btwdh"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bghnn"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j00ur"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6npm"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3j43"]
+atlas = ExtResource("1_c32ov")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ekuum"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hismr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wud4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05r1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akb4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btwdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bghnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j00ur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6npm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3j43")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nerux"]
+radius = 14.0357
+
+[node name="BatSpit" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 8
+collision_mask = 17
+script = ExtResource("1_o8l0w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.298039, 0.737255, 0.12549, 1)
+position = Vector2(1, 2)
+sprite_frames = SubResource("SpriteFrames_ekuum")
+autoplay = "default"
+frame_progress = 0.53332
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.14182, 1.16)
+shape = SubResource("CircleShape2D_nerux")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.294118, 0.92549, 0.247059, 1)
+texture = ExtResource("2_05m7k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
