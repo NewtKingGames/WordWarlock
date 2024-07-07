@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bev0g8poixok"]
+
+[ext_resource type="Script" path="res://Scenes/ui/keyboard/keyboard_letter.gd" id="1_je6lp"]
+[ext_resource type="Texture2D" uid="uid://bsjj7ujaiok3o" path="res://Sprites/Keyboard Letters and Symbols.png" id="2_w6b85"]
+
+[node name="KeyboardLetter" type="Node2D"]
+script = ExtResource("1_je6lp")
+
+[node name="LetterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_w6b85")
+hframes = 8
+vframes = 14
+
+[node name="LetterSpritePressed" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_w6b85")
+hframes = 8
+vframes = 14

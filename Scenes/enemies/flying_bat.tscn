@@ -258,7 +258,7 @@ collision_mask = 19
 script = ExtResource("1_5jpfr")
 attack_distance_to_enter = 300.0
 attack_distance_to_exit = 400.0
-bat_spit_speed = 200.0
+bat_spit_speed = 300.0
 health = 1.0
 walk_speed = 100.0
 chase_distance = 600.0
@@ -292,7 +292,7 @@ shape = SubResource("CircleShape2D_t7ool")
 [node name="StunlockTimer" type="Timer" parent="Timers"]
 
 [node name="SpitAttackCooldownTimer" type="Timer" parent="Timers"]
-wait_time = 0.6
+wait_time = 1.5
 
 [node name="EnemySprite2D" type="Sprite2D" parent="."]
 position = Vector2(2, 0)

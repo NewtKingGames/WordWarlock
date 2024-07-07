@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb38upnaeob6e"]
+
+[ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="1_efb0s"]
+
+[node name="KeyboardLetterA" instance=ExtResource("1_efb0s")]
+
+[node name="LetterSprite" parent="." index="0"]
+frame = 16
+
+[node name="LetterSpritePressed" parent="." index="1"]
+frame = 72

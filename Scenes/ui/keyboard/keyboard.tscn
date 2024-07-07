@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://crdvx4y4114mv"]
+
+[ext_resource type="Script" path="res://Scenes/ui/keyboard/keyboard.gd" id="1_aua3d"]
+[ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="2_fev0j"]
+
+[node name="Keyboard" type="Node2D"]
+script = ExtResource("1_aua3d")
+
+[node name="Letters" type="Node" parent="."]
+
+[node name="LetterA" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-69, -3)
+
+[node name="LetterB" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-11, 9)
+
+[node name="LetterC" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-37, 9)
+
+[node name="LetterD" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-43, -3)
+
+[node name="LetterE" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-46, -15)
+
+[node name="LetterF" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-30, -3)
+
+[node name="LetterG" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-17, -3)
+
+[node name="LetterH" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-4, -3)
+
+[node name="LetterI" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(19, -15)
+
+[node name="LetterJ" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(9, -3)
+
+[node name="LetterK" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(22, -3)
+
+[node name="LetterL" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(35, -3)
+
+[node name="LetterM" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(15, 9)
+
+[node name="LetterN" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(2, 9)
+
+[node name="LetterO" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(32, -15)
+
+[node name="LetterP" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(45, -15)
+
+[node name="LetterQ" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-72, -15)
+
+[node name="LetterR" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-33, -15)
+
+[node name="LetterS" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-56, -3)
+
+[node name="LetterT" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-20, -15)
+
+[node name="LetterU" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(6, -15)
+
+[node name="LetterV" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-24, 9)
+
+[node name="LetterW" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-59, -15)
+
+[node name="LetterX" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-50, 9)
+
+[node name="LetterY" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-7, -15)
+
+[node name="LetterZ" parent="Letters" instance=ExtResource("2_fev0j")]
+position = Vector2(-63, 9)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(6, 6)

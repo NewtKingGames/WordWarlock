@@ -1,0 +1,27 @@
+extends Node2D
+
+var keyboard_letter_scene: PackedScene = preload("res://Scenes/ui/keyboard/keyboard_letter.tscn")
+
+@onready var letters: Node = $Letters
+var letter_dictionary = {}
+
+func _ready():
+	var letter_num = 0
+	var keyboard_letters: Array[Node] = letters.get_children()
+	for keyboard_letter in keyboard_letters:
+		var letter: String = keyboard_letter.get_name().substr(keyboard_letter.get_name().length()-1)
+		keyboard_letter.set_keyboard_letter(letter, letter_num)
+		letter_num += 1
+		letter_dictionary[letter] = keyboard_letter
+	print(letter_dictionary)
+	
+#func _process(delta):
+	#if Input.is_action_just_pressed("up"):
+		#key_pressed("W")
+
+func _on_player_spell_key_pressed(letter_input: String):
+	key_pressed(letter_input)
+
+func key_pressed(letter_input: String):
+	# TODO add error handling?
+	letter_dictionary[letter_input].key_pressed()
