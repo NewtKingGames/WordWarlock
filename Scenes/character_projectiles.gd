@@ -2,9 +2,9 @@ extends Node
 
 
 #Preloaded spells
-var fireball_scene: PackedScene = preload("res://Scenes/projectiles/fireball.tscn")
-var ice_wall_scene: PackedScene = preload("res://Scenes/projectiles/ice_shield.tscn")
-var thunderstorm_scene: PackedScene = preload("res://Scenes/projectiles/thunder_storm.tscn")
+var fireball_scene: PackedScene = load("res://Scenes/projectiles/fireball.tscn")
+var ice_wall_scene: PackedScene = load("res://Scenes/projectiles/ice_shield.tscn")
+var thunderstorm_scene: PackedScene = load("res://Scenes/projectiles/thunder_storm.tscn")
 var player: Player
 
 
@@ -18,7 +18,7 @@ func _on_player_spell_shot(spell_position: Vector2, spell_direction: Vector2, sp
 	print("received player casting spell")
 	print(spell_name)
 	if spell_name == "FIREBALL":
-		var spell: Fireball = fireball_scene.instantiate()
+		var spell: Firespell = fireball_scene.instantiate()
 		spell.position = spell_position
 		spell.rotation = spell_direction.angle()
 		spell.direction = spell_direction

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bivf388fm7ku2"]
 
-[ext_resource type="Script" path="res://scenes/projectiles/fireball.gd" id="1_d0fq5"]
 [ext_resource type="Texture2D" uid="uid://da0bavei3vuwr" path="res://Sprites/Mages Character Pack by RgsDev/Mage 2/16x16 Mage 2 attacks.png" id="1_qd28e"]
+[ext_resource type="Script" path="res://Scenes/projectiles/fireball.gd" id="1_sw05w"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="3_s3q8o"]
 [ext_resource type="AudioStream" uid="uid://ctelf2jh6lbem" path="res://Sounds/GameSFX/Explosion/Retro Explosion Short 01.wav" id="4_20to5"]
 [ext_resource type="AudioStream" uid="uid://c4gs0oawuiu1r" path="res://Sounds/GameSFX/Impact/Retro Impact 20.wav" id="5_my61c"]
@@ -42,8 +42,8 @@ animations = [{
 scale = Vector2(4, 4)
 collision_layer = 2
 collision_mask = 28
-script = ExtResource("1_d0fq5")
-spell_speed = 500.0
+script = ExtResource("1_sw05w")
+spell_speed = 400.0
 impact_sound = NodePath("ImpactNoise")
 spell_damage = 20
 spell_name = "FIREBALL"

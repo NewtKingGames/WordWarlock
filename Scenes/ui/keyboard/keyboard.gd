@@ -1,6 +1,6 @@
 extends Node2D
 
-var keyboard_letter_scene: PackedScene = preload("res://Scenes/ui/keyboard/keyboard_letter.tscn")
+var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard_letter.tscn")
 
 @onready var letters: Node = $Letters
 var letter_dictionary = {}

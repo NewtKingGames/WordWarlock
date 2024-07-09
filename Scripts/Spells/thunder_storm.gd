@@ -4,7 +4,7 @@ class_name Thunderstorm
 
 @export var max_num_lightning_bolts: int
 @onready var lightning_bolts = $LightningBolts
-var lightning_bolt_scene: PackedScene = preload("res://Scenes/projectiles/lightning_bolt.tscn")
+var lightning_bolt_scene: PackedScene = load("res://Scenes/projectiles/lightning_bolt.tscn")
 
 var num_lightning_bolts_spawned: int = 0
 var num_lightning_bolts_destroyed: int = 0

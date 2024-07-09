@@ -8,7 +8,7 @@ var ice_ball_spawn_delay: float = 0.3333
 @onready var ice_balls: Node2D = $IceBalls
 @onready var ice_ball_spawn: Marker2D = $IceBallSpawn
 
-var ice_ball_scene: PackedScene = preload("res://Scenes/projectiles/ice_ball.tscn")
+var ice_ball_scene: PackedScene = load("res://Scenes/projectiles/ice_ball.tscn")
 
 func _ready():
 	# Initiate spawning of ice balls

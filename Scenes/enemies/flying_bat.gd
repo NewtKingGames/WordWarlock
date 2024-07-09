@@ -3,7 +3,7 @@ class_name FlyingBat
 
 signal bat_spit(speed: float, direction: Vector2, position: Vector2)
 
-var bat_spit_scene: PackedScene = preload("res://Scenes/enemies/bat_spit.tscn")
+var bat_spit_scene: PackedScene = load("res://Scenes/enemies/bat_spit.tscn")
 # I believe we want the distance the player needs to exit to be larger
 @export var attack_distance_to_enter: float
 @export var attack_distance_to_exit: float

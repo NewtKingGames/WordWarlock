@@ -1,7 +1,7 @@
 extends Node
 
 
-var bat_spit_scene: PackedScene = preload("res://Scenes/enemies/bat_spit.tscn")
+var bat_spit_scene: PackedScene = load("res://Scenes/enemies/bat_spit.tscn")
 
 func _ready():
 	pass
