@@ -4,9 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="2_fev0j"]
 
 [node name="Keyboard" type="Node2D"]
+z_index = 2
 script = ExtResource("1_aua3d")
 
-[node name="Letters" type="Node" parent="."]
+[node name="Letters" type="Node2D" parent="."]
 
 [node name="LetterA" parent="Letters" instance=ExtResource("2_fev0j")]
 position = Vector2(-69, -3)
@@ -86,5 +87,10 @@ position = Vector2(-7, -15)
 [node name="LetterZ" parent="Letters" instance=ExtResource("2_fev0j")]
 position = Vector2(-63, 9)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(6, 6)
+[node name="SpecialKeys" type="Node2D" parent="."]
+visible = false
+
+[node name="KeyboardLetter" parent="SpecialKeys" instance=ExtResource("2_fev0j")]
+position = Vector2(39, 10)
+
+[editable path="SpecialKeys/KeyboardLetter"]

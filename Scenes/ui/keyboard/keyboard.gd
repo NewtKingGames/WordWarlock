@@ -6,6 +6,7 @@ var keyboard_letter_scene: PackedScene = preload("res://Scenes/ui/keyboard/keybo
 var letter_dictionary = {}
 
 func _ready():
+	visible = false
 	var letter_num = 0
 	var keyboard_letters: Array[Node] = letters.get_children()
 	for keyboard_letter in keyboard_letters:
@@ -21,6 +22,14 @@ func _ready():
 
 func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
+
+func _on_player_enter_cast_state():
+	print("entered state")
+	visible = true
+	
+func _on_player_exit_cast_state():
+	print("exited state")
+	visible = false
 
 func key_pressed(letter_input: String):
 	# TODO add error handling?

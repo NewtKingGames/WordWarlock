@@ -18,7 +18,7 @@ func set_keyboard_letter(letter: String, letter_num: int):
 func key_pressed():
 	letter_sprite.visible = false
 	letter_sprite_pressed.visible = true
-	await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(.09).timeout
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false
 	
