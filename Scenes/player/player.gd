@@ -36,6 +36,8 @@ func _physics_process(delta):
 			var spell_position: Vector2
 			var spell_direction: Vector2
 			# TODO switch this from being hardcoded
+			print("player casting spell")
+			print(cast_spell_name)
 			if cast_spell_name == "FIREBALL":
 				# Put the spell from the aiming origin + some distance the player is looking
 				# we have to add global_position and the relative distance aiming_line is away from the player

@@ -19,11 +19,9 @@ func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
 
 func _on_player_enter_cast_state():
-	print("entered state")
 	visible = true
 	
 func _on_player_exit_cast_state():
-	print("exited state")
 	visible = false
 
 func key_pressed(letter_input: String):

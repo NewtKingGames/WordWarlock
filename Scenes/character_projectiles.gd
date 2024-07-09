@@ -15,6 +15,8 @@ func _ready():
 func _on_player_spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name: String):
 	# TODO - I bet theres a way we could implement this where the level is agnostic to the type of spell being spawned
 	# it'd be great to have a way to make this spell spawning generic rather than if statements
+	print("received player casting spell")
+	print(spell_name)
 	if spell_name == "FIREBALL":
 		var spell: Fireball = fireball_scene.instantiate()
 		spell.position = spell_position
