@@ -121,9 +121,9 @@ animations = [{
 
 [node name="LightningBolt" type="Area2D" node_paths=PackedStringArray("impact_sound", "spell_emit_sound")]
 script = ExtResource("1_2hlcw")
-spell_damage = 10
-spell_name = "LIGHTNING BOLT"
 impact_sound = NodePath("ImpactNoise")
+spell_damage = 12
+spell_name = "LIGHTNING BOLT"
 spell_emit_sound = NodePath("EmitNoise")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

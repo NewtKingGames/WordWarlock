@@ -9,7 +9,6 @@ func _ready():
 	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
 	for enemy: EnemyClass in enemies:
 		if enemy is FlyingBat:
-			print("Connecting flying bat spit to this function")
 			enemy = enemy as FlyingBat
 			enemy.connect("bat_spit", on_bat_spit)
 	

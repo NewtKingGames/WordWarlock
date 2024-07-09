@@ -46,7 +46,6 @@ func _physics_process(delta):
 				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player and is a child of the player
 				spell_direction = Vector2.ZERO
 			if cast_spell_name == "THUNDERSTORM":
-				print("casting thunderstrom")
 				spell_position = global_position # This spell needs to spawn directly on the player, but it is not a child of the player
 				spell_direction = Vector2.ZERO
 			spell_shot.emit(spell_position, spell_direction, cast_spell_name)

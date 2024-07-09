@@ -9,8 +9,6 @@ const CROSS_HAIR = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/
 
 
 func _on_cast_cast_spell(spell_string):
-	print("Attempting to cast spell")
-	print(spell_string)
 	match spell_string:
 		"FIREBALL":
 			spell_cast.emit("FIREBALL")
@@ -19,4 +17,4 @@ func _on_cast_cast_spell(spell_string):
 		"THUNDERSTORM":
 			spell_cast.emit("THUNDERSTORM")
 		_:
-			print("default case")
+			pass

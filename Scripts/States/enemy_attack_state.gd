@@ -5,7 +5,6 @@ class_name EnemyAttackState
 @onready var attack_cooldown_timer = $"../../Timers/AttackCooldownTimer"
 
 func Enter():
-	print("parent attack")
 	player.hit(10, enemy.velocity.normalized() * enemy.knock_back_magnitude)
 	enemy.velocity = Vector2.ZERO
 	attack_cooldown_timer.start()

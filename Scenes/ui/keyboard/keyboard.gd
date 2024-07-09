@@ -14,11 +14,6 @@ func _ready():
 		keyboard_letter.set_keyboard_letter(letter, letter_num)
 		letter_num += 1
 		letter_dictionary[letter] = keyboard_letter
-	print(letter_dictionary)
-	
-#func _process(delta):
-	#if Input.is_action_just_pressed("up"):
-		#key_pressed("W")
 
 func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
