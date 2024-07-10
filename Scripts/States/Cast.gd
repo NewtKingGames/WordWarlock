@@ -26,7 +26,6 @@ func _ready():
 	typing_noises = $"../../Sounds/TypingSounds".get_children()
 
 func Enter():
-	print("time scale!!")
 	Engine.time_scale = 0.5
 	character_animated_sprite_2d.play("cast_spell")
 	cast_string = ""
@@ -39,7 +38,6 @@ func Enter():
 	player.casting_state_entered.emit()
 
 func Exit():
-	print("exiting")
 	casting_text_label.visible = false
 	# Undo bullet time
 	Engine.time_scale = 1

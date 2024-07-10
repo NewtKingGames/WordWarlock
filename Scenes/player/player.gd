@@ -38,7 +38,6 @@ func _process(delta):
 	if state_machine.current_state != $StateMachine/Cast:
 		if Input.is_action_just_pressed("spell_book"):
 			is_spell_book_open = (bool)(!is_spell_book_open)
-		# TODO - add some kind of spell bool
 		if is_spell_book_open:
 			Engine.time_scale = 0
 		else:

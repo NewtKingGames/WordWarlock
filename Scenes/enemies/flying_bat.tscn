@@ -319,4 +319,5 @@ texture = ExtResource("10_3ui33")
 hframes = 4
 frame = 3
 
+[connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/SpitAttackCooldownTimer" to="StateMachine/Attack" method="_on_spit_attack_cooldown_timer_timeout"]
