@@ -26,18 +26,20 @@ func _ready():
 	typing_noises = $"../../Sounds/TypingSounds".get_children()
 
 func Enter():
+	print("time scale!!")
+	Engine.time_scale = 0.5
 	character_animated_sprite_2d.play("cast_spell")
 	cast_string = ""
 	casting_text_label.text = cast_string
 	casting_text_label.visible = true
 	casting_text_label.set_modulate(Color.WHITE)
 	# Start bullet time 
-	Engine.time_scale = 0.5
 	slow_mo_sound_enter.play()
 	slow_mo_sound_exit.stop()
 	player.casting_state_entered.emit()
 
 func Exit():
+	print("exiting")
 	casting_text_label.visible = false
 	# Undo bullet time
 	Engine.time_scale = 1

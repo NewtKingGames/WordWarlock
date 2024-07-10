@@ -38,11 +38,11 @@ func _process(delta):
 	if state_machine.current_state != $StateMachine/Cast:
 		if Input.is_action_just_pressed("spell_book"):
 			is_spell_book_open = (bool)(!is_spell_book_open)
-	# TODO - add some kind of spell bool
-	if is_spell_book_open:
-		Engine.time_scale = 0
-	else:
-		Engine.time_scale = 1
+		# TODO - add some kind of spell bool
+		if is_spell_book_open:
+			Engine.time_scale = 0
+		else:
+			Engine.time_scale = 1
 
 func _physics_process(delta):
 	aiming_line.visible = aiming_spell
