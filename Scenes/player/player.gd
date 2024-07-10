@@ -30,6 +30,10 @@ const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack
 
 
 func _process(delta):
+	if not can_take_damage:
+		$DamageAnimationPlayer.play("damage_flash")
+	if can_take_damage:
+		$DamageAnimationPlayer.stop()
 	# TODO - it's probably worth creating an entire new state for the spell book logic
 	if state_machine.current_state != $StateMachine/Cast:
 		if Input.is_action_just_pressed("spell_book"):
