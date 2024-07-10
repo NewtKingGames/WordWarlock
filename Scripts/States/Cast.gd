@@ -6,11 +6,13 @@ signal casting_state_entered
 signal casting_state_exited
 signal casting_key_pressed(letter_string: String)
 
+# TODO - this might be unnceccessary coupling
+@onready var spell_caster: SpellCaster = $"../../SpellCaster"
 
 @onready var character_animated_sprite_2d: AnimatedSprite2D = $"../../CharacterAnimatedSprite2D"
-@onready var casting_text_label = $"../../CastingText"
-@onready var slow_mo_sound_enter = $"../../Sounds/SlowMoSoundEnter"
-@onready var slow_mo_sound_exit = $"../../Sounds/SlowMoSoundExit"
+@onready var casting_text_label: Label = $"../../CastingText"
+@onready var slow_mo_sound_enter: AudioStreamPlayer2D = $"../../Sounds/SlowMoSoundEnter"
+@onready var slow_mo_sound_exit: AudioStreamPlayer2D = $"../../Sounds/SlowMoSoundExit"
 
 var rng = RandomNumberGenerator.new()
 
@@ -20,7 +22,6 @@ var regex: RegEx = RegEx.new()
 var cast_string: String = ""
 
 func _ready():
-	# this currently doesn't allow space bar
 	regex.compile("[a-zA-Z]")
 	typing_noises = $"../../Sounds/TypingSounds".get_children()
 
@@ -29,6 +30,7 @@ func Enter():
 	cast_string = ""
 	casting_text_label.text = cast_string
 	casting_text_label.visible = true
+	casting_text_label.set_modulate(Color.WHITE)
 	# Start bullet time 
 	Engine.time_scale = 0.5
 	slow_mo_sound_enter.play()
@@ -54,21 +56,27 @@ func Update(_delta: float):
 	elif Input.is_key_pressed(KEY_ESCAPE):
 		Transitioned.emit(self, "idle")
 
-# This timer solution is probably a little hacky, but we'll use it for now
 func Handle_Input(_event: InputEvent):
 	var event_string: String = _event.as_text()
-	if regex.search(event_string) and event_string.length() == 1 and not _event.is_echo() and _event.is_pressed():
-		cast_string += event_string
-		casting_text_label.text = cast_string
-		typing_noises[rng.randi_range(0,2)].play()
-		casting_key_pressed.emit(event_string.to_upper())
-	elif _event.is_action_pressed("space") and cast_string.length() > 0:
-		cast_string += " "
-		casting_text_label.text = cast_string
-		typing_noises[rng.randi_range(0,2)].play()
-	elif _event.is_action_pressed("backspace") and cast_string.length() > 0:
-		cast_string = cast_string.left(cast_string.length() - 1)
-		casting_text_label.text = cast_string
-		typing_noises[rng.randi_range(0,2)].play()
-		
+	if _event.is_pressed() and not _event.is_echo() and not _event.is_action_pressed("enter"):
+		if regex.search(event_string) and event_string.length() == 1:
+			cast_string += event_string
+			casting_text_label.text = cast_string
+			typing_noises[rng.randi_range(0,2)].play()
+			casting_key_pressed.emit(event_string.to_upper())
+		elif _event.is_action_pressed("space") and cast_string.length() > 0:
+			cast_string += " "
+			casting_text_label.text = cast_string
+			typing_noises[rng.randi_range(0,2)].play()
+		elif _event.is_action_pressed("backspace") and cast_string.length() > 0:
+			cast_string = cast_string.left(cast_string.length() - 1)
+			casting_text_label.text = cast_string
+			typing_noises[rng.randi_range(0,2)].play()
+		if spell_caster.is_string_known_spell(cast_string):
+			print(spell_caster.get_known_spell_for_string(cast_string))
+			# TODO think about how you can enhance this to have a color for each spell, that w
+			var spell = spell_caster.get_known_spell_for_string(cast_string)
+			casting_text_label.set_modulate(spell.get_spell_color())
+		else:
+			casting_text_label.set_modulate(Color.WHITE)
 		

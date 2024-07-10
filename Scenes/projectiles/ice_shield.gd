@@ -32,3 +32,8 @@ func on_ice_ball_destroyed():
 	num_ice_balls_spawn -= 1
 	if num_ice_balls_spawn == 0:
 		queue_free()
+
+	
+# Overrides
+static func get_spell_color():
+	return Color.CADET_BLUE

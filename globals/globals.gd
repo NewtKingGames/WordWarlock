@@ -15,4 +15,5 @@ var player_health: int = 30:
 				print("Waiting 3 seconds and restarting game")
 				await get_tree().create_timer(3).timeout
 				get_tree().reload_current_scene()
+				# Reset player health after restarting the game
 				player_health = 30

@@ -55,3 +55,7 @@ func get_enemies_in_zone() -> Array[EnemyClass]:
 			if num_lightning_bolts_spawned >= max_num_lightning_bolts:
 				break
 	return overlapping_enemies
+
+# Overrides
+static func get_spell_color():
+	return Color.GOLDENROD

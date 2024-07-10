@@ -7,3 +7,6 @@ class_name Spell
 func _ready():
 	spell_emit_sound.play()
 
+
+static func get_spell_color():
+	return Color.BLUE_VIOLET

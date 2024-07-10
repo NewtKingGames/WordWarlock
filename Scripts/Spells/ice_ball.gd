@@ -7,6 +7,7 @@ signal ice_ball_destroyed()
 
 var has_hit: bool = false
 
+
 func _on_body_entered(body):
 	if has_hit:
 		return

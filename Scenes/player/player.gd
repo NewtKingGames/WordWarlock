@@ -35,9 +35,6 @@ func _physics_process(delta):
 			# there is almost certainly going to be a better way in the future to do this, but for now these spells will never make it to the level scene
 			var spell_position: Vector2
 			var spell_direction: Vector2
-			# TODO switch this from being hardcoded
-			print("player casting spell")
-			print(cast_spell_name)
 			if cast_spell_name == "FIREBALL":
 				# Put the spell from the aiming origin + some distance the player is looking
 				# we have to add global_position and the relative distance aiming_line is away from the player
@@ -52,7 +49,7 @@ func _physics_process(delta):
 				spell_direction = Vector2.ZERO
 			spell_shot.emit(spell_position, spell_direction, cast_spell_name)
 			aiming_spell = false
-	# Only flip sprite when player is moving from direct input
+	# Only flip sprite when player is moving from direct input or aiming a spell
 	if not taking_damage:
 		if aiming_spell:
 			if get_local_mouse_position().x > 0:
@@ -75,8 +72,7 @@ func hit(damage_number: float, damage_direction: Vector2):
 		taking_damage = true
 		invulnerability_timer.start()
 		stunlock_timer.start()
-		knockback_direction = damage_direction # TODO YOU BROKE KNOCKBACK!
-		# TODO - check if performing the globals player health check here is problematic with signals, wondering if the signal needs to be sent from globals
+		knockback_direction = damage_direction
 		if Globals.player_health > 0:
 			state_machine.on_outside_transition("damage")
 		else:
@@ -88,7 +84,6 @@ func _on_invulnerability_timer_timeout():
 
 func _on_stunlock_timer_timeout():
 	taking_damage = false
-
 
 # TODO JUST PASS THE ACTUAL spell script or scene??? Level might not even have to care about which spell it is
 func _on_spell_caster_spell_cast(spell_name):
