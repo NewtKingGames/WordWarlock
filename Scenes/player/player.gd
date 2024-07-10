@@ -19,13 +19,26 @@ const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
 var aiming_spell: bool = false
-var cast_spell_name: String = "THUNDERSTORM" # TODO change this to be a Spell type itself?
+var cast_spell_name: String = "" # TODO change this to be a Spell type itself?
+var is_spell_book_open: bool = false
 
 var knockback_direction: Vector2 = Vector2.ZERO
 @export var knockback_speed: float = 100 # TODO DELETE
 @export var spell_spawn_distance: float = 100 # Distance away from the player the spell will spawn
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
+
+
+func _process(delta):
+	# TODO - it's probably worth creating an entire new state for the spell book logic
+	if state_machine.current_state != $StateMachine/Cast:
+		if Input.is_action_just_pressed("spell_book"):
+			is_spell_book_open = (bool)(!is_spell_book_open)
+	# TODO - add some kind of spell bool
+	if is_spell_book_open:
+		Engine.time_scale = 0
+	else:
+		Engine.time_scale = 1
 
 func _physics_process(delta):
 	aiming_line.visible = aiming_spell
@@ -68,6 +81,8 @@ func _physics_process(delta):
 			elif velocity.x < 0:
 				character_animated_sprite.flip_h = true
 	move_and_slide()
+
+
 
 func hit(damage_number: float, damage_direction: Vector2):
 	if can_take_damage:

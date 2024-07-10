@@ -18,8 +18,10 @@ func _ready():
 	player.connect("casting_state_exited", on_casting_state_exited)
 	
 func _process(delta):
+	# Shake camera when player is damaged
 	if shake_strength > 0:
 		shake_strength = lerpf(shake_strength, 0, shake_fade*delta)
+	# Zoom camera in when player is spelling
 	if zoom != camera_target_zoom:
 		zoom.x = lerpf(zoom.x, camera_target_zoom.x, typing_zoom_rate*delta)
 		zoom.y = lerpf(zoom.y, camera_target_zoom.y, typing_zoom_rate*delta)
