@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://Scenes/character_projectiles.gd" id="3_av28w"]
 [ext_resource type="Texture2D" uid="uid://dvsjgq018tmb2" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/full spritesheet.png" id="3_kbgx4"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="4_0of1q"]
-[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="4_aaijt"]
 [ext_resource type="Texture2D" uid="uid://5purwjc683qc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/full tilemap.png" id="4_wcbua"]
 [ext_resource type="PackedScene" uid="uid://ooxyv5avybtt" path="res://Scenes/enemies/slime.tscn" id="5_8hhxu"]
+[ext_resource type="PackedScene" uid="uid://dd070ctaor48g" path="res://Scenes/camera_2d.tscn" id="6_cqk03"]
 [ext_resource type="AudioStream" uid="uid://b4k6fdh12v6wa" path="res://Sounds/Battle+-+Draft+5.mp3" id="7_i5kem"]
 [ext_resource type="PackedScene" uid="uid://bc1sate60syol" path="res://Scenes/enemies/flying_bat.tscn" id="9_crbd0"]
 [ext_resource type="PackedScene" uid="uid://dtnnc2owp2ldg" path="res://Scenes/enemies/orc.tscn" id="9_ewlr1"]
@@ -764,11 +764,7 @@ layer_3/tile_data = PackedInt32Array(983057, 458752, 6, 983062, 524288, 6, 98305
 [node name="Player" parent="." instance=ExtResource("1_qycxy")]
 position = Vector2(1295, 789)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.4, 1.4)
-process_callback = 0
-position_smoothing_enabled = true
-script = ExtResource("4_aaijt")
+[node name="Camera2D" parent="Player" instance=ExtResource("6_cqk03")]
 
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(-0.5, 1)

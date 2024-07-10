@@ -2,9 +2,9 @@ extends State
 class_name Cast
 
 signal CastSpell(spell_string: String)
-signal casting_state_entered
-signal casting_state_exited
-signal casting_key_pressed(letter_string: String)
+
+@onready var player = $"../.."
+
 
 # TODO - this might be unnceccessary coupling
 @onready var spell_caster: SpellCaster = $"../../SpellCaster"
@@ -35,7 +35,7 @@ func Enter():
 	Engine.time_scale = 0.5
 	slow_mo_sound_enter.play()
 	slow_mo_sound_exit.stop()
-	casting_state_entered.emit()
+	player.casting_state_entered.emit()
 
 func Exit():
 	casting_text_label.visible = false
@@ -43,7 +43,7 @@ func Exit():
 	Engine.time_scale = 1
 	slow_mo_sound_enter.stop()
 	slow_mo_sound_exit.play()
-	casting_state_exited.emit()
+	player.casting_state_exited.emit()
 	
 func Update(_delta: float):
 	# Player Casting Spell
@@ -63,7 +63,7 @@ func Handle_Input(_event: InputEvent):
 			cast_string += event_string
 			casting_text_label.text = cast_string
 			typing_noises[rng.randi_range(0,2)].play()
-			casting_key_pressed.emit(event_string.to_upper())
+			player.casting_key_pressed.emit(event_string.to_upper())
 		elif _event.is_action_pressed("space") and cast_string.length() > 0:
 			cast_string += " "
 			casting_text_label.text = cast_string

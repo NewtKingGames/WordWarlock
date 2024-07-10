@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
+signal casting_state_entered
+signal casting_state_exited
+signal casting_key_pressed(letter_string: String)
+
 # TODO reconsile name between, spell cast and spell shot
 signal spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name: String)
 
