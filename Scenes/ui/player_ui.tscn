@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4n672j7n470k"]
+
+[ext_resource type="Texture2D" uid="uid://crluaym38yets" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/health_ui.png" id="1_1idu4"]
+[ext_resource type="Script" path="res://Scenes/ui/PlayerHealthUI.gd" id="1_lqjoj"]
+[ext_resource type="Texture2D" uid="uid://bqp2jvnokv12n" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="1_nq8v6"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerHealthUI" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 51.0
+offset_top = 1.0
+offset_right = 91.0
+offset_bottom = 41.0
+scale = Vector2(3, 3)
+script = ExtResource("1_lqjoj")
+
+[node name="PlayerHealthProgressBar" type="TextureProgressBar" parent="PlayerHealthUI"]
+modulate = Color(0, 1, 0.109804, 1)
+layout_mode = 0
+offset_left = 17.3333
+offset_top = 12.6667
+offset_right = 113.333
+offset_bottom = 52.6667
+scale = Vector2(0.646193, 0.364798)
+max_value = 4.0
+value = 4.0
+texture_progress = ExtResource("1_nq8v6")
+
+[node name="PlayerHealthBarOutline" type="TextureRect" parent="PlayerHealthUI"]
+layout_mode = 2
+offset_right = 80.0
+offset_bottom = 40.0
+texture = ExtResource("1_1idu4")
+stretch_mode = 3

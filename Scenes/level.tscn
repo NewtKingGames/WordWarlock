@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=16 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_projectiles.gd" id="1_pvngr"]
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b4k6fdh12v6wa" path="res://Sounds/Battle+-+Draft+5.mp3" id="7_i5kem"]
 [ext_resource type="PackedScene" uid="uid://bc1sate60syol" path="res://Scenes/enemies/flying_bat.tscn" id="9_crbd0"]
 [ext_resource type="PackedScene" uid="uid://dtnnc2owp2ldg" path="res://Scenes/enemies/orc.tscn" id="9_ewlr1"]
+[ext_resource type="PackedScene" uid="uid://b4n672j7n470k" path="res://Scenes/ui/player_ui.tscn" id="12_p2vga"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lncbs"]
 texture = ExtResource("4_wcbua")
@@ -861,3 +862,9 @@ position = Vector2(3062, 2851)
 
 [node name="Slime3" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(1749, 1349)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" parent="CanvasLayer" instance=ExtResource("12_p2vga")]
+offset_top = 2.0
+offset_bottom = 2.0
