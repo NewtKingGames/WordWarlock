@@ -1,7 +1,5 @@
-class_name Firespell # This keeps reporting "Hidiing global script class" it resolves the error when I just retype it.. TODO RENAME BACK TO Fireball
+class_name Fireball
 extends ProjectileSpell
-# BIG BUMMER! Multi inheritance does NOT work correctly meaning pure "projectile spells" are not going to work!!!
-# This is going to require some refactoring, check out https://www.reddit.com/r/godot/comments/15sp93v/problem_with_multiinheritance/
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
@@ -23,4 +21,4 @@ func _on_impact_noise_finished():
 	
 # Overrides
 static func get_spell_color():
-	return Color.BLUE_VIOLET
+	return Color.RED

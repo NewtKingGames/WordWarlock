@@ -73,8 +73,6 @@ func Handle_Input(_event: InputEvent):
 			casting_text_label.text = cast_string
 			typing_noises[rng.randi_range(0,2)].play()
 		if spell_caster.is_string_known_spell(cast_string):
-			print(spell_caster.get_known_spell_for_string(cast_string))
-			# TODO think about how you can enhance this to have a color for each spell, that w
 			var spell = spell_caster.get_known_spell_for_string(cast_string)
 			casting_text_label.set_modulate(spell.get_spell_color())
 		else:

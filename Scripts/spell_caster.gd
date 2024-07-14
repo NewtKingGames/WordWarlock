@@ -9,7 +9,7 @@ signal spell_cast(spell_name: String)
 enum Spells {FIREBALL, ICE_SHIELD, HASTE}
 const CROSS_HAIR = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
-var known_spells: Dictionary = {"FIREBALL": Firespell, "ICE SHIELD": IceShield, "THUNDERSTORM": Thunderstorm}
+var known_spells: Dictionary = {"FIREBALL": Fireball, "ICE SHIELD": IceShield, "THUNDERSTORM": Thunderstorm}
 
 func _on_cast_cast_spell(spell_string):
 	match spell_string:

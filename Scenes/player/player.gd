@@ -50,9 +50,6 @@ func _physics_process(delta):
 		# TODO - make cursor larger
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
 		if Input.is_action_just_pressed("cast_spell"):
-			# TODO - change how we're passing spell information around
-			# TODO SOME SPELLS DONT NEED GLOBAL POSITION THEY NEED TO SPAWN ON THE PLAYER
-			# there is almost certainly going to be a better way in the future to do this, but for now these spells will never make it to the level scene
 			var spell_position: Vector2
 			var spell_direction: Vector2
 			if cast_spell_name == "FIREBALL":
