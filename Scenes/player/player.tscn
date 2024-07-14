@@ -424,3 +424,4 @@ libraries = {
 [connection signal="timeout" from="Timers/StunlockTimer" to="." method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
 [connection signal="spell_cast" from="SpellCaster" to="." method="_on_spell_caster_spell_cast"]
+[connection signal="spell_cast_node" from="SpellCaster" to="." method="_on_spell_caster_spell_cast_node"]

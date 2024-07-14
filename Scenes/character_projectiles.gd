@@ -11,6 +11,7 @@ var player: Player
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	player.connect("spell_shot", _on_player_spell_shot)
+	player.connect("spell_shot_node", _on_player_spell_shot_node)
 	
 func _on_player_spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name: String):
 	# TODO - I bet theres a way we could implement this where the level is agnostic to the type of spell being spawned
@@ -31,3 +32,9 @@ func _on_player_spell_shot(spell_position: Vector2, spell_direction: Vector2, sp
 		spell.position = spell_position
 		self.add_child(spell)
 
+func _on_player_spell_shot_node(spell: Spell):
+	if is_instance_of(spell, IceShield):
+		player.add_child(spell)
+	else:
+		self.add_child(spell)
+	
