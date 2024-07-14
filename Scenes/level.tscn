@@ -764,6 +764,8 @@ layer_3/tile_data = PackedInt32Array(983057, 458752, 6, 983062, 524288, 6, 98305
 
 [node name="Player" parent="." instance=ExtResource("1_qycxy")]
 position = Vector2(1265, 840)
+knockback_speed = 100.0
+spell_spawn_distance = 100.0
 
 [node name="Camera2D" parent="Player" instance=ExtResource("6_cqk03")]
 

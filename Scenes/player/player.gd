@@ -4,10 +4,7 @@ class_name Player
 signal casting_state_entered
 signal casting_state_exited
 signal casting_key_pressed(letter_string: String)
-
-# TODO reconsile name between, spell cast and spell shot
-signal spell_shot(spell_position: Vector2, spell_direction: Vector2, spell_name: String)
-signal spell_shot_node(spell: Spell)
+signal spell_shot(spell: Spell)
 
 @onready var character_animated_sprite: AnimatedSprite2D = $CharacterAnimatedSprite2D
 @onready var light_occluder_2d = $LightOccluder2D
@@ -20,7 +17,6 @@ const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
 var aiming_spell: bool = false
-var cast_spell_name: String = "" # TODO change this to be a Spell type itself?
 var queued_spell: Spell
 var is_spell_book_open: bool = false
 
@@ -47,41 +43,24 @@ func _process(delta):
 
 func _physics_process(delta):
 	aiming_line.visible = aiming_spell
-	# for now, handling spell aiming and casting within the main player script. If this proves to be too large of scope refactor
+	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own nod
 	if aiming_spell:
 		# TODO - make cursor larger
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
 		if Input.is_action_just_pressed("cast_spell"):
-			var spell_position: Vector2 = Vector2.ZERO
-			var spell_direction: Vector2 = Vector2.ZERO
-			if cast_spell_name == "FIREBALL":
-				# Put the spell from the aiming origin + some distance the player is looking
-				# we have to add global_position and the relative distance aiming_line is away from the player
-				spell_position = (global_position + aiming_line.position) + spell_direction*spell_spawn_distance
-				# Get vector the player is looking towards
-				spell_direction = (get_global_mouse_position() - global_position).normalized()
-			if cast_spell_name == "ICE SHIELD":
-				spell_position = Vector2.ZERO # This spell needs to spawn directly on the player and is a child of the player, TODO maybe don't make it a child of the player
-				spell_direction = Vector2.ZERO
-			if cast_spell_name == "THUNDERSTORM":
-				spell_position = global_position # This spell needs to spawn directly on the player, but it is not a child of the player
-				spell_direction = Vector2.ZERO
-			#spell_shot.emit(spell_position, spell_direction, cast_spell_name)
-			#aiming_spell = false
-			# End of old flow
 			# TODO this might not be necessary? Defaults are set on class?
 			queued_spell.position = Vector2.ZERO
-			if is_instance_of(queued_spell, Fireball):
-				# Todo could make this the projectile spell?
-				# Put the spell from the aiming origin + some distance the player is looking
-				# we have to add global_position and the relative distance aiming_line is away from the player
-				queued_spell.position = (global_position + aiming_line.position) + spell_direction*spell_spawn_distance
+			if is_instance_of(queued_spell, Fireball): # Todo could make this check for projectile spell? Shouldn't be specific to fireball
 				# Get vector the player is looking towards
 				queued_spell.direction = (get_global_mouse_position() - global_position).normalized()
+				# Put the spell from the aiming origin + some distance the player is looking
+				# we have to add global_position and the relative distance aiming_line is away from the player
+				queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
+				queued_spell.rotation = queued_spell.direction.angle()
 			if is_instance_of(queued_spell, Thunderstorm):
 				queued_spell.position = global_position
-			spell_shot_node.emit(queued_spell)
-			aiming_spell = false
+			spell_shot.emit(queued_spell)
+			aiming_spell = false # consider just relying on setting the queued spell to null?
 			
 	# Only flip sprite when player is moving from direct input or aiming a spell
 	if not taking_damage:
@@ -99,8 +78,6 @@ func _physics_process(delta):
 				character_animated_sprite.flip_h = true
 	move_and_slide()
 
-
-
 func hit(damage_number: float, damage_direction: Vector2):
 	if can_take_damage:
 		Globals.player_health -= damage_number
@@ -113,7 +90,6 @@ func hit(damage_number: float, damage_direction: Vector2):
 			state_machine.on_outside_transition("damage")
 		else:
 			state_machine.on_outside_transition("death")
-		
 
 func _on_invulnerability_timer_timeout():
 	can_take_damage = true
@@ -121,13 +97,6 @@ func _on_invulnerability_timer_timeout():
 func _on_stunlock_timer_timeout():
 	taking_damage = false
 
-# TODO delete
-## TODO JUST PASS THE ACTUAL spell script or scene??? Level might not even have to care about which spell it is
-#func _on_spell_caster_spell_cast(spell_name):
-	#aiming_spell = true
-	#cast_spell_name = spell_name
-
-
-func _on_spell_caster_spell_cast_node(spell_node: Spell):
+func _on_spell_caster_spell_cast(spell_node: Spell):
 	aiming_spell = true
 	queued_spell = spell_node
