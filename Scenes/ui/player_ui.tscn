@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4n672j7n470k"]
+[gd_scene load_steps=6 format=3 uid="uid://b4n672j7n470k"]
 
 [ext_resource type="Texture2D" uid="uid://crluaym38yets" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/health_ui.png" id="1_1idu4"]
 [ext_resource type="Script" path="res://Scenes/ui/PlayerHealthUI.gd" id="1_lqjoj"]
 [ext_resource type="Texture2D" uid="uid://bqp2jvnokv12n" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="1_nq8v6"]
+[ext_resource type="Texture2D" uid="uid://bq7db05ucbw8s" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/time_bar_ui.png" id="4_070gi"]
+[ext_resource type="Script" path="res://Scenes/ui/PlayerTimeSlowUI.gd" id="4_g70b3"]
 
 [node name="PlayerUI" type="Control"]
 layout_mode = 3
@@ -38,4 +40,31 @@ layout_mode = 2
 offset_right = 80.0
 offset_bottom = 40.0
 texture = ExtResource("1_1idu4")
+stretch_mode = 3
+
+[node name="PlayerTimeSlowUI" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 51.0
+offset_top = 82.0
+offset_right = 91.0
+offset_bottom = 122.0
+scale = Vector2(1.5, 1.5)
+script = ExtResource("4_g70b3")
+
+[node name="PlayerTimeSlowProgressBar" type="TextureProgressBar" parent="PlayerTimeSlowUI"]
+modulate = Color(0.46046, 0.986677, 0.997053, 1)
+layout_mode = 0
+offset_left = 35.3333
+offset_top = 10.6667
+offset_right = 131.333
+offset_bottom = 50.6667
+scale = Vector2(1.27663, 0.502165)
+value = 100.0
+texture_progress = ExtResource("1_nq8v6")
+
+[node name="PlayerTimeSlowBarOutline" type="TextureRect" parent="PlayerTimeSlowUI"]
+layout_mode = 2
+offset_right = 80.0
+offset_bottom = 40.0
+texture = ExtResource("4_070gi")
 stretch_mode = 3

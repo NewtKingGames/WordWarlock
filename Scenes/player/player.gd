@@ -26,7 +26,6 @@ var knockback_direction: Vector2 = Vector2.ZERO
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
-
 func _process(delta):
 	if not can_take_damage:
 		$DamageAnimationPlayer.play("damage_flash")

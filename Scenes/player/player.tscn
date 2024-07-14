@@ -205,9 +205,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7h4y"]
-radius = 7.0
-
 [sub_resource type="Theme" id="Theme_oa0th"]
 
 [sub_resource type="Animation" id="Animation_p2rtu"]
@@ -298,6 +295,9 @@ _data = {
 "damage_flash": SubResource("Animation_p15l4")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7h4y"]
+radius = 7.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(4, 4)
 collision_mask = 29
@@ -335,20 +335,9 @@ sprite_frames = SubResource("SpriteFrames_brvva")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.25)
-scale = Vector2(1, 0.60263)
-shape = SubResource("CapsuleShape2D_j7h4y")
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="InvulnerabilityTimer" type="Timer" parent="Timers"]
-wait_time = 1.5
-one_shot = true
-
-[node name="StunlockTimer" type="Timer" parent="Timers"]
-wait_time = 0.3
-one_shot = true
+[node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]
+position = Vector2(7.25, 30.75)
+scale = Vector2(0.943525, 0.943525)
 
 [node name="SpellCaster" type="Node" parent="."]
 script = ExtResource("7_aw5ht")
@@ -407,20 +396,31 @@ stream = ExtResource("18_7bffb")
 position = Vector2(-1, 8.25)
 occluder = SubResource("OccluderPolygon2D_dtka1")
 
-[node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]
-position = Vector2(7.25, 30.75)
-scale = Vector2(0.943525, 0.943525)
-
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_b8wx2")
 }
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.25)
+scale = Vector2(1, 0.60263)
+shape = SubResource("CapsuleShape2D_j7h4y")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="InvulnerabilityTimer" type="Timer" parent="Timers"]
+wait_time = 1.5
+one_shot = true
+
+[node name="StunlockTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="casting_state_entered" from="." to="Keyboard" method="_on_player_enter_cast_state"]
 [connection signal="casting_state_exited" from="." to="Keyboard" method="_on_player_exit_cast_state"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="SpellCaster" method="_on_cast_cast_spell"]
+[connection signal="spell_cast" from="SpellCaster" to="." method="_on_spell_caster_spell_cast"]
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="." method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
-[connection signal="spell_cast" from="SpellCaster" to="." method="_on_spell_caster_spell_cast"]
