@@ -3,6 +3,19 @@ extends Node
 signal stat_change
 signal player_damage
 signal player_health_change(player_health: int)
+signal player_slowdown_pool_change(player_slowdown_pool: float)
+
+# TODO would this be easier if the player owned all of it?
+var player_slowdown_pool: float = 100:
+	set(value):
+		# short circuit out for min and max values
+		if value <= 0 and player_slowdown_pool != 0:
+			player_slowdown_pool = 0
+		elif value >= 100 and player_slowdown_pool != 100:
+			player_slowdown_pool = 100
+		else:
+			player_slowdown_pool = value
+		player_slowdown_pool_change.emit(player_slowdown_pool)
 
 var player_health: int = 4:
 	set(value):

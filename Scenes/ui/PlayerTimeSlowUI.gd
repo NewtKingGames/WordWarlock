@@ -5,8 +5,7 @@ extends Control
 var player: Player
 
 func _ready():
-	player = get_tree().get_first_node_in_group("player")
-	# Connect signal
+	Globals.connect("player_slowdown_pool_change", _on_player_slow_down_power_change)
 
-func on_player_slow_down_power_change(value: float):
+func _on_player_slow_down_power_change(value: float):
 	player_time_slow_progress_bar.value = value

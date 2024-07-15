@@ -420,6 +420,7 @@ one_shot = true
 [connection signal="casting_state_entered" from="." to="Keyboard" method="_on_player_enter_cast_state"]
 [connection signal="casting_state_exited" from="." to="Keyboard" method="_on_player_exit_cast_state"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="SpellCaster" method="_on_cast_cast_spell"]
+[connection signal="cast_spell_changed" from="StateMachine/Cast" to="." method="_on_spell_caster_state_changed"]
 [connection signal="spell_cast" from="SpellCaster" to="." method="_on_spell_caster_spell_cast"]
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="." method="_on_stunlock_timer_timeout"]

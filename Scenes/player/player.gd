@@ -3,6 +3,8 @@ class_name Player
 
 signal casting_state_entered
 signal casting_state_exited
+signal slowdown_effect_entered
+signal slowdown_effect_exited
 signal casting_key_pressed(letter_string: String)
 signal spell_shot(spell: Spell)
 
@@ -12,6 +14,9 @@ signal spell_shot(spell: Spell)
 @onready var stunlock_timer: Timer = $Timers/StunlockTimer
 @onready var state_machine: StateMachine = $StateMachine
 @onready var aiming_line = $AimingLine
+@onready var slow_mo_sound_enter = $Sounds/SlowMoSoundEnter
+@onready var slow_mo_sound_exit = $Sounds/SlowMoSoundExit
+
 
 const walk_speed: float = 400
 var can_take_damage: bool = true
@@ -19,10 +24,13 @@ var taking_damage: bool = false
 var aiming_spell: bool = false
 var queued_spell: Spell
 var is_spell_book_open: bool = false
+var is_player_casting: bool = false
 
 var knockback_direction: Vector2 = Vector2.ZERO
-@export var knockback_speed: float = 100 # TODO DELETE
 @export var spell_spawn_distance: float = 100 # Distance away from the player the spell will spawn
+
+var spell_slowdown_decrease_rate: float = 80.0
+var spell_slowdown_increase_rate: float = 16.0
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
@@ -39,6 +47,17 @@ func _process(delta):
 			Engine.time_scale = 0
 		else:
 			Engine.time_scale = 1
+			
+	# Handling player slowdown bar
+	if is_player_casting:
+		# The order of changing the value vs these if statements might really matter, not sure if this is correct
+		if Globals.player_slowdown_pool > 0:
+			slowdown_effect_start()
+		else:
+			slowdown_effect_stop()
+		Globals.player_slowdown_pool = Globals.player_slowdown_pool - spell_slowdown_decrease_rate * delta
+	else:
+		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
 	aiming_line.visible = aiming_spell
@@ -99,3 +118,26 @@ func _on_stunlock_timer_timeout():
 func _on_spell_caster_spell_cast(spell_node: Spell):
 	aiming_spell = true
 	queued_spell = spell_node
+
+func _on_spell_caster_state_changed(is_state_active: bool):
+	if is_state_active:
+		slowdown_effect_start()
+	else:
+		slowdown_effect_stop()
+	is_player_casting = is_state_active
+
+func slowdown_effect_start():
+	if Engine.time_scale == 0.25:
+		return
+	slow_mo_sound_enter.play()
+	slow_mo_sound_exit.stop()
+	Engine.time_scale = 0.25
+	slowdown_effect_entered.emit()
+
+func slowdown_effect_stop():
+	if Engine.time_scale == 1.0:
+		return
+	slow_mo_sound_enter.stop()
+	slow_mo_sound_exit.play()
+	Engine.time_scale = 1
+	slowdown_effect_exited.emit()
