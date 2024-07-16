@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bsjj7ujaiok3o" path="res://Sprites/Keyboard Letters and Symbols.png" id="2_w6b85"]
 
 [node name="KeyboardLetter" type="Node2D"]
-modulate = Color(0.944454, 0.0294741, 2.83963e-07, 1)
 script = ExtResource("1_je6lp")
 
 [node name="LetterSprite" type="Sprite2D" parent="."]

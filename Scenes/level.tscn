@@ -771,7 +771,6 @@ position = Vector2(1265, 840)
 position = Vector2(-0.5, 1)
 stream = ExtResource("7_i5kem")
 volume_db = -11.985
-autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(5, 244)

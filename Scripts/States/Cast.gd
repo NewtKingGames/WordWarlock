@@ -5,15 +5,14 @@ signal CastSpell(spell_string: String)
 signal cast_spell_changed(is_state_active: bool)
 
 @onready var player = $"../.."
-
-
 # TODO - this might be unnceccessary coupling
 @onready var spell_caster: SpellCaster = $"../../SpellCaster"
-
 @onready var character_animated_sprite_2d: AnimatedSprite2D = $"../../CharacterAnimatedSprite2D"
 @onready var casting_text_label: Label = $"../../CastingText"
 @onready var slow_mo_sound_enter: AudioStreamPlayer2D = $"../../Sounds/SlowMoSoundEnter"
 @onready var slow_mo_sound_exit: AudioStreamPlayer2D = $"../../Sounds/SlowMoSoundExit"
+
+var keyboard: Keyboard
 
 var rng = RandomNumberGenerator.new()
 
@@ -25,6 +24,7 @@ var cast_string: String = ""
 func _ready():
 	regex.compile("[a-zA-Z]")
 	typing_noises = $"../../Sounds/TypingSounds".get_children()
+	keyboard = get_tree().get_first_node_in_group("keyboard")
 
 func Enter():
 	cast_spell_changed.emit(true)
@@ -51,15 +51,19 @@ func Update(_delta: float):
 	elif Input.is_key_pressed(KEY_ESCAPE):
 		Transitioned.emit(self, "idle")
 
-# TODO - figure out how you can have this class talk to the keyboard node... I think it probably makes sense for this class to retrieve a reference to it rather than using signals?
 func Handle_Input(_event: InputEvent):
 	var event_string: String = _event.as_text()
 	if _event.is_pressed() and not _event.is_echo() and not _event.is_action_pressed("enter"):
 		if regex.search(event_string) and event_string.length() == 1:
-			cast_string += event_string
-			casting_text_label.text = cast_string
-			typing_noises[rng.randi_range(0,2)].play()
-			player.casting_key_pressed.emit(event_string.to_upper())
+			var keyboard_letter: String = keyboard.key_pressed(event_string)
+			if keyboard_letter != "":
+				cast_string += event_string
+				casting_text_label.text = cast_string
+				typing_noises[rng.randi_range(0,2)].play()
+			else:
+				typing_noises[3].play()
+			# TODO decide to keep or get rid of this signal
+			#player.casting_key_pressed.emit(event_string.to_upper())
 		elif _event.is_action_pressed("space") and cast_string.length() > 0:
 			cast_string += " "
 			casting_text_label.text = cast_string

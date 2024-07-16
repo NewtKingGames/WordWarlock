@@ -127,11 +127,11 @@ func _on_spell_caster_state_changed(is_state_active: bool):
 	is_player_casting = is_state_active
 
 func slowdown_effect_start():
-	if Engine.time_scale == 0.25:
+	if Engine.time_scale == Globals.engine_slowdown_magnitude:
 		return
 	slow_mo_sound_enter.play()
 	slow_mo_sound_exit.stop()
-	Engine.time_scale = 0.25
+	Engine.time_scale = Globals.engine_slowdown_magnitude
 	slowdown_effect_entered.emit()
 
 func slowdown_effect_stop():

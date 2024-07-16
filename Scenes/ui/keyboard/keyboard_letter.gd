@@ -8,13 +8,13 @@ var letter_string: String = ""
 
 # TODO would be cool to implement a feature where letters could get jumbled around? if you want to do that you should probably differentiate between the "original_letter_string" and "current_letter_string"
 
-var letter_active: bool = false:
+var letter_active: bool = true:
 	set(value): 
 		if value == letter_active:
 			return
+		# TODO add more visual/audio effects?
 		if value == false:
 			modulate = Color.FIREBRICK
-			# TODO add visual/audio effects
 			letter_active = false
 		if value == true:
 			modulate = Color.WHITE
@@ -23,6 +23,12 @@ var letter_active: bool = false:
 func _ready():
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false
+	# temporary random to test inactive letters
+	var random_num = randi_range(0, 1)
+	if random_num == 0:
+		letter_active = false
+	if random_num == 1:
+		letter_active = true
 
 func set_keyboard_letter(letter: String, letter_num: int):
 	letter_string = letter
@@ -31,11 +37,12 @@ func set_keyboard_letter(letter: String, letter_num: int):
 
 func key_pressed():
 	if not letter_active:
-		print("dead letter")
-		print(letter_string)
 		return
 	letter_sprite.visible = false
 	letter_sprite_pressed.visible = true
-	await get_tree().create_timer(.09).timeout
+	if Engine.time_scale == Globals.engine_slowdown_magnitude:
+		await get_tree().create_timer(.025).timeout
+	elif Engine.time_scale == 1:
+		await get_tree().create_timer(.1).timeout
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false

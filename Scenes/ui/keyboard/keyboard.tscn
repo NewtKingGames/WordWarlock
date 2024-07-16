@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/ui/keyboard/keyboard.gd" id="1_aua3d"]
 [ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="2_fev0j"]
 
-[node name="Keyboard" type="Node2D"]
+[node name="Keyboard" type="Node2D" groups=["keyboard"]]
 z_index = 2
 script = ExtResource("1_aua3d")
 

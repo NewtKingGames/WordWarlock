@@ -5,6 +5,9 @@ signal player_damage
 signal player_health_change(player_health: int)
 signal player_slowdown_pool_change(player_slowdown_pool: float)
 
+
+var engine_slowdown_magnitude: float = 0.25
+
 # TODO would this be easier if the player owned all of it?
 var player_slowdown_pool: float = 100:
 	set(value):

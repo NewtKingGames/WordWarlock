@@ -1,4 +1,5 @@
 extends Node2D
+class_name Keyboard
 
 var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard_letter.tscn")
 
@@ -35,4 +36,3 @@ func key_pressed(letter_input: String) -> String:
 	else:
 		print("inactive")
 		return ""
-	#letter_dictionary[letter_input].key_pressed()
