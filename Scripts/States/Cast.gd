@@ -51,6 +51,7 @@ func Update(_delta: float):
 	elif Input.is_key_pressed(KEY_ESCAPE):
 		Transitioned.emit(self, "idle")
 
+# TODO - figure out how you can have this class talk to the keyboard node... I think it probably makes sense for this class to retrieve a reference to it rather than using signals?
 func Handle_Input(_event: InputEvent):
 	var event_string: String = _event.as_text()
 	if _event.is_pressed() and not _event.is_echo() and not _event.is_action_pressed("enter"):

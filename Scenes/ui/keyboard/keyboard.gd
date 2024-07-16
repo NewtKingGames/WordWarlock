@@ -24,6 +24,15 @@ func _on_player_enter_cast_state():
 func _on_player_exit_cast_state():
 	visible = false
 
-func key_pressed(letter_input: String):
-	# TODO add error handling?
-	letter_dictionary[letter_input].key_pressed()
+# Returns the letter the player pressed. Returns empty string "" if the key is disabled
+func key_pressed(letter_input: String) -> String:
+	# TODO make sure this doesn't impact memory/performance
+	var letter: KeyboardLetter = letter_dictionary[letter_input]
+	if letter.letter_active:
+		print("active?")
+		letter.key_pressed()
+		return letter.letter_string
+	else:
+		print("inactive")
+		return ""
+	#letter_dictionary[letter_input].key_pressed()
