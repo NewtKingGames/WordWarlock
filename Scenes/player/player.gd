@@ -30,7 +30,7 @@ var knockback_direction: Vector2 = Vector2.ZERO
 @export var spell_spawn_distance: float = 100 # Distance away from the player the spell will spawn
 
 var spell_slowdown_decrease_rate: float = 80.0
-var spell_slowdown_increase_rate: float = 16.0
+var spell_slowdown_increase_rate: float = 22.0
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 

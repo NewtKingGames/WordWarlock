@@ -23,12 +23,12 @@ var letter_active: bool = true:
 func _ready():
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false
-	# temporary random to test inactive letters
-	var random_num = randi_range(0, 1)
-	if random_num == 0:
-		letter_active = false
-	if random_num == 1:
-		letter_active = true
+	## temporary random to test inactive letters
+	#var random_num = randi_range(0, 1)
+	#if random_num == 0:
+		#letter_active = false
+	#if random_num == 1:
+		#letter_active = true
 
 func set_keyboard_letter(letter: String, letter_num: int):
 	letter_string = letter

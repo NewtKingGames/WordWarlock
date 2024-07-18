@@ -30,9 +30,7 @@ func key_pressed(letter_input: String) -> String:
 	# TODO make sure this doesn't impact memory/performance
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	if letter.letter_active:
-		print("active?")
 		letter.key_pressed()
 		return letter.letter_string
 	else:
-		print("inactive")
 		return ""
