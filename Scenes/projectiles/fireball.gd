@@ -4,6 +4,7 @@ extends ProjectileSpell
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
 var has_hit: bool = false
+var ammo:int = 3
 
 
 func _on_body_entered(body: Node2D):
@@ -17,8 +18,7 @@ func _on_body_entered(body: Node2D):
 
 func _on_impact_noise_finished():
 	queue_free()
-	
-	
+
 # Overrides
 static func get_spell_color():
 	return Color.RED

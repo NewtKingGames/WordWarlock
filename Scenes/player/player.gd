@@ -23,6 +23,8 @@ var can_take_damage: bool = true
 var taking_damage: bool = false
 var aiming_spell: bool = false
 var queued_spell: Spell
+var queued_spell_scene: PackedScene
+var queued_spell_ammo: int = 0
 var is_spell_book_open: bool = false
 var is_player_casting: bool = false
 
@@ -78,7 +80,13 @@ func _physics_process(delta):
 			if is_instance_of(queued_spell, Thunderstorm):
 				queued_spell.position = global_position
 			spell_shot.emit(queued_spell)
-			aiming_spell = false # consider just relying on setting the queued spell to null?
+			queued_spell_ammo -= 1
+			if queued_spell_ammo <= 0:
+				aiming_spell = false
+				queued_spell = null
+			else:
+				queued_spell = queued_spell_scene.instantiate()
+			#aiming_spell = false # consider just relying on setting the queued spell to null?
 			
 	# Only flip sprite when player is moving from direct input or aiming a spell
 	if not taking_damage:
@@ -115,9 +123,15 @@ func _on_invulnerability_timer_timeout():
 func _on_stunlock_timer_timeout():
 	taking_damage = false
 
-func _on_spell_caster_spell_cast(spell_node: Spell):
+func _on_spell_caster_spell_cast(spell_scene: PackedScene):
 	aiming_spell = true
-	queued_spell = spell_node
+	queued_spell_scene = spell_scene
+	queued_spell = spell_scene.instantiate()
+	# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
+	if "ammo" in queued_spell:
+		queued_spell_ammo = queued_spell.ammo
+	else:
+		queued_spell_ammo = 1
 
 func _on_spell_caster_state_changed(is_state_active: bool):
 	if is_state_active:

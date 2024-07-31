@@ -1,7 +1,7 @@
 class_name SpellCaster
 extends Node
 
-signal spell_cast(spell_node: Spell)
+signal spell_cast(spell_node: PackedScene)
 
 # TODO see if you can get enums to work or define the enum in the spell as well to avoid hard coded strings?
 enum Spells {FIREBALL, ICE_SHIELD, HASTE}
@@ -15,14 +15,14 @@ var known_spells_scenes: Dictionary = {
 }
 
 func _on_cast_cast_spell(spell_string):
-	var spell: Spell = null
+	var spell: PackedScene = null
 	match spell_string:
 		"FIREBALL":
-			spell = known_spells_scenes["FIREBALL"].instantiate()
+			spell = known_spells_scenes["FIREBALL"]
 		"ICE SHIELD":
-			spell = known_spells_scenes["ICE SHIELD"].instantiate()
+			spell = known_spells_scenes["ICE SHIELD"]
 		"THUNDERSTORM":
-			spell = known_spells_scenes["THUNDERSTORM"].instantiate()
+			spell = known_spells_scenes["THUNDERSTORM"]
 		_:
 			pass
 	if spell != null:
