@@ -59,7 +59,10 @@ func Handle_Input(_event: InputEvent):
 			if keyboard_letter != "":
 				cast_string += event_string
 				casting_text_label.text = cast_string
-				typing_noises[rng.randi_range(0,2)].play()
+				# Randomize typing clip and pitch
+				var typing_noise_index: int = rng.randi_range(0,2)
+				typing_noises[typing_noise_index].pitch_scale = rng.randf_range(.93, 1.08)
+				typing_noises[typing_noise_index].play()
 			else:
 				typing_noises[3].play()
 			# TODO decide to keep or get rid of this signal
