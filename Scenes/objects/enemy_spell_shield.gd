@@ -6,13 +6,14 @@ var enemy_parent: EnemyClass
 # TODO unfortunately this flips due to us flipping the scale of the entire enemy object...
 # A quick fix would be to organize everything that needs flipping on each enemy under a node "flippable_objects" and then flipping the scale of that
 @onready var spell_break_text: Label = $SpellBreakText
+@onready var break_noise: AudioStreamPlayer2D = $BreakNoise
 
 
 func _ready():
 	# Choose random spell to be the spell break
 	spell_break = GlobalSpells.enemy_spell_shield_words[randi_range(0, GlobalSpells.enemy_spell_shield_words.size()-1)]
 	# TODO set spell text
-	spell_break_text.text = spell_break
+	spell_break_text.text = spell_break.to_upper()
 	print(spell_break)
 	# Make the parent enemy object invulnerable
 	if is_instance_of(get_parent(), EnemyClass):
@@ -25,9 +26,12 @@ func _ready():
 
 
 func on_player_spell_cast_string(string: String):
-	# TODO - not only should the word match, but the player should have to be within range, atleat to the point where the camera can see them
+	# TODO - not only should the word match, but the player should have to be within range, atleast to the point where the camera can see them
 	if spell_break.to_upper() == string.to_upper():
 		print("player has successfully typed the counter spell!")
 		enemy_parent.can_take_damage = true
-		# TODO add some audio and visual effects!
+		# TODO add some more audio and visual effects!
+		break_noise.play()
+		visible = false
+		await get_tree().create_timer(1).timeout
 		queue_free()

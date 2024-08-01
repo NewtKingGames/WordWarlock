@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dykbj0vmbxkss"]
+[gd_scene load_steps=5 format=3 uid="uid://dykbj0vmbxkss"]
 
 [ext_resource type="Script" path="res://Scenes/objects/enemy_spell_shield.gd" id="1_pjyjk"]
 [ext_resource type="Texture2D" uid="uid://c72da57kqmvc2" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/effects (new)/explosion_anim_f0.png" id="2_8iwwu"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="3_nweep"]
+[ext_resource type="AudioStream" uid="uid://by6w53m4dgv4u" path="res://Sounds/PossibleShieldBreak.mp3" id="4_c7l11"]
 
 [node name="EnemySpellShield" type="Node2D"]
 script = ExtResource("1_pjyjk")
@@ -22,3 +23,7 @@ theme_override_fonts/font = ExtResource("3_nweep")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BreakNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_c7l11")
+pitch_scale = 0.9
