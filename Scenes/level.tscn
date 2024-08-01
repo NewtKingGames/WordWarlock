@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=17 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_projectiles.gd" id="1_pvngr"]
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b8r0jowpjstqd" path="res://Sounds/Songs/WordlockBattle.mp3" id="7_25jvf"]
 [ext_resource type="PackedScene" uid="uid://bc1sate60syol" path="res://Scenes/enemies/flying_bat.tscn" id="9_crbd0"]
 [ext_resource type="PackedScene" uid="uid://dtnnc2owp2ldg" path="res://Scenes/enemies/orc.tscn" id="9_ewlr1"]
+[ext_resource type="PackedScene" uid="uid://dykbj0vmbxkss" path="res://Scenes/objects/enemy_spell_shield.tscn" id="12_jxqa0"]
 [ext_resource type="PackedScene" uid="uid://b4n672j7n470k" path="res://Scenes/ui/player_ui.tscn" id="12_p2vga"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lncbs"]
@@ -844,6 +845,8 @@ position = Vector2(2121, 2387)
 
 [node name="Slime" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(1287, 1228)
+
+[node name="EnemySpellShield" parent="Enemies/Slime" instance=ExtResource("12_jxqa0")]
 
 [node name="Slime2" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(2190, 1352)

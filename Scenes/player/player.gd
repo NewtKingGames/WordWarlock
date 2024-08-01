@@ -6,7 +6,10 @@ signal casting_state_exited
 signal slowdown_effect_entered
 signal slowdown_effect_exited
 signal casting_key_pressed(letter_string: String)
+# This signal is used to pass the actual spell object to the object responsible for adding them to the scene
 signal spell_shot(spell: Spell)
+# This signal is used to simply tell the game that the player hit enter on some string, spell or not
+signal spell_string_cast(string: String)
 
 @onready var character_animated_sprite: AnimatedSprite2D = $CharacterAnimatedSprite2D
 @onready var light_occluder_2d = $LightOccluder2D
@@ -132,6 +135,10 @@ func _on_spell_caster_spell_cast(spell_scene: PackedScene):
 		queued_spell_ammo = queued_spell.ammo
 	else:
 		queued_spell_ammo = 1
+
+# This signal is NOT the signal containing the actual spell. This is just a signal indicating the player hint enter on text they typed
+func _on_cast_cast_spell(string: String):
+	spell_string_cast.emit(string)
 
 func _on_spell_caster_state_changed(is_state_active: bool):
 	if is_state_active:

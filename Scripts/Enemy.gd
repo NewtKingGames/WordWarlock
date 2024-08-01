@@ -10,6 +10,8 @@ class_name EnemyClass
 @onready var animated_sprite_2d: AnimationPlayer = $EnemyAnimationPlayer
 @onready var enemy_sprite: Sprite2D = $EnemySprite2D
 @onready var attack_area: Area2D = $AttackArea
+# TODO - this is only used for EnemySpellShield today, should probably add some kind of invunlerability period to enemies
+var can_take_damage: bool = true
 
 
 var player: Player
@@ -33,8 +35,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func hit(damage: float):
-	health -= damage
-	if health <= 0:
-		state_machine.on_outside_transition("death")
-	else:
-		state_machine.on_outside_transition("damage")
+	if can_take_damage:
+		health -= damage
+		if health <= 0:
+			state_machine.on_outside_transition("death")
+		else:
+			state_machine.on_outside_transition("damage")

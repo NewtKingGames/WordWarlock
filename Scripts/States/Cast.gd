@@ -65,7 +65,7 @@ func Handle_Input(_event: InputEvent):
 				typing_noises[typing_noise_index].play()
 			else:
 				typing_noises[3].play()
-			# TODO decide to keep or get rid of this signal
+			 #TODO decide to keep or get rid of this signal
 			#player.casting_key_pressed.emit(event_string.to_upper())
 		elif _event.is_action_pressed("space") and cast_string.length() > 0:
 			cast_string += " "
