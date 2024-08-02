@@ -1,5 +1,6 @@
 class_name SpellCaster
 extends Node
+# TODO - should this just be a global script? I don't think it serves much point being part of the player
 
 signal spell_cast(spell_node: PackedScene)
 
