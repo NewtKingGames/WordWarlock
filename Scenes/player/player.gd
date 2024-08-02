@@ -24,10 +24,11 @@ signal spell_string_cast(string: String)
 const walk_speed: float = 400
 var can_take_damage: bool = true
 var taking_damage: bool = false
-var aiming_spell: bool = false
+
 var queued_spell: Spell
 var queued_spell_scene: PackedScene
 var queued_spell_ammo: int = 0
+
 var is_spell_book_open: bool = false
 var is_player_casting: bool = false
 
@@ -65,9 +66,9 @@ func _process(delta):
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
-	aiming_line.visible = aiming_spell
+	aiming_line.visible = queued_spell != null
 	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own nod
-	if aiming_spell:
+	if queued_spell != null:
 		# TODO - make cursor larger
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
 		if Input.is_action_just_pressed("cast_spell"):
@@ -85,15 +86,13 @@ func _physics_process(delta):
 			spell_shot.emit(queued_spell)
 			queued_spell_ammo -= 1
 			if queued_spell_ammo <= 0:
-				aiming_spell = false
 				queued_spell = null
 			else:
 				queued_spell = queued_spell_scene.instantiate()
-			#aiming_spell = false # consider just relying on setting the queued spell to null?
 			
 	# Only flip sprite when player is moving from direct input or aiming a spell
 	if not taking_damage:
-		if aiming_spell:
+		if queued_spell != null:
 			if get_local_mouse_position().x > 0:
 				character_animated_sprite.flip_h = false
 				light_occluder_2d.scale.x = 1
@@ -127,7 +126,6 @@ func _on_stunlock_timer_timeout():
 	taking_damage = false
 
 func _on_spell_caster_spell_cast(spell_scene: PackedScene):
-	aiming_spell = true
 	queued_spell_scene = spell_scene
 	queued_spell = spell_scene.instantiate()
 	# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
