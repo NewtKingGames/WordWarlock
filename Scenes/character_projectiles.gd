@@ -7,7 +7,7 @@ func _ready():
 	player.connect("spell_shot", _on_player_spell_shot)
 
 func _on_player_spell_shot(spell: Spell):
-	if is_instance_of(spell, IceShield): # Some spells spawn on the player
+	if is_instance_of(spell, IceShield) or is_instance_of(spell, EffectSpell): # Some spells spawn on the player
 		player.add_child(spell)
 	else:
 		self.add_child(spell)
