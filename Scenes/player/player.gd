@@ -150,6 +150,7 @@ func _on_stunlock_timer_timeout():
 	taking_damage = false
 
 func _on_spell_caster_spell_cast(spell_scene: PackedScene):
+	return
 	queued_spell_scene = spell_scene
 	queued_spell = spell_scene.instantiate()
 	# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
@@ -158,11 +159,12 @@ func _on_spell_caster_spell_cast(spell_scene: PackedScene):
 	else:
 		queued_spell_ammo = 1
 
-# This signal is NOT the signal containing the actual spell. This is just a signal indicating the player hint enter on text they typed
+# This signal is NOT the signal containing the actual spell. This is just a signal indicating the player hit enter on text they typed
 func _on_cast_cast_spell(string: String):
 	spell_string_cast.emit(string)
 
 func _on_spell_caster_state_changed(is_casting: bool):
+	return
 	if is_casting:
 		slowdown_effect_start()
 	else:
@@ -171,6 +173,30 @@ func _on_spell_caster_state_changed(is_casting: bool):
 			Globals.player_slowdown_pool += (slowdown_pool_consumed * .66)
 	is_player_casting = is_casting
 	casting_state_changed.emit(is_casting)
+
+
+# Bit of a bummer, I can't type hint typed_string and spell_scene because nulling them out doesn't work. Is it an issue with typed Scene?
+# TODO - the solution here is to create a custom "Object" which is simply a payload for all of these values which does support nulling these out akin to an API contract
+func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
+	# Handling state entered
+	if is_casting:
+		slowdown_effect_start()
+		return
+	else:
+		# Handling state exit
+		slowdown_effect_stop()
+		# TODO handle the different combinations of the player leaving the state
+		if spell_scene:
+			queued_spell_scene = spell_scene
+			queued_spell = spell_scene.instantiate()
+			# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
+			if "ammo" in queued_spell:
+				queued_spell_ammo = queued_spell.ammo
+			else:
+				queued_spell_ammo = 1
+	is_player_casting = is_casting
+	casting_state_changed.emit(is_casting)
+	
 
 func slowdown_effect_start():
 	# Prevent duplicate effects from playing

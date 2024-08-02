@@ -3,10 +3,13 @@ class_name Cast
 
 signal CastSpell(spell_string: String)
 signal cast_spell_changed(is_state_active: bool)
+# Catch all signal for entering and exiting the cast state. If exiting it will include the String if the player attempted to cast, and if the player was successful it will include the spell scene
+# TODO how to handle counter spells?
+signal cast_spell_state_changed(is_state_active: bool, string_typed, spell_scene)
+# TODO - you might need to change this to support the "escape" key situation
+signal player_attempted_spell()
 
 @onready var player: Player = $"../.."
-# TODO - this might be unnceccessary coupling
-@onready var spell_caster: SpellCaster = $"../../SpellCaster"
 @onready var character_animated_sprite_2d: AnimatedSprite2D = $"../../CharacterAnimatedSprite2D"
 @onready var casting_text_label: Label = $"../../CastingText"
 @onready var slow_mo_sound_enter: AudioStreamPlayer2D = $"../../Sounds/SlowMoSoundEnter"
@@ -28,6 +31,8 @@ func _ready():
 
 func Enter():
 	cast_spell_changed.emit(true)
+	# new signal
+	cast_spell_state_changed.emit(true, null, null)
 	character_animated_sprite_2d.play("cast_spell")
 	cast_string = ""
 	casting_text_label.text = cast_string
@@ -36,13 +41,18 @@ func Enter():
 
 func Exit():
 	casting_text_label.visible = false
+	# New path:
+	var casted_spell = String(cast_string)
+	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)
+	print(spell_scene)
+	cast_spell_state_changed.emit(false, casted_spell, spell_scene)
 	cast_spell_changed.emit(false)
 	
 func Update(_delta: float):
 	# Player Casting Spell
 	if Input.is_action_just_pressed("enter"):
-		# TODO - this copying of cast_string might be unneccessary
 		var casted_spell = String(cast_string)
+		# TODO - this copying of cast_string might be unneccessary
 		CastSpell.emit(casted_spell)
 		Transitioned.emit(self, "idle")
 	# Player Cancelling Spell
@@ -73,8 +83,8 @@ func Handle_Input(_event: InputEvent):
 			cast_string = cast_string.left(cast_string.length() - 1)
 			casting_text_label.text = cast_string
 			typing_noises[rng.randi_range(0,2)].play()
-		if spell_caster.is_string_known_spell(cast_string):
-			var spell = spell_caster.get_known_spell_for_string(cast_string)
+		if GlobalSpells.is_string_known_spell(cast_string):
+			var spell = GlobalSpells.get_known_spell_for_string(cast_string)
 			casting_text_label.set_modulate(spell.get_spell_color())
 		else:
 			casting_text_label.set_modulate(Color.WHITE)
