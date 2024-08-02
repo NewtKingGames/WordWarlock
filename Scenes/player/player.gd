@@ -39,6 +39,11 @@ var spell_slowdown_increase_rate: float = 22.0
 # TODO - track the total current amount of spell slowdown lost in a single charge as a variable
 var slowdown_pool_consumed: float = 0
 var player_has_combo: bool = false
+var spells_in_combo: int = 0
+# Idea for the combo system:
+# You could reduce your signals from 'cast' down to a single signal which includes:
+# (is_casting: true/false, spell_string null or the string, spell_scene null or the scene cast)
+# If we do that then we can tell: 1. Did we leave the state due to a casting of the spell or because we tried to cast a spell and if we did was it succesful?
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
@@ -73,14 +78,12 @@ func _process(delta):
 
 func _physics_process(delta):
 	aiming_line.visible = queued_spell != null
-	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own nod
+	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own node
 	if queued_spell != null:
 		# TODO - make cursor larger
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
 		if Input.is_action_just_pressed("cast_spell"):
-			# TODO this might not be necessary? Defaults are set on class?
-			queued_spell.position = Vector2.ZERO
-			if is_instance_of(queued_spell, Fireball): # Todo could make this check for projectile spell? Shouldn't be specific to fireball
+			if is_instance_of(queued_spell, ProjectileSpell):
 				# Get vector the player is looking towards
 				queued_spell.direction = (get_global_mouse_position() - global_position).normalized()
 				# Put the spell from the aiming origin + some distance the player is looking
@@ -153,9 +156,9 @@ func _on_spell_caster_state_changed(is_casting: bool):
 			Globals.player_slowdown_pool += slowdown_pool_consumed
 	is_player_casting = is_casting
 	casting_state_changed.emit(is_casting)
-	
 
 func slowdown_effect_start():
+	# Prevent duplicate effects from playing
 	if Engine.time_scale == Globals.engine_slowdown_magnitude:
 		return
 	slow_mo_sound_enter.play()
@@ -164,6 +167,7 @@ func slowdown_effect_start():
 	slowdown_effect_entered.emit()
 
 func slowdown_effect_stop():
+	# Prevent duplicate effects from playing
 	if Engine.time_scale == 1.0:
 		return
 	slow_mo_sound_enter.stop()
