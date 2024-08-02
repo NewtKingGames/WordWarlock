@@ -828,8 +828,12 @@ position = Vector2(2400, 996)
 [node name="Orc" parent="Enemies" instance=ExtResource("9_ewlr1")]
 position = Vector2(2654, 1356)
 
+[node name="EnemySpellShield" parent="Enemies/Orc" instance=ExtResource("12_jxqa0")]
+
 [node name="Orc2" parent="Enemies" instance=ExtResource("9_ewlr1")]
 position = Vector2(1982, 2794)
+
+[node name="EnemySpellShield" parent="Enemies/Orc2" instance=ExtResource("12_jxqa0")]
 
 [node name="Orc3" parent="Enemies" instance=ExtResource("9_ewlr1")]
 position = Vector2(1920, 3123)
@@ -851,6 +855,8 @@ position = Vector2(1287, 1228)
 [node name="Slime2" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(2190, 1352)
 
+[node name="EnemySpellShield" parent="Enemies/Slime2" instance=ExtResource("12_jxqa0")]
+
 [node name="Slime4" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(2312, 2226)
 
@@ -862,6 +868,8 @@ position = Vector2(2241, 3153)
 
 [node name="Slime7" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(3062, 2851)
+
+[node name="EnemySpellShield" parent="Enemies/Slime7" instance=ExtResource("12_jxqa0")]
 
 [node name="Slime3" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(1749, 1349)

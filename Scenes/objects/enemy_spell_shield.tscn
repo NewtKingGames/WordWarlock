@@ -1,16 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://dykbj0vmbxkss"]
+[gd_scene load_steps=8 format=3 uid="uid://dykbj0vmbxkss"]
 
 [ext_resource type="Script" path="res://Scenes/objects/enemy_spell_shield.gd" id="1_pjyjk"]
 [ext_resource type="Texture2D" uid="uid://c72da57kqmvc2" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/effects (new)/explosion_anim_f0.png" id="2_8iwwu"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="3_nweep"]
 [ext_resource type="AudioStream" uid="uid://by6w53m4dgv4u" path="res://Sounds/PossibleShieldBreak.mp3" id="4_c7l11"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="5_4pbhp"]
+
+[sub_resource type="Animation" id="Animation_srogm"]
+resource_name = "break"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_np4cb"]
+_data = {
+"break": SubResource("Animation_srogm")
+}
 
 [node name="EnemySpellShield" type="Node2D"]
 script = ExtResource("1_pjyjk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.701961, 1, 1, 0.254902)
-position = Vector2(0.0206833, -11)
+modulate = Color(0, 0.624174, 0.625446, 0.254902)
+position = Vector2(0, -12)
 scale = Vector2(1.25129, 1.25129)
 texture = ExtResource("2_8iwwu")
 
@@ -27,3 +49,16 @@ vertical_alignment = 1
 [node name="BreakNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_c7l11")
 pitch_scale = 0.9
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+texture = ExtResource("5_4pbhp")
+texture_scale = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_np4cb")
+}
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -11)

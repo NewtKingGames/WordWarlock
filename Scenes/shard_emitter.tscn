@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cwxdffm21d4yc"]
+
+[node name="ShardEmitter" type="Node2D"]
+
+[node name="DeleteTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_DeleteTimer_timeout"]
