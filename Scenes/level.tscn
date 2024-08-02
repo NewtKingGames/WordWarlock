@@ -768,7 +768,7 @@ position = Vector2(1300, 783)
 
 [node name="Camera2D" parent="Player" instance=ExtResource("6_cqk03")]
 
-[node name="LevelMusic" type="AudioStreamPlayer2D" parent="Player"]
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="Player" groups=["music"]]
 position = Vector2(-0.5, 1)
 stream = ExtResource("7_25jvf")
 volume_db = -6.0
