@@ -10,7 +10,7 @@ func Enter():
 	
 func Update(_delta: float):
 	var direction = Input.get_vector("left", "right", "up", "down")
-	player.velocity = direction * player.walk_speed
+	player.velocity = direction * Globals.player_walk_speed
 	if not direction:
 		if Input.is_action_just_pressed("enter"):
 			Transitioned.emit(self, "cast")

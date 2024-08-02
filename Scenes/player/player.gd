@@ -166,6 +166,11 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 		if spell_scene:
 			queued_spell_scene = spell_scene
 			queued_spell = spell_scene.instantiate()
+			# Effect spells are immediately cast after typing
+			if is_instance_of(queued_spell, EffectSpell):
+				spell_shot.emit(queued_spell)
+				queued_spell = null
+				return
 			# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
 			if "ammo" in queued_spell:
 				queued_spell_ammo = queued_spell.ammo

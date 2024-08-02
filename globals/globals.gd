@@ -20,6 +20,15 @@ var player_slowdown_pool: float = 100:
 			player_slowdown_pool = value
 		player_slowdown_pool_change.emit(player_slowdown_pool)
 
+
+const player_base_walk_speed: float = 400
+var player_walk_speed: float = player_base_walk_speed:
+	set(value):
+		if value > player_base_walk_speed:
+			print("player is speeding up!!")
+		player_walk_speed = value
+		
+
 var player_health: int = 4:
 	set(value):
 		if player_health <= 0:

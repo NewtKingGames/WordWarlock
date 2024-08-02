@@ -44,7 +44,6 @@ func Exit():
 	# New path:
 	var casted_spell = String(cast_string)
 	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)
-	print(spell_scene)
 	cast_spell_state_changed.emit(false, casted_spell, spell_scene)
 	cast_spell_changed.emit(false)
 	
