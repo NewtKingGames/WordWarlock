@@ -37,6 +37,9 @@ var knockback_direction: Vector2 = Vector2.ZERO
 
 var spell_slowdown_decrease_rate: float = 80.0
 var spell_slowdown_increase_rate: float = 22.0
+# TODO - track the total current amount of spell slowdown lost in a single charge as a variable
+var slowdown_pool_consumed: float = 0
+var player_has_combo: bool = false
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
@@ -61,8 +64,12 @@ func _process(delta):
 			slowdown_effect_start()
 		else:
 			slowdown_effect_stop()
+		slowdown_pool_consumed += spell_slowdown_decrease_rate * delta
+		print("slowdown pool consumed")
+		print(slowdown_pool_consumed)
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool - spell_slowdown_decrease_rate * delta
 	else:
+		slowdown_pool_consumed = 0
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
@@ -143,6 +150,8 @@ func _on_spell_caster_state_changed(is_state_active: bool):
 		slowdown_effect_start()
 	else:
 		slowdown_effect_stop()
+		if player_has_combo:
+			Globals.player_slowdown_pool += slowdown_pool_consumed
 	is_player_casting = is_state_active
 
 func slowdown_effect_start():
