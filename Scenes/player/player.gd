@@ -46,8 +46,8 @@ var spells_in_combo: int = 0
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
+# Variables related to music slowdown and speed up effects
 var level_music: AudioStreamPlayer2D
-
 const pitch_scale_slow: float = .5
 const pitch_scale_max: float = 1
 const pitch_scale_rate_up: float = 8
@@ -83,8 +83,6 @@ func _process(delta):
 		else:
 			slowdown_effect_stop()
 		slowdown_pool_consumed += spell_slowdown_decrease_rate * delta
-		print("slowdown pool consumed")
-		print(slowdown_pool_consumed)
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool - spell_slowdown_decrease_rate * delta
 	else:
 		slowdown_pool_consumed = 0

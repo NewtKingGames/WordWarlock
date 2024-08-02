@@ -14,7 +14,6 @@ func _ready():
 	# Choose random spell to be the spell break
 	spell_break = GlobalSpells.enemy_spell_shield_words[randi_range(0, GlobalSpells.enemy_spell_shield_words.size()-1)]
 	spell_break_text.text = spell_break.to_upper()
-	print(spell_break)
 	# Make the parent enemy object invulnerable
 	if is_instance_of(get_parent(), EnemyClass):
 		enemy_parent = get_parent()
@@ -26,9 +25,7 @@ func _ready():
 
 
 func on_player_spell_cast_string(string: String):
-	# TODO - not only should the word match, but the player should have to be within range, atleast to the point where the camera can see them
 	if visible_on_screen_notifier_2d.is_on_screen() && spell_break.to_upper() == string.to_upper():
-		print("player has successfully typed the counter spell!")
 		enemy_parent.can_take_damage = true
 		# TODO add some more audio and visual effects!
 		break_noise.play()
