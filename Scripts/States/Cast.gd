@@ -4,7 +4,7 @@ class_name Cast
 signal CastSpell(spell_string: String)
 signal cast_spell_changed(is_state_active: bool)
 
-@onready var player = $"../.."
+@onready var player: Player = $"../.."
 # TODO - this might be unnceccessary coupling
 @onready var spell_caster: SpellCaster = $"../../SpellCaster"
 @onready var character_animated_sprite_2d: AnimatedSprite2D = $"../../CharacterAnimatedSprite2D"
@@ -33,12 +33,10 @@ func Enter():
 	casting_text_label.text = cast_string
 	casting_text_label.visible = true
 	casting_text_label.set_modulate(Color.WHITE)
-	player.casting_state_entered.emit()
 
 func Exit():
 	casting_text_label.visible = false
 	cast_spell_changed.emit(false)
-	player.casting_state_exited.emit()
 	
 func Update(_delta: float):
 	# Player Casting Spell

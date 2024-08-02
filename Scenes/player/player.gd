@@ -1,10 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
-signal casting_state_entered
-signal casting_state_exited
 signal slowdown_effect_entered
 signal slowdown_effect_exited
+signal casting_state_changed(is_casting: bool)
 signal casting_key_pressed(letter_string: String)
 # This signal is used to pass the actual spell object to the object responsible for adding them to the scene
 signal spell_shot(spell: Spell)
@@ -145,14 +144,16 @@ func _on_spell_caster_spell_cast(spell_scene: PackedScene):
 func _on_cast_cast_spell(string: String):
 	spell_string_cast.emit(string)
 
-func _on_spell_caster_state_changed(is_state_active: bool):
-	if is_state_active:
+func _on_spell_caster_state_changed(is_casting: bool):
+	if is_casting:
 		slowdown_effect_start()
 	else:
 		slowdown_effect_stop()
 		if player_has_combo:
 			Globals.player_slowdown_pool += slowdown_pool_consumed
-	is_player_casting = is_state_active
+	is_player_casting = is_casting
+	casting_state_changed.emit(is_casting)
+	
 
 func slowdown_effect_start():
 	if Engine.time_scale == Globals.engine_slowdown_magnitude:

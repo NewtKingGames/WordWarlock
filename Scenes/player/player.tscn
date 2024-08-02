@@ -421,8 +421,7 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
-[connection signal="casting_state_entered" from="." to="Keyboard" method="_on_player_enter_cast_state"]
-[connection signal="casting_state_exited" from="." to="Keyboard" method="_on_player_exit_cast_state"]
+[connection signal="casting_state_changed" from="." to="Keyboard" method="_on_player_cast_state_change"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="." method="_on_cast_cast_spell"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="SpellCaster" method="_on_cast_cast_spell"]
 [connection signal="cast_spell_changed" from="StateMachine/Cast" to="." method="_on_spell_caster_state_changed"]

@@ -19,11 +19,8 @@ func _ready():
 func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
 
-func _on_player_enter_cast_state():
-	visible = true
-	
-func _on_player_exit_cast_state():
-	visible = false
+func _on_player_cast_state_change(is_casting: bool):
+	visible = is_casting
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
 func key_pressed(letter_input: String) -> String:
