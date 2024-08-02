@@ -38,7 +38,7 @@ var spell_slowdown_decrease_rate: float = 80.0
 var spell_slowdown_increase_rate: float = 22.0
 # TODO - track the total current amount of spell slowdown lost in a single charge as a variable
 var slowdown_pool_consumed: float = 0
-var player_has_combo: bool = false
+var player_has_combo: bool = false 
 var spells_in_combo: int = 0
 # Idea for the combo system:
 # You could reduce your signals from 'cast' down to a single signal which includes:
@@ -47,7 +47,22 @@ var spells_in_combo: int = 0
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
+var level_music: AudioStreamPlayer2D
+
+const pitch_scale_slow: float = .5
+const pitch_scale_max: float = 1
+const pitch_scale_rate_up: float = 8
+var pitch_scale_rate_down: float = pitch_scale_rate_up * (1.0/Globals.engine_slowdown_magnitude)
+var target_pitch: float = pitch_scale_max
+
+func _ready():
+	level_music = get_tree().get_first_node_in_group("music")
+
 func _process(delta):
+	if level_music.pitch_scale < target_pitch:
+		level_music.pitch_scale = lerpf(level_music.pitch_scale, target_pitch, pitch_scale_rate_up*delta)
+	elif level_music.pitch_scale > target_pitch:
+		level_music.pitch_scale = lerpf(level_music.pitch_scale, target_pitch, pitch_scale_rate_down*delta)
 	if not can_take_damage:
 		$DamageAnimationPlayer.play("damage_flash")
 	if can_take_damage:
@@ -153,7 +168,7 @@ func _on_spell_caster_state_changed(is_casting: bool):
 	else:
 		slowdown_effect_stop()
 		if player_has_combo:
-			Globals.player_slowdown_pool += slowdown_pool_consumed
+			Globals.player_slowdown_pool += (slowdown_pool_consumed * .66)
 	is_player_casting = is_casting
 	casting_state_changed.emit(is_casting)
 
@@ -164,6 +179,7 @@ func slowdown_effect_start():
 	slow_mo_sound_enter.play()
 	slow_mo_sound_exit.stop()
 	Engine.time_scale = Globals.engine_slowdown_magnitude
+	target_pitch = pitch_scale_slow
 	slowdown_effect_entered.emit()
 
 func slowdown_effect_stop():
@@ -173,4 +189,5 @@ func slowdown_effect_stop():
 	slow_mo_sound_enter.stop()
 	slow_mo_sound_exit.play()
 	Engine.time_scale = 1
+	target_pitch = pitch_scale_max
 	slowdown_effect_exited.emit()
