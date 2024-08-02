@@ -14,8 +14,8 @@ var camera_target_zoom: Vector2 = zoom
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	Globals.connect("player_damage", apply_shake)
-	player.connect("slowdown_effect_entered", on_casting_state_entered)
-	player.connect("slowdown_effect_exited", on_casting_state_exited)
+	player.connect("slowdown_effect_entered", on_slowdown_effect_entered)
+	player.connect("slowdown_effect_exited", on_slowdown_effect_exited)
 	
 func _process(delta):
 	# Shake camera when player is damaged
@@ -30,10 +30,10 @@ func _process(delta):
 func apply_shake():
 	shake_strength = random_strength
 
-func on_casting_state_entered():
+func on_slowdown_effect_entered():
 	camera_target_zoom = Vector2(2, 2)
 	
-func on_casting_state_exited():
+func on_slowdown_effect_exited():
 	camera_target_zoom = Vector2(1.4, 1.4)
 	
 func random_offset() -> Vector2:

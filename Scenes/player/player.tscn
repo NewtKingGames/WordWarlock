@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=51 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Script" path="res://Scenes/player/player.gd" id="1_gp0yp"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/States/player_move.gd" id="4_gmyaw"]
 [ext_resource type="Script" path="res://Scripts/States/cast.gd" id="5_lstil"]
 [ext_resource type="Script" path="res://Scripts/States/damage.gd" id="6_e403r"]
-[ext_resource type="Script" path="res://Scripts/spell_caster.gd" id="7_aw5ht"]
 [ext_resource type="Script" path="res://Scripts/States/death.gd" id="7_ntvts"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="8_n785n"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
@@ -340,9 +339,6 @@ autoplay = "idle"
 position = Vector2(7.25, 30.75)
 scale = Vector2(0.943525, 0.943525)
 
-[node name="SpellCaster" type="Node" parent="."]
-script = ExtResource("7_aw5ht")
-
 [node name="CastingText" type="Label" parent="."]
 z_index = 1
 offset_left = -34.0
@@ -421,13 +417,10 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
-[connection signal="casting_state_changed" from="." to="Keyboard" method="_on_player_cast_state_change"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="." method="_on_cast_cast_spell"]
-[connection signal="CastSpell" from="StateMachine/Cast" to="SpellCaster" method="_on_cast_cast_spell"]
 [connection signal="cast_spell_changed" from="StateMachine/Cast" to="." method="_on_spell_caster_state_changed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="." method="_on_cast_spell_state_changed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="Keyboard" method="_on_cast_spell_state_changed"]
-[connection signal="spell_cast" from="SpellCaster" to="." method="_on_spell_caster_spell_cast"]
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="." method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]

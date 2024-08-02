@@ -18,5 +18,4 @@ func Update(_delta: float):
 
 
 func _on_stunlock_timer_timeout():
-	
 	Transitioned.emit(self, "idle")

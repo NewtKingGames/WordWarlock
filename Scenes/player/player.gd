@@ -3,7 +3,6 @@ class_name Player
 
 signal slowdown_effect_entered
 signal slowdown_effect_exited
-signal casting_state_changed(is_casting: bool)
 signal casting_key_pressed(letter_string: String)
 # This signal is used to pass the actual spell object to the object responsible for adding them to the scene
 signal spell_shot(spell: Spell)
@@ -18,7 +17,6 @@ signal spell_string_cast(string: String)
 @onready var aiming_line = $AimingLine
 @onready var slow_mo_sound_enter = $Sounds/SlowMoSoundEnter
 @onready var slow_mo_sound_exit = $Sounds/SlowMoSoundExit
-
 
 const walk_speed: float = 400
 var can_take_damage: bool = true
@@ -44,6 +42,7 @@ var spells_in_combo: int = 0
 # You could reduce your signals from 'cast' down to a single signal which includes:
 # (is_casting: true/false, spell_string null or the string, spell_scene null or the scene cast)
 # If we do that then we can tell: 1. Did we leave the state due to a casting of the spell or because we tried to cast a spell and if we did was it succesful?
+# Update: ^ I did the above and I like it a whole lot more, that said the next step is to creat an actual response object from the Cast state to give me more flexibility
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
@@ -149,35 +148,15 @@ func _on_invulnerability_timer_timeout():
 func _on_stunlock_timer_timeout():
 	taking_damage = false
 
-func _on_spell_caster_spell_cast(spell_scene: PackedScene):
-	return
-	queued_spell_scene = spell_scene
-	queued_spell = spell_scene.instantiate()
-	# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
-	if "ammo" in queued_spell:
-		queued_spell_ammo = queued_spell.ammo
-	else:
-		queued_spell_ammo = 1
-
 # This signal is NOT the signal containing the actual spell. This is just a signal indicating the player hit enter on text they typed
 func _on_cast_cast_spell(string: String):
 	spell_string_cast.emit(string)
-
-func _on_spell_caster_state_changed(is_casting: bool):
-	return
-	if is_casting:
-		slowdown_effect_start()
-	else:
-		slowdown_effect_stop()
-		if player_has_combo:
-			Globals.player_slowdown_pool += (slowdown_pool_consumed * .66)
-	is_player_casting = is_casting
-	casting_state_changed.emit(is_casting)
 
 
 # Bit of a bummer, I can't type hint typed_string and spell_scene because nulling them out doesn't work. Is it an issue with typed Scene?
 # TODO - the solution here is to create a custom "Object" which is simply a payload for all of these values which does support nulling these out akin to an API contract
 func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
+	is_player_casting = is_casting
 	# Handling state entered
 	if is_casting:
 		slowdown_effect_start()
@@ -194,8 +173,6 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 				queued_spell_ammo = queued_spell.ammo
 			else:
 				queued_spell_ammo = 1
-	is_player_casting = is_casting
-	casting_state_changed.emit(is_casting)
 	
 
 func slowdown_effect_start():
