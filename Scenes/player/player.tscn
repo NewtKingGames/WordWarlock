@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=60 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/States/death.gd" id="7_ntvts"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="8_n785n"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
+[ext_resource type="Script" path="res://Scripts/States/player_shot_spell.gd" id="9_y8sb8"]
 [ext_resource type="Script" path="res://Scenes/player/aiming_line.gd" id="12_en663"]
 [ext_resource type="AudioStream" uid="uid://86bl4nq6ymup" path="res://Sounds/possible_damage_two.wav" id="13_0r2mo"]
 [ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="14_x12ab"]
@@ -83,6 +84,30 @@ region = Rect2(192, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_v6oeg"]
 atlas = ExtResource("4_fvahh")
 region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6c3dh"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(192, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nwe7"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(256, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrr7d"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(320, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njilk"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(384, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdd7y"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(448, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di4ig"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(512, 448, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_som2i"]
 atlas = ExtResource("4_fvahh")
@@ -182,6 +207,29 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6c3dh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nwe7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrr7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njilk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdd7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_di4ig")
+}],
+"loop": false,
+"name": &"shoot_spell",
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -337,12 +385,17 @@ script = ExtResource("6_e403r")
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource("7_ntvts")
 
+[node name="ShotSpell" type="Node" parent="StateMachine"]
+script = ExtResource("9_y8sb8")
+
 [node name="CharacterAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_30it8")
 position = Vector2(0, -7.75)
 sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"idle"
+animation = &"shoot_spell"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]
 position = Vector2(7.25, 30.75)

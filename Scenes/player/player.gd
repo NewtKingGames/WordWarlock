@@ -110,6 +110,9 @@ func _physics_process(delta):
 			if is_instance_of(queued_spell, Thunderstorm):
 				queued_spell.position = global_position
 			spell_shot.emit(queued_spell)
+			# New animation
+			#character_animated_sprite.play("shoot_spell")
+			state_machine.on_outside_transition("shotspell")
 			queued_spell_ammo -= 1
 			if queued_spell_ammo <= 0:
 				queued_spell = null
