@@ -21,7 +21,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,7 +39,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("EnemySprite2D:visible")
+tracks/1/path = NodePath("VisibleNodes/EnemySprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,7 +63,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EnemyDeathSprite2D:visible")
+tracks/2/path = NodePath("VisibleNodes/EnemyDeathSprite2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -80,7 +80,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:visible")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,7 +92,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("EnemyDeathSprite2D:visible")
+tracks/1/path = NodePath("VisibleNodes/EnemyDeathSprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -104,7 +104,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EnemyDeathSprite2D:frame")
+tracks/2/path = NodePath("VisibleNodes/EnemyDeathSprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -136,7 +136,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -264,6 +264,19 @@ walk_speed = 100.0
 chase_distance = 600.0
 knock_back_magnitude = 10.0
 
+[node name="VisibleNodes" type="Node2D" parent="."]
+
+[node name="EnemySprite2D" type="Sprite2D" parent="VisibleNodes"]
+position = Vector2(2, 0)
+texture = ExtResource("8_y5k3v")
+hframes = 8
+
+[node name="EnemyDeathSprite2D" type="Sprite2D" parent="VisibleNodes"]
+visible = false
+texture = ExtResource("10_3ui33")
+hframes = 4
+frame = 3
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_8eawt")
 initial_state = NodePath("Idle")
@@ -294,11 +307,6 @@ shape = SubResource("CircleShape2D_t7ool")
 [node name="SpitAttackCooldownTimer" type="Timer" parent="Timers"]
 wait_time = 1.5
 
-[node name="EnemySprite2D" type="Sprite2D" parent="."]
-position = Vector2(2, 0)
-texture = ExtResource("8_y5k3v")
-hframes = 8
-
 [node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_nvric")
@@ -312,12 +320,6 @@ sprite_frames = SubResource("SpriteFrames_rv4tt")
 animation = &"new_animation"
 autoplay = "new_animation"
 frame_progress = 0.687902
-
-[node name="EnemyDeathSprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("10_3ui33")
-hframes = 4
-frame = 3
 
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/SpitAttackCooldownTimer" to="StateMachine/Attack" method="_on_spit_attack_cooldown_timer_timeout"]

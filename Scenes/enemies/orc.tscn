@@ -9,13 +9,11 @@
 [ext_resource type="Script" path="res://Scripts/States/enemy_damage.gd" id="5_hbc64"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_death.gd" id="6_yn0dc"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_guh2t"]
-height = 20.5
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_stbka"]
 radius = 6.25
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y65se"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_guh2t"]
+height = 20.5
 
 [sub_resource type="Animation" id="Animation_gwpva"]
 resource_name = "attack"
@@ -23,7 +21,7 @@ length = 0.50001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -54,7 +52,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -70,7 +68,7 @@ length = 0.30001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -86,7 +84,7 @@ length = 0.50001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -117,7 +115,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -136,6 +134,8 @@ _data = {
 "idle": SubResource("Animation_vbjhr")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y65se"]
+
 [node name="Orc" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(4, 4)
 collision_layer = 4
@@ -146,6 +146,22 @@ health = 50.0
 walk_speed = 200.0
 chase_distance = 500.0
 knock_back_magnitude = 100.0
+
+[node name="VisibleNodes" type="Node2D" parent="."]
+
+[node name="EnemySprite2D" type="Sprite2D" parent="VisibleNodes"]
+texture = ExtResource("1_vobdq")
+hframes = 8
+vframes = 6
+frame = 19
+
+[node name="SwingArea" type="Area2D" parent="VisibleNodes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibleNodes/SwingArea"]
+position = Vector2(14.25, -3.5)
+rotation = -0.352706
+shape = SubResource("CapsuleShape2D_stbka")
+debug_color = Color(0.917647, 0.2, 0, 0.419608)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_2a0p5")
@@ -169,14 +185,6 @@ script = ExtResource("6_yn0dc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_guh2t")
 
-[node name="SwingArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingArea"]
-position = Vector2(14.25, -3.5)
-rotation = -0.352706
-shape = SubResource("CapsuleShape2D_stbka")
-debug_color = Color(0.917647, 0.2, 0, 0.419608)
-
 [node name="DamageNoise" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Timers" type="Node" parent="."]
@@ -188,24 +196,18 @@ wait_time = 0.2
 wait_time = 1.2
 one_shot = true
 
+[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_56l80")
+}
+autoplay = "idle"
+
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 scale = Vector2(1.98423, 1.9863)
 shape = SubResource("CircleShape2D_y65se")
 debug_color = Color(0.190496, 0.639321, 0.168529, 0.42)
-
-[node name="EnemySprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vobdq")
-hframes = 8
-vframes = 6
-frame = 19
-
-[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_56l80")
-}
-autoplay = "idle"
 
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_attack_cooldown_timer_timeout"]

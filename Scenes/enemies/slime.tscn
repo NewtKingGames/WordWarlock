@@ -9,13 +9,13 @@
 [ext_resource type="Script" path="res://Scripts/States/enemy_death.gd" id="8_bp1j1"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_attack_state.gd" id="8_igxjm"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ajr77"]
+polygon = PackedVector2Array(-5, -14.75, 0, -15.25, 5, -15, 7, -4, 7.25, 0, -7, 0, -7, -3.5, -4.5, -5.75, -5.25, -14.5)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eaulm"]
 height = 39.0096
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spwkb"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ajr77"]
-polygon = PackedVector2Array(-5, -14.75, 0, -15.25, 5, -15, 7, -4, 7.25, 0, -7, 0, -7, -3.5, -4.5, -5.75, -5.25, -14.5)
 
 [sub_resource type="Animation" id="Animation_hyr4v"]
 resource_name = "hurt"
@@ -25,7 +25,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -42,7 +42,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -59,7 +59,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +91,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite2D:frame_coords")
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,6 +119,18 @@ health = 40.0
 walk_speed = 100.0
 chase_distance = 500.0
 knock_back_magnitude = 200.0
+
+[node name="VisibleNodes" type="Node2D" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="VisibleNodes"]
+occluder = SubResource("OccluderPolygon2D_ajr77")
+
+[node name="EnemySprite2D" type="Sprite2D" parent="VisibleNodes"]
+position = Vector2(2.08165e-12, -11.75)
+texture = ExtResource("1_ib7ob")
+hframes = 4
+vframes = 3
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.96046e-08, -7)
@@ -163,21 +175,11 @@ one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_ajr77")
-
 [node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_m0k21")
 }
 autoplay = "idle"
-
-[node name="EnemySprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.08165e-12, -11.75)
-texture = ExtResource("1_ib7ob")
-hframes = 4
-vframes = 3
-frame = 6
 
 [connection signal="body_entered" from="AttackArea" to="StateMachine/Chase" method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_attack_cooldown_timer_timeout"]

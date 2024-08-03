@@ -12,7 +12,7 @@ class_name EnemyClass
 @onready var attack_area: Area2D = $AttackArea
 # TODO - this is only used for EnemySpellShield today, should probably add some kind of invunlerability period to enemies
 var can_take_damage: bool = true
-
+var visible_nodes: Node2D
 
 var player: Player
 
@@ -20,14 +20,15 @@ var player: Player
 var previous_velocity: Vector2 = Vector2(1,0)
 
 func _ready():
+	visible_nodes = get_child(0)
 	player = get_tree().get_first_node_in_group("player")
 	
 func _physics_process(delta):
 	# Solution to flip the character when it changes direction on the x axis
 	if velocity.x > 0 and previous_velocity.x < 0:
-		scale.x = -4
+		visible_nodes.scale.x = 1
 	if velocity.x < 0 and previous_velocity.x > 0:
-		scale.x = -4
+		visible_nodes.scale.x = -1
 	
 	# only set previous velocity to nonzero x values
 	if velocity.x != 0:

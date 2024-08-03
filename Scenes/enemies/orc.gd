@@ -1,7 +1,7 @@
 extends EnemyClass
 class_name Orc
 
-@onready var swing_area: Area2D = $SwingArea
+@onready var swing_area: Area2D = $VisibleNodes/SwingArea
 
 func _physics_process(delta):
 	super._physics_process(delta)
