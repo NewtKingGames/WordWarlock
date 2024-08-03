@@ -38,11 +38,8 @@ var spell_slowdown_increase_rate: float = 22.0
 var slowdown_pool_consumed: float = 0
 var player_has_combo: bool = false 
 var spells_in_combo: int = 0
-# Idea for the combo system:
-# You could reduce your signals from 'cast' down to a single signal which includes:
-# (is_casting: true/false, spell_string null or the string, spell_scene null or the scene cast)
-# If we do that then we can tell: 1. Did we leave the state due to a casting of the spell or because we tried to cast a spell and if we did was it succesful?
-# Update: ^ I did the above and I like it a whole lot more, that said the next step is to creat an actual response object from the Cast state to give me more flexibility
+
+# TODO Next step is to creat an actual response object from the Cast state to give me more flexibility, instead of passing 3 variables around especially because you can't type hint the signals correctly
 
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
@@ -54,10 +51,18 @@ const pitch_scale_rate_up: float = 8
 var pitch_scale_rate_down: float = pitch_scale_rate_up * (1.0/Globals.engine_slowdown_magnitude)
 var target_pitch: float = pitch_scale_max
 
+# Variables related to visual status effects
+var is_haste_active: bool = false
+
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
 
 func _process(delta):
+	# Reconsider choice to rely on global variables
+	if Globals.player_walk_speed > Globals.player_base_walk_speed:
+		character_animated_sprite.material.set_shader_parameter("color", Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
+	else:
+		character_animated_sprite.material.set_shader_parameter("color", Color(0, 0, 0, 0))
 	if level_music.pitch_scale < target_pitch:
 		level_music.pitch_scale = lerpf(level_music.pitch_scale, target_pitch, pitch_scale_rate_up*delta)
 	elif level_music.pitch_scale > target_pitch:

@@ -20,7 +20,6 @@ func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
 
 func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_scene):
-	print(is_casting_active)
 	visible = is_casting_active
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
