@@ -106,7 +106,7 @@ collision_mask = 28
 script = ExtResource("1_l724t")
 spell_speed = 100.0
 impact_sound = NodePath("ImpactNoise")
-spell_damage = 5
+spell_damage = 10
 spell_name = "ICE BALL"
 spell_emit_sound = NodePath("EmitNoise")
 

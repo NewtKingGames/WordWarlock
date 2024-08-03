@@ -1,7 +1,7 @@
 extends Node
 
 # Spells used for enemy shield bubbles
-var enemy_spell_shield_words: Array[String] = ["Disarm", "Pierce", "Break", "Shatter", "Earl the Pug", "Hedgehog"]
+var enemy_spell_shield_words: Array[String] = ["Disarm", "Pierce", "Break", "Shatter", "Dismantle", "Destroy", "Demolish", "Relinquish"]
 
 # TODO see if you can get enums to work or define the enum in the spell as well to avoid hard coded strings?
 enum Spells {FIREBALL, ICE_SHIELD, HASTE}
