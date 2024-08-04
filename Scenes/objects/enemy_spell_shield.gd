@@ -3,8 +3,6 @@ class_name EnemySpellShield
 
 var spell_break: String
 var enemy_parent: EnemyClass
-# TODO unfortunately this flips due to us flipping the scale of the entire enemy object...
-# A quick fix would be to organize everything that needs flipping on each enemy under a node "flippable_objects" and then flipping the scale of that
 @onready var spell_break_text: Label = $SpellBreakText
 @onready var break_noise: AudioStreamPlayer2D = $BreakNoise
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D

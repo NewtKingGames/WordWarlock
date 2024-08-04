@@ -19,17 +19,6 @@ func get_spell_scene_for_string(spell_string) -> Object:
 	if known_spells_scenes.has(spell_string):
 		return known_spells_scenes[spell_string]
 	return null
-	#match spell_string:
-		#"FIREBALL":
-			#spell = known_spells_scenes["FIREBALL"]
-		#"ICE SHIELD":
-			#spell = known_spells_scenes["ICE SHIELD"]
-		#"THUNDERSTORM":
-			#spell = known_spells_scenes["THUNDERSTORM"]
-		#""
-		#_:
-			#pass
-	#return spell
 
 func is_string_known_spell(input: String) -> bool:
 	return known_spells_classes.has(input.to_upper())	
