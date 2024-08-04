@@ -29,7 +29,6 @@ func _process(delta):
 	position += direction*spell_speed*delta
 	distance_traveled = (starting_position - global_position).length()
 	if distance_traveled >= max_distance:
-		print("boomerang hit max distance!")
 		traveling_back = true
 	# Traveling back and hit the player
 	if traveling_back and (player.global_position - global_position).length() < retrievable_distance:
@@ -38,3 +37,9 @@ func _process(delta):
 # OVERRIDE
 static func get_spell_color():
 	return Color.WEB_PURPLE
+
+
+func _on_body_entered(body):
+	# If we hit a wall we return the boomerang back to the player
+	if is_instance_of(body, TileMap):
+		traveling_back = true

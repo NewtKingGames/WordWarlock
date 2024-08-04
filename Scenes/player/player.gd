@@ -161,7 +161,6 @@ func _on_cast_cast_spell(string: String):
 # Bit of a bummer, I can't type hint typed_string and spell_scene because nulling them out doesn't work. Is it an issue with typed Scene?
 # TODO - the solution here is to create a custom "Object" which is simply a payload for all of these values which does support nulling these out akin to an API contract
 func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
-	print(spell_scene)
 	is_player_casting = is_casting
 	# Handling state entered
 	if is_casting:
@@ -174,7 +173,6 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 		if spell_scene:
 			queued_spell_scene = spell_scene
 			queued_spell = spell_scene.instantiate()
-			print(queued_spell)
 			# Effect spells are immediately cast after typing
 			if is_instance_of(queued_spell, EffectSpell):
 				spell_shot.emit(queued_spell)

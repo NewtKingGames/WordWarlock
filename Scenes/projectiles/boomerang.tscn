@@ -63,3 +63,5 @@ polygon = PackedVector2Array(-2.44151e-15, -7, 6, -1, 6, 1, 2.44151e-15, 7, -4, 
 [node name="ImpactSound" type="AudioStreamPlayer2D" parent="."]
 
 [node name="EmitSound" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
