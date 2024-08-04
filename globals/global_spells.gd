@@ -6,12 +6,19 @@ var enemy_spell_shield_words: Array[String] = ["Disarm", "Pierce", "Break", "Sha
 # TODO see if you can get enums to work or define the enum in the spell as well to avoid hard coded strings?
 enum Spells {FIREBALL, ICE_SHIELD, HASTE}
 
-var known_spells_classes: Dictionary = {"FIREBALL": Fireball, "ICE SHIELD": IceShield, "THUNDERSTORM": Thunderstorm, "HASTE": Haste}
+var known_spells_classes: Dictionary = {
+	"FIREBALL": Fireball,
+ 	"ICE SHIELD": IceShield,
+	"THUNDERSTORM": Thunderstorm,
+	"HASTE": Haste,
+	"BOOMERANG": Boomerang
+}
 var known_spells_scenes: Dictionary = {
 	"FIREBALL": load("res://Scenes/projectiles/fireball.tscn"),
  	"ICE SHIELD": load("res://Scenes/projectiles/ice_shield.tscn"),
  	"THUNDERSTORM": load("res://Scenes/projectiles/thunder_storm.tscn"),
-	"HASTE": load("res://Scenes/projectiles/haste_spell.tscn")
+	"HASTE": load("res://Scenes/projectiles/haste_spell.tscn"),
+	"BOOMERANG": load("res://Scenes/projectiles/boomerang.tscn")
 }
 
 # Retruns a packed scene for a spell or null

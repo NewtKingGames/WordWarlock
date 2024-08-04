@@ -83,7 +83,9 @@ func Handle_Input(_event: InputEvent):
 			casting_text_label.text = cast_string
 			typing_noises[rng.randi_range(0,2)].play()
 		if GlobalSpells.is_string_known_spell(cast_string):
+			print("is the spell known")
 			var spell = GlobalSpells.get_known_spell_for_string(cast_string)
+			print("setting the modulate!!")
 			casting_text_label.set_modulate(spell.get_spell_color())
 		else:
 			casting_text_label.set_modulate(Color.WHITE)
