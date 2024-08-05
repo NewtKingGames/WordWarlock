@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd4xp6qo6ehk8"]
+[gd_scene load_steps=11 format=3 uid="uid://cd4xp6qo6ehk8"]
 
 [ext_resource type="Script" path="res://Scripts/Spells/boomerang.gd" id="1_cjraa"]
 [ext_resource type="Texture2D" uid="uid://ccvvmalch3dea" path="res://Sprites/Boomerangs-Sheet.png" id="1_fc72o"]
+[ext_resource type="AudioStream" uid="uid://bgkgs5y14s5hi" path="res://Sounds/GameSFX/Swoosh/Retro Swooosh 02.wav" id="3_svpiv"]
+[ext_resource type="AudioStream" uid="uid://dhmndvl73am5j" path="res://Sounds/GameSFX/Swoosh/Retro Swooosh 16.wav" id="4_iakao"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="5_f2rg5"]
+[ext_resource type="Texture2D" uid="uid://21mlx33crvu" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/effects (new)/hit_effect_anim_f0.png" id="6_hg8x1"]
 
 [sub_resource type="Animation" id="Animation_ne763"]
 length = 0.001
@@ -14,7 +18,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,6 +27,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [3.48787e-16, 3.14159, 6.28319]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28319]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_moxnu"]
 _data = {
@@ -30,20 +46,22 @@ _data = {
 "spin": SubResource("Animation_abwrg")
 }
 
+[sub_resource type="Gradient" id="Gradient_xhxjj"]
+offsets = PackedFloat32Array(0.187417, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
 [node name="Boomerang" type="Area2D" node_paths=PackedStringArray("impact_sound", "spell_emit_sound")]
-rotation = 3.14159
 scale = Vector2(4, 4)
 collision_layer = 2
 collision_mask = 20
 script = ExtResource("1_cjraa")
-spell_speed = 400.0
+spell_speed = 500.0
 impact_sound = NodePath("ImpactSound")
 spell_damage = 20
 spell_name = "BOOMERANG"
 spell_emit_sound = NodePath("EmitSound")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 3.14159
 texture = ExtResource("1_fc72o")
 offset = Vector2(2.08165e-12, 2.08165e-12)
 flip_h = true
@@ -58,10 +76,42 @@ libraries = {
 autoplay = "spin"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+scale = Vector2(-1, -1)
 polygon = PackedVector2Array(-2.44151e-15, -7, 6, -1, 6, 1, 2.44151e-15, 7, -4, 7, -4, 4, 0, 0, -4, -4, -4, -7)
 
 [node name="ImpactSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_svpiv")
 
 [node name="EmitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_iakao")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.590199, 0.245176, 0.820893, 1)
+energy = 0.0
+texture = ExtResource("5_f2rg5")
+texture_scale = 0.1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(0.729412, 0.192157, 1, 0.431373)
+position = Vector2(3, -4)
+amount = 12
+lifetime = 0.5
+texture = ExtResource("6_hg8x1")
+emission_shape = 4
+emission_points = PackedVector2Array(2.08165e-12, 2.08165e-12, 2.08165e-12, 9.5)
+emission_colors = PackedColorArray()
+particle_flag_align_y = true
+direction = Vector2(1, 2.08165e-12)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+damping_min = 80.0
+damping_max = 80.0
+scale_amount_min = 5.0
+scale_amount_max = 7.0
+color = Color(0.607843, 0.313726, 0.835294, 0.823529)
+color_ramp = SubResource("Gradient_xhxjj")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
