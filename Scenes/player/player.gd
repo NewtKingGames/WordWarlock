@@ -58,8 +58,6 @@ func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
 
 func _process(delta):
-	print("player position")
-	print(global_position)
 	# Reconsider choice to rely on global variables
 	if Globals.player_walk_speed > Globals.player_base_walk_speed:
 		character_animated_sprite.material.set_shader_parameter("color", Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
