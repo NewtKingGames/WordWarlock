@@ -1,6 +1,9 @@
 extends EnemyAttackState
 class_name EnemyAttackProjectileState
 
+var new_position: Vector2
+var vector_from_player: Vector2
+
 var can_shoot: bool = true
 func Enter():
 	can_shoot = true
@@ -9,6 +12,14 @@ func Enter():
 	$"../../Timers/SpitAttackCooldownTimer".start()
 	
 func Update(delta: float):
+	vector_from_player = enemy.global_position - player.global_position
+	# if vector_from_player magnitude is too low bump it
+	# TODO probably worth fine tuning these values
+	if abs(vector_from_player.length() - enemy.attack_distance_to_enter) > 12:
+		vector_from_player = vector_from_player * 2
+	new_position = player.global_position + vector_from_player.rotated(0.08)
+	var vector_to_position: Vector2 = new_position - enemy.global_position
+	enemy.velocity = vector_to_position.normalized() * enemy.walk_speed
 	if can_shoot:
 		enemy.shoot()
 		can_shoot = false

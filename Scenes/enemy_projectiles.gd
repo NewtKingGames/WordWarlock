@@ -4,7 +4,6 @@ extends Node
 var bat_spit_scene: PackedScene = load("res://Scenes/enemies/bat_spit.tscn")
 
 func _ready():
-	pass
 	# Connect all of the required enemy signals to this node
 	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
 	for enemy: EnemyClass in enemies:
