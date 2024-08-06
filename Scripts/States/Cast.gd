@@ -1,5 +1,4 @@
 extends State
-class_name Cast
 
 signal CastSpell(spell_string: String)
 signal cast_spell_changed(is_state_active: bool)

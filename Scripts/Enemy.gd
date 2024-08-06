@@ -8,8 +8,9 @@ class_name EnemyClass
 # This relies on every enemy having a child node "StateMachine"
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animated_sprite_2d: AnimationPlayer = $EnemyAnimationPlayer
-@onready var enemy_sprite: Sprite2D = $EnemySprite2D
+@onready var enemy_sprite: Sprite2D = $VisibleNodes/EnemySprite2D
 @onready var attack_area: Area2D = $AttackArea
+
 # TODO - this is only used for EnemySpellShield today, should probably add some kind of invunlerability period to enemies
 var can_take_damage: bool = true
 var visible_nodes: Node2D

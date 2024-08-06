@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ck2gicusjd7y5"
+path="res://.godot/imported/Game music - Wordlock Battle.mp3-55209135fc3fb89a8bb78803d0a77956.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Songs/Game music - Wordlock Battle.mp3"
+dest_files=["res://.godot/imported/Game music - Wordlock Battle.mp3-55209135fc3fb89a8bb78803d0a77956.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=26.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -7,6 +7,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0j1t"]
 
+[sub_resource type="Animation" id="Animation_jy4pm"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_1oqls"]
 resource_name = "spawn"
 length = 3.0
@@ -23,9 +26,6 @@ tracks/0/keys = {
 "values": [5.0, 0.5, 0.8, 0.5, 0.8]
 }
 
-[sub_resource type="Animation" id="Animation_jy4pm"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yw78y"]
 _data = {
 "RESET": SubResource("Animation_jy4pm"),
@@ -41,7 +41,7 @@ spell_emit_sound = NodePath("EmitNoise")
 shape = SubResource("CircleShape2D_b0j1t")
 
 [node name="SpellDuration" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 6.0
 one_shot = true
 autostart = true
 

@@ -3,7 +3,7 @@ class_name Boomerang
 
 @onready var cpu_particles_2d:CPUParticles2D = $CPUParticles2D
 
-var max_distance: float = 300
+var max_distance: float = 400
 var distance_traveled: float = 0
 var retrievable_distance: float = 10
 var starting_position: Vector2
@@ -37,7 +37,7 @@ func _physics_process(delta):
 		current_speed = lerpf(current_speed, ending_speed, delta*8)
 	else:
 		current_speed = lerpf(current_speed, starting_speed, delta*8)
-	print(current_speed)
+	#print(current_speed)
 
 # Do we need a state machine?
 # I think we actually don't want this to collide with enemies
@@ -50,14 +50,12 @@ func _process(delta):
 	distance_traveled = (starting_position - global_position).length()
 	if distance_traveled >= max_distance:
 		traveling_back = true
-		print("the speed was")
-		print(current_speed)
 	cpu_particles_2d.direction = direction
 	
 	# Traveling back and hit the player
 	if traveling_back and (player.global_position - global_position).length() < retrievable_distance:
-		print("the speed was")
-		print(current_speed)
+		#print("the speed was")
+		#print(current_speed)
 		queue_free()
 
 # OVERRIDE

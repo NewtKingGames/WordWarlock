@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=63 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -64,6 +64,18 @@ region = Rect2(192, 320, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jslj2"]
 atlas = ExtResource("4_fvahh")
 region = Rect2(256, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gym2"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(128, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwa8m"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(192, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r3fd"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(256, 448, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8vf6"]
 atlas = ExtResource("4_fvahh")
@@ -187,6 +199,20 @@ animations = [{
 "loop": false,
 "name": &"death",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gym2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwa8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r3fd")
+}],
+"loop": false,
+"name": &"effect_spell",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -392,9 +418,9 @@ script = ExtResource("9_y8sb8")
 material = SubResource("ShaderMaterial_30it8")
 position = Vector2(0, -7.75)
 sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"shoot_spell"
+animation = &"effect_spell"
 autoplay = "idle"
-frame = 5
+frame = 2
 frame_progress = 1.0
 
 [node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]

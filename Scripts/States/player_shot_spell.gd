@@ -1,5 +1,5 @@
 extends State
-class_name PlayerShotSpell
+class_name PlayerShotSpellState
 
 @onready var player = $"../.."
 @onready var character_animated_sprite_2d = $"../../CharacterAnimatedSprite2D"

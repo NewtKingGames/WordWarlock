@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://5purwjc683qc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/full tilemap.png" id="4_wcbua"]
 [ext_resource type="PackedScene" uid="uid://ooxyv5avybtt" path="res://Scenes/enemies/slime.tscn" id="5_8hhxu"]
 [ext_resource type="PackedScene" uid="uid://dd070ctaor48g" path="res://Scenes/camera_2d.tscn" id="6_cqk03"]
-[ext_resource type="AudioStream" uid="uid://b8r0jowpjstqd" path="res://Sounds/Songs/WordlockBattle.mp3" id="7_25jvf"]
+[ext_resource type="AudioStream" uid="uid://ck2gicusjd7y5" path="res://Sounds/Songs/Game music - Wordlock Battle.mp3" id="7_ypf81"]
 [ext_resource type="PackedScene" uid="uid://bc1sate60syol" path="res://Scenes/enemies/flying_bat.tscn" id="9_crbd0"]
 [ext_resource type="PackedScene" uid="uid://dtnnc2owp2ldg" path="res://Scenes/enemies/orc.tscn" id="9_ewlr1"]
 [ext_resource type="PackedScene" uid="uid://dykbj0vmbxkss" path="res://Scenes/objects/enemy_spell_shield.tscn" id="12_jxqa0"]
@@ -770,8 +770,9 @@ position = Vector2(1243, 795)
 
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="Player" groups=["music"]]
 position = Vector2(-0.5, 1)
-stream = ExtResource("7_25jvf")
+stream = ExtResource("7_ypf81")
 volume_db = -6.0
+autoplay = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(5, 244)
