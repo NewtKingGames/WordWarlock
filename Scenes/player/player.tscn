@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=64 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -380,6 +380,8 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7h4y"]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iypjs"]
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(4, 4)
 collision_mask = 29
@@ -503,6 +505,15 @@ one_shot = true
 [node name="StunlockTimer" type="Timer" parent="Timers"]
 wait_time = 0.3
 one_shot = true
+
+[node name="AutoAimAttackArea" type="Area2D" parent="."]
+scale = Vector2(-20.2584, -20.2584)
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutoAimAttackArea"]
+shape = SubResource("CircleShape2D_iypjs")
+debug_color = Color(0.84696, 0.321016, 0.514421, 0.42)
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="." method="_on_cast_cast_spell"]

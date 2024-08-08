@@ -18,6 +18,7 @@ signal spell_string_cast(string: String)
 @onready var slow_mo_sound_enter = $Sounds/SlowMoSoundEnter
 @onready var slow_mo_sound_exit = $Sounds/SlowMoSoundExit
 @onready var keyboard: Keyboard = $Keyboard
+@onready var auto_aim_attack_area = $AutoAimAttackArea
 
 
 const walk_speed: float = 400
@@ -55,6 +56,11 @@ var target_pitch: float = pitch_scale_max
 
 # Variables related to visual status effects
 var is_haste_active: bool = false
+
+# How to track nearest enemy? (For now ignoring sight lines)
+# 1. Mimic the behavior of the thunderstorm spell
+# 2. create an area2d and check for overlapping bodies at the exact moment the player casts the spell
+# 3. iterate through those bodies and find the closest enemy type
 
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
@@ -100,8 +106,10 @@ func _physics_process(delta):
 	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own node
 	if queued_spell != null:
 		# TODO - make cursor larger
+		if not Globals.cast_spells_with_mouse:
+			autocast_spell()
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
-		if Input.is_action_just_pressed("cast_spell"):
+		if Input.is_action_just_pressed("cast_spell") and Globals.cast_spells_with_mouse:
 			if is_instance_of(queued_spell, ProjectileSpell):
 				# Get vector the player is looking towards
 				queued_spell.direction = (get_global_mouse_position() - global_position).normalized()
@@ -112,13 +120,7 @@ func _physics_process(delta):
 			if is_instance_of(queued_spell, Thunderstorm):
 				queued_spell.position = global_position
 			# Consider creating a function for shooting a spelld
-			spell_shot.emit(queued_spell)
-			state_machine.on_outside_transition("shotspell")
-			queued_spell_ammo -= 1
-			if queued_spell_ammo <= 0:
-				queued_spell = null
-			else:
-				queued_spell = queued_spell_scene.instantiate()
+			shoot_queued_spell()
 			
 	# Only flip sprite when player is moving from direct input or aiming a spell
 	if not taking_damage:
@@ -148,6 +150,19 @@ func hit(damage_number: float, damage_direction: Vector2):
 			state_machine.on_outside_transition("damage")
 		else:
 			state_machine.on_outside_transition("death")
+
+func shoot_queued_spell():
+	# Consider creating a function for shooting a spelld
+	spell_shot.emit(queued_spell)
+	# I think the issue is trying to enter AND exit a state within a single 'tick'
+	# maybe this is solved by using the physics process or process functions?
+	# Instead of automatically calling all of this code here we wait till the next 'tick' that way?
+	state_machine.on_outside_transition("shotspell") # commenting this out?
+	queued_spell_ammo -= 1
+	if queued_spell_ammo <= 0:
+		queued_spell = null
+	else:
+		queued_spell = queued_spell_scene.instantiate()
 
 func _on_invulnerability_timer_timeout():
 	can_take_damage = true
@@ -179,7 +194,7 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 			if is_instance_of(queued_spell, EffectSpell):
 				spell_shot.emit(queued_spell)
 				queued_spell = null
-				return
+				return 
 			# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
 			if "ammo" in queued_spell:
 				queued_spell_ammo = queued_spell.ammo
@@ -209,3 +224,32 @@ func slowdown_effect_stop():
 	
 func disable_random_key() -> KeyboardLetter:
 	return keyboard.disable_random_key()
+
+func autocast_spell():
+	if is_instance_of(queued_spell, ProjectileSpell):
+		var closest_enemy: EnemyClass = get_nearest_enemy_in_range()
+		# Get vector betwen player and closest enemy
+		queued_spell.direction = (closest_enemy.global_position - global_position).normalized()
+		# Put the spell from the aiming origin + some distance the player is looking
+		# we have to add global_position and the relative distance aiming_line is away from the player
+		queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
+		queued_spell.rotation = queued_spell.direction.angle()
+		# Grab nearest enemy
+	if is_instance_of(queued_spell, Thunderstorm):
+		queued_spell.position = global_position
+	shoot_queued_spell()
+
+# according to the docs this might not be the most accurate way to do this, consider using signals
+# TODO - add line of sight to this as well
+func get_nearest_enemy_in_range() -> EnemyClass:
+	var overlapping_bodies: Array[Node2D] = auto_aim_attack_area.get_overlapping_bodies()
+	var closest_enemy: EnemyClass = null
+	for over_lapping_body: Node2D in overlapping_bodies:
+		if over_lapping_body is EnemyClass:
+			if closest_enemy:
+				if position.distance_to(closest_enemy.global_position) > position.distance_to(over_lapping_body.global_position):
+					closest_enemy = over_lapping_body
+			else:
+				closest_enemy = over_lapping_body
+	return closest_enemy
+	
