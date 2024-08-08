@@ -17,6 +17,8 @@ signal spell_string_cast(string: String)
 @onready var aiming_line = $AimingLine
 @onready var slow_mo_sound_enter = $Sounds/SlowMoSoundEnter
 @onready var slow_mo_sound_exit = $Sounds/SlowMoSoundExit
+@onready var keyboard: Keyboard = $Keyboard
+
 
 const walk_speed: float = 400
 var can_take_damage: bool = true
@@ -204,3 +206,6 @@ func slowdown_effect_stop():
 	Engine.time_scale = 1
 	target_pitch = pitch_scale_max
 	slowdown_effect_exited.emit()
+	
+func disable_random_key() -> KeyboardLetter:
+	return keyboard.disable_random_key()

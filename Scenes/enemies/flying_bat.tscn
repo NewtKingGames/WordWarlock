@@ -267,15 +267,15 @@ knock_back_magnitude = 10.0
 [node name="VisibleNodes" type="Node2D" parent="."]
 
 [node name="EnemySprite2D" type="Sprite2D" parent="VisibleNodes"]
+visible = false
 position = Vector2(2, 0)
 texture = ExtResource("8_y5k3v")
 hframes = 8
+frame = 4
 
 [node name="EnemyDeathSprite2D" type="Sprite2D" parent="VisibleNodes"]
-visible = false
 texture = ExtResource("10_3ui33")
 hframes = 4
-frame = 3
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_8eawt")

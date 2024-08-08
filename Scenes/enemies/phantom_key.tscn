@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://bciaiy483xprw"]
+
+[ext_resource type="Texture2D" uid="uid://cv8iq6fbf1h6g" path="res://Sprites/slime_green.png" id="1_jpc0s"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_nhjt2"]
+[ext_resource type="Script" path="res://Scenes/enemies/phantom_key.gd" id="1_wer5p"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="2_x0ocp"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_chase_projectile.gd" id="5_hhts8"]
+[ext_resource type="Script" path="res://Scripts/States/phantom_key_attack_state.gd" id="6_l2l5s"]
+[ext_resource type="Script" path="res://Scripts/States/phantom_key_death_state.gd" id="7_vafcj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grgcb"]
+
+[node name="PhantomKey" type="CharacterBody2D" groups=["enemies"]]
+scale = Vector2(4, 4)
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_wer5p")
+attack_distance_to_enter = 300.0
+attack_distance_to_exit = 300.0
+health = 10.0
+walk_speed = 10.0
+chase_distance = 500.0
+knock_back_magnitude = 1.0
+
+[node name="VisibleNodes" type="Node2D" parent="."]
+
+[node name="EnemySprite2D" type="Sprite2D" parent="VisibleNodes"]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(0, -6)
+texture = ExtResource("1_jpc0s")
+hframes = 4
+vframes = 3
+frame = 4
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_nhjt2")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("2_x0ocp")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("5_hhts8")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_l2l5s")
+
+[node name="Damage" type="Node" parent="StateMachine"]
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("7_vafcj")
+
+[node name="StoleKey" type="Node" parent="StateMachine"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_grgcb")
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="AttackCooldownTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="StunlockTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_ghost_attack_cooldown_timer_timeout"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://8j13p6a46xx1"]
+
+[ext_resource type="Script" path="res://Scenes/projectiles/phantom_key_hand_projectile.gd" id="1_dj1wx"]
+[ext_resource type="Texture2D" uid="uid://bhvoa44me8j42" path="res://Sprites/GhostSprites/Ghost Hands Projectile-Sheet.png" id="2_s1wou"]
+[ext_resource type="Texture2D" uid="uid://4jhtgb1amyx4" path="res://Sprites/GhostSprites/Ghost Hands Projectile Hit-Sheet.png" id="3_koldo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ytio2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muiye"]
+atlas = ExtResource("3_koldo")
+region = Rect2(0, 0, 35, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2kyx"]
+atlas = ExtResource("3_koldo")
+region = Rect2(35, 0, 35, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxl5w"]
+atlas = ExtResource("3_koldo")
+region = Rect2(70, 0, 35, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cgm2"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muiye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2kyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxl5w")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[node name="PhantomKeyHandProjectile" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_dj1wx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 4.71239
+texture = ExtResource("2_s1wou")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 4.71239
+scale = Vector2(1.92, 0.6)
+shape = SubResource("CircleShape2D_ytio2")
+
+[node name="HitEffect" type="AnimatedSprite2D" parent="."]
+visible = false
+rotation = 4.71239
+sprite_frames = SubResource("SpriteFrames_3cgm2")
+animation = &"hit"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

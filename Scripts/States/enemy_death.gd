@@ -12,3 +12,4 @@ func Enter():
 			enemy.animated_sprite_2d.play("death_two")
 		return
 	enemy.animated_sprite_2d.play("death")
+	# TODO ARE YOU DESTROYING BATS PROPERLY??

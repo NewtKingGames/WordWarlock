@@ -24,10 +24,25 @@ func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_s
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
 func key_pressed(letter_input: String) -> String:
-	# TODO make sure this doesn't impact memory/performance
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	if letter.letter_active:
 		letter.key_pressed()
 		return letter.letter_string
 	else:
 		return ""
+
+func disable_random_key() -> KeyboardLetter:
+	# TODO randomize this later
+	var letter_node: KeyboardLetter = get_random_active_key()
+	letter_node.letter_active = false
+	return letter_node
+
+func get_random_active_key() -> KeyboardLetter:
+	# TODO - this is an infinite loop if somehow all keys are not active, that probably won't happen but probably should have some contingency
+	while true:
+		var random_letter_string: String = char(randi_range(65, 90))
+		var letter_node: KeyboardLetter = letter_dictionary[random_letter_string]
+		if letter_node.letter_active:
+			return letter_node
+	# This is unexpected
+	return null

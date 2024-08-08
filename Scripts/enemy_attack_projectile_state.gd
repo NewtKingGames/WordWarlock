@@ -1,5 +1,5 @@
 extends EnemyAttackState
-class_name EnemyAttackProjectileState
+class_name EnemyAttackProjectileState # TODO you should rename this to the BatAttackState class, it's become very bat specific
 
 var new_position: Vector2
 var vector_from_player: Vector2

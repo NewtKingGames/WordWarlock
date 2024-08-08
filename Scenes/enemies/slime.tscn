@@ -18,6 +18,9 @@ height = 39.0096
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spwkb"]
 
+[sub_resource type="Animation" id="Animation_aqjln"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_hyr4v"]
 resource_name = "hurt"
 length = 0.500013
@@ -84,24 +87,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_ysxon"]
-resource_name = "idel"
-length = 0.500013
-loop_mode = 1
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_oo3l2"]
 resource_name = "death_two"
 length = 0.750013
@@ -157,8 +142,23 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_aqjln"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_ysxon"]
+resource_name = "idel"
+length = 0.500013
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisibleNodes/EnemySprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m0k21"]
 _data = {

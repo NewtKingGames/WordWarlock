@@ -15,4 +15,3 @@ func Update(_delta):
 		return
 	enemy.velocity = vector_to_player.normalized() * enemy.walk_speed
 	enemy.animated_sprite_2d.play("chase")
-
