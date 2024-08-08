@@ -139,7 +139,6 @@ scale = Vector2(4.91463, 4.91463)
 shape = SubResource("CircleShape2D_7ws8t")
 
 [node name="Sprites" type="Node2D" parent="."]
-position = Vector2(1.05759e-12, -2.03222)
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprites"]
 color = Color(0.673906, 0.669683, 3.95734e-07, 1)
