@@ -1,19 +1,53 @@
-[gd_scene load_steps=9 format=3 uid="uid://c27go8qjx16je"]
+[gd_scene load_steps=11 format=3 uid="uid://c27go8qjx16je"]
 
 [ext_resource type="PackedScene" uid="uid://c486dfptvtwsf" path="res://Scenes/ui/keyboard/letter.tscn" id="1_0hs4y"]
 [ext_resource type="Script" path="res://Scenes/items/keyboard_letter_pickup_item.gd" id="1_ls6he"]
 [ext_resource type="Texture2D" uid="uid://d2ixun4gywkkq" path="res://Sprites/Key Pickup-Sheet.png" id="2_2oc1c"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="4_ads63"]
+[ext_resource type="AudioStream" uid="uid://cnpppdkto5cgg" path="res://Sounds/GameSFX/PickUp/Retro PickUp 10.wav" id="5_k0s3l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ws8t"]
 
+[sub_resource type="Animation" id="Animation_diy6p"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_8k7xv"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, 4), Vector2(2.08165e-12, 2.08165e-12), Vector2(2.08165e-12, -4), Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_mx24b"]
 resource_name = "pickup"
-length = 0.150002
+length = 2.0
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PickupSprite:frame")
+tracks/0/path = NodePath("Sprites/PickupSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +59,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LetterSprite:scale")
+tracks/1/path = NodePath("Sprites/LetterSprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,12 +68,58 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(2.08165e-12, 2.08165e-12), Vector2(1e-05, 1e-05)]
 }
-
-[sub_resource type="Animation" id="Animation_diy6p"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_8k7xv"]
-resource_name = "idle"
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4509),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/PointLight2D:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1169),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PickupSound")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1837),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qql16"]
 _data = {
@@ -49,20 +129,29 @@ _data = {
 }
 
 [node name="KeyboardLetterPickupItem" type="Area2D"]
-scale = Vector2(4, 4)
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(2, 2)
 collision_layer = 64
 script = ExtResource("1_ls6he")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.87044, 0.87044)
+[node name="PickupArea" type="CollisionShape2D" parent="."]
+scale = Vector2(4.91463, 4.91463)
 shape = SubResource("CircleShape2D_7ws8t")
 
-[node name="PickupSprite" type="Sprite2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2(1.05759e-12, -2.03222)
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprites"]
+color = Color(0.673906, 0.669683, 3.95734e-07, 1)
+texture = ExtResource("4_ads63")
+texture_scale = 0.09
+
+[node name="PickupSprite" type="Sprite2D" parent="Sprites"]
 position = Vector2(0, -3)
 texture = ExtResource("2_2oc1c")
 hframes = 9
 
-[node name="LetterSprite" parent="." instance=ExtResource("1_0hs4y")]
+[node name="LetterSprite" parent="Sprites" instance=ExtResource("1_0hs4y")]
 position = Vector2(0.75, 0)
 vframes = 14
 frame = 37
@@ -71,7 +160,10 @@ frame = 37
 libraries = {
 "": SubResource("AnimationLibrary_qql16")
 }
-autoplay = "RESET"
+autoplay = "idle"
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_k0s3l")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
