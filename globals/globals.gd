@@ -49,13 +49,3 @@ var player_health: int = 4:
 				# Reset player health after restarting the game
 				player_health = 4
 				player_health_change.emit(player_health)
-		#if value < player_health:
-			#player_damage.emit()
-			#stat_change.emit()
-			#player_health = value
-			#if value <= 0:
-				#print("Waiting 3 seconds and restarting game")
-				#await get_tree().create_timer(3).timeout
-				#get_tree().reload_current_scene()
-				## Reset player health after restarting the game
-				#player_health = 30

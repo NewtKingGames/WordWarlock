@@ -4,6 +4,7 @@ signal CastSpell(spell_string: String)
 signal cast_spell_changed(is_state_active: bool)
 # Catch all signal for entering and exiting the cast state. If exiting it will include the String if the player attempted to cast, and if the player was successful it will include the spell scene
 # TODO how to handle counter spells?
+# TODO Next step is to creat an actual response object from the Cast state to give me more flexibility, instead of passing 3 variables around especially because you can't type hint the signals correctly
 signal cast_spell_state_changed(is_state_active: bool, string_typed, spell_scene)
 # TODO - you might need to change this to support the "escape" key situation
 signal player_attempted_spell()

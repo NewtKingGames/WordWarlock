@@ -42,8 +42,6 @@ var slowdown_pool_consumed: float = 0
 var player_has_combo: bool = false 
 var spells_in_combo: int = 0
 
-# TODO Next step is to creat an actual response object from the Cast state to give me more flexibility, instead of passing 3 variables around especially because you can't type hint the signals correctly
-
 const CROSSHAIR_3 = preload("res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_3.png")
 
 # Variables related to music slowdown and speed up effects
@@ -163,8 +161,6 @@ func shoot_queued_spell():
 	# Instead of automatically calling all of this code here we wait till the next 'tick' that way?
 	state_machine.on_outside_transition("shotspell") # commenting this out?
 	queued_spell_ammo -= 1
-	print("remaining spell ammo")
-	print(queued_spell)
 	if queued_spell_ammo <= 0:
 		queued_spell = null
 	else:
@@ -206,8 +202,57 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 				queued_spell_ammo = queued_spell.ammo
 			else:
 				queued_spell_ammo = 1
-	
 
+func disable_random_key() -> KeyboardLetter:
+	return keyboard.disable_random_key()
+
+func autocast_spell():
+	if is_instance_of(queued_spell, ProjectileSpell):
+		if not can_cast_again:
+			return
+		can_cast_again = false
+		var timer: SceneTreeTimer = get_tree().create_timer(queued_spell.rate_of_fire)
+		timer.connect("timeout", on_fire_rate_timeout)
+		var closest_enemy: EnemyClass = get_nearest_enemy_in_range()
+		# TODO - handle null scenario
+		var spell_target: Vector2
+		if closest_enemy:
+			spell_target = closest_enemy.global_position
+		else:
+			# TODO maybe shoot the spell in a random direction?
+			spell_target = global_position + Vector2(75, 0)
+			print("Found no enemies close enough!!")
+		# Get vector betwen player and closest enemy
+		queued_spell.direction = (spell_target - global_position).normalized()
+		# Put the spell from the aiming origin + some distance the player is looking
+		# we have to add global_position and the relative distance aiming_line is away from the player
+		# TODO make sure this aiming line still works properly in new flow
+		queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
+		queued_spell.rotation = queued_spell.direction.angle()
+		# Grab nearest enemy
+	if is_instance_of(queued_spell, Thunderstorm):
+		queued_spell.position = global_position
+	shoot_queued_spell()
+
+func on_fire_rate_timeout():
+	can_cast_again = true
+
+
+# according to the docs this might not be the most accurate way to do this, consider using signals
+# TODO - add line of sight to this as well
+func get_nearest_enemy_in_range() -> EnemyClass:
+	var overlapping_bodies: Array[Node2D] = auto_aim_attack_area.get_overlapping_bodies()
+	var closest_enemy: EnemyClass = null
+	for over_lapping_body: Node2D in overlapping_bodies:
+		if over_lapping_body is EnemyClass:
+			if closest_enemy:
+				if position.distance_to(closest_enemy.global_position) > position.distance_to(over_lapping_body.global_position):
+					closest_enemy = over_lapping_body
+			else:
+				closest_enemy = over_lapping_body
+	return closest_enemy
+
+# Slow down control code - probably should be moved to it's own scene
 func slowdown_effect_start():
 	# Prevent duplicate effects from playing
 	if Engine.time_scale == Globals.engine_slowdown_magnitude:
@@ -227,45 +272,3 @@ func slowdown_effect_stop():
 	Engine.time_scale = 1
 	target_pitch = pitch_scale_max
 	slowdown_effect_exited.emit()
-	
-func disable_random_key() -> KeyboardLetter:
-	return keyboard.disable_random_key()
-
-func autocast_spell():
-	if is_instance_of(queued_spell, ProjectileSpell):
-		if not can_cast_again:
-			return
-		can_cast_again = false
-		var timer: SceneTreeTimer = get_tree().create_timer(queued_spell.rate_of_fire)
-		timer.connect("timeout", on_fire_rate_timeout)
-		var closest_enemy: EnemyClass = get_nearest_enemy_in_range()
-		# TODO - handle null scenario
-		# Get vector betwen player and closest enemy
-		queued_spell.direction = (closest_enemy.global_position - global_position).normalized()
-		# Put the spell from the aiming origin + some distance the player is looking
-		# we have to add global_position and the relative distance aiming_line is away from the player
-		# TODO make sure this aiming line still works properly in new flow
-		queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
-		queued_spell.rotation = queued_spell.direction.angle()
-		# Grab nearest enemy
-	if is_instance_of(queued_spell, Thunderstorm):
-		queued_spell.position = global_position
-	shoot_queued_spell()
-
-# according to the docs this might not be the most accurate way to do this, consider using signals
-# TODO - add line of sight to this as well
-func get_nearest_enemy_in_range() -> EnemyClass:
-	var overlapping_bodies: Array[Node2D] = auto_aim_attack_area.get_overlapping_bodies()
-	var closest_enemy: EnemyClass = null
-	for over_lapping_body: Node2D in overlapping_bodies:
-		if over_lapping_body is EnemyClass:
-			if closest_enemy:
-				if position.distance_to(closest_enemy.global_position) > position.distance_to(over_lapping_body.global_position):
-					closest_enemy = over_lapping_body
-			else:
-				closest_enemy = over_lapping_body
-	return closest_enemy
-
-
-func on_fire_rate_timeout():
-	can_cast_again = true
