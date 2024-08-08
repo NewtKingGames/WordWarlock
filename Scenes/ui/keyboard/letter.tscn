@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c486dfptvtwsf"]
+
+[ext_resource type="Texture2D" uid="uid://esnyg0tlx8vg" path="res://Sprites/Keyboard Letters and Symbols Only Font.png" id="1_7yxur"]
+[ext_resource type="Script" path="res://Scenes/ui/keyboard/letter.gd" id="2_4gamk"]
+
+[node name="LetterSprite" type="Sprite2D"]
+texture = ExtResource("1_7yxur")
+hframes = 8
+vframes = 13
+script = ExtResource("2_4gamk")

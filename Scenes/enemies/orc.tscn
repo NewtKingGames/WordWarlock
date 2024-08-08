@@ -153,7 +153,7 @@ knock_back_magnitude = 100.0
 texture = ExtResource("1_vobdq")
 hframes = 8
 vframes = 6
-frame = 21
+frame = 16
 
 [node name="SwingArea" type="Area2D" parent="VisibleNodes"]
 

@@ -10,6 +10,9 @@ func _ready():
 		if enemy is FlyingBat:
 			enemy = enemy as FlyingBat
 			enemy.connect("bat_spit", on_bat_spit)
+		if enemy is PhantomKey:
+			enemy = enemy as PhantomKey
+			enemy.connect("keyboard_letter_item_dropped", on_keyboard_letter_item_dropped)
 	
 # If you start to add many more enemies which shoot consider making all of the shoot signals pass 
 # in the direction and speed as you do now BUT ALSO pass in the packed scene so that way the level doesn't have to care
@@ -20,3 +23,9 @@ func on_bat_spit(bat_spit_speed: float, direction: Vector2, position: Vector2):
 	bat_spit.position = position
 	bat_spit.rotation = direction.angle()
 	add_child(bat_spit)
+
+# Is it better in general to pass the instantiated scene or is it better to pass properties and instantiate it here?
+func on_keyboard_letter_item_dropped(keyboard_letter_item: KeyboardLetterPickupItem):
+	print("adding child!")
+	add_child(keyboard_letter_item)
+	

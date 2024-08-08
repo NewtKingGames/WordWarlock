@@ -90,6 +90,7 @@ spell_book={
 2d_physics/layer_4="enemy_projectiles"
 2d_physics/layer_5="structures"
 2d_physics/layer_6="areas"
+2d_physics/layer_7="items"
 
 [rendering]
 
