@@ -3,6 +3,9 @@ class_name Boomerang
 
 @onready var cpu_particles_2d:CPUParticles2D = $CPUParticles2D
 
+var ammo: int = 4
+var rate_of_fire: float = 1
+
 var max_distance: float = 400
 var distance_traveled: float = 0
 var retrievable_distance: float = 10

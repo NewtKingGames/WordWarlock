@@ -57,6 +57,9 @@ var target_pitch: float = pitch_scale_max
 # Variables related to visual status effects
 var is_haste_active: bool = false
 
+# Variable used to control if player can shoot a projectile spell again
+var can_cast_again = true
+
 # How to track nearest enemy? (For now ignoring sight lines)
 # 1. Mimic the behavior of the thunderstorm spell
 # 2. create an area2d and check for overlapping bodies at the exact moment the player casts the spell
@@ -102,7 +105,8 @@ func _process(delta):
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
-	aiming_line.visible = queued_spell != null
+	if Globals.cast_spells_with_mouse:
+		aiming_line.visible = queued_spell != null
 	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own node
 	if queued_spell != null:
 		# TODO - make cursor larger
@@ -159,6 +163,8 @@ func shoot_queued_spell():
 	# Instead of automatically calling all of this code here we wait till the next 'tick' that way?
 	state_machine.on_outside_transition("shotspell") # commenting this out?
 	queued_spell_ammo -= 1
+	print("remaining spell ammo")
+	print(queued_spell)
 	if queued_spell_ammo <= 0:
 		queued_spell = null
 	else:
@@ -227,11 +233,18 @@ func disable_random_key() -> KeyboardLetter:
 
 func autocast_spell():
 	if is_instance_of(queued_spell, ProjectileSpell):
+		if not can_cast_again:
+			return
+		can_cast_again = false
+		var timer: SceneTreeTimer = get_tree().create_timer(queued_spell.rate_of_fire)
+		timer.connect("timeout", on_fire_rate_timeout)
 		var closest_enemy: EnemyClass = get_nearest_enemy_in_range()
+		# TODO - handle null scenario
 		# Get vector betwen player and closest enemy
 		queued_spell.direction = (closest_enemy.global_position - global_position).normalized()
 		# Put the spell from the aiming origin + some distance the player is looking
 		# we have to add global_position and the relative distance aiming_line is away from the player
+		# TODO make sure this aiming line still works properly in new flow
 		queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
 		queued_spell.rotation = queued_spell.direction.angle()
 		# Grab nearest enemy
@@ -252,4 +265,7 @@ func get_nearest_enemy_in_range() -> EnemyClass:
 			else:
 				closest_enemy = over_lapping_body
 	return closest_enemy
-	
+
+
+func on_fire_rate_timeout():
+	can_cast_again = true
