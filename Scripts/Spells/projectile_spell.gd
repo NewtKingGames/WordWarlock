@@ -19,5 +19,5 @@ func spell_hit_body(body: Node2D):
 		body.hit(spell_damage)
 	else:
 		pass
-	impact_sound.pitch_scale = randf_range(0.6, 1.4)	
+	impact_sound.pitch_scale = randf_range(0.6, 1.4)
 	impact_sound.play()

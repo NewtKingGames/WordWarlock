@@ -885,3 +885,12 @@ offset_bottom = 2.0
 
 [node name="KeyboardLetterPickupItem" parent="." instance=ExtResource("15_ifuk4")]
 position = Vector2(1428, 766)
+
+[node name="KeyboardLetterPickupItem2" parent="." instance=ExtResource("15_ifuk4")]
+position = Vector2(1146, 761)
+
+[node name="KeyboardLetterPickupItem3" parent="." instance=ExtResource("15_ifuk4")]
+position = Vector2(1134, 1073)
+
+[node name="KeyboardLetterPickupItem4" parent="." instance=ExtResource("15_ifuk4")]
+position = Vector2(1404, 1074)

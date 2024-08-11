@@ -7,11 +7,12 @@ class_name KeyboardLetterPickupItem
 
 var keyboard_letter: KeyboardLetter
 var is_active: bool = true
-
-# TODO this class neeeds all kinds of retweaking
+var player: Player
+var navigate_to_player: bool = false
 
 func _ready():
-	#letter_sprite.set_letter_string(keyboard_letter.letter_string)
+	player = get_tree().get_first_node_in_group("player")
+	#letter_sprite.set_letter_string(keyboard_letter.letter_string) # Uncomment when done testing
 	letter_sprite.set_letter_string("A")
 
 
@@ -20,17 +21,19 @@ func _on_body_entered(body):
 		return
 	if is_instance_of(body, Player):
 		is_active = false
-		var opposite_direction_from_player: Vector2  = (global_position - body.global_position)
+		var opposite_direction_from_player: Vector2  = (global_position - body.global_position) / 2.5
 		var location_away_from_player: Vector2 = opposite_direction_from_player + global_position
 		var tween: Tween = create_tween()
-		tween.tween_property(self, "position", location_away_from_player, .2)
-		animation_player.play("pickup")
-		tween.tween_property(self, "position", body.global_position, .1)
-		#keyboard_letter.letter_active = true
+		await tween.tween_property(self, "position", location_away_from_player, .2).finished
+		navigate_to_player = true
+		# Todo it would be cool to have some fun lighting/sounds here to indicate the player got an item back
 
 
-#func _on_animation_player_animation_finished(anim_name: String):
-	#if anim_name == "pickup":
-		#print("done picking up")
-		#
-		#queue_free()
+func _process(delta):
+	if navigate_to_player:
+		var vector_to_player = global_position.direction_to(player.global_position)
+		position = position + vector_to_player * 1000 * delta
+		# Once the item get's close enough start the animation
+		if global_position.distance_to(player.global_position) < 300:
+			animation_player.play("pickup")
+			#keyboard_letter.letter_active = true # Uncomment when done testing
