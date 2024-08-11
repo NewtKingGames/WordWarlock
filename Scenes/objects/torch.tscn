@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhx6a23hru8ou"]
+[gd_scene load_steps=14 format=3 uid="uid://dhx6a23hru8ou"]
 
+[ext_resource type="Script" path="res://Scenes/objects/torch.gd" id="1_2ucok"]
 [ext_resource type="Texture2D" uid="uid://p3un1avx40d8" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/torch_spritesheet.png" id="1_stlji"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="2_807d4"]
 
@@ -62,10 +63,10 @@ tracks/0/path = NodePath("PointLight2D:energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(-0.1),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [2.0]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_1wv2u"]
@@ -93,6 +94,7 @@ _data = {
 
 [node name="Torch" type="Node2D"]
 scale = Vector2(4, 4)
+script = ExtResource("1_2ucok")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_crf43")
@@ -100,7 +102,7 @@ autoplay = "default"
 frame_progress = 0.906179
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 2.0
+energy = 0.0
 shadow_enabled = true
 shadow_filter = 1
 texture = ExtResource("2_807d4")
@@ -110,4 +112,3 @@ texture_scale = 0.3
 libraries = {
 "": SubResource("AnimationLibrary_hg3te")
 }
-autoplay = "torch_light"
