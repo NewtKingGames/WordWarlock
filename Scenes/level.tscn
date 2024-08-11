@@ -775,10 +775,16 @@ position = Vector2(-0.5, 1)
 stream = ExtResource("7_ypf81")
 volume_db = -6.0
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="DarkeningLight" type="DirectionalLight2D" parent="."]
 position = Vector2(5, 244)
-energy = 0.7
+energy = 0.8
 blend_mode = 1
+
+[node name="BlueMoodLight" type="DirectionalLight2D" parent="."]
+position = Vector2(5, 244)
+color = Color(0.0208521, 0.127069, 0.281414, 1)
+energy = 0.2
+blend_mode = 2
 
 [node name="Torches" type="Node" parent="."]
 
@@ -830,6 +836,7 @@ position = Vector2(2400, 996)
 position = Vector2(2654, 1356)
 
 [node name="EnemySpellShield" parent="Enemies/Orc" instance=ExtResource("12_jxqa0")]
+position = Vector2(-0.75, 0)
 
 [node name="Orc2" parent="Enemies" instance=ExtResource("9_ewlr1")]
 position = Vector2(1982, 2794)
@@ -858,7 +865,6 @@ position = Vector2(2209, 1323)
 scale = Vector2(3.99754, 4)
 
 [node name="EnemySpellShield" parent="Enemies/Slime2" instance=ExtResource("12_jxqa0")]
-scale = Vector2(1.01675, 0.750373)
 
 [node name="Slime4" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(2312, 2226)
