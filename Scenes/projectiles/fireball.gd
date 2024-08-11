@@ -5,7 +5,7 @@ extends ProjectileSpell
 
 var has_hit: bool = false
 var ammo: int = 3
-var rate_of_fire: float = 0.5
+var rate_of_fire: float = 0.25
 
 
 func _on_body_entered(body: Node2D):

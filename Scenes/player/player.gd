@@ -219,7 +219,7 @@ func autocast_spell():
 		if closest_enemy:
 			spell_target = closest_enemy.global_position
 		else:
-			# TODO maybe shoot the spell in a random direction?
+			# TODO maybe shoot the spell in a random direction? Right now just shooting it right
 			spell_target = global_position + Vector2(75, 0)
 			print("Found no enemies close enough!!")
 		# Get vector betwen player and closest enemy
@@ -229,7 +229,6 @@ func autocast_spell():
 		# TODO make sure this aiming line still works properly in new flow
 		queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
 		queued_spell.rotation = queued_spell.direction.angle()
-		# Grab nearest enemy
 	if is_instance_of(queued_spell, Thunderstorm):
 		queued_spell.position = global_position
 	shoot_queued_spell()
@@ -237,20 +236,41 @@ func autocast_spell():
 func on_fire_rate_timeout():
 	can_cast_again = true
 
-
 # according to the docs this might not be the most accurate way to do this, consider using signals
-# TODO - add line of sight to this as well
 func get_nearest_enemy_in_range() -> EnemyClass:
 	var overlapping_bodies: Array[Node2D] = auto_aim_attack_area.get_overlapping_bodies()
 	var closest_enemy: EnemyClass = null
 	for over_lapping_body: Node2D in overlapping_bodies:
 		if over_lapping_body is EnemyClass:
+			# Check if the enemy is within a line of sight of the player
+			if not is_in_line_of_sight(over_lapping_body):
+				return
 			if closest_enemy:
 				if position.distance_to(closest_enemy.global_position) > position.distance_to(over_lapping_body.global_position):
 					closest_enemy = over_lapping_body
 			else:
 				closest_enemy = over_lapping_body
 	return closest_enemy
+
+# TODO - This isn't working correctly... You're still hittinhg collisions? 
+# I think it has to do with your start and end of the raycast, see if you can print it?
+func is_in_line_of_sight(object: Node2D):
+	var space_state = get_world_2d().direct_space_state
+	var line_of_sight_query = PhysicsRayQueryParameters2D.create(global_position, object.global_position)
+	#print("the positions are")
+	#print(global_position)
+	#print(object.global_position)
+	#print("mouse position")
+	#print(get_global_mouse_position())
+	#line_of_sight_query.set_collide_with_areas(true)
+	var result: Dictionary = space_state.intersect_ray(line_of_sight_query)
+	if result:
+		if result.has("collider"):
+			if is_instance_of(result["collider"], TileMap):
+				#print("hit a collider?")
+				#print(result)
+				return false
+	return true
 
 # Slow down control code - probably should be moved to it's own scene
 func slowdown_effect_start():
