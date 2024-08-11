@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=18 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_projectiles.gd" id="1_pvngr"]
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://dtnnc2owp2ldg" path="res://Scenes/enemies/orc.tscn" id="9_ewlr1"]
 [ext_resource type="PackedScene" uid="uid://dykbj0vmbxkss" path="res://Scenes/objects/enemy_spell_shield.tscn" id="12_jxqa0"]
 [ext_resource type="PackedScene" uid="uid://b4n672j7n470k" path="res://Scenes/ui/player_ui.tscn" id="12_p2vga"]
-[ext_resource type="PackedScene" uid="uid://bciaiy483xprw" path="res://Scenes/enemies/phantom_key.tscn" id="13_6res8"]
 [ext_resource type="PackedScene" uid="uid://c27go8qjx16je" path="res://Scenes/items/keyboard_letter_pickup_item.tscn" id="15_ifuk4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lncbs"]
@@ -877,9 +876,6 @@ position = Vector2(3062, 2851)
 
 [node name="Slime3" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(1749, 1349)
-
-[node name="PhantomKey" parent="Enemies" instance=ExtResource("13_6res8")]
-position = Vector2(3684, 1668)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

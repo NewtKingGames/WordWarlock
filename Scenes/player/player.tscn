@@ -255,7 +255,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot_spell",
-"speed": 18.0
+"speed": 22.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -387,6 +387,15 @@ scale = Vector2(4, 4)
 collision_mask = 29
 script = ExtResource("1_gp0yp")
 
+[node name="CharacterAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_30it8")
+position = Vector2(0, -7.75)
+sprite_frames = SubResource("SpriteFrames_brvva")
+animation = &"shoot_spell"
+autoplay = "idle"
+frame = 5
+frame_progress = 1.0
+
 [node name="AimingLine" type="Line2D" parent="."]
 visible = false
 position = Vector2(0, 0.25)
@@ -416,15 +425,6 @@ script = ExtResource("7_ntvts")
 
 [node name="ShotSpell" type="Node" parent="StateMachine"]
 script = ExtResource("9_y8sb8")
-
-[node name="CharacterAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_30it8")
-position = Vector2(0, -7.75)
-sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"effect_spell"
-autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 
 [node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]
 position = Vector2(7.25, 30.75)
@@ -493,9 +493,21 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.25)
 scale = Vector2(1, 0.60263)
 shape = SubResource("CapsuleShape2D_j7h4y")
+
+[node name="AutoAimAttackArea" type="Area2D" parent="."]
+visible = false
+rotation = 3.14159
+scale = Vector2(20.2584, 20.2584)
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutoAimAttackArea"]
+shape = SubResource("CircleShape2D_iypjs")
+debug_color = Color(0.84696, 0.321016, 0.514421, 0.42)
 
 [node name="Timers" type="Node" parent="."]
 
@@ -506,15 +518,6 @@ one_shot = true
 [node name="StunlockTimer" type="Timer" parent="Timers"]
 wait_time = 0.3
 one_shot = true
-
-[node name="AutoAimAttackArea" type="Area2D" parent="."]
-scale = Vector2(-20.2584, -20.2584)
-collision_layer = 32
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AutoAimAttackArea"]
-shape = SubResource("CircleShape2D_iypjs")
-debug_color = Color(0.84696, 0.321016, 0.514421, 0.42)
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="." method="_on_cast_cast_spell"]

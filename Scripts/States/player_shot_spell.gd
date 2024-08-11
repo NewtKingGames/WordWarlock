@@ -13,6 +13,7 @@ func Enter():
 func Update(_delta: float):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	player.velocity = direction * Globals.player_walk_speed * .66
+	# Update the player to look towards the enemy the player is shooting at?
 
 func Physics_Update(_delta: float):
 	pass

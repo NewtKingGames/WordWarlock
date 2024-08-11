@@ -58,11 +58,6 @@ var is_haste_active: bool = false
 # Variable used to control if player can shoot a projectile spell again
 var can_cast_again = true
 
-# How to track nearest enemy? (For now ignoring sight lines)
-# 1. Mimic the behavior of the thunderstorm spell
-# 2. create an area2d and check for overlapping bodies at the exact moment the player casts the spell
-# 3. iterate through those bodies and find the closest enemy type
-
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
 
@@ -91,7 +86,6 @@ func _process(delta):
 			
 	# Handling player slowdown bar
 	if is_player_casting:
-		# The order of changing the value vs these if statements might really matter, not sure if this is correct
 		if Globals.player_slowdown_pool > 0:
 			slowdown_effect_start()
 		else:
@@ -121,23 +115,18 @@ func _physics_process(delta):
 				queued_spell.rotation = queued_spell.direction.angle()
 			if is_instance_of(queued_spell, Thunderstorm):
 				queued_spell.position = global_position
-			# Consider creating a function for shooting a spelld
 			shoot_queued_spell()
 			
 	# Only flip sprite when player is moving from direct input or aiming a spell
 	if not taking_damage:
-		if queued_spell != null:
+		if queued_spell != null and Globals.cast_spells_with_mouse:
 			if get_local_mouse_position().x > 0:
 				character_animated_sprite.flip_h = false
 				light_occluder_2d.scale.x = 1
 			else:
 				character_animated_sprite.flip_h = true
 				light_occluder_2d.scale.x = -1
-		else:
-			if velocity.x > 0:
-				character_animated_sprite.flip_h = false
-			elif velocity.x < 0:
-				character_animated_sprite.flip_h = true
+		# how to flip the sprite briefly while shooting?
 	move_and_slide()
 
 func hit(damage_number: float, damage_direction: Vector2):
@@ -154,12 +143,8 @@ func hit(damage_number: float, damage_direction: Vector2):
 			state_machine.on_outside_transition("death")
 
 func shoot_queued_spell():
-	# Consider creating a function for shooting a spelld
 	spell_shot.emit(queued_spell)
-	# I think the issue is trying to enter AND exit a state within a single 'tick'
-	# maybe this is solved by using the physics process or process functions?
-	# Instead of automatically calling all of this code here we wait till the next 'tick' that way?
-	state_machine.on_outside_transition("shotspell") # commenting this out?
+	state_machine.on_outside_transition("shotspell")
 	queued_spell_ammo -= 1
 	if queued_spell_ammo <= 0:
 		queued_spell = null
@@ -252,7 +237,7 @@ func get_nearest_enemy_in_range() -> EnemyClass:
 				closest_enemy = over_lapping_body
 	return closest_enemy
 
-# TODO - This isn't working correctly... You're still hittinhg collisions? 
+# TODO - This isn't working correctly all the time... You're still hitting collisions? 
 # I think it has to do with your start and end of the raycast, see if you can print it?
 func is_in_line_of_sight(object: Node2D):
 	var space_state = get_world_2d().direct_space_state
