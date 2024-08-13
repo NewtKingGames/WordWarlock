@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjif4o7yccjtd"
-path="res://.godot/imported/Ghost Re-Materialize-Sheet.png-5f627e8b241c545e2d8583e3e96c28d1.ctex"
+uid="uid://bcprgbdp7tjb1"
+path="res://.godot/imported/Ghost_Re-Materialize-Sheet.png-8ac0c549cc5ca3ff74d00198ce5e6643.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost Re-Materialize-Sheet.png"
-dest_files=["res://.godot/imported/Ghost Re-Materialize-Sheet.png-5f627e8b241c545e2d8583e3e96c28d1.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost_Re-Materialize-Sheet.png"
+dest_files=["res://.godot/imported/Ghost_Re-Materialize-Sheet.png-8ac0c549cc5ca3ff74d00198ce5e6643.ctex"]
 
 [params]
 

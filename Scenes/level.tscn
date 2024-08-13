@@ -774,6 +774,7 @@ metadata/_edit_group_ = true
 position = Vector2(-0.5, 1)
 stream = ExtResource("7_ypf81")
 volume_db = -6.0
+autoplay = true
 
 [node name="DarkeningLight" type="DirectionalLight2D" parent="."]
 position = Vector2(5, 244)

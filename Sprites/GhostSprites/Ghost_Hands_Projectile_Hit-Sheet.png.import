@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2dio0qtw5ddp"
-path="res://.godot/imported/Ghost Damage (Stolen Key)-Sheet.png-8a6e008092337bffd874fc9ed16ccf89.ctex"
+uid="uid://doftnyj5l3nqi"
+path="res://.godot/imported/Ghost_Hands_Projectile_Hit-Sheet.png-a2d962888796d019f731746a1ba65808.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost Damage (Stolen Key)-Sheet.png"
-dest_files=["res://.godot/imported/Ghost Damage (Stolen Key)-Sheet.png-8a6e008092337bffd874fc9ed16ccf89.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost_Hands_Projectile_Hit-Sheet.png"
+dest_files=["res://.godot/imported/Ghost_Hands_Projectile_Hit-Sheet.png-a2d962888796d019f731746a1ba65808.ctex"]
 
 [params]
 

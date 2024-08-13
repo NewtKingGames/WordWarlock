@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk3dkybgcte1x"
-path="res://.godot/imported/Ghost Death (Stolen Key)-Sheet.png-a985ebd24a2755ee64a0c0b95cf69332.ctex"
+uid="uid://b8lf7dugt1yrk"
+path="res://.godot/imported/Ghost_Damage_No_Key-Sheet.png-174c667d34f595c6884d48b9eb181f0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost Death (Stolen Key)-Sheet.png"
-dest_files=["res://.godot/imported/Ghost Death (Stolen Key)-Sheet.png-a985ebd24a2755ee64a0c0b95cf69332.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost_Damage_No_Key-Sheet.png"
+dest_files=["res://.godot/imported/Ghost_Damage_No_Key-Sheet.png-174c667d34f595c6884d48b9eb181f0c.ctex"]
 
 [params]
 

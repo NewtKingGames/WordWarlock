@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhvoa44me8j42"
-path="res://.godot/imported/Ghost Hands Projectile-Sheet.png-04541a8b1eeae1347101dd236c113ccf.ctex"
+uid="uid://ina2tsnudtvy"
+path="res://.godot/imported/Ghost_Death_Stolen_Key-Sheet.png-2fc1d9aad704c44230a9c2afa1f4feb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost Hands Projectile-Sheet.png"
-dest_files=["res://.godot/imported/Ghost Hands Projectile-Sheet.png-04541a8b1eeae1347101dd236c113ccf.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost_Death_Stolen_Key-Sheet.png"
+dest_files=["res://.godot/imported/Ghost_Death_Stolen_Key-Sheet.png-2fc1d9aad704c44230a9c2afa1f4feb2.ctex"]
 
 [params]
 

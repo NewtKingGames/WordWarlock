@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csqieab2v7qjl"
-path="res://.godot/imported/Ghost Death (No Key)-Sheet.png-d765a339d244106d9b36dc99f9237d78.ctex"
+uid="uid://u6l61tos7lg5"
+path="res://.godot/imported/Ghost_Alerted-Sheet.png-1880c2db75e3818945ac5f508e0ea53d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost Death (No Key)-Sheet.png"
-dest_files=["res://.godot/imported/Ghost Death (No Key)-Sheet.png-d765a339d244106d9b36dc99f9237d78.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost_Alerted-Sheet.png"
+dest_files=["res://.godot/imported/Ghost_Alerted-Sheet.png-1880c2db75e3818945ac5f508e0ea53d.ctex"]
 
 [params]
 

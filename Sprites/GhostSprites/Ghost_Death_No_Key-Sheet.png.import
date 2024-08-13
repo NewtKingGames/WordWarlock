@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm0ilkccdshy0"
-path="res://.godot/imported/Ghost Idle (Stolen Key)-Sheet.png-9260f811f919754ad107af458da9c25c.ctex"
+uid="uid://w4v8l1r57774"
+path="res://.godot/imported/Ghost_Death_No_Key-Sheet.png-b64680c063d02bc8ad40572c39b30f5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost Idle (Stolen Key)-Sheet.png"
-dest_files=["res://.godot/imported/Ghost Idle (Stolen Key)-Sheet.png-9260f811f919754ad107af458da9c25c.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost_Death_No_Key-Sheet.png"
+dest_files=["res://.godot/imported/Ghost_Death_No_Key-Sheet.png-b64680c063d02bc8ad40572c39b30f5d.ctex"]
 
 [params]
 

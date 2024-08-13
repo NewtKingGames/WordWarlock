@@ -58,6 +58,9 @@ var is_haste_active: bool = false
 # Variable used to control if player can shoot a projectile spell again
 var can_cast_again = true
 
+
+## TODO!!! The player can eject themself out of the cast state when the next queued spell shoots, it would be nice to prevent this from happening! 
+
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
 

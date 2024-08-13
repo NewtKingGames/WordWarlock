@@ -163,6 +163,7 @@ autoplay = "idle"
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_k0s3l")
+volume_db = -0.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
