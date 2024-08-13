@@ -38,6 +38,9 @@ func spawn_keyboard_letter_pickup():
 		item.position = global_position
 		keyboard_letter_item_dropped.emit(item)
 
+func has_key():
+	return keyboard_letter != null
+
 func _on_hand_keyboard_letter_stolen(keyboard_letter_stolen: KeyboardLetter):
 	keyboard_letter = keyboard_letter_stolen
 	# TODO - transition to StoleKey phase

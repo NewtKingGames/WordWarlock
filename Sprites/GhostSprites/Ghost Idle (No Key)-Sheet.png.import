@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpm5t2qp6l5im"
-path="res://.godot/imported/Ghost_Idle_No_Key-Sheet.png-ed1f59a0200692e18fce4f6d062de01f.ctex"
+uid="uid://df1dwbwaorj3d"
+path="res://.godot/imported/Ghost Idle (No Key)-Sheet.png-507e6f195bda3980955c099d5c051d23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost_Idle_No_Key-Sheet.png"
-dest_files=["res://.godot/imported/Ghost_Idle_No_Key-Sheet.png-ed1f59a0200692e18fce4f6d062de01f.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost Idle (No Key)-Sheet.png"
+dest_files=["res://.godot/imported/Ghost Idle (No Key)-Sheet.png-507e6f195bda3980955c099d5c051d23.ctex"]
 
 [params]
 
