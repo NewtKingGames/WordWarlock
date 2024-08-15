@@ -1,16 +1,65 @@
-[gd_scene load_steps=14 format=3 uid="uid://bciaiy483xprw"]
+[gd_scene load_steps=19 format=3 uid="uid://bciaiy483xprw"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_nhjt2"]
 [ext_resource type="Script" path="res://Scenes/enemies/phantom_key.gd" id="1_wer5p"]
-[ext_resource type="Texture2D" uid="uid://cmakywqr0mt63" path="res://Sprites/GhostSprites/Ghost Alerted-Sheet-Sheet.png" id="2_mtdqr"]
+[ext_resource type="Texture2D" uid="uid://cmhjnvgk4nyij" path="res://Sprites/GhostSprites/Ghost Alerted-Sheet.png" id="2_0ndkl"]
 [ext_resource type="Texture2D" uid="uid://df1dwbwaorj3d" path="res://Sprites/GhostSprites/Ghost Idle (No Key)-Sheet.png" id="3_yjt22"]
 [ext_resource type="Texture2D" uid="uid://krka6l3bovpw" path="res://Sprites/GhostSprites/Ghost Idle (Stolen Key)-Sheet.png" id="4_laho4"]
+[ext_resource type="PackedScene" uid="uid://c486dfptvtwsf" path="res://Scenes/ui/keyboard/letter.tscn" id="5_3g2gf"]
+[ext_resource type="Texture2D" uid="uid://bcprgbdp7tjb1" path="res://Sprites/GhostSprites/Ghost_Re-Materialize-With-KeySheet.png" id="5_rxa86"]
 [ext_resource type="Script" path="res://Scripts/States/phantom_key_attack_state.gd" id="6_l2l5s"]
 [ext_resource type="Script" path="res://Scripts/States/ghost_idle.gd" id="6_v6645"]
 [ext_resource type="Script" path="res://Scripts/States/ghost_chase.gd" id="7_ixexq"]
 [ext_resource type="Script" path="res://Scripts/States/phantom_key_death_state.gd" id="7_vafcj"]
+[ext_resource type="Script" path="res://Scripts/States/stole_key.gd" id="11_mlc5m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_grgcb"]
+
+[sub_resource type="Animation" id="Animation_7aopc"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_8dtvb"]
+resource_name = "attack"
+length = 1.25001
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisibleNodes/GhostAlertedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1, 1.08333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisibleNodes/GhostAlertedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_hands"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_h68fu"]
 resource_name = "idle"
@@ -42,13 +91,29 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 }
 
-[sub_resource type="Animation" id="Animation_7aopc"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_kdomy"]
+resource_name = "rematerialize_key"
+length = 1.16668
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisibleNodes/GhostRematerializeWithKey2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1, 1.08333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_biyhp"]
 _data = {
 "RESET": SubResource("Animation_7aopc"),
-"idle": SubResource("Animation_h68fu")
+"attack": SubResource("Animation_8dtvb"),
+"idle": SubResource("Animation_h68fu"),
+"rematerialize_key": SubResource("Animation_kdomy")
 }
 
 [node name="PhantomKey" type="CharacterBody2D" groups=["enemies"]]
@@ -57,9 +122,9 @@ collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_wer5p")
 attack_distance_to_enter = 300.0
-attack_distance_to_exit = 300.0
-health = 10.0
-walk_speed = 100.0
+attack_distance_to_exit = 320.0
+health = 30.0
+walk_speed = 250.0
 chase_distance = 500.0
 knock_back_magnitude = 1.0
 
@@ -68,8 +133,9 @@ knock_back_magnitude = 1.0
 [node name="GhostAlertedSprite2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
 position = Vector2(1.5, -7.5)
-texture = ExtResource("2_mtdqr")
+texture = ExtResource("2_0ndkl")
 hframes = 14
+frame = 9
 
 [node name="GhostDamageNoKeySprite2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
@@ -84,18 +150,28 @@ visible = false
 visible = false
 
 [node name="GhostIdleNoKey2D" type="Sprite2D" parent="VisibleNodes"]
+visible = false
 position = Vector2(-4, 0)
 texture = ExtResource("3_yjt22")
 offset = Vector2(5, 2.08165e-12)
 hframes = 16
+frame = 10
 
 [node name="GhostIdleStolenKey2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
 texture = ExtResource("4_laho4")
 hframes = 16
+frame = 10
 
-[node name="GhostRematerialize2D" type="Sprite2D" parent="VisibleNodes"]
+[node name="GhostRematerializeWithKey2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
+texture = ExtResource("5_rxa86")
+hframes = 14
+frame = 13
+
+[node name="LetterSprite" parent="." instance=ExtResource("5_3g2gf")]
+visible = false
+position = Vector2(0.333333, 1.33333)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_nhjt2")
@@ -116,6 +192,7 @@ script = ExtResource("6_l2l5s")
 script = ExtResource("7_vafcj")
 
 [node name="StoleKey" type="Node" parent="StateMachine"]
+script = ExtResource("11_mlc5m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_grgcb")
@@ -135,4 +212,5 @@ one_shot = true
 [node name="StunlockTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[connection signal="animation_finished" from="EnemyAnimationPlayer" to="StateMachine/StoleKey" method="_on_enemy_animation_player_animation_finished"]
 [connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_ghost_attack_cooldown_timer_timeout"]

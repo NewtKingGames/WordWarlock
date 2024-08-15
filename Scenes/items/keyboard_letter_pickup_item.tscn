@@ -152,7 +152,6 @@ hframes = 9
 
 [node name="LetterSprite" parent="Sprites" instance=ExtResource("1_0hs4y")]
 position = Vector2(0.75, 0)
-vframes = 14
 frame = 37
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

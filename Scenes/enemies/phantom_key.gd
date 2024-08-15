@@ -2,6 +2,7 @@ extends EnemyClass
 class_name PhantomKey
 
 signal keyboard_letter_item_dropped(keyboard_item: KeyboardLetterPickupItem)
+@onready var collision_shape_2d = $CollisionShape2D
 
 @onready var projectiles = $Projectiles
 
@@ -20,12 +21,17 @@ var keyboard_letter: KeyboardLetter = null
 func shoot_hands():
 	var hands: PhantomKeyHandProjectile = hand_projectile_scene.instantiate()
 	hands.keyboard_letter_stolen.connect(_on_hand_keyboard_letter_stolen)
+	hands.max_distance_traveled.connect(_on_projectile_miss)
 	var direction: Vector2 = (player.global_position - global_position).normalized()
 	hands.initial_direction = direction
 	# You should implement some kind of system where they spawn a small distance away from the ghost similar to what you do with player projectiles
 	hands.position = global_position
 	hands.rotation = direction.angle()
 	projectiles.add_child(hands)
+	
+	# Make the ghost invisible and untouchable i.e. no collisions, no damage, no visibility
+	toggle_ghost_visible(false)
+	# Maybe set speed to zero as well?
 
 func die():
 	spawn_keyboard_letter_pickup()
@@ -41,6 +47,28 @@ func spawn_keyboard_letter_pickup():
 func has_key():
 	return keyboard_letter != null
 
+
+func ghost_reappear():
+	toggle_ghost_visible(true)
+	collision_shape_2d.set_deferred("disabled", false)
+	if keyboard_letter:
+		print("transfer to StoleKey state")
+		$LetterSprite.set_letter_string(keyboard_letter.letter_string)
+		$StateMachine.on_outside_transition("StoleKey")
+	else:
+		$StateMachine.on_outside_transition("Chase")
+		print("transfer to chase state")
+
+func toggle_ghost_visible(is_visible: bool):
+	visible = is_visible
+	collision_shape_2d.set_deferred("disabled", !is_visible)# Docs say this property should be modified with set_deffered
+	
 func _on_hand_keyboard_letter_stolen(keyboard_letter_stolen: KeyboardLetter):
+	# Consider where the ghost should reappear in this state
 	keyboard_letter = keyboard_letter_stolen
+	ghost_reappear()
 	# TODO - transition to StoleKey phase
+
+func _on_projectile_miss(final_position: Vector2):
+	position = final_position
+	ghost_reappear()

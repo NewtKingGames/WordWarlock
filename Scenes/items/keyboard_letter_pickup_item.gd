@@ -12,8 +12,7 @@ var navigate_to_player: bool = false
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
-	#letter_sprite.set_letter_string(keyboard_letter.letter_string) # Uncomment when done testing
-	letter_sprite.set_letter_string("A")
+	letter_sprite.set_letter_string(keyboard_letter.letter_string) # Uncomment when done testing
 
 
 func _on_body_entered(body):
@@ -36,4 +35,4 @@ func _process(delta):
 		# Once the item get's close enough start the animation
 		if global_position.distance_to(player.global_position) < 300:
 			animation_player.play("pickup")
-			#keyboard_letter.letter_active = true # Uncomment when done testing
+			keyboard_letter.letter_active = true # Uncomment when done testing

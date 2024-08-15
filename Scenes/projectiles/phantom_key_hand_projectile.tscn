@@ -1,26 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://8j13p6a46xx1"]
+[gd_scene load_steps=11 format=3 uid="uid://8j13p6a46xx1"]
 
 [ext_resource type="Script" path="res://Scenes/projectiles/phantom_key_hand_projectile.gd" id="1_dj1wx"]
+[ext_resource type="Texture2D" uid="uid://c83doxvpgkc7c" path="res://Sprites/GhostSprites/Ghost Hands Projectile-Sheet.png" id="2_s1wou"]
+[ext_resource type="Texture2D" uid="uid://doftnyj5l3nqi" path="res://Sprites/GhostSprites/Ghost_Hands_Projectile_Hit-Sheet.png" id="3_kthkd"]
+
+[sub_resource type="Animation" id="Animation_1gy2e"]
+resource_name = "shoot"
+length = 0.250008
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FistProjectile:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7e1o"]
+_data = {
+"shoot": SubResource("Animation_1gy2e")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ytio2"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_07ntb"]
+atlas = ExtResource("3_kthkd")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmuny"]
+atlas = ExtResource("3_kthkd")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb34k"]
+atlas = ExtResource("3_kthkd")
+region = Rect2(200, 0, 100, 100)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cgm2"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07ntb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07ntb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmuny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmuny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb34k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb34k")
+}],
 "loop": false,
-"name": &"default",
-"speed": 5.0
+"name": &"hit",
+"speed": 12.0
 }]
 
 [node name="PhantomKeyHandProjectile" type="Area2D"]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 script = ExtResource("1_dj1wx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="FistProjectile" type="Sprite2D" parent="."]
 rotation = 4.71239
-hframes = 3
+texture = ExtResource("2_s1wou")
+hframes = 4
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y7e1o")
+}
+autoplay = "shoot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -30,7 +90,10 @@ shape = SubResource("CircleShape2D_ytio2")
 
 [node name="HitEffect" type="AnimatedSprite2D" parent="."]
 visible = false
+position = Vector2(-12.3333, 0)
 rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_3cgm2")
+animation = &"hit"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="HitEffect" to="." method="_on_hit_effect_animation_finished"]
