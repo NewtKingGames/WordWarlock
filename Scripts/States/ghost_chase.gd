@@ -17,6 +17,7 @@ func Exit():
 
 
 func Update(_delta):
+	enemy.animated_sprite_2d.play("idle")
 	var vector_to_player: Vector2 = player.global_position - enemy.global_position
 	if vector_to_player.length() > enemy.chase_distance:
 		Transitioned.emit(self, "idle")

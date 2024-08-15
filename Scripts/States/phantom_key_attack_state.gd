@@ -16,15 +16,5 @@ func Enter():
 func Exit():
 	ghost_alerted_sprite_2d.visible = false
 
-
-# TODO - you might be able to delete ALL of this commented out code
-#func Update(delta: float):
-	#if can_shoot:
-		#enemy.shoot_hands()
-		#attack_cooldown_timer.start()
-		#can_shoot = false
-
-#func _on_ghost_attack_cooldown_timer_timeout():
-	#print("ghost can attack again")
-	#can_shoot = true
-	#attack_cooldown_timer.start()
+func Update(delta):
+	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bciaiy483xprw"]
+[gd_scene load_steps=20 format=3 uid="uid://bciaiy483xprw"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_nhjt2"]
 [ext_resource type="Script" path="res://Scenes/enemies/phantom_key.gd" id="1_wer5p"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/States/ghost_chase.gd" id="7_ixexq"]
 [ext_resource type="Script" path="res://Scripts/States/phantom_key_death_state.gd" id="7_vafcj"]
 [ext_resource type="Script" path="res://Scripts/States/stole_key.gd" id="11_mlc5m"]
+[ext_resource type="Script" path="res://Scripts/States/miss_key.gd" id="13_ai6ku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_grgcb"]
 
@@ -125,18 +126,18 @@ script = ExtResource("1_wer5p")
 attack_distance_to_enter = 300.0
 attack_distance_to_exit = 320.0
 health = 30.0
-walk_speed = 250.0
+walk_speed = 200.0
 chase_distance = 500.0
 knock_back_magnitude = 1.0
 
 [node name="VisibleNodes" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.694118)
 
 [node name="GhostAlertedSprite2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
 position = Vector2(1.5, -7.5)
 texture = ExtResource("2_0ndkl")
 hframes = 14
-frame = 9
 
 [node name="GhostDamageNoKeySprite2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
@@ -194,6 +195,9 @@ script = ExtResource("7_vafcj")
 
 [node name="StoleKey" type="Node" parent="StateMachine"]
 script = ExtResource("11_mlc5m")
+
+[node name="MissKey" type="Node" parent="StateMachine"]
+script = ExtResource("13_ai6ku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_grgcb")
