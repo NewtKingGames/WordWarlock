@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmakywqr0mt63"
-path="res://.godot/imported/Ghost Alerted-Sheet-Sheet.png-01aaeefe1f609c7593a62a6be69a10fd.ctex"
+uid="uid://cmhjnvgk4nyij"
+path="res://.godot/imported/Ghost Alerted-Sheet.png-453c828ea5538f494209d5def304e94c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost Alerted-Sheet-Sheet.png"
-dest_files=["res://.godot/imported/Ghost Alerted-Sheet-Sheet.png-01aaeefe1f609c7593a62a6be69a10fd.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost Alerted-Sheet.png"
+dest_files=["res://.godot/imported/Ghost Alerted-Sheet.png-453c828ea5538f494209d5def304e94c.ctex"]
 
 [params]
 

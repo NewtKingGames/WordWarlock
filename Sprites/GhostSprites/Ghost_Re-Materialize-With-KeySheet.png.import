@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcprgbdp7tjb1"
-path="res://.godot/imported/Ghost_Re-Materialize-Sheet.png-8ac0c549cc5ca3ff74d00198ce5e6643.ctex"
+path="res://.godot/imported/Ghost_Re-Materialize-With-KeySheet.png-c64c6dea7fb7ecd365bdde18b20f40a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GhostSprites/Ghost_Re-Materialize-Sheet.png"
-dest_files=["res://.godot/imported/Ghost_Re-Materialize-Sheet.png-8ac0c549cc5ca3ff74d00198ce5e6643.ctex"]
+source_file="res://Sprites/GhostSprites/Ghost_Re-Materialize-With-KeySheet.png"
+dest_files=["res://.godot/imported/Ghost_Re-Materialize-With-KeySheet.png-c64c6dea7fb7ecd365bdde18b20f40a1.ctex"]
 
 [params]
 
