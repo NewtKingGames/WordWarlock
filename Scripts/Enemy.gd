@@ -34,7 +34,7 @@ func _physics_process(delta):
 	# only set previous velocity to nonzero x values
 	if velocity.x != 0:
 		previous_velocity = velocity
-	move_and_slide()
+	move_and_collide(velocity*delta)
 
 func hit(damage: float):
 	if can_take_damage:

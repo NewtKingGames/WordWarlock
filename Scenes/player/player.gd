@@ -70,10 +70,12 @@ func _process(delta):
 		character_animated_sprite.material.set_shader_parameter("color", Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
 	else:
 		character_animated_sprite.material.set_shader_parameter("color", Color(0, 0, 0, 0))
+	# Alter the pitch scale of the music on slowdown/speed up
 	if level_music.pitch_scale < target_pitch:
 		level_music.pitch_scale = lerpf(level_music.pitch_scale, target_pitch, pitch_scale_rate_up*delta)
 	elif level_music.pitch_scale > target_pitch:
 		level_music.pitch_scale = lerpf(level_music.pitch_scale, target_pitch, pitch_scale_rate_down*delta)
+	# Effects while player is in invulnerable cooldown
 	if not can_take_damage:
 		$DamageAnimationPlayer.play("damage_flash")
 	if can_take_damage:
@@ -130,7 +132,8 @@ func _physics_process(delta):
 				character_animated_sprite.flip_h = true
 				light_occluder_2d.scale.x = -1
 		# how to flip the sprite briefly while shooting?
-	move_and_slide()
+	#move_and_slide()
+	move_and_collide(velocity*delta)
 
 func hit(damage_number: float, damage_direction: Vector2):
 	if can_take_damage:
@@ -245,11 +248,6 @@ func get_nearest_enemy_in_range() -> EnemyClass:
 func is_in_line_of_sight(object: Node2D):
 	var space_state = get_world_2d().direct_space_state
 	var line_of_sight_query = PhysicsRayQueryParameters2D.create(global_position, object.global_position)
-	#print("the positions are")
-	#print(global_position)
-	#print(object.global_position)
-	#print("mouse position")
-	#print(get_global_mouse_position())
 	#line_of_sight_query.set_collide_with_areas(true)
 	var result: Dictionary = space_state.intersect_ray(line_of_sight_query)
 	if result:
