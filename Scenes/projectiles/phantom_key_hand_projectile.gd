@@ -37,7 +37,6 @@ func _process(delta: float):
 	position = position + (initial_direction * projectile_speed * delta)
 	if initial_position.distance_to(position) >= max_distance_to_travel:
 		projectile_speed = 0
-		print("Traveled maximum distance!")
 		max_distance_traveled.emit(global_position)
 		destroy_projectile()
 

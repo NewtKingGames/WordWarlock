@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ooxyv5avybtt"]
+[gd_scene load_steps=21 format=3 uid="uid://ooxyv5avybtt"]
 
 [ext_resource type="Texture2D" uid="uid://cv8iq6fbf1h6g" path="res://Sprites/slime_green.png" id="1_ib7ob"]
 [ext_resource type="Script" path="res://Scenes/enemies/slime.gd" id="1_un4ex"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/States/enemy_damage.gd" id="6_min30"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_death.gd" id="8_bp1j1"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_attack_state.gd" id="8_igxjm"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="10_o7nng"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ajr77"]
 polygon = PackedVector2Array(-5, -14.75, 0, -15.25, 5, -15, 7, -4, 7.25, 0, -7, 0, -7, -3.5, -4.5, -5.75, -5.25, -14.5)
@@ -201,6 +202,7 @@ texture = ExtResource("3_5wvf6")
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(5.96046e-08, -7)
 scale = Vector2(0.555941, 0.410156)
 shape = SubResource("CapsuleShape2D_eaulm")
@@ -225,6 +227,7 @@ script = ExtResource("8_igxjm")
 script = ExtResource("8_bp1j1")
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
@@ -248,6 +251,12 @@ libraries = {
 "": SubResource("AnimationLibrary_m0k21")
 }
 autoplay = "idle"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-0.25, -6)
+color = Color(0.427451, 0.635294, 0.00392157, 1)
+texture = ExtResource("10_o7nng")
+texture_scale = 0.06
 
 [connection signal="body_entered" from="AttackArea" to="StateMachine/Chase" method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_attack_cooldown_timer_timeout"]

@@ -52,12 +52,10 @@ func ghost_reappear():
 	toggle_ghost_visible(true)
 	collision_shape_2d.set_deferred("disabled", false)
 	if keyboard_letter:
-		print("transfer to StoleKey state")
 		$LetterSprite.set_letter_string(keyboard_letter.letter_string)
 		$StateMachine.on_outside_transition("StoleKey")
 	else:
 		$StateMachine.on_outside_transition("MissKey")
-		print("transfer to chase state")
 
 func toggle_ghost_visible(is_visible: bool):
 	visible = is_visible

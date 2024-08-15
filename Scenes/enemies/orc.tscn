@@ -210,6 +210,11 @@ scale = Vector2(1.98423, 1.9863)
 shape = SubResource("CircleShape2D_y65se")
 debug_color = Color(0.190496, 0.639321, 0.168529, 0.42)
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.860108, 0.54703, 1.3791e-06, 1)
+energy = 0.5
+texture_scale = 0.1
+
 [connection signal="timeout" from="Timers/StunlockTimer" to="StateMachine/Damage" method="_on_stunlock_timer_timeout"]
 [connection signal="timeout" from="Timers/AttackCooldownTimer" to="StateMachine/Attack" method="_on_attack_cooldown_timer_timeout"]
 [connection signal="body_entered" from="AttackArea" to="StateMachine/Chase" method="_on_attack_area_body_entered"]

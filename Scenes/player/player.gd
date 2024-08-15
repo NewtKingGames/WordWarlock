@@ -106,7 +106,6 @@ func _physics_process(delta):
 		aiming_line.visible = queued_spell != null
 	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own node
 	if queued_spell != null:
-		# TODO - make cursor larger
 		if not Globals.cast_spells_with_mouse:
 			autocast_spell()
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)

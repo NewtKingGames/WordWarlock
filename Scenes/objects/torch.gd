@@ -15,4 +15,3 @@ func animate_lights():
 	var light_flicker_tween: Tween = create_tween().set_loops()
 	light_flicker_tween.tween_property(point_light_2d, "energy", randf_range(0.03, 0.2), randf_range(0.25, 1))
 	light_flicker_tween.tween_property(point_light_2d, "energy", randf_range(0.3, 0.4), randf_range(0.25, 1))
-	#light_flicker_tween.tween_callback(animate_lights())
