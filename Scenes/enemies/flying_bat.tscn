@@ -255,6 +255,7 @@ animations = [{
 scale = Vector2(4, 4)
 collision_layer = 4
 collision_mask = 19
+motion_mode = 1
 script = ExtResource("1_5jpfr")
 attack_distance_to_enter = 300.0
 attack_distance_to_exit = 400.0

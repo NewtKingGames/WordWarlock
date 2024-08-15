@@ -175,6 +175,7 @@ z_index = 1
 scale = Vector2(4, 4)
 collision_layer = 4
 collision_mask = 23
+motion_mode = 1
 script = ExtResource("1_un4ex")
 health = 40.0
 walk_speed = 100.0
