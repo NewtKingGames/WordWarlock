@@ -6,5 +6,6 @@
 [node name="LetterSprite" type="Sprite2D"]
 texture = ExtResource("1_7yxur")
 hframes = 8
-vframes = 13
+vframes = 14
+frame = 16
 script = ExtResource("2_4gamk")
