@@ -519,6 +519,8 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
+[node name="AimParent" type="Node" parent="."]
+
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="." method="_on_cast_cast_spell"]
 [connection signal="cast_spell_changed" from="StateMachine/Cast" to="." method="_on_spell_caster_state_changed"]

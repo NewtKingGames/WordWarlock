@@ -58,11 +58,15 @@ var is_haste_active: bool = false
 # Variable used to control if player can shoot a projectile spell again
 var can_cast_again = true
 
-
+var locked_on_enemy: EnemyClass
+var aim_lock_on_reticle: Node2D
+##
 ## TODO!!! The player can eject themself out of the cast state when the next queued spell shoots, it would be nice to prevent this from happening! 
-
+##
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
+	aim_lock_on_reticle = load("res://Scenes/ui/aim_lock_on_reticle.tscn").instantiate()
+	$AimParent.add_child(aim_lock_on_reticle)
 
 func _process(delta):
 	# Reconsider choice to rely on global variables
@@ -102,6 +106,22 @@ func _process(delta):
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
+	# Calculate the nearest enemy
+	var closest_enemy = get_nearest_enemy_in_range()
+	if closest_enemy:
+		if locked_on_enemy:
+			#print("Have the reticle smoothly follow the enemy position")
+			aim_lock_on_reticle.global_position.x = lerpf(aim_lock_on_reticle.global_position.x, closest_enemy.global_position.x, 0.1)
+			aim_lock_on_reticle.global_position.y = lerpf(aim_lock_on_reticle.global_position.y, closest_enemy.global_position.y, 0.1)
+		else:
+			aim_lock_on_reticle.position = closest_enemy.global_position
+		locked_on_enemy = closest_enemy
+		aim_lock_on_reticle.visible = true
+		#aim_lock_on_reticle.global_position = closest_enemy.global_position
+	else:
+		locked_on_enemy = null
+		aim_lock_on_reticle.visible = false
+	
 	if Globals.cast_spells_with_mouse:
 		aiming_line.visible = queued_spell != null
 	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own node
@@ -234,7 +254,7 @@ func get_nearest_enemy_in_range() -> EnemyClass:
 		if over_lapping_body is EnemyClass:
 			# Check if the enemy is within a line of sight of the player
 			if not is_in_line_of_sight(over_lapping_body):
-				return
+				continue
 			if closest_enemy:
 				if position.distance_to(closest_enemy.global_position) > position.distance_to(over_lapping_body.global_position):
 					closest_enemy = over_lapping_body
