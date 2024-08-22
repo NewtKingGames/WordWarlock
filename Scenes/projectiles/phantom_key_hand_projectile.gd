@@ -45,6 +45,8 @@ func _on_body_entered(body):
 		var keyboard_letter: KeyboardLetter = body.disable_random_key()
 		print(keyboard_letter)
 		keyboard_letter_stolen.emit(keyboard_letter)
+		# Add knockback for no damage to ghost
+		body.hit(0, initial_direction*100)
 	destroy_projectile()
 
 # Object gets queued free in sprite animated 2d signal for 
