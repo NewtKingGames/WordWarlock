@@ -19,6 +19,8 @@ signal spell_string_cast(string: String)
 @onready var slow_mo_sound_exit = $Sounds/SlowMoSoundExit
 @onready var keyboard: Keyboard = $Keyboard
 @onready var auto_aim_attack_area = $AutoAimAttackArea
+@onready var aim_lock_on_reticle: Reticle = $AimLockOnReticle
+
 
 
 const walk_speed: float = 400
@@ -59,14 +61,15 @@ var is_haste_active: bool = false
 var can_cast_again = true
 
 var locked_on_enemy: EnemyClass
-var aim_lock_on_reticle: Node2D
+
 ##
 ## TODO!!! The player can eject themself out of the cast state when the next queued spell shoots, it would be nice to prevent this from happening! 
 ##
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
-	aim_lock_on_reticle = load("res://Scenes/ui/aim_lock_on_reticle.tscn").instantiate()
-	$AimParent.add_child(aim_lock_on_reticle)
+	# TODO - delete
+	#aim_lock_on_reticle = load("res://Scenes/ui/aim_lock_on_reticle.tscn").instantiate()
+	#$AimParent.add_child(aim_lock_on_reticle)
 
 func _process(delta):
 	# Reconsider choice to rely on global variables
@@ -106,21 +109,13 @@ func _process(delta):
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
-	# Calculate the nearest enemy
+	# Calculate the nearest enemy - TODO could only run this every X frames to cut back?
 	var closest_enemy = get_nearest_enemy_in_range()
 	if closest_enemy:
-		if locked_on_enemy:
-			#print("Have the reticle smoothly follow the enemy position")
-			aim_lock_on_reticle.global_position.x = lerpf(aim_lock_on_reticle.global_position.x, closest_enemy.global_position.x, 0.1)
-			aim_lock_on_reticle.global_position.y = lerpf(aim_lock_on_reticle.global_position.y, closest_enemy.global_position.y, 0.1)
-		else:
-			aim_lock_on_reticle.position = closest_enemy.global_position
-		locked_on_enemy = closest_enemy
-		aim_lock_on_reticle.visible = true
-		#aim_lock_on_reticle.global_position = closest_enemy.global_position
+		aim_lock_on_reticle.set_target_node(closest_enemy)
 	else:
 		locked_on_enemy = null
-		aim_lock_on_reticle.visible = false
+		aim_lock_on_reticle.set_target_node(null)
 	
 	if Globals.cast_spells_with_mouse:
 		aiming_line.visible = queued_spell != null

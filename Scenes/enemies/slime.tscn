@@ -184,6 +184,7 @@ chase_distance = 500.0
 knock_back_magnitude = 200.0
 
 [node name="VisibleNodes" type="Node2D" parent="."]
+position = Vector2(0, 7)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="VisibleNodes"]
 occluder = SubResource("OccluderPolygon2D_ajr77")
@@ -202,8 +203,6 @@ texture = ExtResource("3_5wvf6")
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(5.96046e-08, -7)
 scale = Vector2(0.555941, 0.410156)
 shape = SubResource("CapsuleShape2D_eaulm")
 
@@ -227,7 +226,7 @@ script = ExtResource("8_igxjm")
 script = ExtResource("8_bp1j1")
 
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
+position = Vector2(0, 7)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
@@ -253,7 +252,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-0.25, -6)
+position = Vector2(0, 0.25)
 color = Color(0.427451, 0.635294, 0.00392157, 1)
 texture = ExtResource("10_o7nng")
 texture_scale = 0.06

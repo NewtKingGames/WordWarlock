@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi6b5ug46r344"]
+[gd_scene load_steps=3 format=3 uid="uid://bi6b5ug46r344"]
 
 [ext_resource type="Texture2D" uid="uid://b31ksjsmet28u" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/crosshair_1.png" id="1_g12bp"]
+[ext_resource type="Script" path="res://Scenes/ui/aim_lock_on_reticle.gd" id="1_xkrs2"]
 
-[node name="AimLockOnReticle" type="Node2D"]
+[node name="AimLockOnReticle" type="Node2D" groups=["reticle"]]
+script = ExtResource("1_xkrs2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.4, 0.223529, 0.533333)
 z_index = 2
 rotation = 0.785398
-scale = Vector2(6, 6)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_g12bp")

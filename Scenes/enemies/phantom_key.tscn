@@ -157,13 +157,11 @@ position = Vector2(-4, 0)
 texture = ExtResource("3_yjt22")
 offset = Vector2(5, 2.08165e-12)
 hframes = 16
-frame = 10
 
 [node name="GhostIdleStolenKey2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
 texture = ExtResource("4_laho4")
 hframes = 16
-frame = 10
 
 [node name="GhostRematerializeWithKey2D" type="Sprite2D" parent="VisibleNodes"]
 visible = false
