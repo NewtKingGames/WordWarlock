@@ -61,7 +61,12 @@ var is_haste_active: bool = false
 var can_cast_again = true
 
 var locked_on_enemy: EnemyClass
-
+var closest_enemies_in_range: Array[EnemyClass] = []
+# This will control how we lock on to enemies this needs to be set in two ways:
+# 1. if the player hits tab we increment this by 1
+# 2. if the total amount of closest enemies goes to zero we set this to zero
+# 3. if the index is >= size of closest enemies we set this to 0
+var lock_on_index: int = 0
 ##
 ## TODO!!! The player can eject themself out of the cast state when the next queued spell shoots, it would be nice to prevent this from happening! 
 ##
@@ -106,10 +111,19 @@ func _process(delta):
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
+	
+	if Input.is_action_just_pressed("switch_target"):
+		lock_on_index += 1
 	# Calculate the nearest enemy - TODO could only run this every X frames to cut back?
-	var closest_enemies_in_range = get_nearest_enemies_in_range_in_order() # TODO - support using this instead of "closest enemy"
-	print(closest_enemies_in_range)
-	var closest_enemy = get_nearest_enemy_in_range()
+	closest_enemies_in_range = get_nearest_enemies_in_range_in_order()
+	#print(closest_enemies_in_range)
+	if lock_on_index != 0 and lock_on_index >= closest_enemies_in_range.size():
+		lock_on_index = 0
+	#var closest_enemy = get_nearest_enemy_in_range()
+	# Grab the closest locked on enemy
+	var closest_enemy: EnemyClass = null
+	if closest_enemies_in_range.size() > 0:
+		closest_enemy = closest_enemies_in_range[lock_on_index]
 	if closest_enemy:
 		aim_lock_on_reticle.set_target_node(closest_enemy)
 	else:
