@@ -1,7 +1,10 @@
 class_name Reticle extends Node2D
 
 # TODO - could make this an enemy?
-var target_node: Node2D
+var target_node: Node2D:
+	set(node):
+		is_active = true if node else false
+		target_node = node
 var is_active: bool:
 	set(flag):
 		$Sprite2D.visible = flag
@@ -29,15 +32,10 @@ func _process(delta):
 func set_target_node(node: Node2D):
 	if node == target_node:
 		return
-	# If the reticle was previously not set auto
-	#if not is_active:	
-	is_active = true if node else false
 	target_node = node
 	if node != null:
 		target_node.connect("tree_exiting", on_target_tree_exiting)
 
-# Necessary to avoid NPE's
+# Necessary to avoid NPE's when an enemy is destroyed
 func on_target_tree_exiting():
-	print("the target is being removed from the scene!!")
 	target_node = null
-	is_active = false
