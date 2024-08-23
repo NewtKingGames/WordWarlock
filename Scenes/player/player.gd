@@ -67,9 +67,6 @@ var locked_on_enemy: EnemyClass
 ##
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
-	# TODO - delete
-	#aim_lock_on_reticle = load("res://Scenes/ui/aim_lock_on_reticle.tscn").instantiate()
-	#$AimParent.add_child(aim_lock_on_reticle)
 
 func _process(delta):
 	# Reconsider choice to rely on global variables
@@ -110,6 +107,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	# Calculate the nearest enemy - TODO could only run this every X frames to cut back?
+	var closest_enemies_in_range = get_nearest_enemies_in_range_in_order() # TODO - support using this instead of "closest enemy"
+	print(closest_enemies_in_range)
 	var closest_enemy = get_nearest_enemy_in_range()
 	if closest_enemy:
 		aim_lock_on_reticle.set_target_node(closest_enemy)
@@ -137,6 +136,7 @@ func _physics_process(delta):
 			shoot_queued_spell()
 			
 	# Only flip sprite when player is moving from direct input or aiming a spell
+	# how to flip the sprite briefly while shooting?
 	if not taking_damage:
 		if queued_spell != null and Globals.cast_spells_with_mouse:
 			if get_local_mouse_position().x > 0:
@@ -145,9 +145,7 @@ func _physics_process(delta):
 			else:
 				character_animated_sprite.flip_h = true
 				light_occluder_2d.scale.x = -1
-		# how to flip the sprite briefly while shooting?
 	move_and_slide()
-	#move_and_collide(velocity*delta)
 
 func hit(damage_number: float, damage_direction: Vector2):
 	if can_take_damage:
@@ -256,6 +254,27 @@ func get_nearest_enemy_in_range() -> EnemyClass:
 			else:
 				closest_enemy = over_lapping_body
 	return closest_enemy
+
+func get_nearest_enemies_in_range_in_order() -> Array[EnemyClass]:
+	var overlapping_bodies: Array[Node2D] = auto_aim_attack_area.get_overlapping_bodies()
+	var enemies_in_range: Array[EnemyClass] = []
+	var enemy_count_in_range: int = 0
+	for over_lapping_body: Node2D in overlapping_bodies:
+		if over_lapping_body is EnemyClass:
+			# Check if the enemy is within a line of sight of the player
+			if not is_in_line_of_sight(over_lapping_body):
+				continue
+			enemies_in_range.append(over_lapping_body)
+			enemy_count_in_range += 1
+	# We need to resize the array to only contain non-null values?
+	enemies_in_range.resize(enemy_count_in_range)
+	enemies_in_range.sort_custom(sort_asc_distance)
+	return enemies_in_range
+
+func sort_asc_distance(a: Node2D, b: Node2D):
+	if a.global_position.distance_to(global_position) < b.global_position.distance_to(global_position):
+		return true
+	return false
 
 # TODO - This isn't working correctly all the time... You're still hitting collisions? 
 # I think it has to do with your start and end of the raycast, see if you can print it?

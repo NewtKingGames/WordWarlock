@@ -33,7 +33,8 @@ func set_target_node(node: Node2D):
 	#if not is_active:	
 	is_active = true if node else false
 	target_node = node
-	target_node.connect("tree_exiting", on_target_tree_exiting)
+	if node != null:
+		target_node.connect("tree_exiting", on_target_tree_exiting)
 
 # Necessary to avoid NPE's
 func on_target_tree_exiting():
