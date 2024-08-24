@@ -9,7 +9,7 @@ var is_active: bool:
 	set(flag):
 		$Sprite2D.visible = flag
 		is_active = flag
-@export var reticle_speed: float = 1000.0
+@export var reticle_speed: float = 1800.0
 var player: Player
 
 
@@ -60,8 +60,8 @@ func steady_state_effects():
 		tween_rotation.tween_property(self, "rotation_degrees", -360, 3)
 		
 		# Consider only tweening the sprite scale
-		tween_scale.tween_property(self, "scale", Vector2(5, 5), 1.0)
-		tween_scale.tween_property(self, "scale", Vector2(4, 4), 1.0)
+		tween_scale.tween_property(self, "scale", Vector2(6, 6), .5)
+		tween_scale.tween_property(self, "scale", Vector2(3, 3), .5)
 
 func chase_state_effects():
 	# TODO how to stop these tweens then?

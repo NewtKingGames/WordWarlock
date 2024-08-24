@@ -67,7 +67,7 @@ var closest_enemies_in_range: Array[EnemyClass] = []
 # 2. if the total amount of closest enemies goes to zero we set this to zero
 # 3. if the index is >= size of closest enemies we set this to 0
 var lock_on_index: int = 0
-var is_lock_on_set: bool = false
+var is_manual_lock_on_set: bool = false
 ##
 ## TODO!!! The player can eject themself out of the cast state when the next queued spell shoots, it would be nice to prevent this from happening! 
 ##
@@ -135,8 +135,11 @@ func _physics_process(delta):
 		var index_of_lock_on: int = closest_enemies_in_range.find(locked_on_enemy)
 		if index_of_lock_on != -1:
 			locked_on_enemy = closest_enemies_in_range[(index_of_lock_on+1)% closest_enemies_in_range.size()]
+		#lock_on_index = (lock_on_index + 1) %  closest_enemies_in_range.size()# TODO - should this be remainder size of enemies?
+		#if closest_enemies_in_range.size() > lock_on_index:
+			#print(lock_on_index)
+			#locked_on_enemy = closest_enemies_in_range[lock_on_index]
 	aim_lock_on_reticle.set_target_node(locked_on_enemy)
-
 	
 	if Globals.cast_spells_with_mouse:
 		aiming_line.visible = queued_spell != null
