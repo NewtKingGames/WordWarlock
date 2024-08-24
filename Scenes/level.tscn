@@ -861,6 +861,12 @@ walk_speed = 2.08165e-12
 
 [node name="EnemySpellShield" parent="Enemies/Slime" instance=ExtResource("12_jxqa0")]
 
+[node name="Slime3" parent="Enemies" instance=ExtResource("5_8hhxu")]
+position = Vector2(1301, 1485)
+walk_speed = 2.08165e-12
+
+[node name="EnemySpellShield" parent="Enemies/Slime3" instance=ExtResource("12_jxqa0")]
+
 [node name="Slime2" parent="Enemies" instance=ExtResource("5_8hhxu")]
 position = Vector2(1548, 1384)
 scale = Vector2(3.99754, 4)

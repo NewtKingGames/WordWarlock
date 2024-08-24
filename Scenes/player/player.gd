@@ -67,6 +67,7 @@ var closest_enemies_in_range: Array[EnemyClass] = []
 # 2. if the total amount of closest enemies goes to zero we set this to zero
 # 3. if the index is >= size of closest enemies we set this to 0
 var lock_on_index: int = 0
+var is_lock_on_set: bool = false
 ##
 ## TODO!!! The player can eject themself out of the cast state when the next queued spell shoots, it would be nice to prevent this from happening! 
 ##
@@ -111,24 +112,31 @@ func _process(delta):
 		Globals.player_slowdown_pool = Globals.player_slowdown_pool + spell_slowdown_increase_rate * delta
 
 func _physics_process(delta):
-	
-	if Input.is_action_just_pressed("switch_target"):
-		lock_on_index += 1
-	# Calculate the nearest enemy - TODO could only run this every X frames to cut back?
-	# TODO - how to respect the players current lock on target? this might become an issue where you need to save a reference to the currently locked on enemy and then check track where in the array it is when a new enemy comes in
+	# TODO - we might be able to make this more efficient by only checking if it the current enemy that we lock on to is out of range
 	closest_enemies_in_range = get_nearest_enemies_in_range_in_order()
-	if lock_on_index != 0 and lock_on_index >= closest_enemies_in_range.size():
-		lock_on_index = 0
-	# Grab the closest locked on enemy
-	var closest_enemy: EnemyClass = null
-	if closest_enemies_in_range.size() > 0:
-		closest_enemy = closest_enemies_in_range[lock_on_index]
-	if closest_enemy:
-		locked_on_enemy = closest_enemy
-		aim_lock_on_reticle.set_target_node(closest_enemy)
-	else:
+	# If there are no enemies in range, clear all lock on settings
+	if closest_enemies_in_range.size() == 0:
 		locked_on_enemy = null
-		aim_lock_on_reticle.set_target_node(null)
+	# If there are enemies in range, check if we have a current enemy locked on
+	elif locked_on_enemy:
+		# If we have a current enemy locked on, check that it's still in the list
+		if not closest_enemies_in_range.has(locked_on_enemy):
+			# If it's not still in the list, set the current lock on target to the first enemy in the array (Make sure this isn't problematic)
+			locked_on_enemy = closest_enemies_in_range[0]
+			lock_on_index = 0
+	elif not locked_on_enemy:
+		if lock_on_index == 0:
+			# If there is no locked on enemy set the locked on enemy to the closest enemy
+			locked_on_enemy = closest_enemies_in_range[0]
+			lock_on_index = 0
+	# When the player presses tab, cycle through to the next enemy in range
+	if Input.is_action_just_pressed("switch_target") and locked_on_enemy:
+		# instead of saving lock on index, instead we save the enemy and upon toggle find the enemy in the list AFTER the current toggled enemy
+		var index_of_lock_on: int = closest_enemies_in_range.find(locked_on_enemy)
+		if index_of_lock_on != -1:
+			locked_on_enemy = closest_enemies_in_range[(index_of_lock_on+1)% closest_enemies_in_range.size()]
+	aim_lock_on_reticle.set_target_node(locked_on_enemy)
+
 	
 	if Globals.cast_spells_with_mouse:
 		aiming_line.visible = queued_spell != null

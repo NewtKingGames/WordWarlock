@@ -9,7 +9,7 @@ var is_active: bool:
 	set(flag):
 		$Sprite2D.visible = flag
 		is_active = flag
-@export var reticle_speed: float = 800.0
+@export var reticle_speed: float = 1000.0
 var player: Player
 
 
@@ -55,9 +55,9 @@ func steady_state_effects():
 	# For now maybe we set it to "breath" and slowly spin around an enemy?s
 		tween_scale = create_tween().set_loops()
 		tween_rotation = create_tween().set_loops()
-		# TODO - this technically rotates to the right and then rotates to the left. If you want to change that you'll need to not use tweens
+		# TODO - tweens don't work great for rotation here, gotta fix that
 		tween_rotation.tween_property(self, "rotation_degrees", 360, 3)
-		tween_rotation.tween_property(self, "rotation_degrees", 0, 3)
+		tween_rotation.tween_property(self, "rotation_degrees", -360, 3)
 		
 		# Consider only tweening the sprite scale
 		tween_scale.tween_property(self, "scale", Vector2(5, 5), 1.0)
