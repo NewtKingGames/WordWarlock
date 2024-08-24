@@ -115,16 +115,16 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("switch_target"):
 		lock_on_index += 1
 	# Calculate the nearest enemy - TODO could only run this every X frames to cut back?
+	# TODO - how to respect the players current lock on target? this might become an issue where you need to save a reference to the currently locked on enemy and then check track where in the array it is when a new enemy comes in
 	closest_enemies_in_range = get_nearest_enemies_in_range_in_order()
-	#print(closest_enemies_in_range)
 	if lock_on_index != 0 and lock_on_index >= closest_enemies_in_range.size():
 		lock_on_index = 0
-	#var closest_enemy = get_nearest_enemy_in_range()
 	# Grab the closest locked on enemy
 	var closest_enemy: EnemyClass = null
 	if closest_enemies_in_range.size() > 0:
 		closest_enemy = closest_enemies_in_range[lock_on_index]
 	if closest_enemy:
+		locked_on_enemy = closest_enemy
 		aim_lock_on_reticle.set_target_node(closest_enemy)
 	else:
 		locked_on_enemy = null
@@ -230,7 +230,9 @@ func autocast_spell():
 		can_cast_again = false
 		var timer: SceneTreeTimer = get_tree().create_timer(queued_spell.rate_of_fire)
 		timer.connect("timeout", on_fire_rate_timeout)
-		var closest_enemy: EnemyClass = get_nearest_enemy_in_range()
+		#var closest_enemy: EnemyClass = get_nearest_enemy_in_range()
+		var closest_enemy = locked_on_enemy
+		print(locked_on_enemy)
 		# TODO - handle null scenario
 		var spell_target: Vector2
 		if closest_enemy:

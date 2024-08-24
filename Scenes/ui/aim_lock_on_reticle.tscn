@@ -4,11 +4,12 @@
 [ext_resource type="Script" path="res://Scenes/ui/aim_lock_on_reticle.gd" id="1_xkrs2"]
 
 [node name="AimLockOnReticle" type="Node2D" groups=["reticle"]]
+top_level = true
+scale = Vector2(4, 4)
 script = ExtResource("1_xkrs2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.4, 0.223529, 1)
 z_index = 2
 rotation = 0.785398
-scale = Vector2(1.96387, 1.96387)
 texture = ExtResource("1_g12bp")
