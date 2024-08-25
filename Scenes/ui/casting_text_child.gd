@@ -1,20 +1,20 @@
 class_name CastingTextChild extends Label
 var letter_position_offset: float = 20
 var speed_offset: float = Engine.time_scale
+
+# TODO - play around with these effects in the future
+
 # On ready the text should pop up
 func _ready():
 	rotate_text_start()
 
 func other_letter_added_effect():
-	print("other letter is added, move this thing to the left")
 	slide_text_left()
 	
 func other_letter_removed_effect():
-	print("other letter is removed, move this thing to the right")
 	slide_text_right()
 	
 func remove():
-	print("deleting this letter")
 	queue_free()
 
 # Temp code stolen from the game jam
@@ -46,4 +46,4 @@ func slide_text(direction: int):
 	var rotation = randi_range(15, 20)
 	tween_rotate.tween_property(self, "rotation_degrees", rotation * direction, 0.1 * speed_offset)
 	tween_rotate.tween_property(self, "rotation_degrees", 0, 0.1 * speed_offset)
-	tween_position.tween_property(self, "position", Vector2(position.x + letter_position_offset*direction, position.y), 0.1 * speed_offset)
+	#tween_position.tween_property(self, "position", Vector2(position.x + letter_position_offset*direction, position.y), 0.1 * speed_offset)

@@ -26,6 +26,5 @@ func on_bat_spit(bat_spit_speed: float, direction: Vector2, position: Vector2):
 
 # Is it better in general to pass the instantiated scene or is it better to pass properties and instantiate it here?
 func on_keyboard_letter_item_dropped(keyboard_letter_item: KeyboardLetterPickupItem):
-	print("adding child!")
 	add_child(keyboard_letter_item)
 	

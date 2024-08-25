@@ -39,7 +39,7 @@ func Enter():
 	casting_text_label.set_casting_text(cast_string)
 	casting_text_parent.clear_letters()
 	#casting_text_label.text = cast_string
-	casting_text_label.visible = true
+	casting_text_label.visible = false
 	casting_text_parent.visible = true
 	casting_text_label.set_modulate(Color.WHITE)
 
