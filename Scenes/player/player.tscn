@@ -427,6 +427,7 @@ script = ExtResource("7_ntvts")
 script = ExtResource("9_y8sb8")
 
 [node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]
+z_index = 3
 position = Vector2(7.25, 30.75)
 scale = Vector2(0.943525, 0.943525)
 

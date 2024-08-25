@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://blv5bb1hvo01r"]
+
+[ext_resource type="Texture2D" uid="uid://0p2yrl5gmio3" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_fullyopen.png" id="1_bxvkj"]
+[ext_resource type="Texture2D" uid="uid://hwxjimasjogc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_spritesheet.png" id="1_ufa6v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l45io"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xllm"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isk63"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coff0"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8e1l"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1u74"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sksjt"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ud4u"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a23mu"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo53u"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2eqlk"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhcv0"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4lgb"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg57y"]
+atlas = ExtResource("1_ufa6v")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xma44"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bxvkj")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l45io")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xllm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isk63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coff0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8e1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1u74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sksjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ud4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a23mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo53u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2eqlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhcv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4lgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg57y")
+}],
+"loop": false,
+"name": &"unlock",
+"speed": 15.0
+}]
+
+[node name="DoorWithLock" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xma44")
+animation = &"open"
