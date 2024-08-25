@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbpdlf28pqd0u"]
+
+[ext_resource type="FontFile" uid="uid://davdrvjvam6n" path="res://Font/PixelOperator8-Bold.ttf" id="1_02i04"]
+[ext_resource type="Script" path="res://Scenes/ui/casting_text_child.gd" id="1_ks5xb"]
+
+[node name="casting_text_child" type="Label"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_02i04")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_ks5xb")

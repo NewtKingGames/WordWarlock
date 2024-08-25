@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bata6nhuga2rj"]
+
+[ext_resource type="Script" path="res://Scenes/ui/casting_text_parent.gd" id="1_s5v7x"]
+[ext_resource type="Texture2D" uid="uid://llg71j7vd7lw" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button.png" id="2_e0cn8"]
+
+[node name="CastingTextParent" type="Node2D"]
+script = ExtResource("1_s5v7x")
+
+[node name="DELETE ME" type="Camera2D" parent="."]
+zoom = Vector2(1.4, 1.4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -52)
+scale = Vector2(3.68537, 3.68537)
+texture = ExtResource("2_e0cn8")
