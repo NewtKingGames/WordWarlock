@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=67 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/States/player_shot_spell.gd" id="9_y8sb8"]
 [ext_resource type="Script" path="res://Scenes/player/aiming_line.gd" id="12_en663"]
 [ext_resource type="AudioStream" uid="uid://86bl4nq6ymup" path="res://Sounds/possible_damage_two.wav" id="13_0r2mo"]
+[ext_resource type="Script" path="res://Scenes/player/casting_text.gd" id="14_g337k"]
 [ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="14_x12ab"]
 [ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="15_7do8n"]
 [ext_resource type="AudioStream" uid="uid://bjvichsn4626q" path="res://Sounds/typewriterthree.mp3" id="16_303c8"]
@@ -22,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://cf4u8shsrf0pr" path="res://Sounds/error_sound.mp3" id="18_lfn45"]
 [ext_resource type="PackedScene" uid="uid://crdvx4y4114mv" path="res://Scenes/ui/keyboard/keyboard.tscn" id="19_hd66t"]
 [ext_resource type="PackedScene" uid="uid://bi6b5ug46r344" path="res://Scenes/ui/aim_lock_on_reticle.tscn" id="22_7irsn"]
+[ext_resource type="PackedScene" uid="uid://bata6nhuga2rj" path="res://Scenes/ui/casting_text_parent.tscn" id="24_msl8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_30it8"]
 shader = ExtResource("1_fvxyb")
@@ -444,6 +446,7 @@ theme_override_fonts/font = ExtResource("8_n785n")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("14_g337k")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-1, -1.75)
@@ -520,6 +523,11 @@ wait_time = 0.3
 one_shot = true
 
 [node name="AimLockOnReticle" parent="." instance=ExtResource("22_7irsn")]
+
+[node name="CastingTextParent" parent="." instance=ExtResource("24_msl8w")]
+z_index = 1
+position = Vector2(0, -34.25)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="CastSpell" from="StateMachine/Cast" to="." method="_on_cast_cast_spell"]

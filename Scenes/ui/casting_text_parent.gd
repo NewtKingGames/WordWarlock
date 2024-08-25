@@ -1,7 +1,8 @@
-extends Node2D
+class_name CastingTextParent extends Node2D
 
 var child_text_scene: PackedScene = preload("res://Scenes/ui/casting_text_child.tscn")
 var letter_position_offset: float = 20
+var current_string: String = ""
 
 
 # DELETE ME
@@ -12,7 +13,7 @@ var letter_position_offset: float = 20
 	##add_letter("B")
 	##await get_tree().create_timer(0.5).timeout
 	##delete_letter()
-# DELETE ME
+ #DELETE ME
 #func _process(delta):
 	#if Input.is_action_just_pressed("left"):
 		#add_letter("A")
@@ -22,6 +23,7 @@ var letter_position_offset: float = 20
 		#delete_letter()
 
 func add_letter(letter: String):
+	current_string = current_string + letter
 	slide_all_previous_letters_left()
 	print("adding child")
 	var child_text_node: CastingTextChild = child_text_scene.instantiate()
@@ -41,6 +43,9 @@ func slide_all_previous_letters_right():
 			letter.other_letter_removed_effect()
 
 func delete_letter():
+	if current_string.length() == 0:
+		return
+	current_string = current_string.left(current_string.length() - 1)
 	var total_children: int = get_child_count()
 	if total_children == 0:
 		print("skipping delete no children")
