@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=64 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -9,12 +9,10 @@
 [ext_resource type="Script" path="res://Scripts/States/cast.gd" id="5_lstil"]
 [ext_resource type="Script" path="res://Scripts/States/damage.gd" id="6_e403r"]
 [ext_resource type="Script" path="res://Scripts/States/death.gd" id="7_ntvts"]
-[ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="8_n785n"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
 [ext_resource type="Script" path="res://Scripts/States/player_shot_spell.gd" id="9_y8sb8"]
 [ext_resource type="Script" path="res://Scenes/player/aiming_line.gd" id="12_en663"]
 [ext_resource type="AudioStream" uid="uid://86bl4nq6ymup" path="res://Sounds/possible_damage_two.wav" id="13_0r2mo"]
-[ext_resource type="Script" path="res://Scenes/player/casting_text.gd" id="14_g337k"]
 [ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="14_x12ab"]
 [ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="15_7do8n"]
 [ext_resource type="AudioStream" uid="uid://bjvichsn4626q" path="res://Sounds/typewriterthree.mp3" id="16_303c8"]
@@ -290,8 +288,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Theme" id="Theme_oa0th"]
-
 [sub_resource type="Animation" id="Animation_p2rtu"]
 length = 0.001
 tracks/0/type = "value"
@@ -433,20 +429,6 @@ script = ExtResource("9_y8sb8")
 [node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]
 position = Vector2(7.25, 30.75)
 scale = Vector2(0.943525, 0.943525)
-
-[node name="CastingText" type="Label" parent="."]
-z_index = 1
-offset_left = -34.0
-offset_top = -33.75
-offset_right = 36.0
-offset_bottom = -10.75
-theme = SubResource("Theme_oa0th")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("8_n785n")
-theme_override_font_sizes/font_size = 8
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("14_g337k")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-1, -1.75)
