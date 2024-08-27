@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://blv5bb1hvo01r"]
+[gd_scene load_steps=23 format=3 uid="uid://blv5bb1hvo01r"]
 
 [ext_resource type="Texture2D" uid="uid://0p2yrl5gmio3" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_fullyopen.png" id="1_bxvkj"]
+[ext_resource type="Script" path="res://Scenes/objects/door_with_lock.gd" id="1_oseif"]
 [ext_resource type="Texture2D" uid="uid://hwxjimasjogc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_spritesheet.png" id="1_ufa6v"]
+[ext_resource type="PackedScene" uid="uid://d08xojooaxuao" path="res://Scenes/levels/test_level.tscn" id="2_lt621"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l45io"]
 atlas = ExtResource("1_ufa6v")
@@ -111,14 +113,53 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xg57y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_bxvkj")
 }],
 "loop": false,
 "name": &"unlock",
 "speed": 15.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55u0t"]
+size = Vector2(20, 17.9685)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x428r"]
+size = Vector2(19, 12.5011)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o68jy"]
+
 [node name="DoorWithLock" type="Node2D"]
+script = ExtResource("1_oseif")
+scene_to_take_player_to = ExtResource("2_lt621")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xma44")
-animation = &"open"
+animation = &"unlock"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1.65707)
+scale = Vector2(1.5323, 1.63141)
+shape = SubResource("RectangleShape2D_55u0t")
+
+[node name="TeleportArea" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea"]
+position = Vector2(-1.77636e-15, -11)
+scale = Vector2(1.15512, 1.61631)
+shape = SubResource("RectangleShape2D_x428r")
+debug_color = Color(0.516114, 0.569848, 0.241732, 0.42)
+
+[node name="WalkUpArea" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WalkUpArea"]
+scale = Vector2(7.40086, 6.33789)
+shape = SubResource("CircleShape2D_o68jy")
+debug_color = Color(0.695632, 0.492149, 0.138589, 0.42)

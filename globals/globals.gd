@@ -25,8 +25,9 @@ var player_slowdown_pool: float = 100:
 
 
 const player_base_walk_speed: float = 400
-var player_walk_speed: float = player_base_walk_speed:
+@export var player_walk_speed: float = player_base_walk_speed:
 	set(value):
+		print(value)
 		if value > player_base_walk_speed:
 			print("player is speeding up - add some fancy effects here")
 		player_walk_speed = value

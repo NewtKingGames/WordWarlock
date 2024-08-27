@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwl6j83q73opo"]
+
+[ext_resource type="Script" path="res://Scenes/ui/canvas_layer.gd" id="1_dtq2b"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_dtq2b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(51.337, 28.274)
+color = Color(0, 0, 0, 0)

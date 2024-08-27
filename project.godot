@@ -10,15 +10,16 @@ config_version=5
 
 [application]
 
-config/name="WordWarlock"
+config/name="Wordlock"
 run/main_scene="res://Scenes/levels/test_level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Sprites/wordlock cover.png"
 
 [autoload]
 
 Globals="*res://globals/globals.gd"
 GlobalSpells="*res://globals/global_spells.gd"
+GlobalCanvasLayer="*res://Scenes/ui/canvas_layer.tscn"
 
 [debug]
 
