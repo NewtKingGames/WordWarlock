@@ -4,21 +4,34 @@ extends Node2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var teleport_area: Area2D = $TeleportArea
 @onready var walk_up_area: Area2D = $WalkUpArea
+@onready var unlock_label: Label = $UnlockLabel
+@export var unlock_text: String = "KNOCK"
 var is_door_opened: bool = false
 
 func _ready():
+	unlock_label.text = unlock_text
 	teleport_area.connect("body_entered", on_teleport_area_body_entered)
 	walk_up_area.connect("body_entered", on_walk_up_area_body_entered)
+	walk_up_area.connect("body_exited", on_walk_up_area_body_exited)
+	get_tree().get_first_node_in_group("player").connect("spell_string_cast", on_player_spell_cast_string)
+
+func on_player_spell_cast_string(spell_text: String):
+	if unlock_label.visible and unlock_text.to_upper() == spell_text.to_upper():
+		lower_door()
 
 func on_teleport_area_body_entered(body: Node2D):
 	take_player_to_new_scene()
 	
 func on_walk_up_area_body_entered(body: Node2D):
-	lower_door()
+	unlock_label.visible = true
+	# Play effects for the text
 
+func on_walk_up_area_body_exited(body: Node2D):
+	unlock_label.visible = false
 
 func lower_door():
 	if not is_door_opened:
+		unlock_label.visible = false
 		is_door_opened = true
 		$StaticBody2D.queue_free()
 		animated_sprite_2d.play("unlock")
@@ -26,4 +39,3 @@ func lower_door():
 func take_player_to_new_scene():
 	if scene_to_take_player_to:
 		GlobalCanvasLayer.change_scene(scene_to_take_player_to)
-		#get_tree().change_scene_to_packed(scene_to_take_player_to)

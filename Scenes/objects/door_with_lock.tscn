@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://blv5bb1hvo01r"]
+[gd_scene load_steps=24 format=3 uid="uid://blv5bb1hvo01r"]
 
 [ext_resource type="Texture2D" uid="uid://0p2yrl5gmio3" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_fullyopen.png" id="1_bxvkj"]
 [ext_resource type="Script" path="res://Scenes/objects/door_with_lock.gd" id="1_oseif"]
 [ext_resource type="Texture2D" uid="uid://hwxjimasjogc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_spritesheet.png" id="1_ufa6v"]
 [ext_resource type="PackedScene" uid="uid://d08xojooaxuao" path="res://Scenes/levels/test_level.tscn" id="2_lt621"]
+[ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="5_g7qpq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l45io"]
 atlas = ExtResource("1_ufa6v")
@@ -163,3 +164,17 @@ collision_layer = 32
 scale = Vector2(7.40086, 6.33789)
 shape = SubResource("CircleShape2D_o68jy")
 debug_color = Color(0.695632, 0.492149, 0.138589, 0.42)
+
+[node name="UnlockLabel" type="Label" parent="."]
+visible = false
+z_index = 5
+offset_left = -25.0
+offset_top = -4.0
+offset_right = 45.0
+offset_bottom = 19.0
+scale = Vector2(0.714525, 0.714525)
+theme_override_fonts/font = ExtResource("5_g7qpq")
+text = "KNOCK
+"
+horizontal_alignment = 1
+vertical_alignment = 1
