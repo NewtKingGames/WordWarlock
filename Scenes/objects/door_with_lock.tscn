@@ -134,6 +134,7 @@ size = Vector2(19, 12.5011)
 [node name="DoorWithLock" type="Node2D"]
 script = ExtResource("1_oseif")
 scene_to_take_player_to = ExtResource("2_lt621")
+unlock_text = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xma44")

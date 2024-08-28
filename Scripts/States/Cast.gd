@@ -1,7 +1,4 @@
 extends State
-
-signal CastSpell(spell_string: String)
-signal cast_spell_changed(is_state_active: bool)
 # Catch all signal for entering and exiting the cast state. If exiting it will include the String if the player attempted to cast, and if the player was successful it will include the spell scene
 # TODO how to handle counter spells?
 # TODO Next step is to creat an actual response object from the Cast state to give me more flexibility, instead of passing 3 variables around especially because you can't type hint the signals correctly
@@ -30,7 +27,6 @@ func _ready():
 	keyboard = get_tree().get_first_node_in_group("keyboard")
 
 func Enter():
-	cast_spell_changed.emit(true)
 	# new signal
 	cast_spell_state_changed.emit(true, null, null)
 	character_animated_sprite_2d.play("cast_spell")
@@ -43,17 +39,16 @@ func Exit():
 	var casted_spell = String(cast_string)
 	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)
 	cast_spell_state_changed.emit(false, casted_spell, spell_scene)
-	cast_spell_changed.emit(false)
 	
 func Update(_delta: float):
 	# Player Casting Spell
 	if Input.is_action_just_pressed("enter"):
-		var casted_spell = String(cast_string)
 		# TODO - this copying of cast_string might be unneccessary
-		CastSpell.emit(casted_spell)
+		var casted_spell = String(cast_string)
 		Transitioned.emit(self, "idle")
 	# Player Cancelling Spell
 	elif Input.is_key_pressed(KEY_ESCAPE):
+		cast_string = ""
 		Transitioned.emit(self, "idle")
 
 func Handle_Input(_event: InputEvent):

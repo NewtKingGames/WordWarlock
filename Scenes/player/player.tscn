@@ -513,8 +513,6 @@ position = Vector2(0, -34.25)
 scale = Vector2(0.5, 0.5)
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
-[connection signal="CastSpell" from="StateMachine/Cast" to="." method="_on_cast_cast_spell"]
-[connection signal="cast_spell_changed" from="StateMachine/Cast" to="." method="_on_spell_caster_state_changed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="." method="_on_cast_spell_state_changed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="Keyboard" method="_on_cast_spell_state_changed"]
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

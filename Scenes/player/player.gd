@@ -200,14 +200,18 @@ func _on_invulnerability_timer_timeout():
 func _on_stunlock_timer_timeout():
 	taking_damage = false
 
-# This signal is NOT the signal containing the actual spell. This is just a signal indicating the player hit enter on text they typed
-func _on_cast_cast_spell(string: String):
-	spell_string_cast.emit(string)
+## This signal is NOT the signal containing the actual spell. This is just a signal indicating the player hit enter on text they typed
+#func _on_cast_cast_spell(string: String):
+	#spell_string_cast.emit(string)
 
 
 # Bit of a bummer, I can't type hint typed_string and spell_scene because nulling them out doesn't work. Is it an issue with typed Scene?
 # TODO - the solution here is to create a custom "Object" which is simply a payload for all of these values which does support nulling these out akin to an API contract
 func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
+	# Emit spell_string_cast if we left the casting state with some kind of spell entered
+	if not is_casting and typed_string and typed_string != "":
+		spell_string_cast.emit(typed_string)
+
 	is_player_casting = is_casting
 	# Handling state entered
 	if is_casting:
