@@ -158,6 +158,7 @@ shape = SubResource("RectangleShape2D_x428r")
 debug_color = Color(0.516114, 0.569848, 0.241732, 0.42)
 
 [node name="WalkUpArea" type="Area2D" parent="."]
+scale = Vector2(0.821456, 0.821456)
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WalkUpArea"]
@@ -168,11 +169,11 @@ debug_color = Color(0.695632, 0.492149, 0.138589, 0.42)
 [node name="UnlockLabel" type="Label" parent="."]
 visible = false
 z_index = 5
-offset_left = -25.0
-offset_top = -4.0
-offset_right = 45.0
-offset_bottom = 19.0
-scale = Vector2(0.714525, 0.714525)
+offset_left = -21.0
+offset_top = -2.0
+offset_right = 49.0
+offset_bottom = 21.0
+scale = Vector2(0.620064, 0.620064)
 theme_override_fonts/font = ExtResource("5_g7qpq")
 text = "KNOCK
 "
