@@ -68,9 +68,7 @@ var closest_enemies_in_range: Array[EnemyClass] = []
 # 3. if the index is >= size of closest enemies we set this to 0
 var lock_on_index: int = 0
 var is_manual_lock_on_set: bool = false
-##
-## TODO!!! The player can eject themself out of the cast state when the next queued spell shoots, it would be nice to prevent this from happening! 
-##
+
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
 
@@ -186,6 +184,9 @@ func hit(damage_number: float, damage_direction: Vector2):
 			state_machine.on_outside_transition("death")
 
 func shoot_queued_spell():
+	# Add check for the player not being in the cast state:
+	if is_player_casting:
+		return
 	spell_shot.emit(queued_spell)
 	state_machine.on_outside_transition("shotspell")
 	queued_spell_ammo -= 1
@@ -307,18 +308,13 @@ func sort_asc_distance(a: Node2D, b: Node2D):
 		return true
 	return false
 
-# TODO - This isn't working correctly all the time... You're still hitting collisions? 
-# I think it has to do with your start and end of the raycast, see if you can print it?
 func is_in_line_of_sight(object: Node2D):
 	var space_state = get_world_2d().direct_space_state
 	var line_of_sight_query = PhysicsRayQueryParameters2D.create(global_position, object.global_position)
-	#line_of_sight_query.set_collide_with_areas(true)
 	var result: Dictionary = space_state.intersect_ray(line_of_sight_query)
 	if result:
 		if result.has("collider"):
 			if is_instance_of(result["collider"], TileMap):
-				#print("hit a collider?")
-				#print(result)
 				return false
 	return true
 
