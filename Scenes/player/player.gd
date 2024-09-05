@@ -133,10 +133,6 @@ func _physics_process(delta):
 		var index_of_lock_on: int = closest_enemies_in_range.find(locked_on_enemy)
 		if index_of_lock_on != -1:
 			locked_on_enemy = closest_enemies_in_range[(index_of_lock_on+1)% closest_enemies_in_range.size()]
-		#lock_on_index = (lock_on_index + 1) %  closest_enemies_in_range.size()# TODO - should this be remainder size of enemies?
-		#if closest_enemies_in_range.size() > lock_on_index:
-			#print(lock_on_index)
-			#locked_on_enemy = closest_enemies_in_range[lock_on_index]
 	aim_lock_on_reticle.set_target_node(locked_on_enemy)
 	
 	if Globals.cast_spells_with_mouse:
@@ -246,9 +242,7 @@ func autocast_spell():
 		can_cast_again = false
 		var timer: SceneTreeTimer = get_tree().create_timer(queued_spell.rate_of_fire)
 		timer.connect("timeout", on_fire_rate_timeout)
-		#var closest_enemy: EnemyClass = get_nearest_enemy_in_range()
 		var closest_enemy = locked_on_enemy
-		print(locked_on_enemy)
 		# TODO - handle null scenario
 		var spell_target: Vector2
 		if closest_enemy:
@@ -271,29 +265,12 @@ func autocast_spell():
 func on_fire_rate_timeout():
 	can_cast_again = true
 
-# according to the docs this might not be the most accurate way to do this, consider using signals
-func get_nearest_enemy_in_range() -> EnemyClass:
-	var overlapping_bodies: Array[Node2D] = auto_aim_attack_area.get_overlapping_bodies()
-	var closest_enemy: EnemyClass = null
-	for over_lapping_body: Node2D in overlapping_bodies:
-		if over_lapping_body is EnemyClass:
-			# Check if the enemy is within a line of sight of the player
-			if not is_in_line_of_sight(over_lapping_body):
-				continue
-			if closest_enemy:
-				if position.distance_to(closest_enemy.global_position) > position.distance_to(over_lapping_body.global_position):
-					closest_enemy = over_lapping_body
-			else:
-				closest_enemy = over_lapping_body
-	return closest_enemy
-
 func get_nearest_enemies_in_range_in_order() -> Array[EnemyClass]:
 	var overlapping_bodies: Array[Node2D] = auto_aim_attack_area.get_overlapping_bodies()
 	var enemies_in_range: Array[EnemyClass] = []
 	var enemy_count_in_range: int = 0
 	for over_lapping_body: Node2D in overlapping_bodies:
 		if over_lapping_body is EnemyClass:
-			# Check if the enemy is within a line of sight of the player
 			if not is_in_line_of_sight(over_lapping_body):
 				continue
 			enemies_in_range.append(over_lapping_body)
@@ -318,7 +295,7 @@ func is_in_line_of_sight(object: Node2D):
 				return false
 	return true
 
-# Slow down control code - probably should be moved to it's own scene
+# Slowdown control code - probably should be moved to it's own scene
 func slowdown_effect_start():
 	# Prevent duplicate effects from playing
 	if Engine.time_scale == Globals.engine_slowdown_magnitude:
@@ -330,7 +307,7 @@ func slowdown_effect_start():
 	slowdown_effect_entered.emit()
 
 func slowdown_effect_stop():
-	# Prevent duplicate effects from playing
+	# Prevent duplicate slowdown effects from playing
 	if Engine.time_scale == 1.0:
 		return
 	slow_mo_sound_enter.stop()
