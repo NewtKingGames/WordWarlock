@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu65i2la36w3s"]
+
+[ext_resource type="Script" path="res://Scenes/ui/spell_stack.gd" id="1_b2o8c"]
+
+[node name="SpellStack" type="Node2D"]
+script = ExtResource("1_b2o8c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)

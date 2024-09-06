@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://xiokyov6l160"]
+
+[ext_resource type="Script" path="res://Scenes/ui/spell_stack_word.gd" id="1_08w7k"]
+[ext_resource type="FontFile" uid="uid://davdrvjvam6n" path="res://Font/PixelOperator8-Bold.ttf" id="1_bq0tu"]
+
+[node name="SpellStackWord" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_bq0tu")
+theme_override_font_sizes/font_size = 16
+script = ExtResource("1_08w7k")
