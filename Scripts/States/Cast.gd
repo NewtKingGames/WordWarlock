@@ -61,7 +61,7 @@ func Handle_Input(_event: InputEvent):
 				casting_text_parent.add_letter(event_string)
 				# Randomize typing clip and pitch
 				var typing_noise_index: int = rng.randi_range(0,2)
-				typing_noises[typing_noise_index].pitch_scale = rng.randf_range(.93, 1.08)
+				typing_noises[typing_noise_index].pitch_scale = rng.randf_range(.86, 1.00)
 				typing_noises[typing_noise_index].play()
 			else:
 				typing_noises[3].play()

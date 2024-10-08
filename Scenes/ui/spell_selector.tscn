@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfe2dxet4lf1v"]
+
+[ext_resource type="Script" path="res://spell_selector.gd" id="1_0bnuv"]
+
+[node name="SpellSelector" type="Node2D"]
+script = ExtResource("1_0bnuv")

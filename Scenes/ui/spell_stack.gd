@@ -19,14 +19,16 @@ var spell_stack_word_children: Array[SpellStackWord] = []
 
 # Test method
 func _ready():
-	var list_of_words: Array[String] = ["burn", "ember", "flame"]
-	set_stack_word_strings(list_of_words)
+	for node in get_children():
+		node.queue_free()
+	#var list_of_words: Array[String] = ["burn", "ember", "flame"]
+	#set_stack_word_strings(list_of_words)
 
 
-func _process(delta):
-	# Going to do some testing
-	if Input.is_action_just_pressed("backspace"):
-		on_player_casted_spell(spell_stack_word_children[0].word)
+#func _process(delta):
+	## Going to do some testing
+	#if Input.is_action_just_pressed("backspace"):
+		#on_player_casted_spell(spell_stack_word_children[0].word)
 
 # Let's say that the max amount of words that the max amount of words is 6 that means that max height is 120
 
@@ -78,7 +80,7 @@ func generate_spell_stack_word_opacity(index: int) -> Color:
 	return Color(starting_color.r, starting_color.g, starting_color.b, 1 - (0.4*index))
 
 func on_player_casted_spell(word: String):
-	if word == spell_stack_word_children[0].word:
+	if word.to_upper() == spell_stack_word_children[0].word.to_upper():
 		pop_spell()
 	# TODO - add some spell miss?
 
@@ -104,3 +106,6 @@ func spell_popped_effect(word: SpellStackWord):
 
 func stack_emptied():
 	print("stack emptied time to do something!!")
+
+func has_spell_stack() -> bool:
+	return spell_stack_word_children.size() > 0

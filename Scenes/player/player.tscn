@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=66 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -21,6 +21,8 @@
 [ext_resource type="AudioStream" uid="uid://cf4u8shsrf0pr" path="res://Sounds/error_sound.mp3" id="18_lfn45"]
 [ext_resource type="PackedScene" uid="uid://crdvx4y4114mv" path="res://Scenes/ui/keyboard/keyboard.tscn" id="19_hd66t"]
 [ext_resource type="PackedScene" uid="uid://bi6b5ug46r344" path="res://Scenes/ui/aim_lock_on_reticle.tscn" id="22_7irsn"]
+[ext_resource type="PackedScene" uid="uid://cu65i2la36w3s" path="res://Scenes/ui/spell_stack.tscn" id="23_edok1"]
+[ext_resource type="Script" path="res://Scenes/player/spell_stack_connector.gd" id="23_pwhfy"]
 [ext_resource type="PackedScene" uid="uid://bata6nhuga2rj" path="res://Scenes/ui/casting_text_parent.tscn" id="24_msl8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_30it8"]
@@ -509,8 +511,16 @@ one_shot = true
 
 [node name="CastingTextParent" parent="." instance=ExtResource("24_msl8w")]
 z_index = 1
-position = Vector2(0, -34.25)
+position = Vector2(0, -27.5)
 scale = Vector2(0.5, 0.5)
+
+[node name="SpellStackConnector" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(-18, -42.25)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("23_pwhfy")
+
+[node name="SpellStack" parent="SpellStackConnector" instance=ExtResource("23_edok1")]
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="." method="_on_cast_spell_state_changed"]

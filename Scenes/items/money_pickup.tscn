@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpckays5xwbnl"]
+
+[ext_resource type="Texture2D" uid="uid://xq2ro8xu8tnl" path="res://Sprites/pixelswitches.png" id="1_ogjjr"]
+
+[node name="MoneyPickup" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="VisibleNodes" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="VisibleNodes"]
+texture = ExtResource("1_ogjjr")
