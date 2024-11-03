@@ -47,3 +47,10 @@ func get_known_spell_for_string(input: String) -> Object:
 	if is_string_known_spell(input.to_upper()):
 		return known_spells_classes[input.to_upper()]
 	return null
+
+# TODO - you could balance this alot to allow for balance
+func get_words_for_spell(spell: Spell) -> Array[String]:
+	var array: Array[String] = []
+	for i in range(3):
+		array.append(known_spell_random_words[spell.spell_name].pick_random())
+	return array

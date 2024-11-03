@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://xiokyov6l160"]
+
+[ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="1_cjmfa"]
+[ext_resource type="Script" path="res://Scenes/ui/spell_stack/spell_stack_word.gd" id="2_v2wrt"]
+
+[node name="SpellStackWord" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_cjmfa")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_v2wrt")

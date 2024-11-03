@@ -20,6 +20,7 @@ config/icon="res://Sprites/wordlock cover.png"
 Globals="*res://globals/globals.gd"
 GlobalSpells="*res://globals/global_spells.gd"
 GlobalCanvasLayer="*res://Scenes/ui/canvas_layer.tscn"
+Events="*res://globals/events.gd"
 
 [debug]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=9 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_projectiles.gd" id="1_pvngr"]
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
 [ext_resource type="Script" path="res://Scenes/character_projectiles.gd" id="3_av28w"]
 [ext_resource type="PackedScene" uid="uid://dd070ctaor48g" path="res://Scenes/camera_2d.tscn" id="6_cqk03"]
+[ext_resource type="PackedScene" uid="uid://dy455infn6fqv" path="res://Scenes/ui/spell_stack/spell_stack_parent.tscn" id="6_w4t3b"]
 [ext_resource type="PackedScene" uid="uid://cwl6j83q73opo" path="res://Scenes/ui/canvas_layer.tscn" id="7_4keth"]
 [ext_resource type="AudioStream" uid="uid://ck2gicusjd7y5" path="res://Sounds/Songs/Game music - Wordlock Battle.mp3" id="7_ypf81"]
 [ext_resource type="PackedScene" uid="uid://b4n672j7n470k" path="res://Scenes/ui/player_ui.tscn" id="12_p2vga"]
@@ -28,6 +29,8 @@ position = Vector2(-0.5, 1)
 stream = ExtResource("7_ypf81")
 volume_db = -6.0
 autoplay = true
+
+[node name="SpellStackParent" parent="Player" instance=ExtResource("6_w4t3b")]
 
 [node name="DarkeningLight" type="DirectionalLight2D" parent="."]
 position = Vector2(5, 244)

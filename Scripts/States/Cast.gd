@@ -75,6 +75,7 @@ func Handle_Input(_event: InputEvent):
 			cast_string = cast_string.left(cast_string.length() - 1)
 			casting_text_parent.delete_letter()
 			typing_noises[rng.randi_range(0,2)].play()
+		Events.current_string_typed.emit(cast_string)
 		if GlobalSpells.is_string_known_spell(cast_string):
 			var spell = GlobalSpells.get_known_spell_for_string(cast_string)
 			casting_text_parent.set_modulate(spell.get_spell_color())
