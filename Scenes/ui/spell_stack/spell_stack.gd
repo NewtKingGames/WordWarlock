@@ -48,6 +48,8 @@ func init(spell: Spell) -> void:
 func initialize_stack_word_children() -> void:
 	# Delete any existing nodes because these are just test values
 	for node in get_children():
+		print("deleting these nodes")
+		print(node)
 		node.queue_free()
 	#spell_stack_word_strings = words
 	#for word in spell_stack_word_strings:
@@ -89,7 +91,7 @@ func slide_spell_stack_word(spell_stack_word: SpellStackWord, position: Vector2,
 
 # Given the index of the word return the position the element should go
 func generate_spell_stack_word_position(index: int) -> Vector2:
-	return Vector2(0, index*vertical_offset)
+	return Vector2(spell_stack_word_children[index].position.x, index*vertical_offset)
 
 func generate_spell_stack_word_opacity(index: int) -> Color:
 	var starting_color: Color = spell_stack_word_children[index].modulate

@@ -31,6 +31,7 @@ volume_db = -6.0
 autoplay = true
 
 [node name="SpellStackParent" parent="Player" instance=ExtResource("6_w4t3b")]
+position = Vector2(0, -44.25)
 
 [node name="DarkeningLight" type="DirectionalLight2D" parent="."]
 position = Vector2(5, 244)

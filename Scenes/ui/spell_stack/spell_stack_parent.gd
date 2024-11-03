@@ -8,6 +8,8 @@ const FIREBALL = preload("res://Scenes/projectiles/fireball.tscn")
 #var spell_stack_children: Array[SpellStack] = []
 
 func _ready() -> void:
+	for child in get_children():
+		child.queue_free()
 	# Todo subscribe to relevant signals
 	Events.current_string_typed.connect(_on_player_typed_string)
 	# TODO - delete
