@@ -120,13 +120,15 @@ func spell_popped_effect(word: SpellStackWord):
 	var tween_position: Tween = create_tween()
 	var tween_modulate: Tween = create_tween()
 	tween_modulate.tween_property(word, "modulate", Color(1,1,1,0), 0.25).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	await tween_position.tween_property(
+	tween_position.tween_property(
 		word,
 		"position",
 		word.position + Vector2(0, 20),
 	 	0.25
-	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).finished
-	word.queue_free()
+	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).finished.connect(
+		func():
+			word.queue_free()
+	)
 
 func stack_emptied():
 	print("stack emptied time to do something!!")
