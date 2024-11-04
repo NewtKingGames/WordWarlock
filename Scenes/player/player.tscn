@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://Scripts/States/death.gd" id="7_ntvts"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="9_h1ujj"]
 [ext_resource type="Script" path="res://Scripts/States/player_shot_spell.gd" id="9_y8sb8"]
-[ext_resource type="Script" path="res://Scenes/player/aiming_line.gd" id="12_en663"]
 [ext_resource type="AudioStream" uid="uid://86bl4nq6ymup" path="res://Sounds/possible_damage_two.wav" id="13_0r2mo"]
 [ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="14_x12ab"]
 [ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="15_7do8n"]
@@ -288,6 +287,15 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_1nlkr"]
+script/source = "extends Line2D
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	remove_point(1)
+	add_point(get_local_mouse_position())
+"
+
 [sub_resource type="Animation" id="Animation_p2rtu"]
 length = 0.001
 tracks/0/type = "value"
@@ -402,7 +410,7 @@ position = Vector2(0, 0.25)
 points = PackedVector2Array(0, 0)
 width = 1.0
 default_color = Color(1, 0.415686, 0.196078, 1)
-script = ExtResource("12_en663")
+script = SubResource("GDScript_1nlkr")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_435rg")

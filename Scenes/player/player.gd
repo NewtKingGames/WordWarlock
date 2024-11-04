@@ -71,6 +71,8 @@ var is_manual_lock_on_set: bool = false
 
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
+	# This is part of the new flow!
+	Events.spell_casted.connect(_on_handle_spell)
 
 func _process(delta):
 	# Reconsider choice to rely on global variables
@@ -215,18 +217,26 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 		slowdown_effect_stop()
 		# TODO handle the different combinations of the player leaving the state
 		if spell_scene:
-			queued_spell_scene = spell_scene
-			queued_spell = spell_scene.instantiate()
-			# Effect spells are immediately cast after typing
-			if is_instance_of(queued_spell, EffectSpell):
-				spell_shot.emit(queued_spell)
-				queued_spell = null
-				return 
-			# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
-			if "ammo" in queued_spell:
-				queued_spell_ammo = queued_spell.ammo
-			else:
-				queued_spell_ammo = 1
+			equip_and_cast_spell_scene(spell_scene)
+
+func equip_and_cast_spell_scene(spell_scene: PackedScene) -> void:
+	queued_spell_scene = spell_scene
+	queued_spell = spell_scene.instantiate()
+	# Effect spells are immediately cast after typing
+	if is_instance_of(queued_spell, EffectSpell):
+		spell_shot.emit(queued_spell)
+		queued_spell = null
+		return 
+	# Some spells have 'ammo' allowing the spell to be cast multiple times in a row
+	if "ammo" in queued_spell:
+		queued_spell_ammo = queued_spell.ammo
+	else:
+		queued_spell_ammo = 1
+
+
+## Holdover function to help get new code working without refactoring the entire spell resource
+func _on_handle_spell(spell: Spell) -> void:
+	equip_and_cast_spell_scene(GlobalSpells.get_spell_scene_for_string(spell.spell_name))
 
 func disable_random_key() -> KeyboardLetter:
 	return keyboard.disable_random_key()

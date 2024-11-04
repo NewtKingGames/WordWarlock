@@ -30,6 +30,7 @@ func remove_spell_stack(spell_stack: SpellStack) -> void:
 	
 	
 func _on_child_spell_stack_completed(spell_stack: SpellStack) -> void:
+	Events.spell_casted.emit(spell_stack.spell)
 	remove_spell_stack(spell_stack)
 	# TODO - emit the spell effect
 

@@ -9,3 +9,7 @@ signal player_exited_casting_state
 # Typing-related signals
 signal current_string_typed(string: String)
 signal string_entered(string: String)
+
+
+# Spell-related signals
+signal spell_casted(spell: Spell)
