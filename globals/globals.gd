@@ -10,6 +10,8 @@ signal player_slowdown_pool_change(player_slowdown_pool: float)
 var cast_spells_with_mouse: bool = false
 
 var engine_slowdown_magnitude: float = 0.25
+# Convenience value to allow me to have animations that speed up as necessary when we're in the slow down effect
+var time_scale_offset: float = 1 
 
 var is_player_casting: bool = false
 
@@ -17,11 +19,15 @@ func _ready() -> void:
 	Events.player_entered_casting_state.connect(_on_player_entered_casting)
 	Events.player_exited_casting_state.connect(_on_player_exited_casting)
 
+
+# TODO - move engine time scale logic here
 func _on_player_entered_casting() -> void:
 	is_player_casting = true
+	time_scale_offset = engine_slowdown_magnitude
 
 func _on_player_exited_casting() -> void:
 	is_player_casting = false
+	time_scale_offset = 1
 
 # TODO would this be easier if the player owned all of it?
 var player_slowdown_pool: float = 100:

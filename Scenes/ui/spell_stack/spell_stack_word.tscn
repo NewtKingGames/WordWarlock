@@ -17,3 +17,4 @@ text = "Word"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_v2wrt")
+HIGHLIGHT_COLOR = Color(1, 0.800413, 0.332239, 1)

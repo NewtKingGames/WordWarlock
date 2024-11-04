@@ -48,9 +48,8 @@ func get_known_spell_for_string(input: String) -> Object:
 		return known_spells_classes[input.to_upper()]
 	return null
 
-# TODO - you could balance this alot to allow for balance
-func get_words_for_spell(spell: Spell) -> Array[String]:
+func get_words_for_spell(spell: Spell, num_words) -> Array[String]:
 	var array: Array[String] = []
-	for i in range(3):
+	for i in range(num_words):
 		array.append(known_spell_random_words[spell.spell_name].pick_random())
 	return array
