@@ -2,8 +2,6 @@ class_name SpellStackParent
 extends Node2D
 
 const SPELL_STACK_SCENE: PackedScene = preload("res://Scenes/ui/spell_stack/spell_stack.tscn")
-# TODO - delete
-const FIREBALL = preload("res://Scenes/projectiles/fireball.tscn")
 # See if you can get away with not using this and instead just use get_children/get_child_count
 #var spell_stack_children: Array[SpellStack] = []
 
@@ -12,10 +10,28 @@ func _ready() -> void:
 		child.queue_free()
 	# Todo subscribe to relevant signals
 	Events.current_string_typed.connect(_on_player_typed_string)
-	# TODO - delete
-	var fireball: Fireball = FIREBALL.instantiate()
-	add_spell_stack(fireball)
+	# The spell stack parent can be responsible for initializing a spell stack when the player equips a spell?
+	# Or alternatively when they press enter with one selected? Coding both to find which is more fun
+	#SpellSelector.player_equipped_spell.connect(_on_player_equipped_spell)
+	Events.player_entered_casting_state.connect(_on_player_entered_casting_state)
+	Events.player_exited_casting_state.connect(_on_player_exited_casting_state)
 
+func _on_player_equipped_spell() -> void:
+	if get_child_count() > 0:
+		return
+	add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
+
+func _on_player_entered_casting_state() -> void:
+	if get_child_count() > 0:
+		return
+	add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
+
+func _on_player_exited_casting_state() -> void:
+	clear_stacks()
+
+func clear_stacks() -> void:
+	for child in get_children():
+		child.queue_free()
 
 func add_spell_stack(spell: Spell) -> void:
 	var spell_stack_child = SPELL_STACK_SCENE.instantiate()

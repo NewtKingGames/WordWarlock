@@ -21,6 +21,7 @@ Globals="*res://globals/globals.gd"
 GlobalSpells="*res://globals/global_spells.gd"
 GlobalCanvasLayer="*res://Scenes/ui/canvas_layer.tscn"
 Events="*res://globals/events.gd"
+SpellSelector="*res://Scenes/ui/spell_selector.tscn"
 
 [debug]
 
@@ -95,7 +96,13 @@ equip_spell_two={
 }
 equip_spell_three={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":76,"key_label":0,"unicode":108,"echo":false,"script":null)
+]
+}
+equip_spell_four={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":59,"key_label":0,"unicode":59,"echo":false,"script":null)
+]
 }
 
 [layer_names]

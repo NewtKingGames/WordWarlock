@@ -4,7 +4,7 @@ extends Node
 var enemy_spell_shield_words: Array[String] = ["Disarm", "Pierce", "Break", "Shatter", "Dismantle", "Destroy", "Demolish", "Relinquish"]
 
 # TODO see if you can get enums to work or define the enum in the spell as well to avoid hard coded strings?
-enum Spells {FIREBALL, ICE_SHIELD, HASTE}
+enum Spells {FIREBALL, ICE_SHIELD, HASTE, THUNDERSTORM, BOOMERANG}
 
 var known_spells_classes: Dictionary = {
 	"FIREBALL": Fireball,

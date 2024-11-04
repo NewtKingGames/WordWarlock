@@ -11,6 +11,18 @@ var cast_spells_with_mouse: bool = false
 
 var engine_slowdown_magnitude: float = 0.25
 
+var is_player_casting: bool = false
+
+func _ready() -> void:
+	Events.player_entered_casting_state.connect(_on_player_entered_casting)
+	Events.player_exited_casting_state.connect(_on_player_exited_casting)
+
+func _on_player_entered_casting() -> void:
+	is_player_casting = true
+
+func _on_player_exited_casting() -> void:
+	is_player_casting = false
+
 # TODO would this be easier if the player owned all of it?
 var player_slowdown_pool: float = 100:
 	set(value):

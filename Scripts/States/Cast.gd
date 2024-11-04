@@ -29,6 +29,8 @@ func _ready():
 func Enter():
 	# new signal
 	cast_spell_state_changed.emit(true, null, null)
+	# new global signal
+	Events.player_entered_casting_state.emit()
 	character_animated_sprite_2d.play("cast_spell")
 	cast_string = ""
 	casting_text_parent.clear_letters()
@@ -38,7 +40,10 @@ func Exit():
 	casting_text_parent.visible = false
 	var casted_spell = String(cast_string)
 	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)
+	# new signal
 	cast_spell_state_changed.emit(false, casted_spell, spell_scene)
+	# new global signal
+	Events.player_exited_casting_state.emit()
 	
 func Update(_delta: float):
 	# Player Casting Spell
