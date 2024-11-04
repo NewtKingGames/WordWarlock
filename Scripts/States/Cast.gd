@@ -48,8 +48,6 @@ func Exit():
 func Update(_delta: float):
 	# Player Casting Spell
 	if Input.is_action_just_pressed("enter"):
-		# TODO - this copying of cast_string might be unneccessary
-		var casted_spell = String(cast_string)
 		Transitioned.emit(self, "idle")
 	# Player Cancelling Spell
 	elif Input.is_key_pressed(KEY_ESCAPE):
