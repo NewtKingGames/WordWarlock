@@ -30,11 +30,14 @@ func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_s
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
 func key_pressed(letter_input: String) -> String:
+	if not letter_dictionary.has(letter_input):
+		return ""
 	var typing_noise_index: int = randi_range(0, typing_noises.get_child_count()-1)
 	typing_noises.get_child(typing_noise_index).pitch_scale = randf_range(.9, 1.05)
 	typing_noises.get_child(typing_noise_index).play()
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	if letter.letter_active:
+		print("is letter active")
 		letter.key_pressed()
 		return letter.letter_string
 	else:
