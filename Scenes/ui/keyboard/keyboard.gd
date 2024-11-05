@@ -2,6 +2,7 @@ extends Node2D
 class_name Keyboard
 
 var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard_letter.tscn")
+@onready var typing_noises: Node2D = $TypingNoises
 
 @onready var letters: Node = $Letters
 var letter_dictionary = {}
@@ -15,6 +16,11 @@ func _ready():
 		keyboard_letter.set_keyboard_letter(letter, letter_num)
 		letter_num += 1
 		letter_dictionary[letter] = keyboard_letter
+	letter_dictionary["Enter"] = $SpecialKeys/Enter
+	letter_dictionary["Backspace"] = $SpecialKeys/Backspace
+	letter_dictionary["Space"] = $SpecialKeys/Spacebar
+	
+	
 
 func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
@@ -24,6 +30,9 @@ func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_s
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
 func key_pressed(letter_input: String) -> String:
+	var typing_noise_index: int = randi_range(0, typing_noises.get_child_count()-1)
+	typing_noises.get_child(typing_noise_index).pitch_scale = randf_range(.9, 1.05)
+	typing_noises.get_child(typing_noise_index).play()
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	if letter.letter_active:
 		letter.key_pressed()

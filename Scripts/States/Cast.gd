@@ -48,36 +48,32 @@ func Exit():
 func Update(_delta: float):
 	# Player Casting Spell
 	if Input.is_action_just_pressed("enter"):
-		Transitioned.emit(self, "idle")
+		# TODO - if you ever want to reintroduce old style you'll need this back!!!
+		#Transitioned.emit(self, "idle")
+		Events.player_entered_spell_string.emit(cast_string)
 	# Player Cancelling Spell
-	elif Input.is_key_pressed(KEY_ESCAPE):
+	elif Input.is_action_just_pressed("exit"):
 		cast_string = ""
 		Transitioned.emit(self, "idle")
 
 func Handle_Input(_event: InputEvent):
 	var event_string: String = _event.as_text()
-	if _event.is_pressed() and not _event.is_echo() and not _event.is_action_pressed("enter"):
+	#print(event_string)
+	if _event.is_pressed() and not _event.is_echo() and not _event.is_action_pressed("exit"):
+		var keyboard_letter: String = keyboard.key_pressed(event_string)
 		if regex.search(event_string) and event_string.length() == 1:
-			var keyboard_letter: String = keyboard.key_pressed(event_string)
 			if keyboard_letter != "":
 				cast_string += event_string
 				casting_text_parent.add_letter(event_string)
-				# Randomize typing clip and pitch
-				var typing_noise_index: int = rng.randi_range(0,2)
-				typing_noises[typing_noise_index].pitch_scale = rng.randf_range(.86, 1.00)
-				typing_noises[typing_noise_index].play()
 			else:
-				typing_noises[3].play()
-			 #TODO decide to keep or get rid of this signal
-			#player.casting_key_pressed.emit(event_string.to_upper())
+				# Play error noise
+				$"../../Sounds/TypingSounds/ErrorTypingNoise".play()
 		elif _event.is_action_pressed("space") and cast_string.length() > 0:
 			cast_string += " "
 			casting_text_parent.add_letter(" ")
-			typing_noises[rng.randi_range(0,2)].play()
 		elif _event.is_action_pressed("backspace") and cast_string.length() > 0:
 			cast_string = cast_string.left(cast_string.length() - 1)
 			casting_text_parent.delete_letter()
-			typing_noises[rng.randi_range(0,2)].play()
 		Events.current_string_typed.emit(cast_string)
 		if GlobalSpells.is_string_known_spell(cast_string):
 			var spell = GlobalSpells.get_known_spell_for_string(cast_string)
