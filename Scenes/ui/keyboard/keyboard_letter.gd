@@ -24,7 +24,9 @@ var letter_active: bool = true:
 func _ready():
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false
-	set_keyboard_letter(letter_string, letter_num)
+	# Allows for special keys
+	if letter_string != "":
+		set_keyboard_letter(letter_string, letter_num)
 	## temporary random to test inactive letters
 	#var random_num = randi_range(0, 1)
 	#if random_num == 0:
