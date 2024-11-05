@@ -4,18 +4,6 @@ signal spell_stack_completed(SpellStack)
 
 const vertical_offset: int = -20
 var spell_stack_word_scene: PackedScene  = preload("res://Scenes/ui/spell_stack/spell_stack_word.tscn")
-# TODO - delete
-const FIREBALL_SCENE = preload("res://Scenes/projectiles/fireball.tscn")
-# TODOs:
-# 1. add this to the player
-# 2. figure out how to attach signals properly
-# 3. figure out how to do the final stack execution
-# 4. figure out how to dynamically populate this class with spell words
-#    a. Maybe another global array per spell word?
-# 5. figure out how a player is going to equip a spell
-# 6. figure out how visible this property needs to be... Should it disappear after a bit after the player stops casting
-
-# TODO - add the spell/effect here as something that should get executed
 
 var spell_stack_strings: Array[String] = []
 var spell_stack_word_children: Array[SpellStackWord] = []
@@ -28,18 +16,7 @@ func init(spell: Spell) -> void:
 	#spell_stack_strings = GlobalSpells.known_spell_random_words[spell.spell_name]
 	spell_stack_strings = GlobalSpells.get_words_for_spell(spell, randi_range(1, 3))
 	initialize_stack_word_children()
-	
-#func _ready():
-	#for node in get_children():
-		#node.queue_free()
-	#var fire_ball = FIREBALL_SCENE.instantiate()
-	#init(fire_ball)
-	
 
-#func _process(delta):
-	## Going to do some testing
-	#if Input.is_action_just_pressed("backspace"):
-		#on_player_casted_spell(spell_stack_word_children[0].word)
 
 # Let's say that the max amount of words that the max amount of words is 6 that means that max height is 120
 

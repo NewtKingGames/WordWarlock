@@ -32,7 +32,7 @@ func Enter():
 	# new global signal
 	Events.player_entered_casting_state.emit()
 	character_animated_sprite_2d.play("cast_spell")
-	cast_string = ""
+	_clear_entered_text()
 	casting_text_parent.clear_letters()
 	casting_text_parent.visible = true
 
@@ -51,9 +51,11 @@ func Update(_delta: float):
 		# TODO - if you ever want to reintroduce old style you'll need this back!!!
 		#Transitioned.emit(self, "idle")
 		Events.player_entered_spell_string.emit(cast_string)
+		_clear_entered_text()
+		print(cast_string)
 	# Player Cancelling Spell
 	elif Input.is_action_just_pressed("exit"):
-		cast_string = ""
+		_clear_entered_text()
 		Transitioned.emit(self, "idle")
 
 func Handle_Input(_event: InputEvent):
@@ -81,3 +83,7 @@ func Handle_Input(_event: InputEvent):
 		else:
 			casting_text_parent.set_modulate(Color.WHITE)
 		
+
+func _clear_entered_text() -> void:
+	cast_string = ""
+	casting_text_parent.clear_letters()
