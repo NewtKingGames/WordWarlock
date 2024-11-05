@@ -20,6 +20,13 @@ func _ready() -> void:
 	Events.player_exited_casting_state.connect(_on_player_exited_casting)
 
 
+# Global function to allow certain actions to kick the player out of certain states
+func transition_player_to_idle_state() -> void:
+	var player: Player = get_tree().get_first_node_in_group("player") as Player
+	if not player:
+		return
+	player.state_machine.on_outside_transition("idle")
+
 # TODO - move engine time scale logic here
 func _on_player_entered_casting() -> void:
 	is_player_casting = true
