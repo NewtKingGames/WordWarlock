@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch2m7o7f8oyh8"]
+
+[ext_resource type="Script" path="res://Scenes/areas/spell_stack_toggle_area.gd" id="1_bm0eh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_emi8j"]
+
+[node name="SpellStackToggleArea" type="Area2D"]
+collision_layer = 32
+collision_mask = 33
+script = ExtResource("1_bm0eh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(14.3078, 14.3078)
+shape = SubResource("CircleShape2D_emi8j")

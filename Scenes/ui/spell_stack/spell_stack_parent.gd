@@ -1,5 +1,7 @@
 class_name SpellStackParent
 extends Node2D
+
+@export var is_enabled: bool = true
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 const SPELL_STACK_SCENE: PackedScene = preload("res://Scenes/ui/spell_stack/spell_stack.tscn")
@@ -19,6 +21,14 @@ func _ready() -> void:
 	# Or alternatively when they press enter with one selected? Coding both to find which is more fun
 	SpellSelector.player_equipped_spell.connect(_on_player_equipped_spell)
 	Events.player_entered_casting_state.connect(_on_player_entered_casting_state)
+	# Events related to status
+	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
+
+func _on_player_entered_toggle_area(toggle_value: bool) -> void:
+	print("toggling enabled")
+	print(toggle_value)
+	is_enabled = toggle_value
+	clear_stacks()
 
 
 func _on_player_equipped_spell(spell_name: String) -> void:
@@ -29,6 +39,8 @@ func _on_player_equipped_spell(spell_name: String) -> void:
 	add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
 
 func _on_player_entered_casting_state() -> void:
+	if not is_enabled:
+		return
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.1)
 	if not get_active_spell_stack():

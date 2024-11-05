@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://6a10q4q0e11e"]
+[gd_scene load_steps=6 format=3 uid="uid://6a10q4q0e11e"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/level.tscn" id="1_k3s2w"]
 [ext_resource type="TileSet" uid="uid://ktkipmj84kfd" path="res://Scenes/levels/test_level.tres" id="2_1qgbe"]
 [ext_resource type="AudioStream" uid="uid://bvq4xhly0vipp" path="res://Sounds/Songs/TabbedOutSong.wav" id="3_dmatl"]
 [ext_resource type="PackedScene" uid="uid://blv5bb1hvo01r" path="res://Scenes/objects/door_with_lock.tscn" id="4_pghoj"]
+[ext_resource type="PackedScene" uid="uid://ch2m7o7f8oyh8" path="res://Scenes/areas/spell_stack_toggle_area.tscn" id="5_gnpub"]
 
 [node name="HubLevel" instance=ExtResource("1_k3s2w")]
 
@@ -35,3 +36,8 @@ stream = ExtResource("3_dmatl")
 
 [node name="DarkeningLight" parent="." index="5"]
 energy = 0.6
+
+[node name="SpellStackToggleArea" parent="." index="11" instance=ExtResource("5_gnpub")]
+position = Vector2(779, 1018)
+set_enabled = false
+set_opposite_on_exit = true

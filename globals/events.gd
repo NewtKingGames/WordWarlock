@@ -10,6 +10,8 @@ signal player_entered_spell_string(string: String)
 signal current_string_typed(string: String)
 signal string_entered(string: String)
 
-
 # Spell-related signals
 signal spell_casted(spell: Spell)
+
+# Area-related signals
+signal spell_stack_toggle_area_entered(toggle_value: bool)
