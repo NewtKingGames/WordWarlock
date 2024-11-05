@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwntle5lhlhw5"]
+
+[ext_resource type="Script" path="res://Scenes/ui/dialogue/dialogue_player.gd" id="1_ry7sl"]
+[ext_resource type="PackedScene" uid="uid://bata6nhuga2rj" path="res://Scenes/ui/casting_text_parent.tscn" id="1_tyik4"]
+[ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="3_we8li"]
+[ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="4_aa0yr"]
+[ext_resource type="AudioStream" uid="uid://bjvichsn4626q" path="res://Sounds/typewriterthree.mp3" id="5_wi1gj"]
+[ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="6_gfb3b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhmy4"]
+
+[node name="DialoguePlayer" type="Node2D"]
+script = ExtResource("1_ry7sl")
+
+[node name="CastingTextParent" parent="." instance=ExtResource("1_tyik4")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TypingNoises" type="Node2D" parent="."]
+
+[node name="TypingNoiseOne" type="AudioStreamPlayer2D" parent="TypingNoises"]
+stream = ExtResource("3_we8li")
+
+[node name="TypingNoiseTwo" type="AudioStreamPlayer2D" parent="TypingNoises"]
+stream = ExtResource("4_aa0yr")
+
+[node name="TypingNoiseThree" type="AudioStreamPlayer2D" parent="TypingNoises"]
+stream = ExtResource("5_wi1gj")
+
+[node name="KeyboardLetter" parent="." instance=ExtResource("6_gfb3b")]
+z_index = 6
+position = Vector2(0, 91)
+scale = Vector2(2.36566, 2.36566)
+letter_string = "E"
+letter_num = 4
+
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+scale = Vector2(4.42438, 4.42438)
+shape = SubResource("CircleShape2D_qhmy4")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://6a10q4q0e11e"]
+[gd_scene load_steps=9 format=3 uid="uid://6a10q4q0e11e"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/level.tscn" id="1_k3s2w"]
 [ext_resource type="TileSet" uid="uid://ktkipmj84kfd" path="res://Scenes/levels/test_level.tres" id="2_1qgbe"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ch2m7o7f8oyh8" path="res://Scenes/areas/spell_stack_toggle_area.tscn" id="5_gnpub"]
 [ext_resource type="PackedScene" uid="uid://b80l514pmvd3d" path="res://Scenes/enemies/target_dummy.tscn" id="6_2hxde"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="7_sfmrn"]
+[ext_resource type="PackedScene" uid="uid://bwntle5lhlhw5" path="res://Scenes/ui/dialogue/dialogue_player.tscn" id="8_4deks"]
 
 [node name="HubLevel" instance=ExtResource("1_k3s2w")]
 
@@ -66,3 +67,18 @@ position = Vector2(1030, 658)
 
 [node name="Torch4" parent="." index="18" instance=ExtResource("7_sfmrn")]
 position = Vector2(839, 658)
+
+[node name="DialoguePlayer" parent="." index="19" instance=ExtResource("8_4deks")]
+position = Vector2(933, 1786)
+prompt_array = Array[String](["Welcome to Wordlock!", "This hub area provides a shop and training area.
+", "To the left is a training area", "At the top of the room is the exit"])
+
+[node name="KeyboardLetter" parent="DialoguePlayer" index="3"]
+position = Vector2(1.00001, -75.0001)
+scale = Vector2(3.33401, 3.33401)
+
+[node name="CollisionShape2D" parent="DialoguePlayer/InteractArea" index="0"]
+position = Vector2(-1, 12.9999)
+scale = Vector2(23.5614, 23.5614)
+
+[editable path="DialoguePlayer"]
