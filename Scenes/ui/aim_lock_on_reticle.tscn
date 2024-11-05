@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/ui/aim_lock_on_reticle.gd" id="1_xkrs2"]
 
 [node name="AimLockOnReticle" type="Node2D" groups=["reticle"]]
+modulate = Color(1, 1, 1, 0.584314)
 top_level = true
 scale = Vector2(4, 4)
 script = ExtResource("1_xkrs2")

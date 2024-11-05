@@ -167,6 +167,7 @@ func _physics_process(delta):
 				character_animated_sprite.flip_h = true
 				light_occluder_2d.scale.x = -1
 	move_and_slide()
+	#move_and_collide(velocity*delta)
 
 func hit(damage_number: float, damage_direction: Vector2):
 	if can_take_damage:
