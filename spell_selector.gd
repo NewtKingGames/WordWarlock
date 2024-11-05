@@ -8,7 +8,30 @@ signal player_equipped_spell
 # TODO - need to make sure this get's initialized correctly
 @export var equipped_spell: String
 var equipped_index: int = 0
+@onready var equip_spell_icon_slot_one: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotOne
+@onready var keyboard_letter_one: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotOne/KeyboardLetter
 
+@onready var equip_spell_icon_slot_two: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotTwo
+@onready var keyboard_letter_two: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotTwo/KeyboardLetterTwo
+
+@onready var equip_spell_icon_slot_three: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotThree
+@onready var keyboard_letter_three: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotThree/KeyboardLetterThree
+
+@onready var equip_spell_icon_slot_four: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotFour
+@onready var keyboard_letter_four: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotFour/KeyboardLetterFour
+
+var spell_icon_array: Array = []
+var letter_icon_array: Array[KeyboardLetter] = []
+
+func _ready() -> void:
+	spell_icon_array.append(equip_spell_icon_slot_one)
+	spell_icon_array.append(equip_spell_icon_slot_two)
+	spell_icon_array.append(equip_spell_icon_slot_three)
+	spell_icon_array.append(equip_spell_icon_slot_four)
+	letter_icon_array.append(keyboard_letter_one)
+	letter_icon_array.append(keyboard_letter_two)
+	letter_icon_array.append(keyboard_letter_three)
+	letter_icon_array.append(keyboard_letter_four)
 
 func _process(delta: float) -> void:
 	# Only allow changing spells if the player is not casting
@@ -27,5 +50,9 @@ func _process(delta: float) -> void:
 func equip_spell(index: int) -> void:
 	equipped_index = index
 	equipped_spell = available_spells[index]
+	do_equip_effects(index)
 	player_equipped_spell.emit()
 
+func do_equip_effects(index: int) -> void:
+	letter_icon_array[index].key_pressed()
+	

@@ -4,7 +4,8 @@ extends Node2D
 @onready var letter_sprite = $LetterSprite
 @onready var letter_sprite_pressed = $LetterSpritePressed
 # This get's set by the parent 'keyboard' upon initialization in set_keyboard_letter
-var letter_string: String = ""
+@export var letter_string: String = ""
+@export var letter_num: int
 
 # TODO would be cool to implement a feature where letters could get jumbled around? if you want to do that you should probably differentiate between the "original_letter_string" and "current_letter_string"
 
@@ -23,6 +24,7 @@ var letter_active: bool = true:
 func _ready():
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false
+	set_keyboard_letter(letter_string, letter_num)
 	## temporary random to test inactive letters
 	#var random_num = randi_range(0, 1)
 	#if random_num == 0:
