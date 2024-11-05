@@ -21,11 +21,16 @@ var tween_rotation: Tween
 
 # On object ready we set the postion of the object to where the player is and set the visibility false
 func _ready():
+	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggled_area)
 	player = get_tree().get_first_node_in_group("player")
 	is_active = false
 	global_position = player.global_position
 	#tween_scale = create_tween().set_loops()
 	#tween_rotation = create_tween().set_loops()
+
+
+func _on_player_entered_toggled_area(value: bool) -> void:
+	visible = value
 
 func _process(delta):
 	if target_node:
