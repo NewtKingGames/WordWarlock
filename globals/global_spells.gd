@@ -33,6 +33,15 @@ var known_spells_scenes: Dictionary = {
 	"BOOMERANG": load("res://Scenes/projectiles/boomerang.tscn")
 }
 
+func _ready() -> void:
+	Events.player_entered_spell_string.connect(_on_player_entered_spell_string)
+	
+
+func _on_player_entered_spell_string(string: String) -> void:
+	var spell_scene: PackedScene = get_spell_scene_for_string(string)
+	if spell_scene:
+		Events.spell_casted.emit(spell_scene.instantiate())
+
 # Retruns a packed scene for a spell or null
 func get_spell_scene_for_string(spell_string) -> Object:
 	if known_spells_scenes.has(spell_string):

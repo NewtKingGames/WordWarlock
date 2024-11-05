@@ -219,6 +219,11 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 		if spell_scene:
 			equip_and_cast_spell_scene(spell_scene)
 
+## Holdover function to help get new code working without refactoring the entire spell resource
+func _on_handle_spell(spell: Spell) -> void:
+	state_machine.on_outside_transition("idle")
+	equip_and_cast_spell_scene(GlobalSpells.get_spell_scene_for_string(spell.spell_name))
+
 func equip_and_cast_spell_scene(spell_scene: PackedScene) -> void:
 	queued_spell_scene = spell_scene
 	queued_spell = spell_scene.instantiate()
@@ -232,12 +237,6 @@ func equip_and_cast_spell_scene(spell_scene: PackedScene) -> void:
 		queued_spell_ammo = queued_spell.ammo
 	else:
 		queued_spell_ammo = 1
-
-
-## Holdover function to help get new code working without refactoring the entire spell resource
-func _on_handle_spell(spell: Spell) -> void:
-	state_machine.on_outside_transition("idle")
-	equip_and_cast_spell_scene(GlobalSpells.get_spell_scene_for_string(spell.spell_name))
 
 func disable_random_key() -> KeyboardLetter:
 	return keyboard.disable_random_key()
