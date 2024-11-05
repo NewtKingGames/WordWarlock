@@ -512,7 +512,7 @@ scale = Vector2(0.943525, 0.943525)
 [node name="Sprite2D" type="Sprite2D" parent="Keyboard"]
 modulate = Color(1, 1, 1, 0.615686)
 z_index = -1
-position = Vector2(-7.41899, -27.0263)
+position = Vector2(-7.41899, -28.3511)
 scale = Vector2(-0.306503, 0.0198951)
 texture = ExtResource("19_jbw6b")
 

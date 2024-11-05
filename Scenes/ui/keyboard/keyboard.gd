@@ -8,7 +8,8 @@ var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard
 var letter_dictionary = {}
 
 func _ready():
-	visible = false
+	#visible = false
+	modulate = Color(1,1,1,0)
 	var letter_num = 0
 	var keyboard_letters: Array[Node] = letters.get_children()
 	for keyboard_letter in keyboard_letters:
@@ -26,7 +27,12 @@ func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
 
 func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_scene):
-	visible = is_casting_active
+	#visible = is_casting_active
+	var tween = create_tween()
+	if is_casting_active:
+		tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.05)
+	else:
+		tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.2)
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
 func key_pressed(letter_input: String) -> String:

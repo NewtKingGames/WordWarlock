@@ -26,13 +26,18 @@ func _on_player_equipped_spell() -> void:
 	add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
 
 func _on_player_entered_casting_state() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.1)
 	if get_active_spell_stack():
 		return
 	add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
 
 func _on_player_exited_casting_state() -> void:
-	clear_stacks()
-
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.05)
+	# TODO - if you want to delete this?
+	#clear_stacks()
+	
 func clear_stacks() -> void:
 	for child in get_children():
 		if child is SpellStack:
