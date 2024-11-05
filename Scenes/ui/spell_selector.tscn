@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfe2dxet4lf1v"]
+[gd_scene load_steps=7 format=3 uid="uid://bfe2dxet4lf1v"]
 
 [ext_resource type="Script" path="res://spell_selector.gd" id="1_0bnuv"]
 [ext_resource type="PackedScene" uid="uid://47od46f865bb" path="res://Scenes/ui/equip_spell_icon.tscn" id="2_dsx8o"]
 [ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="3_bibr0"]
+[ext_resource type="Texture2D" uid="uid://c1gb3ubtx12g3" path="res://Sprites/Spells/Ice/Ball of ice.png" id="4_68c73"]
+[ext_resource type="Texture2D" uid="uid://b5smhlcfn7y11" path="res://Sprites/Spells/Thunder.png" id="5_xmq1d"]
+[ext_resource type="Texture2D" uid="uid://ccvvmalch3dea" path="res://Sprites/Boomerangs-Sheet.png" id="6_vs5eb"]
 
 [node name="SpellSelector" type="Node2D"]
 script = ExtResource("1_0bnuv")
-available_spells = Array[String](["FIREBALL", "THUNDERSTORM", "ICE SHIELD", "BOOMERANG"])
+available_spells = Array[String](["FIREBALL", "ICE SHIELD", "THUNDERSTORM", "BOOMERANG"])
 equipped_spell = "FIREBALL"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -21,10 +24,11 @@ offset_right = -1920.0
 offset_bottom = 190.0
 grow_horizontal = 0
 grow_vertical = 1
+spell_name = "FIREBALL"
 
 [node name="KeyboardLetter" parent="CanvasLayer/EquipSpellIcon_SlotOne" instance=ExtResource("3_bibr0")]
 position = Vector2(148, 49)
-scale = Vector2(4, 4)
+scale = Vector2(5, 5)
 letter_string = "J"
 letter_num = 9
 
@@ -39,9 +43,17 @@ offset_bottom = 330.0
 grow_horizontal = 0
 grow_vertical = 1
 
+[node name="SpellSprite" parent="CanvasLayer/EquipSpellIcon_SlotTwo" index="1"]
+position = Vector2(50, 46)
+scale = Vector2(1.73744, 1.68543)
+texture = ExtResource("4_68c73")
+hframes = 1
+vframes = 4
+frame = 3
+
 [node name="KeyboardLetterTwo" parent="CanvasLayer/EquipSpellIcon_SlotTwo" instance=ExtResource("3_bibr0")]
 position = Vector2(148, 53)
-scale = Vector2(4, 4)
+scale = Vector2(5, 5)
 letter_string = "K"
 letter_num = 10
 
@@ -56,9 +68,18 @@ offset_bottom = 470.0
 grow_horizontal = 0
 grow_vertical = 1
 
+[node name="SpellSprite" parent="CanvasLayer/EquipSpellIcon_SlotThree" index="1"]
+position = Vector2(49, 56)
+rotation = -0.0135039
+scale = Vector2(0.657856, 0.406685)
+texture = ExtResource("5_xmq1d")
+hframes = 8
+vframes = 1
+frame = 1
+
 [node name="KeyboardLetterThree" parent="CanvasLayer/EquipSpellIcon_SlotThree" instance=ExtResource("3_bibr0")]
 position = Vector2(148, 53)
-scale = Vector2(4, 4)
+scale = Vector2(5, 5)
 letter_string = "L"
 letter_num = 11
 
@@ -73,8 +94,20 @@ offset_bottom = 610.0
 grow_horizontal = 0
 grow_vertical = 1
 
+[node name="SpellSprite" parent="CanvasLayer/EquipSpellIcon_SlotFour" index="1"]
+position = Vector2(48, 46)
+texture = ExtResource("6_vs5eb")
+hframes = 7
+vframes = 4
+frame = 17
+
 [node name="KeyboardLetterFour" parent="CanvasLayer/EquipSpellIcon_SlotFour" instance=ExtResource("3_bibr0")]
 position = Vector2(148, 53)
-scale = Vector2(4, 4)
+scale = Vector2(5, 5)
 letter_string = ";"
 letter_num = 31
+
+[editable path="CanvasLayer/EquipSpellIcon_SlotOne"]
+[editable path="CanvasLayer/EquipSpellIcon_SlotTwo"]
+[editable path="CanvasLayer/EquipSpellIcon_SlotThree"]
+[editable path="CanvasLayer/EquipSpellIcon_SlotFour"]

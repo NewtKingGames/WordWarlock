@@ -8,6 +8,8 @@ signal player_equipped_spell
 # TODO - need to make sure this get's initialized correctly
 @export var equipped_spell: String
 var equipped_index: int = 0
+
+
 @onready var equip_spell_icon_slot_one: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotOne
 @onready var keyboard_letter_one: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotOne/KeyboardLetter
 
@@ -51,6 +53,7 @@ func equip_spell(index: int) -> void:
 	equipped_index = index
 	equipped_spell = available_spells[index]
 	do_equip_effects(index)
+	# TODO - need to make these dynamic!!
 	player_equipped_spell.emit()
 
 func do_equip_effects(index: int) -> void:
