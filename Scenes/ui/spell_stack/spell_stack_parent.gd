@@ -7,6 +7,7 @@ const SPELL_STACK_SCENE: PackedScene = preload("res://Scenes/ui/spell_stack/spel
 #var spell_stack_children: Array[SpellStack] = []
 
 func _ready() -> void:
+	modulate = Color(1,1,1,0)
 	for child in get_children():
 		if child is SpellStack:
 			child.queue_free()
@@ -16,21 +17,22 @@ func _ready() -> void:
 	Events.player_entered_spell_string.connect(_on_playered_entered_spell_string)
 	# The spell stack parent can be responsible for initializing a spell stack when the player equips a spell?
 	# Or alternatively when they press enter with one selected? Coding both to find which is more fun
-	#SpellSelector.player_equipped_spell.connect(_on_player_equipped_spell)
+	SpellSelector.player_equipped_spell.connect(_on_player_equipped_spell)
 	Events.player_entered_casting_state.connect(_on_player_entered_casting_state)
 
 
-func _on_player_equipped_spell() -> void:
-	if get_active_spell_stack():
-		return
+func _on_player_equipped_spell(spell_name: String) -> void:
+	var active_spell_stack = get_active_spell_stack()
+	if active_spell_stack and active_spell_stack.spell.spell_name == spell_name:
+			return
+	clear_stacks()
 	add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
 
 func _on_player_entered_casting_state() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.1)
-	if get_active_spell_stack():
-		return
-	add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
+	if not get_active_spell_stack():
+		add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
 
 func _on_player_exited_casting_state() -> void:
 	var tween: Tween = create_tween()

@@ -23,11 +23,7 @@ func _ready():
 	# TODO figure out how to get the fist to rotate smoothly towards the player
 	player = get_tree().get_first_node_in_group("player")
 	initial_position = position
-	#print("rotation")
-	#print(rotation)
 	destination_rotation = rotation
-	#rotation = deg_to_rad(90)
-	#print(rotation)
 	destination_rotation
 	# This idea doesn't quite work because you need to specify the direction to tween in
 	#var rotate_tween: Tween = create_tween()

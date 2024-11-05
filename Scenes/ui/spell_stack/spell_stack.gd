@@ -24,8 +24,6 @@ func init(spell: Spell) -> void:
 func initialize_stack_word_children() -> void:
 	# Delete any existing nodes because these are just test values
 	for node in get_children():
-		print("deleting these nodes")
-		print(node)
 		node.queue_free()
 	#spell_stack_word_strings = words
 	#for word in spell_stack_word_strings:

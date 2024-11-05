@@ -57,8 +57,6 @@ func _process(delta):
 	
 	# Traveling back and hit the player
 	if traveling_back and (player.global_position - global_position).length() < retrievable_distance:
-		#print("the speed was")
-		#print(current_speed)
 		queue_free()
 
 # OVERRIDE

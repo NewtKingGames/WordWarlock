@@ -43,7 +43,6 @@ func key_pressed(letter_input: String) -> String:
 	typing_noises.get_child(typing_noise_index).play()
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	if letter.letter_active:
-		print("is letter active")
 		letter.key_pressed()
 		return letter.letter_string
 	else:

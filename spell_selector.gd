@@ -1,6 +1,6 @@
 extends Node2D
 
-signal player_equipped_spell
+signal player_equipped_spell(spell_name: String)
 # TODO - you could think about a fun way of letting the player auto cycle through their spells?
 # TODO - this is really gross right now because spells are a node and not a resource....
 @export var available_spells: Array[String] = []
@@ -54,7 +54,7 @@ func equip_spell(index: int) -> void:
 	equipped_spell = available_spells[index]
 	do_equip_effects(index)
 	# TODO - need to make these dynamic!!
-	player_equipped_spell.emit()
+	player_equipped_spell.emit(equipped_spell)
 
 func do_equip_effects(index: int) -> void:
 	letter_icon_array[index].key_pressed()
