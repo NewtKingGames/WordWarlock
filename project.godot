@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Wordlock"
-run/main_scene="res://Scenes/levels/test_level.tscn"
+run/main_scene="res://Scenes/levels/hub_level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Sprites/wordlock cover.png"
 
