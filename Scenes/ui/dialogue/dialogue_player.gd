@@ -44,6 +44,7 @@ func _on_player_exited(body: Node2D) -> void:
 		is_player_near = false
 
 func reset_prompt() -> void:
+	keyboard_letter.hide()
 	current_prompt_index = 0
 	casting_text_parent.clear_letters()
 

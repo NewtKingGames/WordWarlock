@@ -4,3 +4,7 @@ extends EnemyClass
 
 func hit(damage: float):
 	target_enemy_sprite.play("damage")
+
+
+func _physics_process(delta: float) -> void:
+	pass

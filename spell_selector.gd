@@ -9,6 +9,8 @@ signal player_equipped_spell(spell_name: String)
 @export var equipped_spell: String
 var equipped_index: int = 0
 
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+
 
 @onready var equip_spell_icon_slot_one: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotOne
 @onready var keyboard_letter_one: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotOne/KeyboardLetter
@@ -34,6 +36,8 @@ func _ready() -> void:
 	letter_icon_array.append(keyboard_letter_two)
 	letter_icon_array.append(keyboard_letter_three)
 	letter_icon_array.append(keyboard_letter_four)
+	
+	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
 
 func _process(delta: float) -> void:
 	# Only allow changing spells if the player is not casting
@@ -59,3 +63,7 @@ func equip_spell(index: int) -> void:
 func do_equip_effects(index: int) -> void:
 	letter_icon_array[index].key_pressed()
 	
+func _on_player_entered_toggle_area(is_active: bool) -> void:
+	#print("setting is active to")
+	#print(is_active)
+	canvas_layer.visible = is_active
