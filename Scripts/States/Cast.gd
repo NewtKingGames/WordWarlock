@@ -48,11 +48,13 @@ func Exit():
 func Update(_delta: float):
 	# Player Casting Spell
 	if Input.is_action_just_pressed("enter"):
+		if cast_string == "":
+			Transitioned.emit(self, "idle")
+			return
 		# TODO - if you ever want to reintroduce old style you'll need this back!!!
 		#Transitioned.emit(self, "idle")
 		Events.player_entered_spell_string.emit(cast_string)
 		_clear_entered_text()
-		print(cast_string)
 	# Player Cancelling Spell
 	elif Input.is_action_just_pressed("exit"):
 		_clear_entered_text()
@@ -60,7 +62,6 @@ func Update(_delta: float):
 
 func Handle_Input(_event: InputEvent):
 	var event_string: String = _event.as_text()
-	#print(event_string)
 	if _event.is_pressed() and not _event.is_echo() and not _event.is_action_pressed("exit"):
 		var keyboard_letter: String = keyboard.key_pressed(event_string)
 		if regex.search(event_string) and event_string.length() == 1:
