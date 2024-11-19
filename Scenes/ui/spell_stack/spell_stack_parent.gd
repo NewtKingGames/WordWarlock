@@ -77,13 +77,14 @@ func _on_player_typed_string(string: String) -> void:
 	var spell_stack: SpellStack = get_active_spell_stack()
 	if not spell_stack:
 		return
-	# If player entered the spell string and then hit "space"
-	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper() + " ":
-		spell_stack.pop_spell()
 	# If player has currently entered the spell string
 	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper():
 		# TODO - emit a new global signal here which we can then use in the keyboard state to hihglight the enter or space bar
 		Events.current_string_matches.emit(string)
+	# If player entered the spell string and then hit "space"
+	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper() + " ":
+		Events.clear_typed_string.emit()
+		spell_stack.pop_spell()
 	#spell_stack.on_player_typed_string(string)
 
 func _on_playered_entered_spell_string(string: String) -> void:

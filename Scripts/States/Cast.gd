@@ -25,6 +25,7 @@ func _ready():
 	regex.compile("[a-zA-Z]")
 	typing_noises = $"../../Sounds/TypingSounds".get_children()
 	keyboard = get_tree().get_first_node_in_group("keyboard")
+	Events.clear_typed_string.connect(_on_clear_typed_string)
 
 func Enter():
 	# new signal
@@ -40,7 +41,7 @@ func Exit():
 	casting_text_parent.visible = false
 	var casted_spell = String(cast_string)
 	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)
-	# new signal
+	# old signal
 	cast_spell_state_changed.emit(false, casted_spell, spell_scene)
 	# new global signal
 	Events.player_exited_casting_state.emit()
@@ -88,3 +89,6 @@ func Handle_Input(_event: InputEvent):
 func _clear_entered_text() -> void:
 	cast_string = ""
 	casting_text_parent.clear_letters()
+
+func _on_clear_typed_string() -> void:
+	_clear_entered_text()
