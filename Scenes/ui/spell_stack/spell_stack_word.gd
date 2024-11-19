@@ -18,6 +18,4 @@ func _ready() -> void:
 	tween.tween_property(self, "modulate", Color.WHITE, 0.5)
 
 func _process(delta: float) -> void:
-	print(text)
-	print(pivot_offset)
 	pivot_offset = Vector2(size.x/2, size.y/2)

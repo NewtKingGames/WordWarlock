@@ -5,7 +5,13 @@ var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard
 @onready var typing_noises: TypingNoises = $TypingNoises
 
 @onready var letters: Node = $Letters
+@onready var enter: KeyboardLetter = $SpecialKeys/Enter
+@onready var spacebar: KeyboardLetter = $SpecialKeys/Spacebar
+@onready var backspace: KeyboardLetter = $SpecialKeys/Backspace
+
 var letter_dictionary = {}
+
+var is_highlight_on: bool = false
 
 func _ready():
 	#visible = false
@@ -17,9 +23,11 @@ func _ready():
 		keyboard_letter.set_keyboard_letter(letter, letter_num)
 		letter_num += 1
 		letter_dictionary[letter] = keyboard_letter
-	letter_dictionary["Enter"] = $SpecialKeys/Enter
-	letter_dictionary["Backspace"] = $SpecialKeys/Backspace
-	letter_dictionary["Space"] = $SpecialKeys/Spacebar
+	letter_dictionary["Enter"] = enter
+	letter_dictionary["Backspace"] = spacebar
+	letter_dictionary["Space"] = backspace
+	Events.current_string_matches.connect(_on_current_string_matches)
+	Events.current_string_typed.connect(_on_player_typed_string)
 	
 	
 
@@ -62,3 +70,19 @@ func get_random_active_key() -> KeyboardLetter:
 			return letter_node
 	# This is unexpected
 	return null
+
+
+func _on_current_string_matches(string: String) -> void:
+	is_highlight_on = true
+	highlight_letter(enter)
+	highlight_letter(spacebar)
+
+func _on_player_typed_string(string: String) -> void:
+	if is_highlight_on:
+		enter.modulate = Color.WHITE
+		spacebar.modulate = Color.WHITE
+		is_highlight_on = false
+
+func highlight_letter(keyboard_letter: KeyboardLetter) -> void:
+	# TODO - make these effects nicer
+	keyboard_letter.modulate = Color(0.93, 0.755, 0.149)

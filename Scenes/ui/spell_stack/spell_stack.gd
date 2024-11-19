@@ -89,13 +89,6 @@ func generate_spell_stack_word_opacity(index: int) -> Color:
 	var starting_color: Color = spell_stack_word_children[index].modulate
 	# TODO convert 0.4 to some class level value
 	return Color(starting_color.r, starting_color.g, starting_color.b, 1 - (0.4*index))
-
-
-# TODO - delete this?
-func on_player_casted_spell(word: String):
-	if word.to_upper() == spell_stack_word_children[0].word.to_upper():
-		pop_spell()
-	# TODO - add some spell miss?
 	
 func on_player_typed_string(word: String) -> void:
 	if word.to_upper() == spell_stack_word_children[0].word.to_upper():

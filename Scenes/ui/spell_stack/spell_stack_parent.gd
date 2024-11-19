@@ -13,8 +13,8 @@ func _ready() -> void:
 	for child in get_children():
 		if child is SpellStack:
 			child.queue_free()
-	# Todo subscribe to relevant signals
-	#Events.current_string_typed.connect(_on_player_typed_string)
+	Events.current_string_typed.connect(_on_player_typed_string)
+	# BY subscribing to both the player can either hit space or hit enter
 	Events.player_exited_casting_state.connect(_on_player_exited_casting_state)
 	Events.player_entered_spell_string.connect(_on_playered_entered_spell_string)
 	# The spell stack parent can be responsible for initializing a spell stack when the player equips a spell?
@@ -77,7 +77,14 @@ func _on_player_typed_string(string: String) -> void:
 	var spell_stack: SpellStack = get_active_spell_stack()
 	if not spell_stack:
 		return
-	spell_stack.on_player_typed_string(string)
+	# If player entered the spell string and then hit "space"
+	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper() + " ":
+		spell_stack.pop_spell()
+	# If player has currently entered the spell string
+	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper():
+		# TODO - emit a new global signal here which we can then use in the keyboard state to hihglight the enter or space bar
+		Events.current_string_matches.emit(string)
+	#spell_stack.on_player_typed_string(string)
 
 func _on_playered_entered_spell_string(string: String) -> void:
 	var spell_stack: SpellStack = get_active_spell_stack()
