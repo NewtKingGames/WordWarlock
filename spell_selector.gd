@@ -76,6 +76,7 @@ func do_equip_effects(old_index: int, new_index: int) -> void:
 	letter_icon_array[new_index].key_pressed_stick_key()
 	letter_icon_array[old_index].unstick_key()
 	typing_noises.play_typing_noise_global()
+	# TODO Show/Hide reticle as needed
 	
 func _on_player_entered_toggle_area(value: bool) -> void:
 	self.is_active = value
