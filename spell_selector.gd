@@ -10,17 +10,21 @@ signal player_equipped_spell(spell_name: String)
 var equipped_index: int = 0
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var typing_noises: TypingNoises = $TypingNoises
 
-
+# Spell one
 @onready var equip_spell_icon_slot_one: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotOne
 @onready var keyboard_letter_one: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotOne/KeyboardLetter
 
+# Spell two
 @onready var equip_spell_icon_slot_two: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotTwo
 @onready var keyboard_letter_two: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotTwo/KeyboardLetterTwo
 
+# Spell three
 @onready var equip_spell_icon_slot_three: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotThree
 @onready var keyboard_letter_three: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotThree/KeyboardLetterThree
 
+# Spell four
 @onready var equip_spell_icon_slot_four: EquipSpellIcon = $CanvasLayer/EquipSpellIcon_SlotFour
 @onready var keyboard_letter_four: KeyboardLetter = $CanvasLayer/EquipSpellIcon_SlotFour/KeyboardLetterFour
 
@@ -62,6 +66,7 @@ func equip_spell(index: int) -> void:
 
 func do_equip_effects(index: int) -> void:
 	letter_icon_array[index].key_pressed()
+	typing_noises.play_typing_noise_global()
 	
 func _on_player_entered_toggle_area(is_active: bool) -> void:
 	#print("setting is active to")

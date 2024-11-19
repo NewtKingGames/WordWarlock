@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfe2dxet4lf1v"]
+[gd_scene load_steps=8 format=3 uid="uid://bfe2dxet4lf1v"]
 
 [ext_resource type="Script" path="res://spell_selector.gd" id="1_0bnuv"]
 [ext_resource type="PackedScene" uid="uid://47od46f865bb" path="res://Scenes/ui/equip_spell_icon.tscn" id="2_dsx8o"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c1gb3ubtx12g3" path="res://Sprites/Spells/Ice/Ball of ice.png" id="4_68c73"]
 [ext_resource type="Texture2D" uid="uid://b5smhlcfn7y11" path="res://Sprites/Spells/Thunder.png" id="5_xmq1d"]
 [ext_resource type="Texture2D" uid="uid://ccvvmalch3dea" path="res://Sprites/Boomerangs-Sheet.png" id="6_vs5eb"]
+[ext_resource type="PackedScene" uid="uid://ct83717axhedp" path="res://Scenes/audio/typing_noises.tscn" id="7_7erjh"]
 
 [node name="SpellSelector" type="Node2D"]
 script = ExtResource("1_0bnuv")
@@ -110,6 +111,8 @@ position = Vector2(148, 53)
 scale = Vector2(5, 5)
 letter_string = ";"
 letter_num = 31
+
+[node name="TypingNoises" parent="." instance=ExtResource("7_7erjh")]
 
 [editable path="CanvasLayer/EquipSpellIcon_SlotOne"]
 [editable path="CanvasLayer/EquipSpellIcon_SlotTwo"]
