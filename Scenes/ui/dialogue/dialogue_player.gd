@@ -1,6 +1,9 @@
 class_name DialoguePlayer
 extends Node2D
-@onready var casting_text_parent: CastingTextParent = $CastingTextParent
+var current_casting_text_parent_index: int = 0
+@onready var casting_texts: Node2D = $CastingTexts
+#@onready var casting_text_parent: CastingTextParent = $CastingTextParent
+var casting_text_flow_over: Array[CastingTextParent] = []
 @onready var typing_noises: Node2D = $TypingNoises
 @onready var interact_area: Area2D = $InteractArea
 @onready var keyboard_letter: KeyboardLetter = $KeyboardLetter
@@ -46,19 +49,28 @@ func _on_player_exited(body: Node2D) -> void:
 func reset_prompt() -> void:
 	keyboard_letter.hide()
 	current_prompt_index = 0
-	casting_text_parent.clear_letters()
+	#casting_text_parent.clear_letters()
+	clear_prompt()
 
 func play_prompt(index: int) -> void:
-	casting_text_parent.clear_letters()
+	#casting_text_parent.clear_letters()
+	clear_prompt()
+	current_casting_text_parent_index = 0
 	is_playing_prompt = true
 	var prompt: String = prompt_array[index] as String
 	if not prompt:
 		return
 	for character in prompt:
-		casting_text_parent.add_letter(character)
+		if character == "\n":
+			current_casting_text_parent_index += 1
+		casting_texts.get_child(current_casting_text_parent_index).add_letter(character)
 		var typing_noise_index: int = randi_range(0, typing_noises.get_child_count()-1)
 		typing_noises.get_child(typing_noise_index).pitch_scale = randf_range(.9, 1.05)
 		typing_noises.get_child(typing_noise_index).play()
 		await get_tree().create_timer(randf_range(letter_delay_min, letter_delay_max)).timeout
 	is_playing_prompt = false
 	
+
+func clear_prompt() -> void:
+	for casting_text_parent in casting_texts.get_children():
+		casting_text_parent.clear_letters()

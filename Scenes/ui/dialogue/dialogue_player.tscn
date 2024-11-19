@@ -12,7 +12,15 @@
 [node name="DialoguePlayer" type="Node2D"]
 script = ExtResource("1_ry7sl")
 
-[node name="CastingTextParent" parent="." instance=ExtResource("1_tyik4")]
+[node name="CastingTexts" type="Node2D" parent="."]
+
+[node name="CastingTextParent" parent="CastingTexts" instance=ExtResource("1_tyik4")]
+
+[node name="CastingTextParent2" parent="CastingTexts" instance=ExtResource("1_tyik4")]
+position = Vector2(2.08165e-12, 22)
+
+[node name="CastingTextParent3" parent="CastingTexts" instance=ExtResource("1_tyik4")]
+position = Vector2(2.08165e-12, 40)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
