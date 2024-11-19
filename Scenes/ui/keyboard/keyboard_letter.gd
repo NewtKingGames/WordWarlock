@@ -39,14 +39,19 @@ func set_keyboard_letter(letter: String, letter_num: int):
 	letter_sprite.set_frame_coords(Vector2i(letter_num % 8, 2 + letter_num/8))
 	letter_sprite_pressed.set_frame_coords(Vector2i(letter_num % 8, 9 + letter_num/8))
 
-func key_pressed():
+func key_pressed() -> void:
 	if not letter_active:
 		return
 	letter_sprite.visible = false
 	letter_sprite_pressed.visible = true
-	if Engine.time_scale == Globals.engine_slowdown_magnitude:
-		await get_tree().create_timer(.025).timeout
-	elif Engine.time_scale == 1:
-		await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(0.15 * Globals.time_scale_offset).timeout
+	letter_sprite.visible = true
+	letter_sprite_pressed.visible = false
+
+func key_pressed_stick_key() -> void:
+	letter_sprite.visible = false
+	letter_sprite_pressed.visible = true
+
+func unstick_key() -> void:
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false

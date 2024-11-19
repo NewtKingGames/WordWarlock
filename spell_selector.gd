@@ -7,7 +7,9 @@ signal player_equipped_spell(spell_name: String)
 
 # TODO - need to make sure this get's initialized correctly
 @export var equipped_spell: String
+@export var is_active: bool = true
 var equipped_index: int = 0
+
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var typing_noises: TypingNoises = $TypingNoises
@@ -32,6 +34,7 @@ var spell_icon_array: Array = []
 var letter_icon_array: Array[KeyboardLetter] = []
 
 func _ready() -> void:
+	canvas_layer.visible = is_active
 	spell_icon_array.append(equip_spell_icon_slot_one)
 	spell_icon_array.append(equip_spell_icon_slot_two)
 	spell_icon_array.append(equip_spell_icon_slot_three)
@@ -44,6 +47,8 @@ func _ready() -> void:
 	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
 
 func _process(delta: float) -> void:
+	if not is_active:
+		return
 	# Only allow changing spells if the player is not casting
 	if Globals.is_player_casting:
 		return
@@ -58,17 +63,20 @@ func _process(delta: float) -> void:
 
 
 func equip_spell(index: int) -> void:
+	if equipped_index == index:
+		# TODO - could play noise here to indicate already equipped
+		return
+	do_equip_effects(equipped_index, index)
 	equipped_index = index
 	equipped_spell = available_spells[index]
-	do_equip_effects(index)
 	# TODO - need to make these dynamic!!
 	player_equipped_spell.emit(equipped_spell)
 
-func do_equip_effects(index: int) -> void:
-	letter_icon_array[index].key_pressed()
+func do_equip_effects(old_index: int, new_index: int) -> void:
+	letter_icon_array[new_index].key_pressed_stick_key()
+	letter_icon_array[old_index].unstick_key()
 	typing_noises.play_typing_noise_global()
 	
-func _on_player_entered_toggle_area(is_active: bool) -> void:
-	#print("setting is active to")
-	#print(is_active)
-	canvas_layer.visible = is_active
+func _on_player_entered_toggle_area(value: bool) -> void:
+	self.is_active = value
+	canvas_layer.visible = value
