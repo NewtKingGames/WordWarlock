@@ -4,7 +4,7 @@ var current_casting_text_parent_index: int = 0
 @onready var casting_texts: Node2D = $CastingTexts
 #@onready var casting_text_parent: CastingTextParent = $CastingTextParent
 var casting_text_flow_over: Array[CastingTextParent] = []
-@onready var typing_noises: Node2D = $TypingNoises
+@onready var typing_noises: TypingNoises = $TypingNoises
 @onready var interact_area: Area2D = $InteractArea
 @onready var keyboard_letter: KeyboardLetter = $KeyboardLetter
 
@@ -64,9 +64,7 @@ func play_prompt(index: int) -> void:
 		if character == "\n":
 			current_casting_text_parent_index += 1
 		casting_texts.get_child(current_casting_text_parent_index).add_letter(character)
-		var typing_noise_index: int = randi_range(0, typing_noises.get_child_count()-1)
-		typing_noises.get_child(typing_noise_index).pitch_scale = randf_range(.9, 1.05)
-		typing_noises.get_child(typing_noise_index).play()
+		typing_noises.play_typing_noise()
 		await get_tree().create_timer(randf_range(letter_delay_min, letter_delay_max)).timeout
 	is_playing_prompt = false
 	

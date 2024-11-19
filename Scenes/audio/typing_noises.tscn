@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct83717axhedp"]
+
+[ext_resource type="Script" path="res://Scenes/audio/typing_noises.gd" id="1_s1mxm"]
+[ext_resource type="AudioStream" uid="uid://dnkn2vnxn5u4l" path="res://Sounds/typewriterone.mp3" id="1_tk5gt"]
+[ext_resource type="AudioStream" uid="uid://0qg2ymn3oyu7" path="res://Sounds/typewritertwo.mp3" id="2_uud5g"]
+[ext_resource type="AudioStream" uid="uid://bjvichsn4626q" path="res://Sounds/typewriterthree.mp3" id="3_d3qc3"]
+
+[node name="TypingNoises" type="Node2D"]
+script = ExtResource("1_s1mxm")
+
+[node name="LocalTypingSounds" type="Node2D" parent="."]
+
+[node name="TypingNoiseOne" type="AudioStreamPlayer2D" parent="LocalTypingSounds"]
+stream = ExtResource("1_tk5gt")
+
+[node name="TypingNoiseTwo" type="AudioStreamPlayer2D" parent="LocalTypingSounds"]
+stream = ExtResource("2_uud5g")
+
+[node name="TypingNoiseThree" type="AudioStreamPlayer2D" parent="LocalTypingSounds"]
+stream = ExtResource("3_d3qc3")
+
+[node name="GlobalTypingSounds" type="Node" parent="."]
+
+[node name="TypingNoiseOne" type="AudioStreamPlayer" parent="GlobalTypingSounds"]
+stream = ExtResource("1_tk5gt")
+volume_db = -10.0
+
+[node name="TypingNoiseTwo" type="AudioStreamPlayer" parent="GlobalTypingSounds"]
+stream = ExtResource("2_uud5g")
+volume_db = -10.0
+
+[node name="TypingNoiseThree" type="AudioStreamPlayer" parent="GlobalTypingSounds"]
+stream = ExtResource("3_d3qc3")
+volume_db = -10.0

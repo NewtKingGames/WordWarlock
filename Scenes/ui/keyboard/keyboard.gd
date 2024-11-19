@@ -2,7 +2,7 @@ extends Node2D
 class_name Keyboard
 
 var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard_letter.tscn")
-@onready var typing_noises: Node2D = $TypingNoises
+@onready var typing_noises: TypingNoises = $TypingNoises
 
 @onready var letters: Node = $Letters
 var letter_dictionary = {}
@@ -38,9 +38,8 @@ func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_s
 func key_pressed(letter_input: String) -> String:
 	if not letter_dictionary.has(letter_input):
 		return ""
-	var typing_noise_index: int = randi_range(0, typing_noises.get_child_count()-1)
-	typing_noises.get_child(typing_noise_index).pitch_scale = randf_range(.9, 1.05)
-	typing_noises.get_child(typing_noise_index).play()
+	
+	typing_noises.play_typing_noise()
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	if letter.letter_active:
 		letter.key_pressed()

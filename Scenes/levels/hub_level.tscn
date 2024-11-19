@@ -37,6 +37,7 @@ position = Vector2(936, 2477)
 
 [node name="LevelMusic" parent="Player" index="14"]
 stream = ExtResource("3_dmatl")
+autoplay = false
 
 [node name="DarkeningLight" parent="." index="5"]
 energy = 0.65
@@ -82,8 +83,11 @@ position = Vector2(839, 658)
 
 [node name="IntroDialoguePlayer" parent="." index="22" instance=ExtResource("8_4deks")]
 position = Vector2(933, 1786)
-prompt_array = Array[String](["Welcome to Wordlock!", "This hub area provides a shop and training area.
-", "To the left is a training area", "At the top of the room is the exit", "Good luck!"])
+prompt_array = Array[String](["Welcome to Wordlock!", "This hub area provides a shop 
+and training area.
+", "To the left is the training area 
+to practice spelling ", "At the top of the room is the exit
+to the next level", "Good luck and check back soon!"])
 
 [node name="KeyboardLetter" parent="IntroDialoguePlayer" index="3"]
 position = Vector2(1.00001, -75.0001)
