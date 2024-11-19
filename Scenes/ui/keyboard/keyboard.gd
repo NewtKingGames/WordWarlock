@@ -24,8 +24,8 @@ func _ready():
 		letter_num += 1
 		letter_dictionary[letter] = keyboard_letter
 	letter_dictionary["Enter"] = enter
-	letter_dictionary["Backspace"] = spacebar
-	letter_dictionary["Space"] = backspace
+	letter_dictionary["Backspace"] = backspace
+	letter_dictionary["Space"] = spacebar
 	Events.current_string_matches.connect(_on_current_string_matches)
 	Events.current_string_typed.connect(_on_player_typed_string)
 	

@@ -17,7 +17,7 @@ func init(spell: Spell) -> void:
 	self.spell = spell
 	# TODO - if you add the random words to the Spells themselves this would be easier
 	#spell_stack_strings = GlobalSpells.known_spell_random_words[spell.spell_name]
-	spell_stack_strings = GlobalSpells.get_words_for_spell(spell, randi_range(2, 2))
+	spell_stack_strings = GlobalSpells.get_words_for_spell(spell, randi_range(1, 2))
 	initialize_stack_word_children()
 
 

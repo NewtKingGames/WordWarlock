@@ -25,8 +25,6 @@ func _ready() -> void:
 	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
 
 func _on_player_entered_toggle_area(toggle_value: bool) -> void:
-	print("toggling enabled")
-	print(toggle_value)
 	is_enabled = toggle_value
 	clear_stacks()
 
@@ -79,7 +77,6 @@ func _on_player_typed_string(string: String) -> void:
 		return
 	# If player has currently entered the spell string
 	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper():
-		# TODO - emit a new global signal here which we can then use in the keyboard state to hihglight the enter or space bar
 		Events.current_string_matches.emit(string)
 	# If player entered the spell string and then hit "space"
 	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper() + " ":

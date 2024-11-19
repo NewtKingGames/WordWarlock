@@ -45,6 +45,8 @@ func _ready() -> void:
 	letter_icon_array.append(keyboard_letter_four)
 	
 	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
+	
+	letter_icon_array[equipped_index].key_pressed_stick_key()
 
 func _process(delta: float) -> void:
 	if not is_active:
