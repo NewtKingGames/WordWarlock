@@ -18,8 +18,6 @@ func add_letter(letter: String):
 	child_text_node.text = letter
 	# This helps center the list of letters
 	child_text_node.position = Vector2(letter_position_offset*(current_string.length()-1), 0)
-	print("added child!")
-	print(letter)
 	slide_all_previous_letters_left(child_text_node.position)
 	add_child(child_text_node)
 

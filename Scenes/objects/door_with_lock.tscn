@@ -150,34 +150,28 @@ sprite_frames = SubResource("SpriteFrames_xma44")
 animation = &"unlock"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 16
 collision_mask = 31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-visible = false
 position = Vector2(0, 1.65707)
 scale = Vector2(1.5323, 1.63141)
 shape = SubResource("RectangleShape2D_55u0t")
 
 [node name="TeleportArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea"]
-visible = false
 position = Vector2(-1.77636e-15, -11)
 scale = Vector2(1.15512, 1.61631)
 shape = SubResource("RectangleShape2D_x428r")
 debug_color = Color(0.516114, 0.569848, 0.241732, 0.42)
 
 [node name="WalkUpArea" type="Area2D" parent="."]
-visible = false
 scale = Vector2(0.821456, 0.821456)
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WalkUpArea"]
-visible = false
 scale = Vector2(7.40086, 6.33789)
 shape = SubResource("CircleShape2D_o68jy")
 debug_color = Color(0.695632, 0.492149, 0.138589, 0.42)
@@ -197,6 +191,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UnlockNoise" type="AudioStreamPlayer2D" parent="."]
+visible = false
 stream = ExtResource("6_bn1qq")
 
 [node name="OpenNoise" type="AudioStreamPlayer2D" parent="."]
