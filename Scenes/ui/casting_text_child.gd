@@ -2,6 +2,7 @@ class_name CastingTextChild extends Label
 var letter_position_offset: float = 20
 var speed_offset: float = Engine.time_scale
 
+var match_string_tween: Tween
 # TODO - play around with these effects in the future
 
 # On ready the text should pop up
@@ -17,7 +18,6 @@ func other_letter_removed_effect():
 func remove():
 	queue_free()
 
-# Temp code stolen from the game jam
 func rotate_text_start():
 	var tween_size: Tween = create_tween().parallel()
 	var tween_rotate: Tween = create_tween()
@@ -47,3 +47,15 @@ func slide_text(direction: int):
 	tween_rotate.tween_property(self, "rotation_degrees", rotation * direction, 0.1 * speed_offset)
 	tween_rotate.tween_property(self, "rotation_degrees", 0, 0.1 * speed_offset)
 	#tween_position.tween_property(self, "position", Vector2(position.x + letter_position_offset*direction, position.y), 0.1 * speed_offset)
+
+func hover_text(delay_start: float):
+	await get_tree().create_timer(delay_start).timeout
+	match_string_tween = create_tween().set_loops()
+	# TODO - Unfortunately doing this in a tween will result in some wonkiness when time slows/speeds up... Eventually move to proce
+	match_string_tween.tween_property(self, "position", Vector2(position.x, position.y + 5) , 0.5 * speed_offset)
+	match_string_tween.tween_property(self, "position", Vector2(position.x, position.y - 5) , 0.5 * speed_offset)
+
+func stop_hover_text() -> void:
+	position = Vector2(position.x, 0)
+	if match_string_tween:
+		match_string_tween.kill()

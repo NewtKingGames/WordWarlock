@@ -19,7 +19,10 @@ var rng = RandomNumberGenerator.new()
 # TODO Change the audio on these to be more magical rather than a type writer
 var typing_noises: Array
 var regex: RegEx = RegEx.new()
-var cast_string: String = ""
+var cast_string: String = "" :
+	set(value):
+		cast_string = value
+		Events.current_string_typed.emit(cast_string)
 
 func _ready():
 	regex.compile("[a-zA-Z]")
@@ -78,7 +81,6 @@ func Handle_Input(_event: InputEvent):
 		elif _event.is_action_pressed("backspace") and cast_string.length() > 0:
 			cast_string = cast_string.left(cast_string.length() - 1)
 			casting_text_parent.delete_letter()
-		Events.current_string_typed.emit(cast_string)
 		if GlobalSpells.is_string_known_spell(cast_string):
 			var spell = GlobalSpells.get_known_spell_for_string(cast_string)
 			casting_text_parent.set_modulate(spell.get_spell_color())

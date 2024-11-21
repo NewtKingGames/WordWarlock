@@ -73,7 +73,7 @@ func _on_child_spell_stack_completed(spell_stack: SpellStack) -> void:
 
 func _on_player_typed_string(string: String) -> void:
 	var spell_stack: SpellStack = get_active_spell_stack()
-	if not spell_stack:
+	if not spell_stack or spell_stack.spell_stack_word_children.size() == 0:
 		return
 	# If player has currently entered the spell string
 	if string.to_upper() == spell_stack.spell_stack_word_children[0].word.to_upper():

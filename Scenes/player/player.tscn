@@ -504,6 +504,7 @@ one_shot = true
 z_index = 2
 position = Vector2(0, 8.25)
 scale = Vector2(0.5, 0.5)
+is_attached_to_player = true
 
 [node name="Keyboard" parent="." instance=ExtResource("19_hd66t")]
 z_index = 3
