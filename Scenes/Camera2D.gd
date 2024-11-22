@@ -15,6 +15,7 @@ func _ready():
 	Globals.connect("player_damage", apply_shake)
 	player.connect("slowdown_effect_entered", on_slowdown_effect_entered)
 	player.connect("slowdown_effect_exited", on_slowdown_effect_exited)
+	#Events.current_string_typed.connect(apply_shake_small)
 	
 func _process(delta):
 	# Shake camera when player is damaged
@@ -31,6 +32,9 @@ func _process(delta):
 	
 func apply_shake():
 	shake_strength = random_strength
+
+func apply_shake_small(string: String):
+	shake_strength = 0.6
 
 func on_slowdown_effect_entered():
 	camera_target_zoom = Vector2(2, 2)

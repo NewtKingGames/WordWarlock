@@ -12,6 +12,7 @@ var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard
 var letter_dictionary = {}
 
 var is_highlight_on: bool = false
+var highlight_tween: Tween
 
 func _ready():
 	#visible = false
@@ -82,7 +83,13 @@ func _on_player_typed_string(string: String) -> void:
 		enter.modulate = Color.WHITE
 		spacebar.modulate = Color.WHITE
 		is_highlight_on = false
+		highlight_tween.kill()
 
 func highlight_letter(keyboard_letter: KeyboardLetter) -> void:
+	# This doesn't totally work because we only keep one reference to the tween when theres two
+	# TODO - switch this to the child class?
+	highlight_tween = create_tween().set_loops()
+	highlight_tween.tween_property(keyboard_letter, "modulate", Color(0.93, 0.755, 0.149), 0.5 * Engine.time_scale)
+	highlight_tween.tween_property(keyboard_letter, "modulate", Color(1, 1, 1), 0.5 * Engine.time_scale)
 	# TODO - make these effects nicer
-	keyboard_letter.modulate = Color(0.93, 0.755, 0.149)
+	#keyboard_letter.modulate = Color(0.93, 0.755, 0.149)
