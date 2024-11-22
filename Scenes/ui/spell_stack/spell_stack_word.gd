@@ -2,12 +2,9 @@ class_name SpellStackWord extends Label
 
 var word: String:
 	set(string):
-		print(string)
 		word = string
 		text = string
 		pivot_offset = Vector2(size.x/2, size.y/2)
-		print("pivot offset!!")
-		print(pivot_offset)
 var position_in_stack: int # does it make sense to have this here or should the parent be in control of that?
 
 @export var HIGHLIGHT_COLOR: Color
@@ -16,6 +13,14 @@ func _ready() -> void:
 	var tween: Tween = create_tween().set_loops()
 	tween.tween_property(self, "modulate", HIGHLIGHT_COLOR, 0.5)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.5)
+	appear_effects() # TODO - you could change this to do the effect every time it becomes visible?
 
 func _process(delta: float) -> void:
+	# Keep pivot offset within the center
 	pivot_offset = Vector2(size.x/2, size.y/2)
+	pass
+
+func appear_effects() -> void:
+	scale.y = 0
+	var tween_scale: Tween = create_tween()
+	tween_scale.tween_property(self, "scale", Vector2(scale.x, 1), 0.33*Engine.time_scale).set_ease(Tween.EASE_OUT)
