@@ -3,8 +3,8 @@ var letter_position_offset: float = 20
 
 
 var should_hover: bool = false
-@onready var max_y_hover: float = position.y + 5
-@onready var min_y_hover: float = position.y - 5
+@onready var max_y_hover: float = position.y + 4
+@onready var min_y_hover: float = position.y - 4
 var hover_direction: int = 1
 var match_string_tween: Tween
 # TODO - play around with these effects in the future
@@ -16,7 +16,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if should_hover:
-		position.y = position.y + (hover_direction * delta * 20) / Engine.time_scale
+		position.y = position.y + (hover_direction * delta * 15) / Engine.time_scale
 		position.y = clampf(position.y, min_y_hover, max_y_hover)
 		if position.y == max_y_hover:
 			hover_direction = -1
