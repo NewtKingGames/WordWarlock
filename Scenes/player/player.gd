@@ -256,8 +256,8 @@ func autocast_spell():
 			spell_target = closest_enemy.global_position
 		else:
 			# TODO maybe shoot the spell in a random direction? Right now just shooting it right
-			spell_target = global_position + Vector2(75, 0)
-			print("Found no enemies close enough!!")
+			var random_direction: Vector2 = Vector2(randi_range(-75, 75), randi_range(-75, 75))
+			spell_target = global_position + random_direction
 		# Get vector betwen player and closest enemy
 		queued_spell.direction = (spell_target - global_position).normalized()
 		# Put the spell from the aiming origin + some distance the player is looking
