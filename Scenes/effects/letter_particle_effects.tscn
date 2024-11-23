@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqw236xsqlqxq"]
+
+[ext_resource type="Texture2D" uid="uid://esnyg0tlx8vg" path="res://Sprites/Keyboard Letters and Symbols Only Font.png" id="1_ac7io"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mgxce"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 14
+particles_anim_loop = false
+
+[node name="LetterParticleEffects" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_mgxce")
+amount = 6
+lifetime = 3.0
+texture = ExtResource("1_ac7io")
+gravity = Vector2(2.08165e-12, 200)
+anim_offset_min = 0.14
+anim_offset_max = 0.318
