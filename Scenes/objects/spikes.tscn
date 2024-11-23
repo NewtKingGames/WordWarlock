@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://by5ogfiac5bt"]
+
+[ext_resource type="Script" path="res://Scenes/objects/spikes.gd" id="1_5r0so"]
+[ext_resource type="Texture2D" uid="uid://cqigu0yu4aehp" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f2.png" id="1_822il"]
+[ext_resource type="Texture2D" uid="uid://bbhlt5ekusi1t" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f3.png" id="2_um23v"]
+[ext_resource type="Texture2D" uid="uid://duy68i8tgsmmq" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f4.png" id="3_vp4go"]
+[ext_resource type="Texture2D" uid="uid://diqsfsj80isb8" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f5.png" id="4_g0xo2"]
+[ext_resource type="Texture2D" uid="uid://b4vr3ma3viiqv" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f6.png" id="5_3sdqc"]
+[ext_resource type="Texture2D" uid="uid://y8yfgw0yahyc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f7.png" id="6_3qwct"]
+[ext_resource type="Texture2D" uid="uid://dg3sbrxmpg4l" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f8.png" id="7_ykrol"]
+[ext_resource type="Texture2D" uid="uid://bqfydl0hrclyq" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f9.png" id="8_yvigh"]
+[ext_resource type="Texture2D" uid="uid://cq22ra8i1jyvb" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f1.png" id="9_lviet"]
+[ext_resource type="Texture2D" uid="uid://cmtukcapitcuk" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f0.png" id="10_lhvxg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kayk5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_822il")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_um23v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vp4go")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g0xo2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3sdqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3qwct")
+}],
+"loop": false,
+"name": &"activate_spikes",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_3qwct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ykrol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yvigh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3sdqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vp4go")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lviet")
+}],
+"loop": false,
+"name": &"deactivate_spikes",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_lhvxg")
+}],
+"loop": false,
+"name": &"no_spikes",
+"speed": 5.0
+}]
+
+[node name="Spikes" type="Node2D"]
+script = ExtResource("1_5r0so")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kayk5")
+animation = &"no_spikes"
+autoplay = "no_spikes"
