@@ -24,7 +24,7 @@ func add_letter(letter: String):
 func slide_all_previous_letters_left(furthest_right_pos: Vector2):
 	var index: int = 0
 	for letter in get_children():
-		if letter is tChild:
+		if letter is CastingTextChild:
 			# TODO see if you can get the tween solution working someday
 			#var tween: Tween = create_tween().parallel()
 			#tween.tween_property(letter, "position", Vector2(furthest_right_pos.x -(letter_position_offset * (current_string.length()-index)), letter.position.y), 0.05 * Engine.time_scale)

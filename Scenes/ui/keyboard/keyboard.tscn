@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://crdvx4y4114mv"]
+[gd_scene load_steps=6 format=3 uid="uid://crdvx4y4114mv"]
 
 [ext_resource type="Script" path="res://Scenes/ui/keyboard/keyboard.gd" id="1_aua3d"]
 [ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="2_fev0j"]
 [ext_resource type="Texture2D" uid="uid://dvmi102ujpxer" path="res://Sprites/Keyboard Extras.png" id="3_kkht4"]
 [ext_resource type="PackedScene" uid="uid://ct83717axhedp" path="res://Scenes/audio/typing_noises.tscn" id="4_5qryo"]
+[ext_resource type="PackedScene" uid="uid://bqw236xsqlqxq" path="res://Scenes/effects/letter_particle_effects.tscn" id="5_b50ew"]
 
 [node name="Keyboard" type="Node2D" groups=["keyboard"]]
 z_index = 2
 script = ExtResource("1_aua3d")
+
+[node name="LetterParticleEffects" parent="." instance=ExtResource("5_b50ew")]
+position = Vector2(-9, -42)
 
 [node name="Letters" type="Node2D" parent="."]
 
