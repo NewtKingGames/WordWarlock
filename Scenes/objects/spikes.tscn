@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://by5ogfiac5bt"]
+[gd_scene load_steps=14 format=3 uid="uid://by5ogfiac5bt"]
 
 [ext_resource type="Script" path="res://Scenes/objects/spikes.gd" id="1_5r0so"]
 [ext_resource type="Texture2D" uid="uid://cqigu0yu4aehp" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f2.png" id="1_822il"]
@@ -69,10 +69,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyyea"]
+
 [node name="Spikes" type="Node2D"]
+scale = Vector2(4, 4)
 script = ExtResource("1_5r0so")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kayk5")
 animation = &"no_spikes"
 autoplay = "no_spikes"
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+scale = Vector2(0.79731, 0.79731)
+shape = SubResource("RectangleShape2D_gyyea")
+debug_color = Color(0.767683, 0.408199, 0.489149, 0.42)

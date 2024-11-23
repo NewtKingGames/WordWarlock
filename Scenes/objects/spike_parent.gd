@@ -8,8 +8,8 @@ extends Node2D
 #@export var auto_start_spikes: bool = true
 @export var is_spikes_on_timer: bool = true
 # Timer values used if the above boolean is true
-@export var activate_spike_delay: float = 5
-@export var deactivate_spike_delay: float = 5
+@export var activate_spike_delay: float = 3
+@export var deactivate_spike_delay: float = 1.5
 
 func _ready() -> void:
 	get_tree().create_timer(activate_spike_delay).timeout.connect(activate_spikes)
@@ -23,4 +23,7 @@ func activate_spikes() -> void:
 
 func deactivate_spikes() -> void:
 	deactivate_spike_noise.play()
+	for spike_child in spike_nodes.get_children():
+		if spike_child is Spikes:
+			spike_child.deactivate_spikes()
 	get_tree().create_timer(deactivate_spike_delay).timeout.connect(activate_spikes)
