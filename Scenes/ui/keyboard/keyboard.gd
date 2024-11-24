@@ -12,7 +12,7 @@ var keyboard_letter_scene: PackedScene = load("res://Scenes/ui/keyboard/keyboard
 var letter_dictionary = {}
 
 var is_highlight_on: bool = false
-var highlight_tween: Tween
+var highlight_tweens: Array[Tween] = []
 
 func _ready():
 	#visible = false
@@ -76,21 +76,29 @@ func get_random_active_key() -> KeyboardLetter:
 
 func _on_current_string_matches(string: String) -> void:
 	is_highlight_on = true
-	highlight_letter(enter)
-	highlight_letter(spacebar)
+	highlight_letters([enter, spacebar])
+	#highlight_letter(spacebar)
 
 func _on_player_typed_string(string: String) -> void:
 	if is_highlight_on:
+		for tween in highlight_tweens:
+			tween.kill()
+			highlight_tweens = []
 		enter.modulate = Color.WHITE
 		spacebar.modulate = Color.WHITE
 		is_highlight_on = false
-		highlight_tween.kill()
+		#print(highlight_tween)
 
-func highlight_letter(keyboard_letter: KeyboardLetter) -> void:
+func highlight_letters(keyboard_letters: Array[KeyboardLetter]) -> void:
 	# This doesn't totally work because we only keep one reference to the tween when theres two
 	# TODO - switch this to the child class?
-	highlight_tween = create_tween().set_loops()
-	highlight_tween.tween_property(keyboard_letter, "modulate", Color(0.93, 0.755, 0.149), 0.5 * Engine.time_scale)
-	highlight_tween.tween_property(keyboard_letter, "modulate", Color(1, 1, 1), 0.5 * Engine.time_scale)
+	#if highlight_tween: 
+		#highlight_tween.kill()
+	for keyboard_letter in keyboard_letters: 
+		var highlight_tween: Tween = create_tween().set_loops()
+		print("going to tween this object")
+		highlight_tween.tween_property(keyboard_letter, "modulate", Color(0.93, 0.755, 0.149), 0.5 * Engine.time_scale)
+		highlight_tween.tween_property(keyboard_letter, "modulate", Color(1, 1, 1), 0.5 * Engine.time_scale)
+		highlight_tweens.append(highlight_tween)
 	# TODO - make these effects nicer
 	#keyboard_letter.modulate = Color(0.93, 0.755, 0.149)
