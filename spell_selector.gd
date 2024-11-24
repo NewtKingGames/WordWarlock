@@ -1,12 +1,15 @@
 extends Node2D
 
 signal player_equipped_spell(spell_name: String)
+signal player_equipped_spell_resource(spell_resource: SpellResource)
 # TODO - you could think about a fun way of letting the player auto cycle through their spells?
 # TODO - this is really gross right now because spells are a node and not a resource....
 @export var available_spells: Array[String] = []
+@export var available_spell_resources: Array[SpellResource] = []
 
 # TODO - need to make sure this get's initialized correctly
 @export var equipped_spell: String
+@export var equipped_spell_resource: SpellResource
 @export var is_active: bool = true
 var equipped_index: int = 0
 
@@ -43,7 +46,7 @@ func _ready() -> void:
 	letter_icon_array.append(keyboard_letter_two)
 	letter_icon_array.append(keyboard_letter_three)
 	letter_icon_array.append(keyboard_letter_four)
-	
+	player_equipped_spell_resource.emit(equipped_spell_resource)
 	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
 	
 	letter_icon_array[equipped_index].key_pressed_stick_key()
@@ -71,8 +74,11 @@ func equip_spell(index: int) -> void:
 	do_equip_effects(equipped_index, index)
 	equipped_index = index
 	equipped_spell = available_spells[index]
-	# TODO - need to make these dynamic!!
+	equipped_spell_resource = available_spell_resources[index]
+	# TODO - eventually fully refactor to resource flow
 	player_equipped_spell.emit(equipped_spell)
+	player_equipped_spell_resource.emit(equipped_spell_resource)
+	
 
 func do_equip_effects(old_index: int, new_index: int) -> void:
 	letter_icon_array[new_index].key_pressed_stick_key()

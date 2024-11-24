@@ -35,6 +35,7 @@ func _ready():
 func _on_player_spell_key_pressed(letter_input: String):
 	key_pressed(letter_input)
 
+# This is where we change the visibllity
 func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_scene):
 	#visible = is_casting_active
 	var tween = create_tween()

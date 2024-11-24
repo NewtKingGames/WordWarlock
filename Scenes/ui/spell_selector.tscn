@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfe2dxet4lf1v"]
+[gd_scene load_steps=12 format=3 uid="uid://bfe2dxet4lf1v"]
 
 [ext_resource type="Script" path="res://spell_selector.gd" id="1_0bnuv"]
+[ext_resource type="Resource" uid="uid://bewx2xc3dni1j" path="res://Scripts/Spells/ResourceBasedSpells/Implementations/fireball_resource.tres" id="2_1vmit"]
 [ext_resource type="PackedScene" uid="uid://47od46f865bb" path="res://Scenes/ui/equip_spell_icon.tscn" id="2_dsx8o"]
 [ext_resource type="PackedScene" uid="uid://bev0g8poixok" path="res://Scenes/ui/keyboard/keyboard_letter.tscn" id="3_bibr0"]
+[ext_resource type="Resource" uid="uid://d2y0t26nfnpom" path="res://Scripts/Spells/ResourceBasedSpells/Implementations/ice_shield_resource.tres" id="3_xsspr"]
+[ext_resource type="Resource" uid="uid://cxwnko60enpfj" path="res://Scripts/Spells/ResourceBasedSpells/Implementations/thunderstorm_resource.tres" id="4_54xxk"]
 [ext_resource type="Texture2D" uid="uid://c1gb3ubtx12g3" path="res://Sprites/Spells/Ice/Ball of ice.png" id="4_68c73"]
+[ext_resource type="Resource" uid="uid://blokynehrwh36" path="res://Scripts/Spells/ResourceBasedSpells/Implementations/boomerang_resource.tres" id="5_q63b6"]
 [ext_resource type="Texture2D" uid="uid://b5smhlcfn7y11" path="res://Sprites/Spells/Thunder.png" id="5_xmq1d"]
 [ext_resource type="Texture2D" uid="uid://ccvvmalch3dea" path="res://Sprites/Boomerangs-Sheet.png" id="6_vs5eb"]
 [ext_resource type="PackedScene" uid="uid://ct83717axhedp" path="res://Scenes/audio/typing_noises.tscn" id="7_7erjh"]
@@ -11,7 +15,9 @@
 [node name="SpellSelector" type="Node2D"]
 script = ExtResource("1_0bnuv")
 available_spells = Array[String](["FIREBALL", "ICE SHIELD", "THUNDERSTORM", "BOOMERANG"])
+available_spell_resources = Array[Resource("res://Scripts/Spells/ResourceBasedSpells/Base/spell_resource.gd")]([ExtResource("2_1vmit"), ExtResource("3_xsspr"), ExtResource("4_54xxk"), ExtResource("5_q63b6")])
 equipped_spell = "FIREBALL"
+equipped_spell_resource = ExtResource("2_1vmit")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
