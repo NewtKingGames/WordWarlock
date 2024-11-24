@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FireballResource" load_steps=2 format=3 uid="uid://bewx2xc3dni1j"]
+
+[ext_resource type="Script" path="res://Scripts/Spells/ResourceBasedSpells/Implementations/fireball_resource.gd" id="1_l6oer"]
+
+[resource]
+script = ExtResource("1_l6oer")
+speed = 0.0
+target = Vector2(0, 0)
+spell_damage = 0.0
+spell_name = "FIREBALL"
+associated_words = Array[String]([])
+primary_color = Color(0.702247, 0.0550046, 0.0844742, 1)
+secondary_color = Color(0.941176, 0.243137, 0, 1)

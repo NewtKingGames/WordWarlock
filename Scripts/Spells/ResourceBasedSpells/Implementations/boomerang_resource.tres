@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BoomerangResource" load_steps=2 format=3 uid="uid://blokynehrwh36"]
+
+[ext_resource type="Script" path="res://Scripts/Spells/ResourceBasedSpells/Implementations/boomerang_resource.gd" id="1_o2w8e"]
+
+[resource]
+script = ExtResource("1_o2w8e")
+speed = 0.0
+target = Vector2(0, 0)
+spell_damage = 0.0
+spell_name = "BOOMERANG"
+associated_words = Array[String]([])
+primary_color = Color(0.584407, 0.000752751, 0.679973, 1)
+secondary_color = Color(1, 0.698039, 1, 1)

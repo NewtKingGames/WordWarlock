@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IceShieldResource" load_steps=2 format=3 uid="uid://d2y0t26nfnpom"]
+
+[ext_resource type="Script" path="res://Scripts/Spells/ResourceBasedSpells/Implementations/ice_shield_resource.gd" id="1_ebgy5"]
+
+[resource]
+script = ExtResource("1_ebgy5")
+spell_name = "ICE SHIELD"
+associated_words = Array[String]([])
+primary_color = Color(5.07951e-06, 0, 0.941472, 1)
+secondary_color = Color(0, 0.984314, 0.937255, 1)
