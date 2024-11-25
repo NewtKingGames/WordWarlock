@@ -11,8 +11,15 @@ var position_in_stack: int # does it make sense to have this here or should the 
 
 func _ready() -> void:
 	var tween: Tween = create_tween().set_loops()
-	tween.tween_property(self, "modulate", HIGHLIGHT_COLOR, 0.5)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.5)
+	# TODO - you could update these tweens to use set_speed_scale to compensate for the slow mo effect!!
+	#tween.set_speed_scale()
+	if SpellSelector:
+		modulate = SpellSelector.equipped_spell_resource.primary_color
+		tween.tween_property(self, "modulate", SpellSelector.equipped_spell_resource.secondary_color, 0.5)
+		tween.tween_property(self, "modulate", SpellSelector.equipped_spell_resource.primary_color, 0.5)
+	else:
+		tween.tween_property(self, "modulate", HIGHLIGHT_COLOR, 0.5)
+		tween.tween_property(self, "modulate", Color.WHITE, 0.5)
 	appear_effects() # TODO - you could change this to do the effect every time it becomes visible?
 
 func _process(delta: float) -> void:
