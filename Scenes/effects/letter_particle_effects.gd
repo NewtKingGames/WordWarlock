@@ -6,6 +6,7 @@ func _ready() -> void:
 	# Solve this by manually calling the equip function with the current equipped spell
 	_on_spell_equipped(SpellSelector.equipped_spell_resource)
 	SpellSelector.player_equipped_spell_resource.connect(_on_spell_equipped)
+	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
 
 func _process(delta: float) -> void:
 	speed_scale = 1 / Engine.time_scale
@@ -20,3 +21,6 @@ func _on_spell_equipped(spell: SpellResource) -> void:
 	color_ramp.set_color(2, spell.secondary_color)
 	color_ramp.set_color(3, clear_secondary)
 # The original purple color I set for this node was Color(0.514, 0.404, 1) 
+
+func _on_player_entered_toggle_area(value: bool) -> void:
+	visible = value
