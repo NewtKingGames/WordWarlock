@@ -1,6 +1,6 @@
 extends ColorRect
 
-
+# TODO - think about deleting
 func _ready() -> void:
 	#var tween: Tween = create_tween()
 	#set_shader_value(0)

@@ -31,7 +31,6 @@ var queued_spell: Spell
 var queued_spell_scene: PackedScene
 var queued_spell_ammo: int = 0
 
-var is_spell_book_open: bool = false
 var is_player_casting: bool = false
 
 var knockback_direction: Vector2 = Vector2.ZERO
@@ -90,14 +89,6 @@ func _process(delta):
 		$DamageAnimationPlayer.play("damage_flash")
 	if can_take_damage:
 		$DamageAnimationPlayer.stop()
-	# TODO - it's probably worth creating an entire new state for the spell book logic
-	if state_machine.current_state != $StateMachine/Cast:
-		if Input.is_action_just_pressed("spell_book"):
-			is_spell_book_open = (bool)(!is_spell_book_open)
-		if is_spell_book_open:
-			Engine.time_scale = 0
-		else:
-			Engine.time_scale = 1
 			
 	# Handling player slowdown bar
 	if is_player_casting:
