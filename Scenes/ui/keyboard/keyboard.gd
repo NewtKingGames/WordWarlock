@@ -14,6 +14,10 @@ var letter_dictionary = {}
 var is_highlight_on: bool = false
 var highlight_tweens: Array[Tween] = []
 
+# TODO - consider using a global variable for the players current typed word...
+var length_current_string: int = 0
+	
+
 func _ready():
 	#visible = false
 	modulate = Color(1,1,1,0)
@@ -29,11 +33,6 @@ func _ready():
 	letter_dictionary["Space"] = spacebar
 	Events.current_string_matches.connect(_on_current_string_matches)
 	Events.current_string_typed.connect(_on_player_typed_string)
-	
-	
-
-func _on_player_spell_key_pressed(letter_input: String):
-	key_pressed(letter_input)
 
 # This is where we change the visibllity
 func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_scene):
@@ -49,7 +48,7 @@ func key_pressed(letter_input: String) -> String:
 	if not letter_dictionary.has(letter_input):
 		return ""
 	
-	typing_noises.play_typing_noise()
+	typing_noises.play_typing_noise_pitch_modifier(Globals.current_player_typed_string.length())
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	if letter.letter_active:
 		letter.key_pressed()

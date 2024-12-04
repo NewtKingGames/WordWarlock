@@ -14,6 +14,10 @@ var engine_slowdown_magnitude: float = 0.25
 var time_scale_offset: float = 1 
 
 var is_player_casting: bool = false
+var current_player_typed_string: String = "": 
+	set(value):
+		current_player_typed_string = value
+		Events.current_string_typed.emit(current_player_typed_string)
 
 func _ready() -> void:
 	Events.player_entered_casting_state.connect(_on_player_entered_casting)

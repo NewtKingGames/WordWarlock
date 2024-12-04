@@ -38,6 +38,7 @@ scale = Vector2(4.08508, 4.08508)
 
 [node name="Player" parent="." index="5"]
 position = Vector2(941, 2415)
+spell_spawn_distance = null
 
 [node name="LevelMusic" parent="Player" index="14"]
 stream = ExtResource("3_dmatl")

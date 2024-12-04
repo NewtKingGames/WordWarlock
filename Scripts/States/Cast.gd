@@ -16,17 +16,10 @@ var keyboard: Keyboard
 
 var rng = RandomNumberGenerator.new()
 
-# TODO Change the audio on these to be more magical rather than a type writer
-var typing_noises: Array
 var regex: RegEx = RegEx.new()
-var cast_string: String = "" :
-	set(value):
-		cast_string = value
-		Events.current_string_typed.emit(cast_string)
 
 func _ready():
 	regex.compile("[a-zA-Z]")
-	typing_noises = $"../../Sounds/TypingSounds".get_children()
 	keyboard = get_tree().get_first_node_in_group("keyboard")
 	Events.clear_typed_string.connect(_on_clear_typed_string)
 
@@ -42,7 +35,7 @@ func Enter():
 
 func Exit():
 	casting_text_parent.visible = false
-	var casted_spell = String(cast_string)
+	var casted_spell = String(Globals.current_player_typed_string)
 	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)
 	# old signal
 	cast_spell_state_changed.emit(false, casted_spell, spell_scene)
@@ -52,12 +45,12 @@ func Exit():
 func Update(_delta: float):
 	# Player Casting Spell
 	if Input.is_action_just_pressed("enter"):
-		if cast_string == "":
+		if Globals.current_player_typed_string == "":
 			Transitioned.emit(self, "idle")
 			return
 		# TODO - if you ever want to reintroduce old style you'll need this back!!!
 		#Transitioned.emit(self, "idle")
-		Events.player_entered_spell_string.emit(cast_string)
+		Events.player_entered_spell_string.emit(Globals.current_player_typed_string)
 		_clear_entered_text()
 	# Player Cancelling Spell
 	elif Input.is_action_just_pressed("exit"):
@@ -70,26 +63,26 @@ func Handle_Input(_event: InputEvent):
 		var keyboard_letter: String = keyboard.key_pressed(event_string)
 		if regex.search(event_string) and event_string.length() == 1:
 			if keyboard_letter != "":
-				cast_string += event_string
+				Globals.current_player_typed_string += event_string
 				casting_text_parent.add_letter(event_string)
 			else:
 				# Play error noise
 				$"../../Sounds/TypingSounds/ErrorTypingNoise".play()
-		elif _event.is_action_pressed("space") and cast_string.length() > 0:
-			cast_string += " "
+		elif _event.is_action_pressed("space") and Globals.current_player_typed_string.length() > 0:
+			Globals.current_player_typed_string += " "
 			casting_text_parent.add_letter(" ")
-		elif _event.is_action_pressed("backspace") and cast_string.length() > 0:
-			cast_string = cast_string.left(cast_string.length() - 1)
+		elif _event.is_action_pressed("backspace") and Globals.current_player_typed_string.length() > 0:
+			Globals.current_player_typed_string = Globals.current_player_typed_string.left(Globals.current_player_typed_string.length() - 1)
 			casting_text_parent.delete_letter()
-		if GlobalSpells.is_string_known_spell(cast_string):
-			var spell = GlobalSpells.get_known_spell_for_string(cast_string)
+		if GlobalSpells.is_string_known_spell(Globals.current_player_typed_string):
+			var spell = GlobalSpells.get_known_spell_for_string(Globals.current_player_typed_string)
 			casting_text_parent.set_modulate(spell.get_spell_color())
 		else:
 			casting_text_parent.set_modulate(Color.WHITE)
 		
 
 func _clear_entered_text() -> void:
-	cast_string = ""
+	Globals.current_player_typed_string = ""
 	casting_text_parent.clear_letters()
 
 func _on_clear_typed_string() -> void:
