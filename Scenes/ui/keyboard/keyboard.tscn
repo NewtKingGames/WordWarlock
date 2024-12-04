@@ -16,7 +16,6 @@ emission_shape = 3
 emission_rect_extents = Vector2(10, 20)
 initial_velocity_min = 20.0
 initial_velocity_max = 30.0
-angular_velocity_min = 1.4988e-14
 orbit_velocity_max = 0.3
 damping_max = 60.119
 scale_amount_min = 4.0

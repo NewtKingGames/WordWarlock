@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6a10q4q0e11e"]
+[gd_scene load_steps=9 format=3 uid="uid://6a10q4q0e11e"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/level.tscn" id="1_k3s2w"]
 [ext_resource type="TileSet" uid="uid://ktkipmj84kfd" path="res://Scenes/levels/test_level.tres" id="2_1qgbe"]
@@ -8,16 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://b80l514pmvd3d" path="res://Scenes/enemies/target_dummy.tscn" id="6_2hxde"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="7_sfmrn"]
 [ext_resource type="PackedScene" uid="uid://bwntle5lhlhw5" path="res://Scenes/ui/dialogue/dialogue_player.tscn" id="8_4deks"]
-[ext_resource type="PackedScene" uid="uid://bj5o5mbqcjlvs" path="res://Scenes/objects/spike_parent.tscn" id="9_kdx5k"]
-[ext_resource type="PackedScene" uid="uid://by5ogfiac5bt" path="res://Scenes/objects/spikes.tscn" id="10_6dt0t"]
 
 [node name="HubLevel" instance=ExtResource("1_k3s2w")]
 
-[node name="DoorWithLock" parent="." index="0" instance=ExtResource("4_pghoj")]
-position = Vector2(936, 571)
-scale = Vector2(4.08508, 4.08508)
+[node name="ColorRect" parent="CanvasLayer" index="0"]
+offset_top = 3.0
+offset_bottom = 43.0
 
-[node name="TileMap" type="TileMap" parent="." index="1"]
+[node name="TileMap" type="TileMap" parent="." index="3"]
 position = Vector2(-25, 59)
 scale = Vector2(4, 4)
 tile_set = ExtResource("2_1qgbe")
@@ -34,56 +32,60 @@ layer_4/name = "cieling"
 layer_4/z_index = 4
 layer_4/tile_data = PackedInt32Array(851987, 262144, 5, 917523, 262144, 6, 851978, 196608, 5, 917514, 196608, 6, 2228235, 196608, 5, 2162699, 196608, 5, 2228242, 262144, 5, 2162706, 262144, 5, 2097166, 458752, 6, 2097167, 524288, 6, 2031622, 262144, 6, 2031623, 327680, 6, 1966085, 262144, 6, 1966086, 327680, 6, 1900548, 262144, 6, 1900549, 327680, 6, 1835011, 262144, 6, 1835012, 327680, 6, 1769474, 262144, 6, 1769475, 327680, 6, 2031638, 131072, 6, 2031639, 196608, 6, 1966103, 131072, 6, 1966104, 196608, 6, 1900568, 131072, 6, 1900569, 196608, 6, 1835033, 131072, 6, 1835034, 196608, 6, 1769498, 131072, 6, 1769499, 196608, 6, 1638417, 327680, 7, 1572881, 262144, 5, 1507345, 262144, 5, 1638412, 65536, 7, 1572876, 196608, 5, 1507340, 196608, 5, 1376273, 262144, 1342177285, 1376272, 262144, 1342177285, 1376271, 262144, 1342177285, 1376270, 262144, 1342177285, 1376269, 262144, 1342177285, 1376268, 262144, 1342177285, 2097163, 131072, 6, 2097170, 131072, 6, 2097169, 131072, 6, 2097168, 131072, 6, 2097165, 131072, 6, 2097164, 131072, 6, 1441809, 262144, 5, 1441804, 196608, 5, 1638413, 131072, 7, 1638414, 131072, 7, 1638415, 131072, 7, 1638416, 131072, 7, 1245187, 196608, 6, 1179652, 196608, 6, 1114117, 196608, 6, 1048582, 196608, 6, 983047, 196608, 6, 1245186, 131072, 6, 1179651, 131072, 6, 1114116, 131072, 6, 1048581, 131072, 6, 983046, 131072, 6, 917511, 131072, 6, 983062, 262144, 6, 1048599, 262144, 6, 1179673, 262144, 6, 1245210, 262144, 6, 917526, 327680, 6, 983063, 327680, 6, 1179674, 327680, 6, 1245211, 327680, 6, 720906, 196608, 5, 786442, 196608, 5, 720915, 262144, 5, 786451, 262144, 5, 458767, 524288, 6, 917512, 131072, 6, 917513, 131072, 6, 917524, 327680, 6, 917525, 327680, 6, 1048600, 327680, 6, 1114136, 262144, 6, 1114137, 327680, 6, 589842, 327680, 6, 655378, 262144, 6, 655379, 327680, 6, 524305, 327680, 6, 589841, 262144, 6, 458768, 327680, 6, 524304, 262144, 6, 655370, 131072, 6, 589835, 131072, 6, 655371, 196608, 6, 589836, 196608, 6, 524300, 131072, 6, 458765, 131072, 6, 524301, 196608, 6, 458766, 458752, 6, 1245184, 65536, 7, 1245185, 131072, 7, 1179648, 196608, 5, 1114112, 196608, 5, 1048576, 196608, 5, 983040, 196608, 5, 983038, 196608, 1610612741, 983039, 196608, 1610612741, 983037, 196608, 1610612741, 983035, 196608, 1610612741, 983036, 196608, 1610612741, 983034, 196608, 1610612741, 983033, 196608, 1610612741, 983032, 196608, 1610612741, 983031, 196608, 1610612741, 983030, 196608, 1610612741, 1048565, 262144, 5, 1114101, 262144, 5, 1179637, 262144, 5, 1245173, 262144, 5, 1310709, 262144, 5, 1376245, 262144, 5, 1441781, 262144, 5, 1507317, 262144, 5, 1572853, 262144, 5, 1638389, 262144, 5, 1703925, 262144, 5, 1769461, 262144, 5, 1769462, 131072, 6, 1769463, 131072, 6, 1769464, 131072, 6, 1769465, 131072, 6, 1769466, 131072, 6, 1769467, 131072, 6, 1769468, 131072, 6, 1769469, 131072, 6, 1769470, 131072, 6, 1769471, 131072, 6, 1703936, 131072, 6, 1703937, 131072, 6, 1703938, 131072, 6, 2097159, 262144, 6, 2097160, 327680, 6, 2097173, 131072, 6, 2097174, 196608, 6, 2097172, 131072, 6, 2097171, 131072, 6, 2097161, 131072, 6, 2097162, 131072, 6, 1703963, 327680, 6, 1703964, 196608, 5, 1638428, 196608, 5, 1572892, 196608, 5, 1507356, 196608, 5, 1441820, 196608, 5, 1376284, 196608, 5, 1310748, 196608, 5)
 
-[node name="Player" parent="." index="4"]
-position = Vector2(1448, 1592)
+[node name="DoorWithLock" parent="." index="4" instance=ExtResource("4_pghoj")]
+position = Vector2(936, 571)
+scale = Vector2(4.08508, 4.08508)
+
+[node name="Player" parent="." index="5"]
+position = Vector2(941, 2415)
 
 [node name="LevelMusic" parent="Player" index="14"]
 stream = ExtResource("3_dmatl")
 autoplay = false
 
-[node name="DarkeningLight" parent="." index="5"]
+[node name="DarkeningLight" parent="." index="6"]
 energy = 0.65
 
-[node name="TurnOff_SpellStackToggleArea" parent="." index="11" instance=ExtResource("5_gnpub")]
+[node name="TurnOff_SpellStackToggleArea" parent="." index="9" instance=ExtResource("5_gnpub")]
 position = Vector2(953, 2440)
 scale = Vector2(3.1304, 2.58641)
 set_enabled = false
 
-[node name="TargetDummy" parent="." index="12" instance=ExtResource("6_2hxde")]
+[node name="TargetDummy" parent="." index="10" instance=ExtResource("6_2hxde")]
 position = Vector2(-565, 1396)
 scale = Vector2(1.81687, 1.81687)
 
-[node name="TargetDummy2" parent="." index="13" instance=ExtResource("6_2hxde")]
+[node name="TargetDummy2" parent="." index="11" instance=ExtResource("6_2hxde")]
 position = Vector2(-134, 1345)
 scale = Vector2(1.81687, 1.81687)
 
-[node name="TargetDummy4" parent="." index="14" instance=ExtResource("6_2hxde")]
+[node name="TargetDummy4" parent="." index="12" instance=ExtResource("6_2hxde")]
 position = Vector2(-394, 1679)
 scale = Vector2(1.81687, 1.81687)
 
-[node name="TargetDummy3" parent="." index="15" instance=ExtResource("6_2hxde")]
+[node name="TargetDummy3" parent="." index="13" instance=ExtResource("6_2hxde")]
 position = Vector2(-400, 1177)
 scale = Vector2(1.81687, 1.81687)
 
-[node name="Torch" parent="." index="16" instance=ExtResource("7_sfmrn")]
+[node name="Torch" parent="." index="14" instance=ExtResource("7_sfmrn")]
 position = Vector2(844, 2259)
 
-[node name="Torch2" parent="." index="17" instance=ExtResource("7_sfmrn")]
+[node name="Torch2" parent="." index="15" instance=ExtResource("7_sfmrn")]
 position = Vector2(1022, 2259)
 
-[node name="Torch5" parent="." index="18" instance=ExtResource("7_sfmrn")]
+[node name="Torch5" parent="." index="16" instance=ExtResource("7_sfmrn")]
 position = Vector2(771, 1751)
 
-[node name="Torch6" parent="." index="19" instance=ExtResource("7_sfmrn")]
+[node name="Torch6" parent="." index="17" instance=ExtResource("7_sfmrn")]
 position = Vector2(1104, 1751)
 
-[node name="Torch3" parent="." index="20" instance=ExtResource("7_sfmrn")]
+[node name="Torch3" parent="." index="18" instance=ExtResource("7_sfmrn")]
 position = Vector2(1030, 658)
 
-[node name="Torch4" parent="." index="21" instance=ExtResource("7_sfmrn")]
+[node name="Torch4" parent="." index="19" instance=ExtResource("7_sfmrn")]
 position = Vector2(839, 658)
 
-[node name="IntroDialoguePlayer" parent="." index="22" instance=ExtResource("8_4deks")]
+[node name="IntroDialoguePlayer" parent="." index="20" instance=ExtResource("8_4deks")]
 position = Vector2(933, 1786)
 prompt_array = Array[String](["Welcome to Wordlock!", "This hub area provides a shop 
 and training area.
@@ -99,27 +101,27 @@ scale = Vector2(3.33401, 3.33401)
 position = Vector2(-1, 12.9999)
 scale = Vector2(23.5614, 23.5614)
 
-[node name="Torch7" parent="." index="23" instance=ExtResource("7_sfmrn")]
+[node name="Torch7" parent="." index="21" instance=ExtResource("7_sfmrn")]
 position = Vector2(132, 1366)
 
-[node name="Torch10" parent="." index="24" instance=ExtResource("7_sfmrn")]
+[node name="Torch10" parent="." index="22" instance=ExtResource("7_sfmrn")]
 position = Vector2(-55, 1045)
 
-[node name="Torch11" parent="." index="25" instance=ExtResource("7_sfmrn")]
+[node name="Torch11" parent="." index="23" instance=ExtResource("7_sfmrn")]
 position = Vector2(-633, 1045)
 
-[node name="Torch8" parent="." index="26" instance=ExtResource("7_sfmrn")]
+[node name="Torch8" parent="." index="24" instance=ExtResource("7_sfmrn")]
 position = Vector2(578, 1045)
 
-[node name="Torch9" parent="." index="27" instance=ExtResource("7_sfmrn")]
+[node name="Torch9" parent="." index="25" instance=ExtResource("7_sfmrn")]
 position = Vector2(1287, 1045)
 
-[node name="SpellStackToggleArea" parent="." index="28" instance=ExtResource("5_gnpub")]
+[node name="SpellStackToggleArea" parent="." index="26" instance=ExtResource("5_gnpub")]
 position = Vector2(-633, 1444)
 scale = Vector2(4.41318, 5.89142)
 set_opposite_on_exit = true
 
-[node name="TrainingAreaDialoguePlayer" parent="." index="29" instance=ExtResource("8_4deks")]
+[node name="TrainingAreaDialoguePlayer" parent="." index="27" instance=ExtResource("8_4deks")]
 position = Vector2(74, 1378)
 prompt_array = Array[String](["Here you can practice casting", "Equip spells with  'J' 'K' 'L' and ';'", "After equipping a spell press 'enter' to start casting", "Once you've finished spelling your spell will be cast", "Switch targeted enemy with 'tab'", "Give them a shot!"])
 
@@ -129,21 +131,6 @@ position = Vector2(0, -44)
 [node name="CollisionShape2D" parent="TrainingAreaDialoguePlayer/InteractArea" index="0"]
 scale = Vector2(13.0812, 40.4289)
 
-[node name="SpikeParent" parent="." index="30" instance=ExtResource("9_kdx5k")]
-position = Vector2(530, 1509)
-
-[node name="Spikes" parent="SpikeParent/SpikeNodes" index="0" instance=ExtResource("10_6dt0t")]
-position = Vector2(-76, 51)
-
-[node name="Spikes2" parent="SpikeParent/SpikeNodes" index="1" instance=ExtResource("10_6dt0t")]
-position = Vector2(-76, -12)
-
-[node name="Spikes3" parent="SpikeParent/SpikeNodes" index="2" instance=ExtResource("10_6dt0t")]
-position = Vector2(-14, 51)
-
-[node name="Spikes4" parent="SpikeParent/SpikeNodes" index="3" instance=ExtResource("10_6dt0t")]
-position = Vector2(-14, -12)
-
+[editable path="CanvasLayer"]
 [editable path="IntroDialoguePlayer"]
 [editable path="TrainingAreaDialoguePlayer"]
-[editable path="SpikeParent"]

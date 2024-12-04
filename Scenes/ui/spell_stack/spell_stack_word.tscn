@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/ui/spell_stack/spell_stack_word.gd" id="2_v2wrt"]
 
 [node name="SpellStackWord" type="Label"]
+light_mask = 3
 z_index = 4
 anchors_preset = 8
 anchor_left = 0.5

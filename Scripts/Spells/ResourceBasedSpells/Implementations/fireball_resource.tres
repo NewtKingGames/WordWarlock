@@ -10,4 +10,4 @@ spell_damage = 0.0
 spell_name = "FIREBALL"
 associated_words = Array[String]([])
 primary_color = Color(0.702247, 0.0550046, 0.0844742, 1)
-secondary_color = Color(0.941176, 0.831373, 0, 1)
+secondary_color = Color(0.941176, 0.243137, 0, 1)
