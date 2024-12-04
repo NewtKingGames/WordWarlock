@@ -17,7 +17,8 @@ var is_player_casting: bool = false
 var current_player_typed_string: String = "": 
 	set(value):
 		current_player_typed_string = value
-		Events.current_string_typed.emit(current_player_typed_string)
+		if current_player_typed_string != "":
+			Events.current_string_typed.emit(current_player_typed_string)
 
 func _ready() -> void:
 	Events.player_entered_casting_state.connect(_on_player_entered_casting)
@@ -72,7 +73,6 @@ var player_health: int = 4:
 			player_damage.emit()
 			player_health_change.emit(player_health)
 			if player_health <= 0:
-				print("Waiting 3 seconds and restarting game")
 				await get_tree().create_timer(3).timeout
 				get_tree().reload_current_scene()
 				# Reset player health after restarting the game

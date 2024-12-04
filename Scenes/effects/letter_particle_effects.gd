@@ -1,5 +1,6 @@
 extends CPUParticles2D
 
+@onready var emitting_timer: Timer = $EmittingTimer
 
 func _ready() -> void:
 	# Since SpellSelector is globally loaded we don't get the first spell equip event
@@ -7,9 +8,15 @@ func _ready() -> void:
 	_on_spell_equipped(SpellSelector.equipped_spell_resource)
 	SpellSelector.player_equipped_spell_resource.connect(_on_spell_equipped)
 	Events.spell_stack_toggle_area_entered.connect(_on_player_entered_toggle_area)
+	Events.current_string_typed.connect(_on_player_typed_string)
+	emitting_timer.timeout.connect(
+		func(): 
+			emitting = false
+	)
 
 func _process(delta: float) -> void:
 	speed_scale = 1 / Engine.time_scale
+	emitting_timer.wait_time = 1 * Engine.time_scale
 
 func _on_spell_equipped(spell: SpellResource) -> void:
 	var clear_primary: Color = Color(spell.primary_color)
@@ -24,3 +31,10 @@ func _on_spell_equipped(spell: SpellResource) -> void:
 
 func _on_player_entered_toggle_area(value: bool) -> void:
 	visible = value
+
+func _on_player_typed_string(string: String) -> void:
+	if visible:
+		# Start to emit effects
+		emitting = true
+		emitting_timer.start()
+		

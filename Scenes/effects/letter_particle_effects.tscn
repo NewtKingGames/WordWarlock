@@ -20,9 +20,10 @@ colors = PackedColorArray(0.513726, 0.403922, 1, 0, 0.513726, 0.403922, 1, 1, 0.
 
 [node name="LetterParticleEffects" type="CPUParticles2D"]
 material = SubResource("CanvasItemMaterial_mgxce")
-amount = 10
-lifetime = 2.0
-explosiveness = 0.29
+emitting = false
+amount = 15
+lifetime = 1.5
+explosiveness = 0.1
 texture = ExtResource("1_ac7io")
 emission_shape = 1
 emission_sphere_radius = 60.0
@@ -48,3 +49,7 @@ hue_variation_max = 1.0
 anim_offset_min = 0.148
 anim_offset_max = 0.318
 script = ExtResource("2_uwatk")
+
+[node name="EmittingTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
