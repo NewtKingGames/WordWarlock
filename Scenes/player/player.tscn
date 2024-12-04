@@ -519,10 +519,20 @@ position = Vector2(-7.41899, -28.3511)
 scale = Vector2(-0.306503, 0.0198951)
 texture = ExtResource("19_jbw6b")
 
-[node name="TextLight" type="PointLight2D" parent="."]
-position = Vector2(0, -45.5)
+[node name="SpellTextLight" type="PointLight2D" parent="."]
+position = Vector2(0, -51.25)
+energy = 3.0
 range_item_cull_mask = 2
 texture = ExtResource("20_2etts")
+texture_scale = 0.25
+
+[node name="LowerTextLight" type="PointLight2D" parent="."]
+position = Vector2(0, 14)
+scale = Vector2(1.70177, 0.835196)
+color = Color(0.882379, 0.586458, 0.194371, 1)
+energy = 0.25
+range_item_cull_mask = 2
+texture = ExtResource("9_h1ujj")
 texture_scale = 0.25
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
