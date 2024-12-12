@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://6a10q4q0e11e"]
 
-[ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/level.tscn" id="1_k3s2w"]
+[ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_k3s2w"]
 [ext_resource type="TileSet" uid="uid://ktkipmj84kfd" path="res://Scenes/levels/test_level.tres" id="2_1qgbe"]
 [ext_resource type="AudioStream" uid="uid://bvq4xhly0vipp" path="res://Sounds/Songs/TabbedOutSong.wav" id="3_dmatl"]
 [ext_resource type="PackedScene" uid="uid://blv5bb1hvo01r" path="res://Scenes/objects/door_with_lock.tscn" id="4_pghoj"]
@@ -15,7 +15,7 @@
 offset_top = 3.0
 offset_bottom = 43.0
 
-[node name="TileMap" type="TileMap" parent="." index="3"]
+[node name="TileMap2" type="TileMap" parent="." index="3"]
 position = Vector2(-25, 59)
 scale = Vector2(4, 4)
 tile_set = ExtResource("2_1qgbe")

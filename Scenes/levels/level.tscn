@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bldyigqbdrbpm"]
+[gd_scene load_steps=12 format=3 uid="uid://bldyigqbdrbpm"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_projectiles.gd" id="1_pvngr"]
 [ext_resource type="PackedScene" uid="uid://cpr0y5k8k2kgj" path="res://Scenes/player/player.tscn" id="1_qycxy"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dy455infn6fqv" path="res://Scenes/ui/spell_stack/spell_stack_parent.tscn" id="6_w4t3b"]
 [ext_resource type="PackedScene" uid="uid://cwl6j83q73opo" path="res://Scenes/ui/canvas_layer.tscn" id="7_4keth"]
 [ext_resource type="AudioStream" uid="uid://ck2gicusjd7y5" path="res://Sounds/Songs/Game music - Wordlock Battle.mp3" id="7_ypf81"]
+[ext_resource type="TileSet" uid="uid://ktkipmj84kfd" path="res://Scenes/levels/test_level.tres" id="9_yms7g"]
 [ext_resource type="PackedScene" uid="uid://b4n672j7n470k" path="res://Scenes/ui/player_ui.tscn" id="12_p2vga"]
 
 [sub_resource type="Animation" id="Animation_bkd6d"]
@@ -85,5 +86,19 @@ blend_mode = 2
 [node name="PlayerUI" parent="PlayerUILayer" instance=ExtResource("12_p2vga")]
 offset_top = 2.0
 offset_bottom = 2.0
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
+tile_set = ExtResource("9_yms7g")
+format = 2
+layer_0/name = "floor"
+layer_1/name = "walls"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "walldecals"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "floordecals"
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "cieling"
+layer_4/tile_data = PackedInt32Array()
 
 [editable path="CanvasLayer"]
