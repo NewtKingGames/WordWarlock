@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=64 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://crdvx4y4114mv" path="res://Scenes/ui/keyboard/keyboard.tscn" id="19_hd66t"]
 [ext_resource type="Texture2D" uid="uid://uptrm6quna0a" path="res://Sprites/blacksquare.webp" id="19_jbw6b"]
 [ext_resource type="Texture2D" uid="uid://dh8sx7dfyds71" path="res://Sprites/288x288 textures (59).png" id="20_2etts"]
+[ext_resource type="Script" path="res://Scenes/player/casting_flicker_text.gd" id="21_yu25m"]
 [ext_resource type="PackedScene" uid="uid://bi6b5ug46r344" path="res://Scenes/ui/aim_lock_on_reticle.tscn" id="22_7irsn"]
 [ext_resource type="PackedScene" uid="uid://bata6nhuga2rj" path="res://Scenes/ui/casting_text_parent.tscn" id="24_msl8w"]
 
@@ -519,14 +520,16 @@ position = Vector2(-7.41899, -28.3511)
 scale = Vector2(-0.306503, 0.0198951)
 texture = ExtResource("19_jbw6b")
 
-[node name="SpellTextLight" type="PointLight2D" parent="."]
+[node name="CastingRelatedLights" type="Node2D" parent="."]
+
+[node name="SpellTextLight" type="PointLight2D" parent="CastingRelatedLights"]
 position = Vector2(0, -51.25)
 energy = 3.0
 range_item_cull_mask = 2
 texture = ExtResource("20_2etts")
 texture_scale = 0.25
 
-[node name="LowerTextLight" type="PointLight2D" parent="."]
+[node name="LowerTextLight" type="PointLight2D" parent="CastingRelatedLights"]
 position = Vector2(0, 14)
 scale = Vector2(1.70177, 0.835196)
 color = Color(0.882379, 0.586458, 0.194371, 1)
@@ -535,7 +538,7 @@ range_item_cull_mask = 2
 texture = ExtResource("9_h1ujj")
 texture_scale = 0.25
 
-[node name="MiddleTextLight" type="PointLight2D" parent="."]
+[node name="MiddleTextLight" type="PointLight2D" parent="CastingRelatedLights"]
 position = Vector2(0.5, -24)
 scale = Vector2(1.70177, 0.835196)
 color = Color(0.882379, 0.586458, 0.194371, 1)
@@ -543,6 +546,12 @@ energy = 0.25
 range_item_cull_mask = 2
 texture = ExtResource("9_h1ujj")
 texture_scale = 0.25
+
+[node name="CastingFlickerLight" type="PointLight2D" parent="CastingRelatedLights"]
+energy = 0.1
+texture = ExtResource("9_h1ujj")
+texture_scale = 0.3
+script = ExtResource("21_yu25m")
 
 [connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="." method="_on_cast_spell_state_changed"]
