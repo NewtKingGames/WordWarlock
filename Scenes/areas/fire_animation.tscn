@@ -147,8 +147,12 @@ sprite_frames = SubResource("SpriteFrames_akqcn")
 autoplay = "default"
 
 [node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -8.66667)
+scale = Vector2(0.482861, 0.86)
 shape = SubResource("RectangleShape2D_58okl")
 debug_color = Color(0.885571, 0.299886, 0.374874, 0.42)
 
