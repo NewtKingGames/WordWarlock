@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cchfataq1nnxf"]
+[gd_scene load_steps=6 format=3 uid="uid://cchfataq1nnxf"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_fm0cg"]
 [ext_resource type="PackedScene" uid="uid://dyb7igyvwv8jf" path="res://Scenes/areas/fire_animation.tscn" id="2_wdh01"]
+[ext_resource type="PackedScene" uid="uid://cp8bwo026477s" path="res://Scenes/objects/fire_animation_parent.tscn" id="3_vhbtc"]
+[ext_resource type="PackedScene" uid="uid://dggdly4atuhy4" path="res://Scenes/spawners/enemy_spawner.tscn" id="4_qawmp"]
+[ext_resource type="PackedScene" uid="uid://ooxyv5avybtt" path="res://Scenes/enemies/slime.tscn" id="5_0uh2x"]
 
 [node name="Level" instance=ExtResource("1_fm0cg")]
 
 [node name="Player" parent="." index="3"]
-position = Vector2(1333, -4)
+position = Vector2(1350, -96)
 
 [node name="DarkeningLight" parent="." index="4"]
 energy = 0.65
@@ -39,5 +42,16 @@ position = Vector2(1806, 93)
 
 [node name="FireAnimation8" parent="." index="17" instance=ExtResource("2_wdh01")]
 position = Vector2(1806, 142)
+
+[node name="FireAnimationParent" parent="." index="18" instance=ExtResource("3_vhbtc")]
+position = Vector2(1031, -140)
+num_fire_x = 1
+num_fire_y = 6
+
+[node name="Slime" parent="." index="19" instance=ExtResource("5_0uh2x")]
+position = Vector2(1350, 236)
+
+[node name="EnemySpawner" parent="." index="20" instance=ExtResource("4_qawmp")]
+position = Vector2(1412, -261)
 
 [editable path="CanvasLayer"]
