@@ -7,16 +7,19 @@ extends Node2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var hurt_box: Area2D = $HurtBox
 
-
 func _ready() -> void:
 	fire_animation.play("default")
 	point_light_2d.enabled = false
-	await get_tree().create_timer(1).timeout
+	## Temporary timer
+	#await get_tree().create_timer(1).timeout
 	fire_animation.animation_finished.connect(_on_animation_finished)
+	## Temporary timerd
+	#get_tree().create_timer(6).timeout.connect(func(): stop_fire())
+	hurt_box.body_entered.connect(_on_body_entered_hurt_box)
+
+func start_fire() -> void:
 	point_light_2d.enabled = true
 	fire_animation.play("start_orange_four")
-	get_tree().create_timer(6).timeout.connect(func(): stop_fire())
-	hurt_box.body_entered.connect(_on_body_entered_hurt_box)
 
 func stop_fire() -> void:
 	fire_animation.play("end_orange_four")
@@ -35,4 +38,5 @@ func light_effects() -> void:
 func _on_body_entered_hurt_box(body: Node2D) -> void:
 	if body is Player:
 		var player = body as Player
-		player.hit(1, Vector2.ZERO)
+		# TODO - tweak this knock back value
+		player.hit(1, (player.global_position - global_position).normalized() * 300)
