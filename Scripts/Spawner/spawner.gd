@@ -4,6 +4,9 @@ extends Node2D
 signal spawner_finished_spawning
 signal all_spawner_elements_destroyed
 
+enum SpawnMode {RANDOM, ITERATE}
+
+
 @export var elements_to_spawn: Array[PackedScene] = []
 
 # TODO - consider passing in the enemy type?
@@ -16,6 +19,7 @@ signal all_spawner_elements_destroyed
 # When set to -1 there is no limit
 @export var max_elements_at_once: int = -1
 @export var spawn_interval: float = 5.0
+@export var spawn_mode: SpawnMode = SpawnMode.RANDOM
 
 var current_elements: int = 0
 var total_elements_spawned: int = 0
@@ -24,7 +28,7 @@ var total_elements_destroyed: int = 0:
 		total_elements_destroyed = value
 		if total_elements_destroyed == total_elements_to_spawn:
 			all_spawner_elements_destroyed.emit()
-			print("all units destroyed")
+var current_spawn_scene_index: int = 0
 
 
 
@@ -34,17 +38,14 @@ func _ready() -> void:
 # This should probably get overridden by child classes
 func spawn_element() -> Node2D:
 	if check_max_elements_at_once():
-		print("can't spawn right now!")
 		schedule_spawner()
 		return null
 	if check_total_elements_spawned():
 		spawner_finished_spawning.emit()
 		return null
-	# TODO - implement switching between different scenes by cycling through this array
-	var element: Node2D = elements_to_spawn[0].instantiate()
+	var element: Node2D = elements_to_spawn[current_spawn_scene_index].instantiate()
+	current_spawn_scene_index = get_next_index(current_spawn_scene_index)
 	add_child(element)
-	print("elements global position")
-	print(element.global_position)
 	current_elements += 1
 	total_elements_spawned += 1
 	connect_signals(element)
@@ -75,3 +76,9 @@ func check_max_elements_at_once() -> bool:
 
 func check_total_elements_spawned() -> bool:
 	return total_elements_to_spawn != -1 and total_elements_spawned >= total_elements_to_spawn
+
+func get_next_index(current_index: int) -> int:
+	if spawn_mode == SpawnMode.RANDOM:
+		return randi_range(0, elements_to_spawn.size()-1)
+	else:
+		return (current_index + 1) % elements_to_spawn.size()

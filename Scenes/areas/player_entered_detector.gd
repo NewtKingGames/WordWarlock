@@ -2,7 +2,7 @@ extends Area2D
 
 
 signal player_entered
-@export var is_one_shot: bool = false
+@export var is_one_shot: bool = true
 
 func _ready()-> void:
 	body_entered.connect(_on_body_entered)
