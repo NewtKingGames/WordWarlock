@@ -34,7 +34,7 @@ func spawn_lightning_bolt(enemy: EnemyClass):
 	var lightning_bolt: LightningBolt = lightning_bolt_scene.instantiate()
 	lightning_bolt.connect("lightning_bolt_destroyed", _on_lightning_bolt_destroyed)
 	lightning_bolt.enemy = enemy
-	lightning_bolt.position = enemy.global_position + Vector2.UP * 120
+	lightning_bolt.global_position = enemy.global_position + Vector2.UP * 120
 	lightning_bolts.add_child(lightning_bolt)
 
 func _on_lightning_bolt_destroyed():

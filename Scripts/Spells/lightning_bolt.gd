@@ -16,7 +16,7 @@ func _process(_delta):
 	# Have the lightning bolt follow the enemy
 	if enemy == null:
 		return
-	position.x = enemy.position.x
+	global_position.x = enemy.global_position.x
 
 func strike_enemy():
 	spell_hit_body(enemy)
