@@ -33,6 +33,7 @@ func _ready():
 	letter_dictionary["Space"] = spacebar
 	Events.current_string_matches.connect(_on_current_string_matches)
 	Events.current_string_typed.connect(_on_player_typed_string)
+	Events.player_exited_casting_state.connect(_on_casting_state_exited)
 
 # This is where we change the visibllity
 func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_scene):
@@ -79,25 +80,37 @@ func _on_current_string_matches(string: String) -> void:
 	#highlight_letter(spacebar)
 
 func _on_player_typed_string(string: String) -> void:
+	stop_highlight_letters()
+
+func _on_casting_state_exited() -> void:
+	stop_highlight_letters()
+
+func stop_highlight_letters() -> void:
 	if is_highlight_on:
 		for tween in highlight_tweens:
 			tween.kill()
 			highlight_tweens = []
 		enter.modulate = Color.WHITE
 		spacebar.modulate = Color.WHITE
+		enter.rotation = 0
+		spacebar.rotation = 0
 		is_highlight_on = false
-		#print(highlight_tween)
 
+# TODO - make these effects nicer
 func highlight_letters(keyboard_letters: Array[KeyboardLetter]) -> void:
-	# This doesn't totally work because we only keep one reference to the tween when theres two
-	# TODO - switch this to the child class?
-	#if highlight_tween: 
-		#highlight_tween.kill()
-	for keyboard_letter in keyboard_letters: 
+	for keyboard_letter in keyboard_letters:
+		# think about moving the enter and spacebar characters here instead of flashing them yellow
 		var highlight_tween: Tween = create_tween().set_loops()
-		print("going to tween this object")
 		highlight_tween.tween_property(keyboard_letter, "modulate", Color(0.93, 0.755, 0.149), 0.5 * Engine.time_scale)
 		highlight_tween.tween_property(keyboard_letter, "modulate", Color(1, 1, 1), 0.5 * Engine.time_scale)
 		highlight_tweens.append(highlight_tween)
-	# TODO - make these effects nicer
+		#var rotate_tween: Tween = create_tween().set_loops()
+		#rotate_tween.tween_property(keyboard_letter, "rotation", deg_to_rad(8), 0.75 * Engine.time_scale).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
+		#rotate_tween.tween_property(keyboard_letter, "rotation", deg_to_rad(-8), 0.75 * Engine.time_scale).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
+		#highlight_tweens.append(rotate_tween)
+		#var scale_tween: Tween = create_tween().set_loops()
+		#scale_tween.tween_property(keyboard_letter, "scale", Vector2(1.2, 1.2), 0.75 * Engine.time_scale).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		#scale_tween.tween_property(keyboard_letter, "scale", Vector2(0.9, 0.9), 1.25 * Engine.time_scale).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		#highlight_tweens.append(scale_tween)
+	
 	#keyboard_letter.modulate = Color(0.93, 0.755, 0.149)

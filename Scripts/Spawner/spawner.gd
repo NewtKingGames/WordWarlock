@@ -1,9 +1,12 @@
 class_name Spawner
 extends Node2D
 
+signal spawner_finished_spawning
+signal all_spawner_elements_destroyed
+
 @export var elements_to_spawn: Array[PackedScene] = []
 
-# TODO - consider passing in they type?
+# TODO - consider passing in the enemy type?
 @export var is_spawning: bool:
 	set(value):
 		is_spawning = value
@@ -12,14 +15,21 @@ extends Node2D
 @export var total_elements_to_spawn: int = -1
 # When set to -1 there is no limit
 @export var max_elements_at_once: int = -1
+@export var spawn_interval: float = 5.0
+
 var current_elements: int = 0
 var total_elements_spawned: int = 0
-@export var spawn_interval: float = 5.0
-signal spawner_finished
+var total_elements_destroyed: int = 0: 
+	set(value):
+		total_elements_destroyed = value
+		if total_elements_destroyed == total_elements_to_spawn:
+			all_spawner_elements_destroyed.emit()
+			print("all units destroyed")
+
 
 
 func _ready() -> void:
-	get_tree().create_timer(spawn_interval).timeout.connect(spawn_element)
+	schedule_spawner()
 
 # This should probably get overridden by child classes
 func spawn_element() -> Node2D:
@@ -28,7 +38,8 @@ func spawn_element() -> Node2D:
 		schedule_spawner()
 		return null
 	if check_total_elements_spawned():
-		spawner_finished.emit()
+		spawner_finished_spawning.emit()
+		return null
 	# TODO - implement switching between different scenes by cycling through this array
 	var element: Node2D = elements_to_spawn[0].instantiate()
 	add_child(element)
@@ -41,13 +52,11 @@ func spawn_element() -> Node2D:
 	return element
 
 func _on_element_exited_scene() -> void:
-	print("element exited tree")
 	current_elements -= 1
-	print(current_elements)
+	total_elements_destroyed += 1
 
 func schedule_spawner() -> void:
-	# Set a timer here? You might need to use a tween callback instead in the setter method
-	get_tree().create_timer(spawn_interval).timeout.connect(spawn_element)
+	get_tree().create_timer(spawn_interval, true, false, true).timeout.connect(spawn_element)
 
 # Enables custom spawners to add additional signals to the spawned elements
 func connect_signals(element: Node2D) -> void:

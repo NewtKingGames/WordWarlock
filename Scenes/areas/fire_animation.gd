@@ -8,6 +8,7 @@ extends Node2D
 @onready var hurt_box: Area2D = $HurtBox
 
 func _ready() -> void:
+	hurt_box.monitoring = false
 	fire_animation.play("default")
 	point_light_2d.enabled = false
 	## Temporary timer
@@ -18,10 +19,12 @@ func _ready() -> void:
 	hurt_box.body_entered.connect(_on_body_entered_hurt_box)
 
 func start_fire() -> void:
+	hurt_box.monitoring = true
 	point_light_2d.enabled = true
 	fire_animation.play("start_orange_four")
 
 func stop_fire() -> void:
+	hurt_box.monitoring = false
 	fire_animation.play("end_orange_four")
 
 func _on_animation_finished() -> void:

@@ -18,15 +18,11 @@ func _ready() -> void:
 	# Only run this ready function when scene is loaded outside of the editor
 	if not Engine.is_editor_hint():
 		create_fire_children()
-	#await get_tree().create_timer(1).timeout
-	#start_fires()
-		#get_tree().create_timer(activate_spike_delay).timeout.connect(activate_spikes)
 
 func start_fires() -> void:
 	for fire_child in get_children():
 		if fire_child is FireAnimation:
 			fire_child.start_fire()
-	#get_tree().create_timer(deactivate_spike_delay).timeout.connect(deactivate_spikes)
 
 func stop_fires() -> void:
 	for fire_child in get_children():

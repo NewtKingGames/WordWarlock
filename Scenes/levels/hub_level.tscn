@@ -37,9 +37,9 @@ position = Vector2(936, 571)
 scale = Vector2(4.08508, 4.08508)
 
 [node name="Player" parent="." index="5"]
-position = Vector2(950, 2440)
+position = Vector2(351, 1655)
 
-[node name="LevelMusic" parent="Player" index="16"]
+[node name="LevelMusic" parent="Player" index="15"]
 stream = ExtResource("3_dmatl")
 autoplay = false
 

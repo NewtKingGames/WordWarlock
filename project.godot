@@ -22,6 +22,7 @@ GlobalSpells="*res://globals/global_spells.gd"
 GlobalCanvasLayer="*res://Scenes/ui/canvas_layer.tscn"
 Events="*res://globals/events.gd"
 SpellSelector="*res://Scenes/ui/spell_selector.tscn"
+Commands="*res://globals/commands.gd"
 
 [debug]
 

@@ -93,7 +93,6 @@ func generate_spell_stack_word_opacity(index: int) -> Color:
 	
 func on_player_typed_string(word: String) -> void:
 	if word.to_upper() == spell_stack_word_children[0].word.to_upper():
-		print("popping spell")
 		pop_spell()
 
 func pop_spell():
@@ -119,7 +118,6 @@ func spell_popped_effect(word: SpellStackWord):
 	)
 
 func stack_emptied():
-	print("stack emptied time to do something!!")
 	# TODO - emit spell event? or let the parent do that?
 	spell_stack_completed.emit(self)
 

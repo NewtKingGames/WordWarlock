@@ -481,6 +481,7 @@ scale = Vector2(1, 0.76263)
 shape = SubResource("CapsuleShape2D_j7h4y")
 
 [node name="AutoAimAttackArea" type="Area2D" parent="."]
+visible = false
 rotation = 3.14159
 scale = Vector2(12.6592, 12.6592)
 collision_layer = 32

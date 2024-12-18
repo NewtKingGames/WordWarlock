@@ -1,15 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://cchfataq1nnxf"]
+[gd_scene load_steps=15 format=3 uid="uid://cchfataq1nnxf"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_fm0cg"]
-[ext_resource type="PackedScene" uid="uid://dyb7igyvwv8jf" path="res://Scenes/areas/fire_animation.tscn" id="2_wdh01"]
 [ext_resource type="PackedScene" uid="uid://cp8bwo026477s" path="res://Scenes/objects/fire_animation_parent.tscn" id="3_vhbtc"]
 [ext_resource type="PackedScene" uid="uid://dggdly4atuhy4" path="res://Scenes/spawners/enemy_spawner.tscn" id="4_qawmp"]
 [ext_resource type="PackedScene" uid="uid://ooxyv5avybtt" path="res://Scenes/enemies/slime.tscn" id="5_0uh2x"]
+[ext_resource type="PackedScene" uid="uid://dtnnc2owp2ldg" path="res://Scenes/enemies/orc.tscn" id="6_488dv"]
+[ext_resource type="Script" path="res://Scenes/events/event_handler.gd" id="6_dmwrg"]
+[ext_resource type="Script" path="res://Scripts/Commands/command.gd" id="7_3025m"]
+[ext_resource type="PackedScene" uid="uid://cvegtmmm77n47" path="res://Scenes/areas/player_entered_detector.tscn" id="7_hwboa"]
+[ext_resource type="PackedScene" uid="uid://bo37e1xq6rkmd" path="res://Scenes/events/event_handler.tscn" id="10_dnfsa"]
+
+[sub_resource type="Resource" id="Resource_eoclf"]
+script = ExtResource("7_3025m")
+call_method = "start_fires"
+params = []
+
+[sub_resource type="Resource" id="Resource_ij4d5"]
+script = ExtResource("7_3025m")
+call_method = "start_fires"
+params = []
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n55dn"]
+size = Vector2(217, 308)
+
+[sub_resource type="Resource" id="Resource_gwipy"]
+script = ExtResource("7_3025m")
+call_method = "stop_fires"
+params = []
+
+[sub_resource type="Resource" id="Resource_h8jdp"]
+script = ExtResource("7_3025m")
+call_method = "stop_fires"
+params = []
 
 [node name="Level" instance=ExtResource("1_fm0cg")]
 
 [node name="Player" parent="." index="3"]
-position = Vector2(1350, -96)
+position = Vector2(704, -58)
 
 [node name="DarkeningLight" parent="." index="4"]
 energy = 0.65
@@ -19,39 +46,45 @@ layer_0/tile_data = PackedInt32Array(-196608, 393216, 1, -131072, 393216, 2, -65
 layer_1/tile_data = PackedInt32Array(-262144, 393216, 4, -262143, 524288, 4, -262142, 458752, 4, -262141, 393216, 4, -262140, 524288, 4, -262139, 393216, 4, -262138, 393216, 4, -262137, 458752, 4, -262136, 393216, 4, -262135, 524288, 4, -262134, 393216, 4, -262133, 393216, 4, -262132, 524288, 4, -262131, 524288, 4, -262130, 524288, 4, -262129, 524288, 4, -327664, 524288, 4, -393199, 458752, 4, -458734, 524288, 4, -458733, 393216, 4, -458732, 524288, 4, -262117, 393216, 4, -262116, 393216, 4, -262115, 524288, 4, -458728, 393216, 4, -393191, 524288, 4, -327654, 393216, 4, -262114, 458752, 4, -262113, 393216, 4, -262112, 524288, 4, -458731, 393216, 4, -458730, 458752, 4, -458729, 458752, 4)
 layer_4/tile_data = PackedInt32Array(-327680, 131072, 6, -327679, 131072, 6, -327678, 131072, 6, -327677, 131072, 6, -327676, 131072, 6, -327675, 131072, 6, -327674, 131072, 6, -327673, 131072, 6, -327672, 131072, 6, -327671, 131072, 6, -327670, 131072, 6, -327669, 131072, 6, -327668, 131072, 6, -327665, 131072, 6, -393200, 65536, 6, -458735, 65536, 6, -524270, 65536, 6, -524269, 131072, 6, -524268, 131072, 6, 131073, 131072, 7, 131074, 131072, 7, 131075, 131072, 7, 131076, 131072, 7, 131077, 131072, 7, 131078, 131072, 7, 131072, 131072, 7, 131079, 131072, 7, 131080, 131072, 7, 131081, 131072, 7, 131082, 131072, 7, 131083, 131072, 7, 131084, 131072, 7, 131085, 131072, 7, 131086, 131072, 7, 131087, 131072, 7, 196624, 65536, 7, 262161, 65536, 7, 327698, 65536, 7, 327699, 131072, 7, 327700, 131072, 7, 196607, 262144, 6, 131071, 262144, 5, 65535, 262144, 5, -1, 262144, 5, -65537, 262144, 5, -131073, 262144, 5, -196609, 262144, 5, -262145, 262144, 4, -327666, 131072, 6, -327667, 131072, 6, -327664, 196608, 6, -393199, 196608, 6, -458734, 196608, 6, 131088, 196608, 4, 196625, 196608, 4, 262162, 196608, 4, -327654, 262144, 6, 131098, 262144, 4, -327653, 131072, 6, 131099, 131072, 7, -327652, 131072, 6, 131100, 131072, 7, -327651, 131072, 6, 131101, 131072, 7, 131102, 131072, 7, 131103, 131072, 7, 131104, 131072, 7, 131105, 131072, 7, 131106, 131072, 7, 131107, 131072, 7, -524264, 327680, 6, -458728, 262144, 6, 262168, 262144, 4, 327704, 327680, 7, -458727, 327680, 6, -393191, 262144, 6, 196633, 262144, 4, 262169, 327680, 7, -393190, 327680, 6, 196634, 327680, 7, -327650, 131072, 6, -327649, 131072, 6, -327648, 131072, 6, 131108, 131072, 7, 131109, 131072, 7, 131110, 131072, 7, -524267, 131072, 6, -524266, 131072, 6, -524265, 131072, 6, 327701, 131072, 7, 327702, 131072, 7, 327703, 131072, 7)
 
-[node name="FireAnimation" parent="." index="10" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, -181)
-
-[node name="FireAnimation2" parent="." index="11" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, -134)
-
-[node name="FireAnimation3" parent="." index="12" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, -95)
-
-[node name="FireAnimation4" parent="." index="13" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, -55)
-
-[node name="FireAnimation5" parent="." index="14" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, -7)
-
-[node name="FireAnimation6" parent="." index="15" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, 39)
-
-[node name="FireAnimation7" parent="." index="16" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, 93)
-
-[node name="FireAnimation8" parent="." index="17" instance=ExtResource("2_wdh01")]
-position = Vector2(1806, 142)
-
-[node name="FireAnimationParent" parent="." index="18" instance=ExtResource("3_vhbtc")]
+[node name="FirstRoom_FireAnimationParent" parent="." index="10" instance=ExtResource("3_vhbtc")]
 position = Vector2(1031, -140)
 num_fire_x = 1
 num_fire_y = 6
 
-[node name="Slime" parent="." index="19" instance=ExtResource("5_0uh2x")]
+[node name="FirstRoom_FireAnimationParent2" parent="." index="11" instance=ExtResource("3_vhbtc")]
+position = Vector2(1754, -140)
+num_fire_x = 1
+num_fire_y = 6
+
+[node name="Slime" parent="." index="12" instance=ExtResource("5_0uh2x")]
 position = Vector2(1350, 236)
 
-[node name="EnemySpawner" parent="." index="20" instance=ExtResource("4_qawmp")]
+[node name="EnemySpawner" parent="." index="13" instance=ExtResource("4_qawmp")]
 position = Vector2(1412, -261)
+elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
+total_elements_to_spawn = 2
+
+[node name="EventHandlers" type="Node" parent="." index="14"]
+
+[node name="FirstFireRoomEnterEventHandler" type="Node" parent="EventHandlers" index="0" node_paths=PackedStringArray("nodes_to_subscribe", "nodes_to_command")]
+script = ExtResource("6_dmwrg")
+nodes_to_subscribe = [NodePath("PlayerEnteredDetector")]
+signals_to_subscribe = Array[String](["player_entered"])
+nodes_to_command = [NodePath("../../FirstRoom_FireAnimationParent"), NodePath("../../FirstRoom_FireAnimationParent2")]
+commands_to_execute = Array[ExtResource("7_3025m")]([SubResource("Resource_eoclf"), SubResource("Resource_ij4d5")])
+
+[node name="PlayerEnteredDetector" parent="EventHandlers/FirstFireRoomEnterEventHandler" index="0" instance=ExtResource("7_hwboa")]
+position = Vector2(1409, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventHandlers/FirstFireRoomEnterEventHandler/PlayerEnteredDetector" index="0"]
+position = Vector2(-28, -3)
+scale = Vector2(2.07367, 3.08114)
+shape = SubResource("RectangleShape2D_n55dn")
+
+[node name="FirstFireRoomEnemiesKilledEventHandler" parent="EventHandlers" index="1" node_paths=PackedStringArray("nodes_to_subscribe", "nodes_to_command") instance=ExtResource("10_dnfsa")]
+nodes_to_subscribe = [NodePath("../../EnemySpawner")]
+signals_to_subscribe = Array[String](["all_spawner_elements_destroyed"])
+nodes_to_command = [NodePath("../../FirstRoom_FireAnimationParent"), NodePath("../../FirstRoom_FireAnimationParent2")]
+commands_to_execute = Array[ExtResource("7_3025m")]([SubResource("Resource_gwipy"), SubResource("Resource_h8jdp")])
 
 [editable path="CanvasLayer"]
