@@ -18,7 +18,8 @@ enum SpawnMode {RANDOM, ITERATE}
 @export var total_elements_to_spawn: int = -1
 # When set to -1 there is no limit
 @export var max_elements_at_once: int = -1
-@export var spawn_interval: float = 5.0
+@export var spawn_interval_max: float = 3.0
+@export var spawn_interval_min: float = 1.0
 @export var spawn_mode: SpawnMode = SpawnMode.RANDOM
 
 var current_elements: int = 0
@@ -33,7 +34,8 @@ var current_spawn_scene_index: int = 0
 
 
 func _ready() -> void:
-	schedule_spawner()
+	if is_spawning:
+		schedule_spawner()
 
 # This should probably get overridden by child classes
 func spawn_element() -> Node2D:
@@ -57,7 +59,7 @@ func _on_element_exited_scene() -> void:
 	total_elements_destroyed += 1
 
 func schedule_spawner() -> void:
-	get_tree().create_timer(spawn_interval, true, false, true).timeout.connect(spawn_element)
+	get_tree().create_timer(randf_range(spawn_interval_min, spawn_interval_max), true, false, true).timeout.connect(spawn_element)
 
 # Enables custom spawners to add additional signals to the spawned elements
 func connect_signals(element: Node2D) -> void:

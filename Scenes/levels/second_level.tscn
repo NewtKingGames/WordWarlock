@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cchfataq1nnxf"]
+[gd_scene load_steps=17 format=3 uid="uid://cchfataq1nnxf"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_fm0cg"]
 [ext_resource type="PackedScene" uid="uid://cp8bwo026477s" path="res://Scenes/objects/fire_animation_parent.tscn" id="3_vhbtc"]
@@ -18,6 +18,16 @@ params = []
 [sub_resource type="Resource" id="Resource_ij4d5"]
 script = ExtResource("7_3025m")
 call_method = "start_fires"
+params = []
+
+[sub_resource type="Resource" id="Resource_cpg5u"]
+script = ExtResource("7_3025m")
+call_method = "schedule_spawner"
+params = []
+
+[sub_resource type="Resource" id="Resource_yuq2v"]
+script = ExtResource("7_3025m")
+call_method = "schedule_spawner"
 params = []
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n55dn"]
@@ -56,13 +66,20 @@ position = Vector2(1754, -140)
 num_fire_x = 1
 num_fire_y = 6
 
-[node name="Slime" parent="." index="12" instance=ExtResource("5_0uh2x")]
-position = Vector2(1350, 236)
-
-[node name="EnemySpawner" parent="." index="13" instance=ExtResource("4_qawmp")]
-position = Vector2(1412, -261)
+[node name="FirstRoom_EnemySpawner" parent="." index="12" instance=ExtResource("4_qawmp")]
+position = Vector2(1384, -348)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
-total_elements_to_spawn = 2
+total_elements_to_spawn = 3
+max_elements_at_once = 2
+spawn_interval_max = 3.5
+spawn_interval_min = 2.0
+
+[node name="FirstRoom_EnemySpawner2" parent="." index="13" instance=ExtResource("4_qawmp")]
+position = Vector2(1381, 278)
+elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
+total_elements_to_spawn = 3
+max_elements_at_once = 2
+spawn_interval_min = 2.0
 
 [node name="EventHandlers" type="Node" parent="." index="14"]
 
@@ -70,8 +87,8 @@ total_elements_to_spawn = 2
 script = ExtResource("6_dmwrg")
 nodes_to_subscribe = [NodePath("PlayerEnteredDetector")]
 signals_to_subscribe = Array[String](["player_entered"])
-nodes_to_command = [NodePath("../../FirstRoom_FireAnimationParent"), NodePath("../../FirstRoom_FireAnimationParent2")]
-commands_to_execute = Array[ExtResource("7_3025m")]([SubResource("Resource_eoclf"), SubResource("Resource_ij4d5")])
+nodes_to_command = [NodePath("../../FirstRoom_FireAnimationParent"), NodePath("../../FirstRoom_FireAnimationParent2"), NodePath("../../FirstRoom_EnemySpawner"), NodePath("../../FirstRoom_EnemySpawner2")]
+commands_to_execute = Array[ExtResource("7_3025m")]([SubResource("Resource_eoclf"), SubResource("Resource_ij4d5"), SubResource("Resource_cpg5u"), SubResource("Resource_yuq2v")])
 
 [node name="PlayerEnteredDetector" parent="EventHandlers/FirstFireRoomEnterEventHandler" index="0" instance=ExtResource("7_hwboa")]
 position = Vector2(1409, -8)
@@ -82,8 +99,8 @@ scale = Vector2(2.07367, 3.08114)
 shape = SubResource("RectangleShape2D_n55dn")
 
 [node name="FirstFireRoomEnemiesKilledEventHandler" parent="EventHandlers" index="1" node_paths=PackedStringArray("nodes_to_subscribe", "nodes_to_command") instance=ExtResource("10_dnfsa")]
-nodes_to_subscribe = [NodePath("../../EnemySpawner")]
-signals_to_subscribe = Array[String](["all_spawner_elements_destroyed"])
+nodes_to_subscribe = [NodePath("../../FirstRoom_EnemySpawner"), NodePath("../../FirstRoom_EnemySpawner2")]
+signals_to_subscribe = Array[String](["all_spawner_elements_destroyed", "all_spawner_elements_destroyed"])
 nodes_to_command = [NodePath("../../FirstRoom_FireAnimationParent"), NodePath("../../FirstRoom_FireAnimationParent2")]
 commands_to_execute = Array[ExtResource("7_3025m")]([SubResource("Resource_gwipy"), SubResource("Resource_h8jdp")])
 
