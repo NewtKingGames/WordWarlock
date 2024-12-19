@@ -21,6 +21,7 @@ enum SpawnMode {RANDOM, ITERATE}
 @export var spawn_interval_max: float = 3.0
 @export var spawn_interval_min: float = 1.0
 @export var spawn_mode: SpawnMode = SpawnMode.RANDOM
+@export var initial_delay: bool = false
 
 var current_elements: int = 0
 var total_elements_spawned: int = 0
@@ -35,7 +36,14 @@ var current_spawn_scene_index: int = 0
 
 func _ready() -> void:
 	if is_spawning:
+		start_spawner()
+
+func start_spawner() -> void:
+	if initial_delay:
 		schedule_spawner()
+	else:
+		print("we should spawn elements right away?")
+		spawn_element()
 
 # This should probably get overridden by child classes
 func spawn_element() -> Node2D:

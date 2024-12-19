@@ -142,11 +142,11 @@ script = ExtResource("1_q0du7")
 
 [node name="FireAnimation" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_akqcn")
 autoplay = "default"
 
 [node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, 8.83333)
 collision_layer = 32
 collision_mask = 5
 
@@ -157,6 +157,7 @@ shape = SubResource("RectangleShape2D_58okl")
 debug_color = Color(0.885571, 0.299886, 0.374874, 0.42)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(0, -6.75)
 scale = Vector2(0.635985, 0.860106)
 color = Color(0.921569, 0.709804, 0.117647, 1)

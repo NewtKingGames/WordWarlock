@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cchfataq1nnxf"]
+[gd_scene load_steps=18 format=3 uid="uid://cchfataq1nnxf"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_fm0cg"]
 [ext_resource type="PackedScene" uid="uid://cp8bwo026477s" path="res://Scenes/objects/fire_animation_parent.tscn" id="3_vhbtc"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Scripts/Commands/command.gd" id="7_3025m"]
 [ext_resource type="PackedScene" uid="uid://cvegtmmm77n47" path="res://Scenes/areas/player_entered_detector.tscn" id="7_hwboa"]
 [ext_resource type="PackedScene" uid="uid://bo37e1xq6rkmd" path="res://Scenes/events/event_handler.tscn" id="10_dnfsa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dkvn6"]
 
 [sub_resource type="Resource" id="Resource_eoclf"]
 script = ExtResource("7_3025m")
@@ -22,12 +24,12 @@ params = []
 
 [sub_resource type="Resource" id="Resource_cpg5u"]
 script = ExtResource("7_3025m")
-call_method = "schedule_spawner"
+call_method = "start_spawner"
 params = []
 
 [sub_resource type="Resource" id="Resource_yuq2v"]
 script = ExtResource("7_3025m")
-call_method = "schedule_spawner"
+call_method = "start_spawner"
 params = []
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n55dn"]
@@ -44,9 +46,10 @@ call_method = "stop_fires"
 params = []
 
 [node name="Level" instance=ExtResource("1_fm0cg")]
+material = SubResource("ShaderMaterial_dkvn6")
 
 [node name="Player" parent="." index="3"]
-position = Vector2(704, -58)
+position = Vector2(168, -35)
 
 [node name="DarkeningLight" parent="." index="4"]
 energy = 0.65
@@ -57,12 +60,12 @@ layer_1/tile_data = PackedInt32Array(-262144, 393216, 4, -262143, 524288, 4, -26
 layer_4/tile_data = PackedInt32Array(-327680, 131072, 6, -327679, 131072, 6, -327678, 131072, 6, -327677, 131072, 6, -327676, 131072, 6, -327675, 131072, 6, -327674, 131072, 6, -327673, 131072, 6, -327672, 131072, 6, -327671, 131072, 6, -327670, 131072, 6, -327669, 131072, 6, -327668, 131072, 6, -327665, 131072, 6, -393200, 65536, 6, -458735, 65536, 6, -524270, 65536, 6, -524269, 131072, 6, -524268, 131072, 6, 131073, 131072, 7, 131074, 131072, 7, 131075, 131072, 7, 131076, 131072, 7, 131077, 131072, 7, 131078, 131072, 7, 131072, 131072, 7, 131079, 131072, 7, 131080, 131072, 7, 131081, 131072, 7, 131082, 131072, 7, 131083, 131072, 7, 131084, 131072, 7, 131085, 131072, 7, 131086, 131072, 7, 131087, 131072, 7, 196624, 65536, 7, 262161, 65536, 7, 327698, 65536, 7, 327699, 131072, 7, 327700, 131072, 7, 196607, 262144, 6, 131071, 262144, 5, 65535, 262144, 5, -1, 262144, 5, -65537, 262144, 5, -131073, 262144, 5, -196609, 262144, 5, -262145, 262144, 4, -327666, 131072, 6, -327667, 131072, 6, -327664, 196608, 6, -393199, 196608, 6, -458734, 196608, 6, 131088, 196608, 4, 196625, 196608, 4, 262162, 196608, 4, -327654, 262144, 6, 131098, 262144, 4, -327653, 131072, 6, 131099, 131072, 7, -327652, 131072, 6, 131100, 131072, 7, -327651, 131072, 6, 131101, 131072, 7, 131102, 131072, 7, 131103, 131072, 7, 131104, 131072, 7, 131105, 131072, 7, 131106, 131072, 7, 131107, 131072, 7, -524264, 327680, 6, -458728, 262144, 6, 262168, 262144, 4, 327704, 327680, 7, -458727, 327680, 6, -393191, 262144, 6, 196633, 262144, 4, 262169, 327680, 7, -393190, 327680, 6, 196634, 327680, 7, -327650, 131072, 6, -327649, 131072, 6, -327648, 131072, 6, 131108, 131072, 7, 131109, 131072, 7, 131110, 131072, 7, -524267, 131072, 6, -524266, 131072, 6, -524265, 131072, 6, 327701, 131072, 7, 327702, 131072, 7, 327703, 131072, 7)
 
 [node name="FirstRoom_FireAnimationParent" parent="." index="10" instance=ExtResource("3_vhbtc")]
-position = Vector2(1031, -140)
+position = Vector2(1031, -177)
 num_fire_x = 1
 num_fire_y = 6
 
 [node name="FirstRoom_FireAnimationParent2" parent="." index="11" instance=ExtResource("3_vhbtc")]
-position = Vector2(1754, -140)
+position = Vector2(1754, -177)
 num_fire_x = 1
 num_fire_y = 6
 
@@ -71,15 +74,16 @@ position = Vector2(1384, -348)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
 total_elements_to_spawn = 3
 max_elements_at_once = 2
-spawn_interval_max = 3.5
-spawn_interval_min = 2.0
+spawn_interval_max = 5.0
+spawn_interval_min = 3.0
 
 [node name="FirstRoom_EnemySpawner2" parent="." index="13" instance=ExtResource("4_qawmp")]
 position = Vector2(1381, 278)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
 total_elements_to_spawn = 3
 max_elements_at_once = 2
-spawn_interval_min = 2.0
+spawn_interval_max = 5.0
+spawn_interval_min = 3.0
 
 [node name="EventHandlers" type="Node" parent="." index="14"]
 

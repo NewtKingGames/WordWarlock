@@ -90,6 +90,7 @@ offset_bottom = 2.0
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(4, 4)
 tile_set = ExtResource("9_yms7g")
+rendering_quadrant_size = 8
 format = 2
 layer_0/name = "floor"
 layer_1/name = "walls"
