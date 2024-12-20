@@ -22,6 +22,8 @@ enum SpawnMode {RANDOM, ITERATE}
 @export var spawn_interval_min: float = 1.0
 @export var spawn_mode: SpawnMode = SpawnMode.RANDOM
 @export var initial_delay: bool = false
+# Boolean used to help me test - it simply doesn't spawn things if ture
+@export var testing: bool = false
 
 var current_elements: int = 0
 var total_elements_spawned: int = 0
@@ -42,32 +44,42 @@ func start_spawner() -> void:
 	if initial_delay:
 		schedule_spawner()
 	else:
-		print("we should spawn elements right away?")
-		spawn_element()
+		try_spawn_element()
 
 # This should probably get overridden by child classes
-func spawn_element() -> Node2D:
+func try_spawn_element() -> Node2D:
 	if check_max_elements_at_once():
 		schedule_spawner()
 		return null
 	if check_total_elements_spawned():
-		spawner_finished_spawning.emit()
+		end_spawner()
 		return null
+	var element: Node2D = null
+	if not testing:
+		element = await spawn_element()
+		connect_signals(element)
+	schedule_spawner()
+	return element
+
+func spawn_element() -> Node2D:
 	var element: Node2D = elements_to_spawn[current_spawn_scene_index].instantiate()
 	current_spawn_scene_index = get_next_index(current_spawn_scene_index)
 	add_child(element)
 	current_elements += 1
 	total_elements_spawned += 1
-	connect_signals(element)
-	schedule_spawner()
 	return element
+
+
+func end_spawner() -> void:
+	spawner_finished_spawning.emit()
+	
 
 func _on_element_exited_scene() -> void:
 	current_elements -= 1
 	total_elements_destroyed += 1
 
 func schedule_spawner() -> void:
-	get_tree().create_timer(randf_range(spawn_interval_min, spawn_interval_max), true, false, true).timeout.connect(spawn_element)
+	get_tree().create_timer(randf_range(spawn_interval_min, spawn_interval_max), true, false, true).timeout.connect(try_spawn_element)
 
 # Enables custom spawners to add additional signals to the spawned elements
 func connect_signals(element: Node2D) -> void:

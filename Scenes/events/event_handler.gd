@@ -48,4 +48,4 @@ func execute_commands() -> void:
 	for node in nodes_to_command:
 		commands_to_execute[current_index].do_action(node)
 		current_index += 1
-	print("TODO - destroy me")
+	queue_free()

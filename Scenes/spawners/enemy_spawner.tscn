@@ -1,6 +1,75 @@
-[gd_scene load_steps=2 format=3 uid="uid://dggdly4atuhy4"]
+[gd_scene load_steps=10 format=3 uid="uid://dggdly4atuhy4"]
 
 [ext_resource type="Script" path="res://Scenes/spawners/enemy_spawner.gd" id="1_fetf7"]
+[ext_resource type="Texture2D" uid="uid://7ghfqspsr8ot" path="res://Sprites/Glyphs/pentagram_sheet.png" id="2_gmh1v"]
+[ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="3_48cvm"]
+[ext_resource type="Texture2D" uid="uid://cetnbn6kuu0fx" path="res://Sprites/Glyphs/pentagram_single.png" id="3_icnhg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21sgk"]
+atlas = ExtResource("2_gmh1v")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl4xg"]
+atlas = ExtResource("2_gmh1v")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kssfu"]
+atlas = ExtResource("2_gmh1v")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dgmv5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21sgk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vl4xg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kssfu")
+}],
+"loop": true,
+"name": &"flicker",
+"speed": 6.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x41kf"]
+blend_mode = 2
 
 [node name="EnemySpawner" type="Node2D"]
+light_mask = 5
+visibility_layer = 5
 script = ExtResource("1_fetf7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 5
+visibility_layer = 5
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_dgmv5")
+animation = &"flicker"
+frame_progress = 0.358039
+
+[node name="LightSprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_x41kf")
+scale = Vector2(2, 2)
+texture = ExtResource("2_gmh1v")
+hframes = 2
+
+[node name="PentagramLight" type="PointLight2D" parent="."]
+scale = Vector2(1.32, 1.32)
+energy = 0.0
+blend_mode = 2
+range_item_cull_mask = 4
+texture = ExtResource("3_icnhg")
+texture_scale = 1.49
+
+[node name="NormalLight" type="PointLight2D" parent="."]
+color = Color(1, 0.0941176, 0.0588235, 1)
+texture = ExtResource("3_48cvm")

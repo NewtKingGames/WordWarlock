@@ -35,6 +35,21 @@ _data = {
 [node name="Level" type="Node2D"]
 position = Vector2(0, 2)
 
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
+tile_set = ExtResource("9_yms7g")
+rendering_quadrant_size = 8
+format = 2
+layer_0/name = "floor"
+layer_1/name = "walls"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "walldecals"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "floordecals"
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "cieling"
+layer_4/tile_data = PackedInt32Array()
+
 [node name="CanvasLayer" parent="." instance=ExtResource("7_4keth")]
 
 [node name="ColorRect" parent="CanvasLayer" index="0"]
@@ -86,20 +101,5 @@ blend_mode = 2
 [node name="PlayerUI" parent="PlayerUILayer" instance=ExtResource("12_p2vga")]
 offset_top = 2.0
 offset_bottom = 2.0
-
-[node name="TileMap" type="TileMap" parent="."]
-scale = Vector2(4, 4)
-tile_set = ExtResource("9_yms7g")
-rendering_quadrant_size = 8
-format = 2
-layer_0/name = "floor"
-layer_1/name = "walls"
-layer_1/tile_data = PackedInt32Array()
-layer_2/name = "walldecals"
-layer_2/tile_data = PackedInt32Array()
-layer_3/name = "floordecals"
-layer_3/tile_data = PackedInt32Array()
-layer_4/name = "cieling"
-layer_4/tile_data = PackedInt32Array()
 
 [editable path="CanvasLayer"]
