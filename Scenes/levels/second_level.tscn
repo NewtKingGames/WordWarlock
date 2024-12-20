@@ -77,7 +77,7 @@ num_fire_y = 6
 position = Vector2(1388, -232)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
 total_elements_to_spawn = 1
-max_elements_at_once = 1
+max_elements_at_once = 3
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
 
@@ -85,7 +85,7 @@ spawn_interval_min = 3.0
 position = Vector2(1380, 222)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
 total_elements_to_spawn = 1
-max_elements_at_once = 1
+max_elements_at_once = 3
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
 
@@ -108,8 +108,11 @@ shape = SubResource("RectangleShape2D_n55dn")
 
 [node name="FirstFireRoomEnemiesKilledEventHandler" parent="EventHandlers" index="1" node_paths=PackedStringArray("nodes_to_subscribe", "nodes_to_command") instance=ExtResource("10_dnfsa")]
 nodes_to_subscribe = [NodePath("../../FirstRoom_EnemySpawner"), NodePath("../../FirstRoom_EnemySpawner2")]
-signals_to_subscribe = Array[String](["all_spawner_elements_destroyed", "all_spawner_elements_destroyed"])
+signals_to_subscribe = Array[String](["all_spawned_enemies_killed", "all_spawned_enemies_killed"])
 nodes_to_command = [NodePath("../../FirstRoom_FireAnimationParent"), NodePath("../../FirstRoom_FireAnimationParent2")]
 commands_to_execute = Array[ExtResource("7_3025m")]([SubResource("Resource_gwipy"), SubResource("Resource_h8jdp")])
+
+[node name="Slime" parent="." index="15" instance=ExtResource("5_0uh2x")]
+position = Vector2(507, -36)
 
 [editable path="CanvasLayer"]

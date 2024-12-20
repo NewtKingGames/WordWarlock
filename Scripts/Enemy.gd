@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name EnemyClass
 
+signal enemy_died
+
 @export var health: float
 @export var walk_speed: float
 @export var chase_distance: float
@@ -42,5 +44,6 @@ func hit(damage: float):
 		health -= damage
 		if health <= 0:
 			state_machine.on_outside_transition("death")
+			enemy_died.emit()
 		else:
 			state_machine.on_outside_transition("damage")

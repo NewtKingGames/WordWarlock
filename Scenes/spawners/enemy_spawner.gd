@@ -1,18 +1,23 @@
 class_name EnemySpawner
 extends Spawner
-# TODO - at some point you need to improve the enemy classes and have some kind of a signal here!
+
+signal all_spawned_enemies_killed
+
 @onready var color_rect: ColorRect = $ColorRect
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var pentagram_light: PointLight2D = $PentagramLight
 @onready var normal_light: PointLight2D = $NormalLight
 
-
 # Tweens
 var pentagram_light_tween: Tween
 var pentagram_rotate_tween: Tween
 
-# Let's try something weird with the point light and have it modulate
-# the best texture scale is 1.32
+# Tracking enemies alive/dead
+var spawned_enemies_killed: int = 0 :
+	set(value):
+		spawned_enemies_killed = value
+		if spawned_enemies_killed >= total_elements_to_spawn:
+			all_elements_destroyed()
 
 func _ready() -> void:
 	animated_sprite_2d.modulate = Color(0, 0, 0, 0.75)
@@ -26,6 +31,7 @@ func start_active_pentagram_effects() -> void:
 	pentagram_light_tween.tween_property(pentagram_light, "rotation", deg_to_rad(180), 2)
 	pentagram_light_tween.tween_property(pentagram_light, "rotation", deg_to_rad(360), 2)
 	pentagram_rotate_tween.tween_property(pentagram_light, "scale", Vector2(2.5, 2.5),1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
+	# 1.32 is the magic number
 	pentagram_rotate_tween.tween_property(pentagram_light, "scale", Vector2(1.32, 1.32),1.32).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 
 
@@ -38,9 +44,15 @@ func start_spawner() -> void:
 	await start_spawner_effect()
 	super.start_spawner()
 
-func end_spawner() -> void:
-	super.end_spawner()
-	end_spawner_effect()
+func all_elements_destroyed() -> void:
+	await end_spawner_effect()
+	all_spawned_enemies_killed.emit()
+	queue_free()
+
+func connect_signals(element: Node2D) -> void:
+	if element is EnemyClass:
+		element.enemy_died.connect(func(): spawned_enemies_killed +=1)
+	super.connect_signals(element)
 
 
 func start_spawner_effect() -> void:
@@ -64,7 +76,8 @@ func spawn_entity_effect() -> void:
 	await light_flash_tween.finished
 
 func end_spawner_effect() -> void:
+	stop_active_pentagram_effects()
 	var tween: Tween = create_tween().set_parallel()
 	tween.tween_property(animated_sprite_2d, "modulate", Color(1, 1, 1, 0), 0.5)
 	tween.tween_property(normal_light, "energy", 0, 0.2)
-	stop_active_pentagram_effects()
+	await tween.finished

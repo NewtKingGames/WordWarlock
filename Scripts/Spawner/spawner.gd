@@ -2,18 +2,14 @@ class_name Spawner
 extends Node2D
 
 signal spawner_finished_spawning
-signal all_spawner_elements_destroyed
 
 enum SpawnMode {RANDOM, ITERATE}
 
-
 @export var elements_to_spawn: Array[PackedScene] = []
 
-# TODO - consider passing in the enemy type?
 @export var is_spawning: bool:
 	set(value):
 		is_spawning = value
-		# Start/Stop spawning
 # When set to -1 there is no limit
 @export var total_elements_to_spawn: int = -1
 # When set to -1 there is no limit
@@ -30,8 +26,6 @@ var total_elements_spawned: int = 0
 var total_elements_destroyed: int = 0: 
 	set(value):
 		total_elements_destroyed = value
-		if total_elements_destroyed == total_elements_to_spawn:
-			all_spawner_elements_destroyed.emit()
 var current_spawn_scene_index: int = 0
 
 
@@ -69,10 +63,8 @@ func spawn_element() -> Node2D:
 	total_elements_spawned += 1
 	return element
 
-
 func end_spawner() -> void:
-	spawner_finished_spawning.emit()
-	
+	spawner_finished_spawning.emit()	
 
 func _on_element_exited_scene() -> void:
 	current_elements -= 1
@@ -84,14 +76,6 @@ func schedule_spawner() -> void:
 # Enables custom spawners to add additional signals to the spawned elements
 func connect_signals(element: Node2D) -> void:
 	element.tree_exited.connect(_on_element_exited_scene)
-
-func can_spawn() -> bool:
-	if total_elements_to_spawn != -1 and total_elements_spawned >= total_elements_to_spawn:
-		# Right here is where the spawner should be completely finished... I wonder if theres a better place for this
-		return false
-	if max_elements_at_once != -1 and current_elements >= max_elements_at_once:
-		return false
-	return true
 
 func check_max_elements_at_once() -> bool:
 	return max_elements_at_once != -1 and current_elements >= max_elements_at_once
