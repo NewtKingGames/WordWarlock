@@ -59,8 +59,8 @@ func start_spawner_effect() -> void:
 	var tween: Tween = create_tween().set_parallel()
 	tween.tween_property(animated_sprite_2d, "modulate", Color(1,1,1,1), 0.75)
 	tween.tween_property(normal_light, "energy", 0.8, 0.5)
-	await tween.finished
 	start_active_pentagram_effects()
+	await tween.finished
 	animated_sprite_2d.play("flicker")
 	return
 

@@ -2,7 +2,7 @@ class_name SpellStackParent
 extends Node2D
 
 @export var is_enabled: bool = true
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var complete_stack_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 const SPELL_STACK_SCENE: PackedScene = preload("res://Scenes/ui/spell_stack/spell_stack.tscn")
 # See if you can get away with not using this and instead just use get_children/get_child_count
@@ -67,7 +67,7 @@ func remove_spell_stack(spell_stack: SpellStack) -> void:
 	
 	
 func _on_child_spell_stack_completed(spell_stack: SpellStack) -> void:
-	audio_stream_player_2d.play()
+	#complete_stack_sound.play()
 	Events.spell_casted.emit(spell_stack.spell)
 	remove_spell_stack(spell_stack)
 

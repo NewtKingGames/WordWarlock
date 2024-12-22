@@ -9,7 +9,7 @@ extends Node2D
 
 func _ready() -> void:
 	hurt_box.monitoring = false
-	fire_animation.play("default")
+	fire_animation.play("no_animation")
 	point_light_2d.enabled = false
 	## Temporary timer
 	#await get_tree().create_timer(1).timeout

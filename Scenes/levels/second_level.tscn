@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://cchfataq1nnxf"]
+[gd_scene load_steps=19 format=3 uid="uid://cchfataq1nnxf"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_fm0cg"]
+[ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="2_gdgjb"]
 [ext_resource type="PackedScene" uid="uid://cp8bwo026477s" path="res://Scenes/objects/fire_animation_parent.tscn" id="3_vhbtc"]
 [ext_resource type="PackedScene" uid="uid://dggdly4atuhy4" path="res://Scenes/spawners/enemy_spawner.tscn" id="4_qawmp"]
 [ext_resource type="PackedScene" uid="uid://ooxyv5avybtt" path="res://Scenes/enemies/slime.tscn" id="5_0uh2x"]
@@ -63,29 +64,44 @@ position = Vector2(96, -37)
 [node name="DarkeningLight" parent="." index="5"]
 energy = 0.65
 
+[node name="Torch" parent="Torches" index="0" instance=ExtResource("2_gdgjb")]
+position = Vector2(83, -231)
+
+[node name="Torch2" parent="Torches" index="1" instance=ExtResource("2_gdgjb")]
+position = Vector2(276, -231)
+
+[node name="Torch3" parent="Torches" index="2" instance=ExtResource("2_gdgjb")]
+position = Vector2(460, -231)
+
+[node name="Torch4" parent="Torches" index="3" instance=ExtResource("2_gdgjb")]
+position = Vector2(646, -231)
+
+[node name="Torch5" parent="Torches" index="4" instance=ExtResource("2_gdgjb")]
+position = Vector2(871, -231)
+
 [node name="FirstRoom_FireAnimationParent" parent="." index="10" instance=ExtResource("3_vhbtc")]
-position = Vector2(1031, -177)
+position = Vector2(1031, -214)
 num_fire_x = 1
 num_fire_y = 6
 
 [node name="FirstRoom_FireAnimationParent2" parent="." index="11" instance=ExtResource("3_vhbtc")]
-position = Vector2(1754, -177)
+position = Vector2(1754, -214)
 num_fire_x = 1
 num_fire_y = 6
 
 [node name="FirstRoom_EnemySpawner" parent="." index="12" instance=ExtResource("4_qawmp")]
 position = Vector2(1388, -232)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
-total_elements_to_spawn = 1
-max_elements_at_once = 3
+total_elements_to_spawn = 2
+max_elements_at_once = 2
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
 
 [node name="FirstRoom_EnemySpawner2" parent="." index="13" instance=ExtResource("4_qawmp")]
 position = Vector2(1380, 222)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv"), ExtResource("5_0uh2x")])
-total_elements_to_spawn = 1
-max_elements_at_once = 3
+total_elements_to_spawn = 2
+max_elements_at_once = 1
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
 

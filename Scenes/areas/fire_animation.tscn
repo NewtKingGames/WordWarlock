@@ -68,11 +68,6 @@ region = Rect2(30, 0, 10, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_akqcn"]
 animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k2v7r")
@@ -116,6 +111,11 @@ animations = [{
 "name": &"loop_orange_four",
 "speed": 12.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"no_animation",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rlaft")
@@ -143,7 +143,8 @@ script = ExtResource("1_q0du7")
 [node name="FireAnimation" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_akqcn")
-autoplay = "default"
+animation = &"no_animation"
+autoplay = "no_animation"
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, 8.83333)
