@@ -27,7 +27,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_player_near:
 		# Display the interact button
-		if Input.is_action_just_pressed("interact") and not is_playing_prompt:
+		if Input.is_action_just_pressed("interact") and not is_playing_prompt and not Globals.is_player_casting:
 			keyboard_letter.key_pressed()
 			if current_prompt_index == prompt_array.size():
 				reset_prompt()
