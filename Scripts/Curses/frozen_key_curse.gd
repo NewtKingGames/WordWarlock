@@ -9,12 +9,9 @@ func start_curse(scene_tree: SceneTree) -> void:
 	print("do something against the keyboard")
 	print(keyboard)
 	for i in range(6):
-		scene_tree.create_timer(i+1).timeout.connect(func(): _call_back_function(keyboard))
+		keyboard.freeze_random_key()
+		await scene_tree.create_timer(1).timeout
 	pass
-
-func _call_back_function(keyboard: Keyboard) -> void:
-	print("pressing key!")
-	keyboard.key_pressed("A")
 
 func end_curse(scene_tree: SceneTree) -> void:
 	# This could grab a reference to the keyboard and freeze a select amount of letters

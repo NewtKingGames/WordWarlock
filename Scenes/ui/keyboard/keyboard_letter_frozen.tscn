@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://p1o80gbpi7fg"]
+
+[ext_resource type="Script" path="res://Scenes/ui/keyboard/keyboard_letter_frozen.gd" id="1_acsrg"]
+[ext_resource type="Texture2D" uid="uid://wvsb5fjqoy7j" path="res://Sprites/Keyboard LetterEffectsSheet.png" id="2_844cl"]
+[ext_resource type="AudioStream" uid="uid://bifwe0fa1e3s" path="res://Sounds/ice-magic-summon.mp3" id="3_3vood"]
+[ext_resource type="AudioStream" uid="uid://dtlh64ofs1dlk" path="res://Sounds/ice-magic-arrow-trimmed.mp3" id="4_k3xu5"]
+
+[node name="KeyboardLetterFrozen" type="Node2D"]
+script = ExtResource("1_acsrg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_844cl")
+hframes = 8
+vframes = 7
+frame = 16
+
+[node name="KeyPressedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3vood")
+
+[node name="KeyBrokenSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_k3xu5")

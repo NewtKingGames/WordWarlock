@@ -66,8 +66,9 @@ func Handle_Input(_event: InputEvent):
 				Globals.current_player_typed_string += event_string
 				casting_text_parent.add_letter(event_string)
 			else:
-				# Play error noise
-				$"../../Sounds/TypingSounds/ErrorTypingNoise".play()
+				pass
+				# Play error noise - TODO consider deleting this!!
+				#$"../../Sounds/TypingSounds/ErrorTypingNoise".play()
 		elif _event.is_action_pressed("space") and Globals.current_player_typed_string.length() > 0:
 			Globals.current_player_typed_string += " "
 			casting_text_parent.add_letter(" ")
