@@ -59,7 +59,6 @@ func key_pressed(letter_input: String) -> String:
 		return ""
 
 func disable_random_key() -> KeyboardLetter:
-	# TODO randomize this later
 	var letter_node: KeyboardLetter = get_random_active_key()
 	letter_node.letter_active = false
 	return letter_node
