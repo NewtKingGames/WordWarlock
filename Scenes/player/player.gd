@@ -3,7 +3,6 @@ class_name Player
 
 signal slowdown_effect_entered
 signal slowdown_effect_exited
-signal casting_key_pressed(letter_string: String)
 # This signal is used to pass the actual spell object to the object responsible for adding them to the scene
 signal spell_shot(spell: Spell)
 # This signal is used to simply tell the game that the player hit enter on some string, spell or not

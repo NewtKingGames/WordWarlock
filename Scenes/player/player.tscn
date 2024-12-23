@@ -554,7 +554,6 @@ texture = ExtResource("9_h1ujj")
 texture_scale = 0.3
 script = ExtResource("21_yu25m")
 
-[connection signal="casting_key_pressed" from="." to="Keyboard" method="_on_player_spell_key_pressed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="." method="_on_cast_spell_state_changed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="Keyboard" method="_on_cast_spell_state_changed"]
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
