@@ -28,9 +28,9 @@ func _ready():
 		keyboard_letter.set_keyboard_letter(letter, letter_num)
 		letter_num += 1
 		letter_dictionary[letter] = keyboard_letter
-	letter_dictionary["Enter"] = enter
-	letter_dictionary["Backspace"] = backspace
-	letter_dictionary["Space"] = spacebar
+	letter_dictionary["ENTER"] = enter
+	letter_dictionary["BACKSPACE"] = backspace
+	letter_dictionary["SPACE"] = spacebar
 	Events.current_string_matches.connect(_on_current_string_matches)
 	Events.current_string_typed.connect(_on_player_typed_string)
 	Events.player_exited_casting_state.connect(_on_casting_state_exited)
@@ -46,6 +46,7 @@ func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_s
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
 func key_pressed(letter_input: String) -> String:
+	letter_input = letter_input.to_upper()
 	if not letter_dictionary.has(letter_input):
 		return ""
 	

@@ -43,7 +43,7 @@ func key_pressed() -> void:
 		return
 	letter_sprite.visible = false
 	letter_sprite_pressed.visible = true
-	await get_tree().create_timer(0.15 * Globals.time_scale_offset).timeout
+	await get_tree().create_timer(0.2 * Globals.time_scale_offset).timeout
 	letter_sprite.visible = true
 	letter_sprite_pressed.visible = false
 
