@@ -1,5 +1,8 @@
 class_name CastingTextParent extends Node2D
 
+@export var text_idle_effect: CastingTextChild.TEXT_IDLE_EFFECTS = CastingTextChild.TEXT_IDLE_EFFECTS.NONE
+@export var text_intro_effect: CastingTextChild.TEXT_INTRO_EFFECTS = CastingTextChild.TEXT_INTRO_EFFECTS.ROTATE_IN
+
 @export var is_attached_to_player: bool = false
 
 var child_text_scene: PackedScene = preload("res://Scenes/ui/casting_text_child.tscn")
@@ -12,12 +15,22 @@ func _ready() -> void:
 		Events.current_string_matches.connect(_on_current_string_matches)
 		Events.current_string_typed.connect(_on_current_string_typed)
 
+#
+# Only used for testing!!
+#func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("down"):
+		#add_letter("X")
+	#if Input.is_action_just_pressed("backspace"):
+		#delete_letter()
+
 func add_letter(letter: String):
 	current_string = current_string + letter
 	var child_text_node: CastingTextChild = child_text_scene.instantiate()
 	child_text_node.text = letter
 	# This helps center the list of letters
 	child_text_node.position = Vector2(letter_position_offset*(current_string.length()-1), 0)
+	child_text_node.text_idle_effect = text_idle_effect
+	child_text_node.text_intro_effect = text_intro_effect
 	slide_all_previous_letters_left(child_text_node.position)
 	add_child(child_text_node)
 

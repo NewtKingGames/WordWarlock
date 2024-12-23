@@ -96,6 +96,7 @@ total_elements_to_spawn = 2
 max_elements_at_once = 2
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
+testing = true
 
 [node name="FirstRoom_EnemySpawner2" parent="." index="13" instance=ExtResource("4_qawmp")]
 position = Vector2(1380, 222)
@@ -104,6 +105,7 @@ total_elements_to_spawn = 2
 max_elements_at_once = 1
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
+testing = true
 
 [node name="EventHandlers" type="Node" parent="." index="14"]
 
