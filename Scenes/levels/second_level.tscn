@@ -130,7 +130,4 @@ signals_to_subscribe = Array[String](["all_spawned_enemies_killed", "all_spawned
 nodes_to_command = [NodePath("../../FirstRoom_FireAnimationParent"), NodePath("../../FirstRoom_FireAnimationParent2")]
 commands_to_execute = Array[ExtResource("7_3025m")]([SubResource("Resource_gwipy"), SubResource("Resource_h8jdp")])
 
-[node name="Slime" parent="." index="15" instance=ExtResource("5_0uh2x")]
-position = Vector2(507, -36)
-
 [editable path="CanvasLayer"]
