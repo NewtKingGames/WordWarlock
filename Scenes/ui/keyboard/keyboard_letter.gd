@@ -16,10 +16,9 @@ var letter_active: bool = true:
 		# TODO add more visual/audio effects?
 		if value == false:
 			modulate = Color.FIREBRICK
-			letter_active = false
 		if value == true:
 			modulate = Color.WHITE
-			letter_active = true
+		letter_active = value
 
 func _ready():
 	letter_sprite.visible = true
