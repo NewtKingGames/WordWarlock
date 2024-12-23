@@ -22,10 +22,21 @@ func key_pressed() -> void:
 
 func ice_pressed_effects() -> void:
 	# TODO - Rotate sprite
+	var tween_rotate: Tween = create_tween()
+	var max_rotation = randi_range(10, 20)
+	var rotate_direction = randi_range(0, 1)
+	if rotate_direction == 0:
+		rotate_direction = -1
+	tween_rotate.tween_property(self, "rotation_degrees", max_rotation * rotate_direction, 0.025 * Engine.time_scale)
+	tween_rotate.tween_property(self, "rotation_degrees", 0, 0.025 * Engine.time_scale)
+	tween_rotate.tween_property(self, "rotation_degrees", max_rotation * randf_range(0.3, 0.6) * rotate_direction * -1, 0.025 * Engine.time_scale)
+	tween_rotate.tween_property(self, "rotation_degrees", 0, 0.025 * Engine.time_scale)
+	tween_rotate.tween_property(self, "rotation_degrees", max_rotation * randf_range(0.1, 0.3) * rotate_direction, 0.025 * Engine.time_scale )
+	tween_rotate.tween_property(self, "rotation_degrees", 0, 0.025 * Engine.time_scale)
 	key_pressed_sound.play()
 
 func break_ice() -> void:
 	ice_broken.emit()
 	key_broken_sound.play()
-	await key_broken_sound.finished
-	queue_free()
+	get_tree().create_timer(0.1*Engine.time_scale).timeout.connect(func(): sprite_2d.visible = false)
+	key_broken_sound.finished.connect(func(): queue_free)
