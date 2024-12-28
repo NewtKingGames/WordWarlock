@@ -6,8 +6,6 @@ extends Curse
 
 func start_curse(scene_tree: SceneTree) -> void:
 	var keyboard: Keyboard = scene_tree.get_first_node_in_group("keyboard")
-	print("do something against the keyboard")
-	print(keyboard)
 	for i in range(6):
 		keyboard.freeze_random_key()
 		await scene_tree.create_timer(1).timeout

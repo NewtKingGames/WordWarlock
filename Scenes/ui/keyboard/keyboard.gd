@@ -37,12 +37,10 @@ func _ready():
 
 # This is where we change the visibllity
 func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_scene):
-	#visible = is_casting_active
-	var tween = create_tween()
 	if is_casting_active:
-		tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.05)
+		VisualUtils.fade_in_node(self, 0.05)
 	else:
-		tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.2)
+		VisualUtils.fade_out_node(self, 0.2)
 
 # Returns the letter the player pressed. Returns empty string "" if the key is disabled
 func key_pressed(letter_input: String) -> String:
