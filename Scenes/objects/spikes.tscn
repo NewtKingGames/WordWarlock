@@ -1,73 +1,75 @@
-[gd_scene load_steps=14 format=3 uid="uid://by5ogfiac5bt"]
+[gd_scene load_steps=7 format=3 uid="uid://by5ogfiac5bt"]
 
 [ext_resource type="Script" path="res://Scenes/objects/spikes.gd" id="1_5r0so"]
-[ext_resource type="Texture2D" uid="uid://cqigu0yu4aehp" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f2.png" id="1_822il"]
-[ext_resource type="Texture2D" uid="uid://bbhlt5ekusi1t" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f3.png" id="2_um23v"]
-[ext_resource type="Texture2D" uid="uid://duy68i8tgsmmq" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f4.png" id="3_vp4go"]
-[ext_resource type="Texture2D" uid="uid://diqsfsj80isb8" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f5.png" id="4_g0xo2"]
-[ext_resource type="Texture2D" uid="uid://b4vr3ma3viiqv" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f6.png" id="5_3sdqc"]
-[ext_resource type="Texture2D" uid="uid://y8yfgw0yahyc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f7.png" id="6_3qwct"]
-[ext_resource type="Texture2D" uid="uid://dg3sbrxmpg4l" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f8.png" id="7_ykrol"]
-[ext_resource type="Texture2D" uid="uid://bqfydl0hrclyq" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f9.png" id="8_yvigh"]
-[ext_resource type="Texture2D" uid="uid://cq22ra8i1jyvb" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f1.png" id="9_lviet"]
-[ext_resource type="Texture2D" uid="uid://cmtukcapitcuk" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_anim_f0.png" id="10_lhvxg"]
+[ext_resource type="Texture2D" uid="uid://dmflu2ekpwh45" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_spritesheet.png" id="12_tnkvt"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kayk5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_822il")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_um23v")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_vp4go")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_g0xo2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_3sdqc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_3qwct")
-}],
-"loop": false,
-"name": &"activate_spikes",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_3qwct")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_ykrol")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_yvigh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_3sdqc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_vp4go")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_lviet")
-}],
-"loop": false,
-"name": &"deactivate_spikes",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_lhvxg")
-}],
-"loop": false,
-"name": &"no_spikes",
-"speed": 5.0
+[sub_resource type="Animation" id="Animation_ni3ih"]
+resource_name = "activate_spikes"
+length = 0.500008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpikeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 3, 5, 6, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spikes_can_hurt"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_qiwdu"]
+resource_name = "deactivate_spikes"
+length = 0.416675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpikeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 5, 4, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0833333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spikes_cant_hurt"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oy6ui"]
+_data = {
+"activate_spikes": SubResource("Animation_ni3ih"),
+"deactivate_spikes": SubResource("Animation_qiwdu")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyyea"]
 
@@ -75,12 +77,18 @@ animations = [{
 scale = Vector2(4, 4)
 script = ExtResource("1_5r0so")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_kayk5")
-animation = &"no_spikes"
-autoplay = "no_spikes"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oy6ui")
+}
+
+[node name="SpikeSprite" type="Sprite2D" parent="."]
+texture = ExtResource("12_tnkvt")
+hframes = 10
+frame = 7
 
 [node name="HurtBox" type="Area2D" parent="."]
+scale = Vector2(0.798953, 0.795442)
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
