@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="1_w4k2w"]
 
-[node name="Camera2D" type="Camera2D"]
+[node name="Camera2D" type="Camera2D" groups=["camera"]]
 zoom = Vector2(1.4, 1.4)
 process_callback = 0
 position_smoothing_enabled = true

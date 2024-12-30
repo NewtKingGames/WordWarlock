@@ -1,3 +1,4 @@
+class_name GameCamera
 extends Camera2D
 
 @export var random_strength: float = 80

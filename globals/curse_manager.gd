@@ -10,7 +10,6 @@ var player: Player
 
 func _ready() -> void:
 	Events.start_curse.connect(_start_curse)
-	get_tree().create_timer(1).timeout.connect(func(): _start_curse(Curse.CURSE_TYPE.FROZEN_KEY))
 
 func _start_curse(curse_type: Curse.CURSE_TYPE) -> void:
 	var curse: Curse = _create_curse(curse_type)
