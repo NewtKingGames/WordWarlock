@@ -8,6 +8,7 @@ class_name CastingTextParent extends Node2D
 var child_text_scene: PackedScene = preload("res://Scenes/ui/casting_text_child.tscn")
 var letter_position_offset: float = 10
 var current_string: String = ""
+@export var light_mask_override: int = 3
 
 
 func _ready() -> void:
@@ -26,6 +27,7 @@ func _ready() -> void:
 func add_letter(letter: String):
 	current_string = current_string + letter
 	var child_text_node: CastingTextChild = child_text_scene.instantiate()
+	child_text_node.light_mask = light_mask_override
 	child_text_node.text = letter
 	# This helps center the list of letters
 	child_text_node.position = Vector2(letter_position_offset*(current_string.length()-1), 0)

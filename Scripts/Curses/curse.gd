@@ -9,7 +9,8 @@ signal end_self_curse
 enum CURSE_TYPE {FROZEN_KEY}  
 
 @export var name: String = ""
-
+var primary_color: Color
+var secondary_color: Color
 
 func start_curse(scene_tree: SceneTree) -> void:
 	pass

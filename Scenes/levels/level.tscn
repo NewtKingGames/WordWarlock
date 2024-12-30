@@ -75,7 +75,7 @@ metadata/_edit_group_ = true
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="Player" groups=["music"]]
 position = Vector2(-0.5, 1)
 stream = ExtResource("6_imp00")
-volume_db = -2.0
+volume_db = -6.0
 autoplay = true
 
 [node name="SpellStackParent" parent="Player" instance=ExtResource("6_w4t3b")]

@@ -47,7 +47,6 @@ func key_pressed(letter_input: String) -> String:
 	letter_input = letter_input.to_upper()
 	if not letter_dictionary.has(letter_input):
 		return ""
-	
 	typing_noises.play_typing_noise_pitch_modifier(Globals.current_player_typed_string.length())
 	var letter: KeyboardLetter = letter_dictionary[letter_input]
 	# key_pressed returns "" if the letter is inactive

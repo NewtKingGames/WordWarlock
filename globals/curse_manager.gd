@@ -3,17 +3,24 @@ extends Node
 var active_curses: Array[Curse] = []
 # Future proofing in case we want to add any new curses
 @export var active_curse_limit: int = 1
+const CURSE_NOTIFY_VISUALS: PackedScene = preload("res://Scenes/ui/dialogue/curse_notify_visuals.tscn")
+var player: Player
 
 # TODO - NEED TO IMPLEMENT END CURSE BEHAVIOR
 
 func _ready() -> void:
 	Events.start_curse.connect(_start_curse)
-	#get_tree().create_timer(2).timeout.connect(func(): _start_curse(Curse.CURSE_TYPE.FROZEN_KEY))
+	#get_tree().create_timer(1).timeout.connect(func(): _start_curse(Curse.CURSE_TYPE.FROZEN_KEY))
 
 func _start_curse(curse_type: Curse.CURSE_TYPE) -> void:
 	var curse: Curse = _create_curse(curse_type)
 	active_curses.append(curse)
 	curse.start_curse(get_tree())
+	var curse_notification: CurseNotifyVisuals = CURSE_NOTIFY_VISUALS.instantiate()
+	curse_notification.curse = curse
+	var player: Player = get_tree().get_first_node_in_group("player") as Player
+	curse_notification.player = player
+	add_child(curse_notification)
 
 func _create_curse(curse_type: Curse.CURSE_TYPE) -> Curse:
 	var curse: Curse

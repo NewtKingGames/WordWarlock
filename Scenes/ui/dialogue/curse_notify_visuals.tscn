@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://csr87768vi21q"]
+[gd_scene load_steps=5 format=3 uid="uid://csr87768vi21q"]
 
 [ext_resource type="Script" path="res://Scenes/ui/dialogue/curse_notify_visuals.gd" id="1_paeie"]
+[ext_resource type="Texture2D" uid="uid://uptrm6quna0a" path="res://Sprites/blacksquare.webp" id="2_drjmm"]
+[ext_resource type="PackedScene" uid="uid://bata6nhuga2rj" path="res://Scenes/ui/casting_text_parent.tscn" id="3_p0a5s"]
+[ext_resource type="AudioStream" uid="uid://bplbp5y5qw3cf" path="res://Sounds/GameSFX/Events/Negative/Retro Negative Short 21.wav" id="4_17bch"]
 
-[node name="CurseNotifyEffects" type="Node2D"]
+[node name="CurseNotifyVisuals" type="Node2D"]
+z_index = 2
 script = ExtResource("1_paeie")
+
+[node name="CurseTextBackground" type="Sprite2D" parent="."]
+position = Vector2(4, -245.76)
+scale = Vector2(1.84, 0.160001)
+texture = ExtResource("2_drjmm")
+
+[node name="CastingTextParent" parent="." instance=ExtResource("3_p0a5s")]
+position = Vector2(4, -247.76)
+scale = Vector2(1.6, 1.6)
+text_idle_effect = 1
+text_intro_effect = 1
+light_mask_override = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CurseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_17bch")

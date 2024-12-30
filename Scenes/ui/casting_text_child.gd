@@ -22,17 +22,25 @@ var match_string_tween: Tween
 var shake_offset: Vector2
 # On ready the text should pop up
 func _ready():
-	#shake_offset = Vector2(randf_range(-4, 4), randf_range(-4, 4))
-	shake_offset = Vector2(4, 4)
+	shake_offset = Vector2(randf_range(1, 3), randf_range(1, 3))
+	shake_offset = shake_offset if randi_range(0,1) == 1 else -shake_offset
+	#shake_offset = Vector2(1, 1)
 	if text_intro_effect == TEXT_INTRO_EFFECTS.ROTATE_IN:
 		rotate_text_start()
-	elif text_idle_effect == TEXT_INTRO_EFFECTS.SLIDE_DOWN_IN:
+	elif text_intro_effect == TEXT_INTRO_EFFECTS.SLIDE_DOWN_IN:
 		slam_down_text_start()
-
-func _process(delta: float) -> void:
 	if text_idle_effect == TEXT_IDLE_EFFECTS.SHAKE:
-		position = position + shake_offset
-		shake_offset = - shake_offset
+		shake_text()
+
+func shake_text() -> void:
+	position = position + shake_offset
+	shake_offset = - shake_offset
+	get_tree().create_timer(.05).timeout.connect(shake_text)
+
+#func _process(delta: float) -> void:
+	#if text_idle_effect == TEXT_IDLE_EFFECTS.SHAKE:
+		#position = position + shake_offset
+		#shake_offset = - shake_offset
 
 
 func _physics_process(delta: float) -> void:

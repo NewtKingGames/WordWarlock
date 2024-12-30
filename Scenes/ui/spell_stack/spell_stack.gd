@@ -71,19 +71,19 @@ func slide_spell_stack_word(spell_stack_word: SpellStackWord, position: Vector2,
 
 # Given the index of the word return the position the element should go
 func generate_spell_stack_word_position(index: int) -> Vector2:
-	print(spell_stack_word_children[index].position.x)
+	#print(spell_stack_word_children[index].position.x)
 	return Vector2(spell_stack_word_children[index].position.x, index*vertical_offset)
 	#return Vector2(index*horizontal_offset, spell_stack_word_children[index].position.y)
 
 func generate_spell_stack_word_position_horizontal(index: int) -> Vector2:
 	if index == 0:
-		print("first word positiion")
-		print(-spell_stack_word_children[index].size.x/2)
+		#print("first word positiion")
+		#print(-spell_stack_word_children[index].size.x/2)
 		return Vector2(-spell_stack_word_children[index].size.x/2, spell_stack_word_children[index].position.y)
 	# Calculate x position
 	var x_pos: float = spell_stack_word_children[index-1].size.x/2 + horizontal_offset
-	print("this word positiion")
-	print(x_pos)
+	#print("this word positiion")
+	#print(x_pos)
 	return Vector2(x_pos, spell_stack_word_children[index].position.y)
 
 func generate_spell_stack_word_opacity(index: int) -> Color:
