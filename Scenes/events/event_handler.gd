@@ -1,7 +1,7 @@
 class_name EventHandler
 extends Node
 
-# TODO - consider just using four arrays so that you can strongly type this...
+# TODO - this is simply not flexible enough... keep working on it
 # expects Node,String
 @export_group("Subsribers")
 @export var nodes_to_subscribe: Array[Node] = []

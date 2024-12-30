@@ -9,9 +9,9 @@ var player: Player
 # TODO - NEED TO IMPLEMENT END CURSE BEHAVIOR
 
 func _ready() -> void:
-	Events.start_curse.connect(_start_curse)
+	Events.start_curse.connect(start_curse)
 
-func _start_curse(curse_type: Curse.CURSE_TYPE) -> void:
+func start_curse(curse_type: Curse.CURSE_TYPE) -> void:
 	var curse: Curse = _create_curse(curse_type)
 	active_curses.append(curse)
 	curse.start_curse(get_tree())

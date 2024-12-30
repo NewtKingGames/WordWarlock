@@ -13,13 +13,14 @@ func _init() -> void:
 func start_curse(scene_tree: SceneTree) -> void:
 	print(name)
 	var keyboard: Keyboard = scene_tree.get_first_node_in_group("keyboard")
-	if not Globals.is_player_casting:
-		VisualUtils.fade_in_node(keyboard)
+	# TODO - think about having some kind of better visualization for the keyboard curse
+	#if not Globals.is_player_casting:
+		#VisualUtils.fade_in_node(keyboard)
 	for i in range(6):
 		keyboard.freeze_random_key()
 		await scene_tree.create_timer(1).timeout
-	if not Globals.is_player_casting:
-		VisualUtils.fade_out_node(keyboard)
+	#if not Globals.is_player_casting:
+		#VisualUtils.fade_out_node(keyboard)
 
 func end_curse(scene_tree: SceneTree) -> void:
 	# This could grab a reference to the keyboard and freeze a select amount of letters

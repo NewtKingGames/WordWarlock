@@ -10,18 +10,16 @@ z_index = 2
 script = ExtResource("1_paeie")
 
 [node name="CurseTextBackground" type="Sprite2D" parent="."]
-position = Vector2(4, -245.76)
+position = Vector2(4, -316.84)
 scale = Vector2(1.84, 0.160001)
 texture = ExtResource("2_drjmm")
 
 [node name="CastingTextParent" parent="." instance=ExtResource("3_p0a5s")]
-position = Vector2(4, -247.76)
+position = Vector2(4, -318.84)
 scale = Vector2(1.6, 1.6)
 text_idle_effect = 1
 text_intro_effect = 1
 light_mask_override = 1
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CurseSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_17bch")

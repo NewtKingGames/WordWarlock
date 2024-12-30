@@ -39,7 +39,7 @@ func apply_shake_small(string: String):
 	shake_strength = 0.6
 
 func on_slowdown_effect_entered():
-	camera_target_zoom = Vector2(2, 2)
+	camera_target_zoom = Vector2(1.6, 1.6)
 	
 func on_slowdown_effect_exited():
 	camera_target_zoom = Vector2(1.4, 1.4)

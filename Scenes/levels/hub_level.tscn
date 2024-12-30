@@ -39,9 +39,8 @@ scale = Vector2(4.08508, 4.08508)
 [node name="Player" parent="." index="6"]
 position = Vector2(351, 1655)
 
-[node name="LevelMusic" parent="Player" index="15"]
+[node name="LevelMusic" parent="Player" index="14"]
 stream = ExtResource("3_dmatl")
-autoplay = false
 
 [node name="DarkeningLight" parent="." index="7"]
 energy = 0.65
