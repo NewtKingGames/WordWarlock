@@ -10,7 +10,6 @@ var player: Player
 
 func _ready() -> void:
 	curse_text_background.modulate = Color(1,1,1, 0)
-	curse = FrozenKeyCurse.new()
 	_show_curse_name()
 	get_tree().create_timer(5, true, false, true).timeout.connect(_hide_curse_name)
 

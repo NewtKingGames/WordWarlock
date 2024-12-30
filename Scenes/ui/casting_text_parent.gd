@@ -10,12 +10,25 @@ var letter_position_offset: float = 10
 var current_string: String = ""
 @export var light_mask_override: int = 3
 
+var keys_blinded = false
+
+func blind_keys() -> void:
+	keys_blinded = true
+
+func unblind_keys() -> void:
+	keys_blinded = false
 
 func _ready() -> void:
 	if is_attached_to_player:
 		Events.current_string_matches.connect(_on_current_string_matches)
 		Events.current_string_typed.connect(_on_current_string_typed)
+		Events.player_blinded.connect(_on_player_blinded)
 
+func _on_player_blinded(blinded: bool) -> void:
+	if blinded:
+		blind_keys()
+	else:
+		unblind_keys()
 #
 # Only used for testing!!
 #func _process(delta: float) -> void:
@@ -25,10 +38,14 @@ func _ready() -> void:
 		#delete_letter()
 
 func add_letter(letter: String):
+		
 	current_string = current_string + letter
 	var child_text_node: CastingTextChild = child_text_scene.instantiate()
 	child_text_node.light_mask = light_mask_override
 	child_text_node.text = letter
+	# Override value to '?' if the player is blinded
+	if keys_blinded:
+		child_text_node.text = "?"
 	# This helps center the list of letters
 	child_text_node.position = Vector2(letter_position_offset*(current_string.length()-1), 0)
 	child_text_node.text_idle_effect = text_idle_effect

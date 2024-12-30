@@ -16,7 +16,6 @@ var highlight_tweens: Array[Tween] = []
 
 # TODO - consider using a global variable for the players current typed word...
 var length_current_string: int = 0
-	
 
 func _ready():
 	#visible = false

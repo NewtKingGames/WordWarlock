@@ -6,7 +6,7 @@ extends Resource
 # than an event ending the curse explicitly
 signal end_self_curse
 
-enum CURSE_TYPE {FROZEN_KEY}  
+enum CURSE_TYPE {FROZEN_KEY, BLIND_KEYS}  
 
 @export var name: String = ""
 var primary_color: Color

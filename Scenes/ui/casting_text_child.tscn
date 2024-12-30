@@ -13,7 +13,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_02i04")
 theme_override_font_sizes/font_size = 16
-text = "H"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_ks5xb")

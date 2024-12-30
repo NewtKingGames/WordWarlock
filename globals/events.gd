@@ -19,3 +19,4 @@ signal spell_stack_toggle_area_entered(toggle_value: bool)
 
 # Curse-relates signals
 signal start_curse(curse_type: Curse.CURSE_TYPE)
+signal player_blinded(blinded: bool)

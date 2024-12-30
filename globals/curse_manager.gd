@@ -10,7 +10,7 @@ var player: Player
 
 func _ready() -> void:
 	Events.start_curse.connect(_start_curse)
-	#get_tree().create_timer(1).timeout.connect(func(): _start_curse(Curse.CURSE_TYPE.FROZEN_KEY))
+	get_tree().create_timer(1).timeout.connect(func(): _start_curse(Curse.CURSE_TYPE.BLIND_KEYS))
 
 func _start_curse(curse_type: Curse.CURSE_TYPE) -> void:
 	var curse: Curse = _create_curse(curse_type)
@@ -26,4 +26,6 @@ func _create_curse(curse_type: Curse.CURSE_TYPE) -> Curse:
 	var curse: Curse
 	if curse_type == Curse.CURSE_TYPE.FROZEN_KEY:
 		curse = FrozenKeyCurse.new()
+	if curse_type == Curse.CURSE_TYPE.BLIND_KEYS:
+		curse = BlindKeyCurse.new()
 	return curse
