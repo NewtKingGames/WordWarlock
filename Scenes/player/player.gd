@@ -125,30 +125,16 @@ func _physics_process(delta):
 		if index_of_lock_on != -1:
 			locked_on_enemy = closest_enemies_in_range[(index_of_lock_on+1)% closest_enemies_in_range.size()]
 	aim_lock_on_reticle.set_target_node(locked_on_enemy)
-	
-	if Globals.cast_spells_with_mouse:
-		aiming_line.visible = queued_spell != null
+
 	# for now, handling spell aiming and casting within the main player script. Consider refactoring to it's own node
 	if queued_spell != null:
-		if not Globals.cast_spells_with_mouse:
-			autocast_spell()
+		autocast_spell()
 		Input.set_custom_mouse_cursor(CROSSHAIR_3)
-		if Input.is_action_just_pressed("cast_spell") and Globals.cast_spells_with_mouse:
-			if is_instance_of(queued_spell, ProjectileSpell):
-				# Get vector the player is looking towards
-				queued_spell.direction = (get_global_mouse_position() - global_position).normalized()
-				# Put the spell from the aiming origin + some distance the player is looking
-				# we have to add global_position and the relative distance aiming_line is away from the player
-				queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
-				queued_spell.rotation = queued_spell.direction.angle()
-			if is_instance_of(queued_spell, Thunderstorm):
-				queued_spell.position = global_position
-			shoot_queued_spell()
 			
 	# Only flip sprite when player is moving from direct input or aiming a spell
 	# how to flip the sprite briefly while shooting?
 	if not taking_damage:
-		if queued_spell != null and Globals.cast_spells_with_mouse:
+		if queued_spell != null:
 			if get_local_mouse_position().x > 0:
 				character_animated_sprite.flip_h = false
 				light_occluder_2d.scale.x = 1
@@ -206,8 +192,8 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 		# Handling state exit
 		slowdown_effect_stop()
 		# TODO handle the different combinations of the player leaving the state
-		if spell_scene:
-			equip_and_cast_spell_scene(spell_scene)
+		#if spell_scene:
+			#equip_and_cast_spell_scene(spell_scene)
 
 ## Holdover function to help get new code working without refactoring the entire spell resource
 func _on_handle_spell(spell: Spell) -> void:

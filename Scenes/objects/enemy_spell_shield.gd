@@ -18,8 +18,6 @@ func _ready():
 		enemy_parent.can_take_damage = false
 	else:
 		print("shield attached to something that's not the player INVESTIGATE")
-	# Subscribe to player spell_cast signal - TODO delete
-	get_tree().get_first_node_in_group("player").connect("spell_string_cast", on_player_spell_cast_string)
 	Events.player_entered_spell_string.connect(on_player_spell_cast_string)
 
 

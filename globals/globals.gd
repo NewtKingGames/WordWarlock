@@ -5,10 +5,6 @@ signal player_damage
 signal player_health_change(player_health: int)
 signal player_slowdown_pool_change(player_slowdown_pool: float)
 
-
-# Controls how player spells are shot
-var cast_spells_with_mouse: bool = false
-
 var engine_slowdown_magnitude: float = 0.25
 # Convenience value to allow me to have animations that speed up as necessary when we're in the slow down effect
 var time_scale_offset: float = 1 

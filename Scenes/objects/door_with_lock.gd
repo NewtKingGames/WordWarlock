@@ -16,7 +16,6 @@ func _ready():
 	teleport_area.connect("body_entered", on_teleport_area_body_entered)
 	walk_up_area.connect("body_entered", on_walk_up_area_body_entered)
 	walk_up_area.connect("body_exited", on_walk_up_area_body_exited)
-	#get_tree().get_first_node_in_group("player").connect("spell_string_cast", on_player_spell_cast_string)
 	Events.player_entered_spell_string.connect(on_player_spell_cast_string)
 
 func on_player_spell_cast_string(spell_text: String):

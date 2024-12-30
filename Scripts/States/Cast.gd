@@ -75,11 +75,12 @@ func Handle_Input(_event: InputEvent):
 		elif _event.is_action_pressed("backspace") and Globals.current_player_typed_string.length() > 0:
 			Globals.current_player_typed_string = Globals.current_player_typed_string.left(Globals.current_player_typed_string.length() - 1)
 			casting_text_parent.delete_letter()
-		if GlobalSpells.is_string_known_spell(Globals.current_player_typed_string):
-			var spell = GlobalSpells.get_known_spell_for_string(Globals.current_player_typed_string)
-			casting_text_parent.set_modulate(spell.get_spell_color())
-		else:
-			casting_text_parent.set_modulate(Color.WHITE)
+		# Readd code block if you ever want to reintroduce old method of casting in the game
+		#if GlobalSpells.is_string_known_spell(Globals.current_player_typed_string):
+			#var spell = GlobalSpells.get_known_spell_for_string(Globals.current_player_typed_string)
+			#casting_text_parent.set_modulate(spell.get_spell_color())
+		#else:
+			#casting_text_parent.set_modulate(Color.WHITE)
 		
 
 func _clear_entered_text() -> void:
