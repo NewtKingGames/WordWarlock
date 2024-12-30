@@ -13,6 +13,7 @@ var camera_target_zoom: Vector2 = zoom
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	Globals.connect("player_damage", apply_shake)
+	Events.shake_screen.connect(apply_shake)
 	player.connect("slowdown_effect_entered", on_slowdown_effect_entered)
 	player.connect("slowdown_effect_exited", on_slowdown_effect_exited)
 	#Events.current_string_typed.connect(apply_shake_small)
@@ -30,8 +31,8 @@ func _process(delta):
 		#zoom.y = lerpf(zoom.y, camera_target_zoom.y, typing_zoom_rate*delta)
 	offset = random_offset()
 	
-func apply_shake():
-	shake_strength = random_strength
+func apply_shake(strength:float = 80):
+	shake_strength = strength
 
 func apply_shake_small(string: String):
 	shake_strength = 0.6

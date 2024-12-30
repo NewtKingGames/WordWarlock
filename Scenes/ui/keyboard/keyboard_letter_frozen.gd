@@ -34,6 +34,7 @@ func ice_pressed_effects() -> void:
 	tween_rotate.tween_property(self, "rotation_degrees", max_rotation * randf_range(0.1, 0.3) * rotate_direction, 0.025 * Engine.time_scale )
 	tween_rotate.tween_property(self, "rotation_degrees", 0, 0.025 * Engine.time_scale)
 	key_pressed_sound.play()
+	Events.shake_screen.emit(2)
 
 func break_ice() -> void:
 	ice_broken.emit()
