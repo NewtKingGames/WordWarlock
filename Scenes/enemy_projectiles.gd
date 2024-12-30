@@ -4,12 +4,14 @@ extends Node
 var bat_spit_scene: PackedScene = load("res://Scenes/enemies/bat_spit.tscn")
 
 func _ready():
+	Events.bat_spit.connect(on_bat_spit)
 	# Connect all of the required enemy signals to this node
 	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
 	for enemy: EnemyClass in enemies:
-		if enemy is FlyingBat:
-			enemy = enemy as FlyingBat
-			enemy.connect("bat_spit", on_bat_spit)
+		# Flying bats
+		#if enemy is FlyingBat:
+			#enemy = enemy as FlyingBat
+			##enemy.connect("bat_spit", on_bat_spit)
 		if enemy is PhantomKey:
 			enemy = enemy as PhantomKey
 			enemy.connect("keyboard_letter_item_dropped", on_keyboard_letter_item_dropped)

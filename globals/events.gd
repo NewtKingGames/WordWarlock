@@ -17,9 +17,12 @@ signal spell_casted(spell: Spell)
 # Area-related signals
 signal spell_stack_toggle_area_entered(toggle_value: bool)
 
-# Curse-relates signals
+# Curse-related signals
 signal start_curse(curse_type: Curse.CURSE_TYPE)
 signal player_blinded(blinded: bool)
 
 # Camera-related signals
 signal shake_screen(strength: float)
+
+# Enemy-related signals
+signal bat_spit(speed: float, direction: Vector2, position: Vector2)
