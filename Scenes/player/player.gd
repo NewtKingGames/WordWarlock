@@ -13,7 +13,6 @@ signal spell_string_cast(string: String)
 @onready var invulnerability_timer: Timer = $Timers/InvulnerabilityTimer
 @onready var stunlock_timer: Timer = $Timers/StunlockTimer
 @onready var state_machine: StateMachine = $StateMachine
-@onready var aiming_line = $AimingLine
 @onready var slow_mo_sound_enter = $Sounds/SlowMoSoundEnter
 @onready var slow_mo_sound_exit = $Sounds/SlowMoSoundExit
 @onready var keyboard: Keyboard = $Keyboard
@@ -142,7 +141,6 @@ func _physics_process(delta):
 				character_animated_sprite.flip_h = true
 				light_occluder_2d.scale.x = -1
 	move_and_slide()
-	#move_and_collide(velocity*delta)
 
 func hit(damage_number: float, damage_direction: Vector2):
 	if can_take_damage:
@@ -191,9 +189,6 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 	else:
 		# Handling state exit
 		slowdown_effect_stop()
-		# TODO handle the different combinations of the player leaving the state
-		#if spell_scene:
-			#equip_and_cast_spell_scene(spell_scene)
 
 ## Holdover function to help get new code working without refactoring the entire spell resource
 func _on_handle_spell(spell: Spell) -> void:
@@ -236,9 +231,7 @@ func autocast_spell():
 		# Get vector betwen player and closest enemy
 		queued_spell.direction = (spell_target - global_position).normalized()
 		# Put the spell from the aiming origin + some distance the player is looking
-		# we have to add global_position and the relative distance aiming_line is away from the player
-		# TODO make sure this aiming line still works properly in new flow
-		queued_spell.position = (global_position + aiming_line.position) + queued_spell.direction*spell_spawn_distance
+		queued_spell.position = (global_position) + queued_spell.direction*spell_spawn_distance
 		queued_spell.rotation = queued_spell.direction.angle()
 	if is_instance_of(queued_spell, Thunderstorm):
 		queued_spell.position = global_position
