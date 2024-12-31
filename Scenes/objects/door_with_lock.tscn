@@ -142,6 +142,7 @@ size = Vector2(19, 12.5011)
 [sub_resource type="CircleShape2D" id="CircleShape2D_o68jy"]
 
 [node name="DoorWithLock" type="Node2D"]
+scale = Vector2(4, 4)
 script = ExtResource("1_oseif")
 scene_to_take_player_to = ExtResource("2_lt621")
 
