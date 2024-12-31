@@ -24,6 +24,13 @@ var light_effect_tween: Tween
 		num_fire_y = num
 		_delete_all_fire()
 		create_fire_children()
+	
+@export var fire_color_enum: FireAnimation.FIRE_COLOR = FireAnimation.FIRE_COLOR.ORANGE
+var fire_color_to_light: Dictionary = {
+	FireAnimation.FIRE_COLOR.ORANGE:Color("#ebb51e"),
+	FireAnimation.FIRE_COLOR.BLUE:Color("#1a5db2")
+}
+
 
 func _ready() -> void:
 	# Only run this ready function when scene is loaded outside of the editor
@@ -45,12 +52,12 @@ func stop_fires() -> void:
 	stop_light_effects()
 
 func create_fire_children() -> void:
-	# Create the spikes:
 	var fire_position: Vector2 = position
 	for x in range(num_fire_x):
 		for y in range(num_fire_y):
 			var fire: FireAnimation = FIRE_ANIMATION.instantiate()
 			fire.position = Vector2(offset_x*x, offset_y*y)
+			fire.fire_color_enum = fire_color_enum
 			add_child(fire)
 			if Engine.is_editor_hint():
 				fire.owner = self
@@ -61,6 +68,7 @@ func set_light_properties() -> void:
 	var position: Vector2 = Vector2(offset_x*num_fire_x/2-18, offset_y*num_fire_y/2)
 	point_light_2d.position = position
 	point_light_2d.scale = Vector2(scale_light_x_per_flame*num_fire_x, scale_light_y_per_flame*num_fire_y)
+	point_light_2d.color = fire_color_to_light[fire_color_enum]
 	start_fire_sound.position = position
 	end_fire_sound.position = position
 	light_effects()

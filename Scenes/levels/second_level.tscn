@@ -181,6 +181,7 @@ position = Vector2(2568, -936)
 position = Vector2(-46, 557)
 num_fire_x = 3
 num_fire_y = 3
+fire_color_enum = 1
 
 [node name="SpikeParent" parent="NorthRoomObjects" index="1" instance=ExtResource("11_kb0ja")]
 position = Vector2(-353, 198)

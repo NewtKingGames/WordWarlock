@@ -4,6 +4,9 @@ extends Curse
 # TODO - you should make sure that passing a reference of the scene tree to a resource
 # is not problematic!!
 
+var keys_to_freeze: int = 10
+var continually_freeze: bool = false
+
 func _init() -> void:
 	name = "FROZEN KEYS"
 	primary_color = Color("#7495F7")
