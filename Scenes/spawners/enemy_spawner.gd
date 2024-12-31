@@ -7,6 +7,7 @@ signal all_spawned_enemies_killed
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var pentagram_light: PointLight2D = $PentagramLight
 @onready var normal_light: PointLight2D = $NormalLight
+@onready var spawn_sound: AudioStreamPlayer2D = $SpawnSound
 
 # Tweens
 var pentagram_light_tween: Tween
@@ -73,6 +74,7 @@ func spawn_entity_effect() -> void:
 	var light_flash_tween: Tween = create_tween()
 	light_flash_tween.tween_property(normal_light, "energy", 9, 0.25)
 	light_flash_tween.tween_property(normal_light, "energy", 0.8, 0.15)
+	spawn_sound.play()
 	await light_flash_tween.finished
 
 func end_spawner_effect() -> void:

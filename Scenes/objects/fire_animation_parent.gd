@@ -14,6 +14,9 @@ var scale_light_x_per_flame: float = 0.5 # 0.375
 var scale_light_y_per_flame: float = 0.62 # 0.583
 var light_effect_tween: Tween
 
+
+@export var auto_start: bool = false
+
 @export var num_fire_x: int = 0:
 	set(num):
 		num_fire_x = num
@@ -28,14 +31,18 @@ var light_effect_tween: Tween
 @export var fire_color_enum: FireAnimation.FIRE_COLOR = FireAnimation.FIRE_COLOR.ORANGE
 var fire_color_to_light: Dictionary = {
 	FireAnimation.FIRE_COLOR.ORANGE:Color("#ebb51e"),
-	FireAnimation.FIRE_COLOR.BLUE:Color("#1a5db2")
+	FireAnimation.FIRE_COLOR.BLUE:Color("#1a5db2"),
+	FireAnimation.FIRE_COLOR.GREEN:Color("#4fbd3d")
 }
+
 
 
 func _ready() -> void:
 	# Only run this ready function when scene is loaded outside of the editor
 	if not Engine.is_editor_hint():
 		create_fire_children()
+		if auto_start:
+			start_fires()
 
 func start_fires() -> void:
 	for fire_child in get_children():
