@@ -16,6 +16,7 @@ var light_effect_tween: Tween
 
 
 @export var auto_start: bool = false
+@export var knock_back_magnitude: float = 400
 
 @export var num_fire_x: int = 0:
 	set(num):
@@ -34,6 +35,7 @@ var fire_color_to_light: Dictionary = {
 	FireAnimation.FIRE_COLOR.BLUE:Color("#1a5db2"),
 	FireAnimation.FIRE_COLOR.GREEN:Color("#4fbd3d")
 }
+
 
 
 
@@ -65,6 +67,7 @@ func create_fire_children() -> void:
 			var fire: FireAnimation = FIRE_ANIMATION.instantiate()
 			fire.position = Vector2(offset_x*x, offset_y*y)
 			fire.fire_color_enum = fire_color_enum
+			fire.knock_back_magnitude = knock_back_magnitude
 			add_child(fire)
 			if Engine.is_editor_hint():
 				fire.owner = self

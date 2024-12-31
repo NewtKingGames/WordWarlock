@@ -7,7 +7,7 @@
 
 [node name="FireAnimationParent" type="Node2D"]
 script = ExtResource("1_0d0g6")
-auto_start = null
+knock_back_magnitude = null
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)

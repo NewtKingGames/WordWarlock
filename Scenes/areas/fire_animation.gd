@@ -4,7 +4,7 @@ extends Node2D
 
 enum FIRE_COLOR {ORANGE, BLUE, GREEN, PURPLE, WHITE}
 @export var fire_color_enum: FIRE_COLOR = FIRE_COLOR.ORANGE
-
+@export var knock_back_magnitude: float = 400
 
 var fire_color_dict: Dictionary = {
 	FIRE_COLOR.ORANGE: "orange",
@@ -17,17 +17,21 @@ var fire_color_dict: Dictionary = {
 @onready var fire_animation: AnimatedSprite2D = $FireAnimation
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var hurt_box: Area2D = $HurtBox
+var should_hurt_player: bool = false
+var player: Player
 
 func _ready() -> void:
+	player = get_tree().get_first_node_in_group("player")
 	hurt_box.monitoring = false
 	fire_animation.play("no_animation")
 	point_light_2d.enabled = false
-	## Temporary timer
-	#await get_tree().create_timer(1).timeout
 	fire_animation.animation_finished.connect(_on_animation_finished)
-	## Temporary timerd
-	#get_tree().create_timer(6).timeout.connect(func(): stop_fire())
 	hurt_box.body_entered.connect(_on_body_entered_hurt_box)
+	hurt_box.body_exited.connect(_on_body_exited_hurt_box)
+
+func _process(delta: float) -> void:
+	if should_hurt_player:
+		player.hit(1, (player.global_position - global_position - Vector2(0, 30)).normalized() * knock_back_magnitude)
 
 func start_fire() -> void:
 	hurt_box.monitoring = true
@@ -52,10 +56,11 @@ func light_effects() -> void:
 
 func _on_body_entered_hurt_box(body: Node2D) -> void:
 	if body is Player:
-		var player = body as Player
-		# TODO - tweak this knock back value
-		player.hit(1, (player.global_position - global_position).normalized() * 300)
+		should_hurt_player = true
 
+func _on_body_exited_hurt_box(body: Node2D) -> void:
+		if body is Player:
+			should_hurt_player = false
 
 func _get_animation_name(fire_color: FIRE_COLOR, portion: String, number: String ="four") -> String:
 	return "%s_%s_%s" % [portion, fire_color_dict[fire_color], number]
