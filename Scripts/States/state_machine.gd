@@ -5,6 +5,7 @@ class_name StateMachine
 var current_state : State
 # Dictionary of states, keyed by the state node name
 var states : Dictionary = {}
+var input_enabled: bool = true
 
 func _ready():
 	for child in get_children():
@@ -15,19 +16,22 @@ func _ready():
 		initial_state.Enter()
 		current_state = initial_state
 
-func _process(delta):
+func _process(delta: float):
 	if current_state:
 		current_state.Update(delta)
 	
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if current_state:
 		current_state.Physics_Update(delta)
 
-func _input(event):
+func _input(event: InputEvent):
 	if current_state:
 		current_state.Handle_Input(event)
-	
-	
+
+
+func handle_outside_input(event: InputEvent) -> void:
+	print(event)
+
 func on_child_transition(state: State, new_state_name: String):
 	if state != current_state:
 		return

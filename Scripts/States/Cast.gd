@@ -24,6 +24,7 @@ func _ready():
 	Events.clear_typed_string.connect(_on_clear_typed_string)
 
 func Enter():
+	print("we've entered the cast state")
 	# new signal
 	cast_spell_state_changed.emit(true, null, null)
 	# new global signal
@@ -34,6 +35,7 @@ func Enter():
 	casting_text_parent.visible = true
 
 func Exit():
+	print("exit")
 	casting_text_parent.visible = false
 	var casted_spell = String(Globals.current_player_typed_string)
 	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)
@@ -41,10 +43,10 @@ func Exit():
 	cast_spell_state_changed.emit(false, casted_spell, spell_scene)
 	# new global signal
 	Events.player_exited_casting_state.emit()
-	
-func Update(_delta: float):
+
+func Handle_Input(event: InputEvent):
 	# Player Casting Spell
-	if Input.is_action_just_pressed("enter"):
+	if event.is_action_pressed("enter"):
 		if Globals.current_player_typed_string == "":
 			Transitioned.emit(self, "idle")
 			return
@@ -53,13 +55,12 @@ func Update(_delta: float):
 		Events.player_entered_spell_string.emit(Globals.current_player_typed_string)
 		_clear_entered_text()
 	# Player Cancelling Spell
-	elif Input.is_action_just_pressed("exit"):
+	elif event.is_action_pressed("exit"):
 		_clear_entered_text()
 		Transitioned.emit(self, "idle")
-
-func Handle_Input(_event: InputEvent):
-	var event_string: String = _event.as_text()
-	if _event.is_pressed() and not _event.is_echo() and not _event.is_action_pressed("exit"):
+		return
+	var event_string: String = event.as_text()
+	if event.is_pressed() and not event.is_echo() and not event.is_action_pressed("exit"):
 		var keyboard_letter: String = keyboard.key_pressed(event_string)
 		if regex.search(event_string) and event_string.length() == 1:
 			if keyboard_letter != "":
@@ -69,10 +70,10 @@ func Handle_Input(_event: InputEvent):
 				pass
 				# Play error noise - TODO consider deleting this!!
 				#$"../../Sounds/TypingSounds/ErrorTypingNoise".play()
-		elif _event.is_action_pressed("space") and Globals.current_player_typed_string.length() > 0:
+		elif event.is_action_pressed("space") and Globals.current_player_typed_string.length() > 0:
 			Globals.current_player_typed_string += " "
 			casting_text_parent.add_letter(" ")
-		elif _event.is_action_pressed("backspace") and Globals.current_player_typed_string.length() > 0:
+		elif event.is_action_pressed("backspace") and Globals.current_player_typed_string.length() > 0:
 			Globals.current_player_typed_string = Globals.current_player_typed_string.left(Globals.current_player_typed_string.length() - 1)
 			casting_text_parent.delete_letter()
 		# Readd code block if you ever want to reintroduce old method of casting in the game

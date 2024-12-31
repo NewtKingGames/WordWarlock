@@ -6,13 +6,13 @@ class_name Player_Idle
 
 func Enter():
 	character_animated_sprite_2d.play("idle")
+	player.velocity = Vector2.ZERO
 
 func Exit():
 	character_animated_sprite_2d.stop()
-	
-func Update(_delta: float):
+
+func Handle_Input(input: InputEvent) -> void:
 	if Input.get_vector("down","up","right","left"):
 		Transitioned.emit(self, "move")
-	elif Input.is_action_just_pressed("enter"):
+	elif input.is_action_pressed("enter"):
 		Transitioned.emit(self, "cast")
-	player.velocity = Vector2.ZERO

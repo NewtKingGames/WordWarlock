@@ -21,7 +21,3 @@ func Update(_delta: float):
 		player.character_animated_sprite.flip_h = false
 	elif player.velocity.x < 0:
 		player.character_animated_sprite.flip_h = true
-
-func Physics_Update(_delta: float):
-	pass
-

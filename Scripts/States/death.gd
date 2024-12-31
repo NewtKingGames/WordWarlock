@@ -9,5 +9,4 @@ func Enter():
 	damage_noise.play()
 	player.velocity = Vector2.ZERO
 	character_animated_sprite_2d.play("death")
-	print("GAME OVER")
 
