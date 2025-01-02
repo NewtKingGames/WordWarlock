@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://by5ogfiac5bt"]
+[gd_scene load_steps=8 format=3 uid="uid://by5ogfiac5bt"]
 
 [ext_resource type="Script" path="res://Scenes/objects/spikes.gd" id="1_5r0so"]
 [ext_resource type="Texture2D" uid="uid://dmflu2ekpwh45" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/floor/spikes_spritesheet.png" id="12_tnkvt"]
@@ -65,10 +65,26 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_lrbcf"]
+resource_name = "none"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpikeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oy6ui"]
 _data = {
 "activate_spikes": SubResource("Animation_ni3ih"),
-"deactivate_spikes": SubResource("Animation_qiwdu")
+"deactivate_spikes": SubResource("Animation_qiwdu"),
+"none": SubResource("Animation_lrbcf")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyyea"]
@@ -81,11 +97,11 @@ script = ExtResource("1_5r0so")
 libraries = {
 "": SubResource("AnimationLibrary_oy6ui")
 }
+autoplay = "none"
 
 [node name="SpikeSprite" type="Sprite2D" parent="."]
 texture = ExtResource("12_tnkvt")
 hframes = 10
-frame = 7
 
 [node name="HurtBox" type="Area2D" parent="."]
 scale = Vector2(0.798953, 0.795442)

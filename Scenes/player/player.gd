@@ -70,6 +70,22 @@ func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
 	# This is part of the new flow!
 	Events.spell_casted.connect(_on_handle_spell)
+	#toggle_player_input(false)
+	#get_tree().create_timer(1).timeout.connect(dummy_function)
+	#fake_player_input()
+
+func dummy_function() -> void:
+	var input: InputEventKey = InputEventKey.new()
+	#input.action = "down"
+	input.pressed = true
+	input.keycode = 65
+	input.physical_keycode = 65
+	#input.key_label = "KEY_A"
+	#Input.action_press("enter")
+	#print("about to start moving")
+	#for i in range(1):
+		#Input.action_press("left")
+		##fake_player_input(input)
 
 func _process(delta):
 	# Reconsider choice to rely on global variables
@@ -290,3 +306,9 @@ func slowdown_effect_stop():
 	Engine.time_scale = 1
 	target_pitch = pitch_scale_max
 	slowdown_effect_exited.emit()
+
+func toggle_player_input(enabled: bool) -> void:
+	state_machine.input_enabled = enabled
+
+func fake_player_input(event: InputEvent) -> void:
+	state_machine.handle_outside_input(event)

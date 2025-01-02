@@ -52,9 +52,12 @@ func all_elements_destroyed() -> void:
 
 func connect_signals(element: Node2D) -> void:
 	if element is EnemyClass:
-		element.enemy_died.connect(func(): spawned_enemies_killed +=1)
+		element.enemy_died.connect(increment_enemies_killed)
 	super.connect_signals(element)
 
+
+func increment_enemies_killed() -> void:
+	spawned_enemies_killed += 1
 
 func start_spawner_effect() -> void:
 	var tween: Tween = create_tween().set_parallel()

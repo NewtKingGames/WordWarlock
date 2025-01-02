@@ -26,7 +26,7 @@ func _ready() -> void:
 	# Only run this ready function when scene is loaded outside of the editor
 	if not Engine.is_editor_hint():
 		create_spikes()
-		get_tree().create_timer(activate_spike_delay).timeout.connect(activate_spikes)
+		#get_tree().create_timer(activate_spike_delay).timeout.connect(activate_spikes)
 
 func create_spikes() -> void:
 	# Create the spikes:
@@ -47,12 +47,15 @@ func activate_spikes() -> void:
 	get_tree().create_timer(deactivate_spike_delay).timeout.connect(deactivate_spikes)
 
 func deactivate_spikes() -> void:
+	stop_spikes()
+	get_tree().create_timer(deactivate_spike_delay).timeout.connect(activate_spikes)
+
+# Fully stop spikes
+func stop_spikes() -> void:
 	deactivate_spike_noise.play()
 	for spike_child in get_children():
 		if spike_child is Spikes:
 			spike_child.deactivate_spikes()
-	get_tree().create_timer(deactivate_spike_delay).timeout.connect(activate_spikes)
-
 
 func _delete_all_spikes() -> void:
 	for child in get_children():

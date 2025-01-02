@@ -26,7 +26,7 @@ var total_elements_spawned: int = 0
 var total_elements_destroyed: int = 0: 
 	set(value):
 		total_elements_destroyed = value
-var current_spawn_scene_index: int = 0
+var current_spawn_scene_index: int = -1
 
 
 
@@ -56,8 +56,8 @@ func try_spawn_element() -> Node2D:
 	return element
 
 func spawn_element() -> Node2D:
-	var element: Node2D = elements_to_spawn[current_spawn_scene_index].instantiate()
 	current_spawn_scene_index = get_next_index(current_spawn_scene_index)
+	var element: Node2D = elements_to_spawn[current_spawn_scene_index].instantiate()
 	add_child(element)
 	current_elements += 1
 	total_elements_spawned += 1

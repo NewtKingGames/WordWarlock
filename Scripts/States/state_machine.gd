@@ -25,12 +25,18 @@ func _physics_process(delta: float):
 		current_state.Physics_Update(delta)
 
 func _input(event: InputEvent):
-	if current_state:
+	#print("within device")
+	#print(event.device)
+	if current_state and input_enabled:
 		current_state.Handle_Input(event)
 
 
 func handle_outside_input(event: InputEvent) -> void:
-	print(event)
+	#print(event)
+	#print("outside device")
+	#print(event.device)
+	if current_state:
+		current_state.Handle_Input(event)
 
 func on_child_transition(state: State, new_state_name: String):
 	if state != current_state:
