@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://8oaumkerf2fg"]
+
+[ext_resource type="Script" path="res://Scenes/objects/tile_slider.gd" id="1_0s6y1"]
+[ext_resource type="Texture2D" uid="uid://b2deoi5gf5iwh" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/bookshelf.png" id="1_hdteq"]
+[ext_resource type="AudioStream" uid="uid://0bovr3yu1e62" path="res://Sounds/stone_sliding_sound_effect_one.mp3" id="3_mesxi"]
+[ext_resource type="AudioStream" uid="uid://b3o23n8iqoas8" path="res://Sounds/stone_sliding_sound_effect_two.mp3" id="4_1ej1v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctg8a"]
+size = Vector2(20, 16.5306)
+
+[node name="TileSlider" type="Node2D"]
+script = ExtResource("1_0s6y1")
+
+[node name="TileSprite" type="Sprite2D" parent="."]
+scale = Vector2(4.12, 4.12)
+texture = ExtResource("1_hdteq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -5.57806)
+scale = Vector2(3.23717, 3.21561)
+shape = SubResource("RectangleShape2D_ctg8a")
+
+[node name="SlideOutSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mesxi")
+volume_db = -12.167
+pitch_scale = 0.91
+
+[node name="SlideBackSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1, 0)
+stream = ExtResource("4_1ej1v")
+volume_db = -11.629
+pitch_scale = 0.84

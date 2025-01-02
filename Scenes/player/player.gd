@@ -18,10 +18,12 @@ signal spell_string_cast(string: String)
 @onready var keyboard: Keyboard = $Keyboard
 @onready var auto_aim_attack_area = $AutoAimAttackArea
 @onready var aim_lock_on_reticle: Reticle = $AimLockOnReticle
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 
 const walk_speed: float = 400
+const cinematic_walk_speed: float = 200
 var can_take_damage: bool = true
 var taking_damage: bool = false
 
@@ -66,26 +68,30 @@ var closest_enemies_in_range: Array[EnemyClass] = []
 var lock_on_index: int = 0
 var is_manual_lock_on_set: bool = false
 
+var input_enabled: bool = true
+
 func _ready():
 	level_music = get_tree().get_first_node_in_group("music")
 	# This is part of the new flow!
 	Events.spell_casted.connect(_on_handle_spell)
-	#toggle_player_input(false)
-	#get_tree().create_timer(1).timeout.connect(dummy_function)
+	#get_tree().create_timer(1).timeout.connect(1_function)
+	#move_player_in_direction_for_seconds(Vector2.DOWN, 1.5)
 	#fake_player_input()
 
-func dummy_function() -> void:
-	var input: InputEventKey = InputEventKey.new()
-	#input.action = "down"
-	input.pressed = true
-	input.keycode = 65
-	input.physical_keycode = 65
-	#input.key_label = "KEY_A"
-	#Input.action_press("enter")
-	#print("about to start moving")
-	#for i in range(1):
-		#Input.action_press("left")
-		##fake_player_input(input)
+func move_player_in_direction_for_seconds(direction: Vector2, seconds: float) -> void:
+	toggle_player_input(false)
+	collision_shape_2d.disabled = true
+	velocity = direction * cinematic_walk_speed
+	await get_tree().create_timer(seconds).timeout
+	toggle_player_input(true)
+	#velocity = direction * walk_speed
+	collision_shape_2d.disabled = false
+	#get_tree().create_timer(seconds).timeout.connect(
+		#func():
+			#toggle_player_input(true)
+			##velocity = direction * walk_speed
+			#collision_shape_2d.disabled = false
+	#)
 
 func _process(delta):
 	# Reconsider choice to rely on global variables
@@ -308,6 +314,7 @@ func slowdown_effect_stop():
 	slowdown_effect_exited.emit()
 
 func toggle_player_input(enabled: bool) -> void:
+	input_enabled = enabled
 	state_machine.input_enabled = enabled
 
 func fake_player_input(event: InputEvent) -> void:

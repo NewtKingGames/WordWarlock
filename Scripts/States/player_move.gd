@@ -14,9 +14,12 @@ func Update(_delta: float):
 		Transitioned.emit(self, "cast")
 		return
 	var direction = Input.get_vector("left", "right", "up", "down")
-	player.velocity = direction * Globals.player_walk_speed
-	if not direction:
-		Transitioned.emit(self, "idle")
+	if player.input_enabled:
+		player.velocity = direction * Globals.player_walk_speed
+		if not direction:
+			Transitioned.emit(self, "idle")
+	#if not direction and player.input_enabled:
+		
 	if player.velocity.x > 0:
 		player.character_animated_sprite.flip_h = false
 	elif player.velocity.x < 0:
