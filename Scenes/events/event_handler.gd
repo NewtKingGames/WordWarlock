@@ -31,7 +31,6 @@ func _ready() -> void:
 		current_index +=1
 
 func _on_signal_received() -> void:
-	print("signal received")
 	signals_received += 1
 	if signals_received >= subscribed_signals:
 		execute_commands()

@@ -38,7 +38,6 @@ func _on_player_blinded(blinded: bool) -> void:
 		#delete_letter()
 
 func add_letter(letter: String):
-		
 	current_string = current_string + letter
 	var child_text_node: CastingTextChild = child_text_scene.instantiate()
 	child_text_node.light_mask = light_mask_override

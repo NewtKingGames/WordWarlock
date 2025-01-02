@@ -44,7 +44,7 @@ func _on_player_entered_casting_state() -> void:
 		add_spell_stack(GlobalSpells.get_spell_scene_for_string(SpellSelector.equipped_spell).instantiate())
 
 func _on_player_exited_casting_state() -> void:
-	VisualUtils.fade_out_node(self, 0.05)
+	VisualUtils.fade_out_node(self, 0.1)
 	# TODO - if you want to delete this?
 	#clear_stacks()
 	

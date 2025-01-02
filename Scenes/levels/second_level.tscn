@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cchfataq1nnxf"]
+[gd_scene load_steps=35 format=3 uid="uid://cchfataq1nnxf"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_fm0cg"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="2_gdgjb"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cvegtmmm77n47" path="res://Scenes/areas/player_entered_detector.tscn" id="7_hwboa"]
 [ext_resource type="PackedScene" uid="uid://bo37e1xq6rkmd" path="res://Scenes/events/event_handler.tscn" id="10_dnfsa"]
 [ext_resource type="PackedScene" uid="uid://bj5o5mbqcjlvs" path="res://Scenes/objects/spike_parent.tscn" id="11_kb0ja"]
+[ext_resource type="PackedScene" uid="uid://bc1sate60syol" path="res://Scenes/enemies/flying_bat.tscn" id="12_n7yo4"]
 [ext_resource type="Script" path="res://Scenes/levels/north_room_curse_handler.gd" id="13_pu7oq"]
 [ext_resource type="Texture2D" uid="uid://b6nf2grarfmpc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/chest_closed_anim_f0.png" id="14_kgm6w"]
 [ext_resource type="PackedScene" uid="uid://blv5bb1hvo01r" path="res://Scenes/objects/door_with_lock.tscn" id="15_24hfh"]
@@ -90,12 +91,12 @@ params = []
 
 [sub_resource type="Resource" id="Resource_spql2"]
 script = ExtResource("7_3025m")
-call_method = "stop_flames"
+call_method = "stop_fires"
 params = []
 
 [sub_resource type="Resource" id="Resource_ngyls"]
 script = ExtResource("7_3025m")
-call_method = "stop_flames"
+call_method = "stop_fires"
 params = []
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbq7g"]
@@ -116,7 +117,7 @@ layer_4/tile_data = PackedInt32Array(-327680, 131072, 6, -327679, 131072, 6, -32
 scale = Vector2(51.337, 28.1635)
 
 [node name="Player" parent="." index="4"]
-position = Vector2(2283, 19)
+position = Vector2(166, -31)
 
 [node name="DarkeningLight" parent="." index="5"]
 energy = 0.65
@@ -199,21 +200,19 @@ num_fire_y = 6
 
 [node name="FirstRoom_EnemySpawner" parent="FirstRoomObjects" index="2" instance=ExtResource("4_qawmp")]
 position = Vector2(1389, -231)
-elements_to_spawn = Array[PackedScene]([ExtResource("5_0uh2x")])
-total_elements_to_spawn = 2
+elements_to_spawn = Array[PackedScene]([ExtResource("5_0uh2x"), ExtResource("12_n7yo4")])
+total_elements_to_spawn = 3
 max_elements_at_once = 1
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
-spawn_mode = 1
 
 [node name="FirstRoom_EnemySpawner2" parent="FirstRoomObjects" index="3" instance=ExtResource("4_qawmp")]
 position = Vector2(1385, 223)
-elements_to_spawn = Array[PackedScene]([ExtResource("5_0uh2x")])
-total_elements_to_spawn = 2
+elements_to_spawn = Array[PackedScene]([ExtResource("5_0uh2x"), ExtResource("12_n7yo4")])
+total_elements_to_spawn = 3
 max_elements_at_once = 1
 spawn_interval_max = 5.0
 spawn_interval_min = 3.0
-spawn_mode = 1
 
 [node name="NorthRoomObjects" type="Node2D" parent="." index="12"]
 position = Vector2(2568, -936)
@@ -244,14 +243,14 @@ position = Vector2(135, 72)
 [node name="EnemySpawner" parent="NorthRoomObjects" index="5" instance=ExtResource("4_qawmp")]
 position = Vector2(-157, -341)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv")])
-total_elements_to_spawn = 5
+total_elements_to_spawn = 2
 max_elements_at_once = 1
 initial_delay = true
 
 [node name="EnemySpawner2" parent="NorthRoomObjects" index="6" instance=ExtResource("4_qawmp")]
 position = Vector2(195, -341)
 elements_to_spawn = Array[PackedScene]([ExtResource("6_488dv")])
-total_elements_to_spawn = 5
+total_elements_to_spawn = 2
 max_elements_at_once = 1
 spawn_interval_max = 4.0
 spawn_interval_min = 2.0
