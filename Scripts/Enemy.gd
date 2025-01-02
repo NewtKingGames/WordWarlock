@@ -44,6 +44,5 @@ func hit(damage: float):
 		health -= damage
 		if health <= 0:
 			state_machine.on_outside_transition("death")
-			enemy_died.emit()
 		else:
 			state_machine.on_outside_transition("damage")

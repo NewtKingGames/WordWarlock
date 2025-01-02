@@ -3,6 +3,7 @@ class_name EnemyDeath
 
 
 func Enter():
+	enemy.enemy_died.emit()
 	enemy.velocity = Vector2.ZERO
 	if is_instance_of(enemy, Slime):
 		# Randomize death animation for slime
