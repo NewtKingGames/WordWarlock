@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btjn8im3fqcm7"
-path="res://.godot/imported/torch_anim_f3.png-9d240df0b04898f7b1d1d989b8c3280f.ctex"
+uid="uid://1kruy3c5wh56"
+path="res://.godot/imported/torch_anim_f1.png-c41d4f17e7eb2d12a3c10055c2715784.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/torch_anim_f3.png"
-dest_files=["res://.godot/imported/torch_anim_f3.png-9d240df0b04898f7b1d1d989b8c3280f.ctex"]
+source_file="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/torch/orange/torch_anim_f1.png"
+dest_files=["res://.godot/imported/torch_anim_f1.png-c41d4f17e7eb2d12a3c10055c2715784.ctex"]
 
 [params]
 

@@ -1,31 +1,31 @@
 [gd_scene load_steps=14 format=3 uid="uid://dhx6a23hru8ou"]
 
 [ext_resource type="Script" path="res://Scenes/objects/torch.gd" id="1_2ucok"]
-[ext_resource type="Texture2D" uid="uid://p3un1avx40d8" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/torch_spritesheet.png" id="1_stlji"]
 [ext_resource type="Texture2D" uid="uid://cqp3ura14n7ks" path="res://Sprites/flashlight_reverse.png" id="2_807d4"]
+[ext_resource type="Texture2D" uid="uid://p3un1avx40d8" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/torch/orange/torch_spritesheet.png" id="2_cvww7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i1dqo"]
-atlas = ExtResource("1_stlji")
+atlas = ExtResource("2_cvww7")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64yom"]
-atlas = ExtResource("1_stlji")
+atlas = ExtResource("2_cvww7")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryntq"]
-atlas = ExtResource("1_stlji")
+atlas = ExtResource("2_cvww7")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k1mfh"]
-atlas = ExtResource("1_stlji")
+atlas = ExtResource("2_cvww7")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7skl3"]
-atlas = ExtResource("1_stlji")
+atlas = ExtResource("2_cvww7")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yudh"]
-atlas = ExtResource("1_stlji")
+atlas = ExtResource("2_cvww7")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_crf43"]
