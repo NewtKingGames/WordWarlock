@@ -67,10 +67,12 @@ texture_scale = 0.7
 
 [node name="EmitNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_20to5")
+volume_db = -3.489
 autoplay = true
 
 [node name="ImpactNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_my61c")
+volume_db = -6.411
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="finished" from="ImpactNoise" to="." method="_on_impact_noise_finished"]

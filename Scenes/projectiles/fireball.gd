@@ -4,8 +4,8 @@ extends ProjectileSpell
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
 var has_hit: bool = false
-var ammo: int = 3
-var rate_of_fire: float = 0.25
+var ammo: int = 4
+var rate_of_fire: float = 0.3
 
 
 func _on_body_entered(body: Node2D):

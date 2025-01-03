@@ -241,13 +241,17 @@ func autocast_spell():
 		can_cast_again = false
 		var timer: SceneTreeTimer = get_tree().create_timer(queued_spell.rate_of_fire)
 		timer.connect("timeout", on_fire_rate_timeout)
-		var closest_enemy = locked_on_enemy
+		 #TODO Sync with Will to see what others thinks feels better - Ability to target random enemy instead of nearest:
+		var target_enemy = locked_on_enemy
+		#var enemies_in_range: Array[EnemyClass] = get_nearest_enemies_in_range_in_order()
+		#var target_enemy
+		#if enemies_in_range.size() > 0:
+			#target_enemy = enemies_in_range[randi_range(0, enemies_in_range.size()-1)]
 		# TODO - handle null scenario
 		var spell_target: Vector2
-		if closest_enemy:
-			spell_target = closest_enemy.global_position
+		if target_enemy:
+			spell_target = target_enemy.global_position
 		else:
-			# TODO maybe shoot the spell in a random direction? Right now just shooting it right
 			var random_direction: Vector2 = Vector2(randi_range(-75, 75), randi_range(-75, 75))
 			spell_target = global_position + random_direction
 		# Get vector betwen player and closest enemy
