@@ -45,7 +45,6 @@ layer_4/tile_data = PackedInt32Array(851987, 262144, 5, 917523, 262144, 6, 85197
 [node name="DoorWithLock" parent="." index="4" instance=ExtResource("4_pghoj")]
 position = Vector2(936, 571)
 level_transition_context = SubResource("Resource_4qfis")
-unlock_text = "KNOCK"
 
 [node name="Player" parent="." index="6"]
 position = Vector2(938, 2471)
@@ -96,6 +95,7 @@ position = Vector2(1030, 658)
 position = Vector2(839, 658)
 
 [node name="IntroDialoguePlayer" parent="." index="20" instance=ExtResource("8_4deks")]
+unique_name_in_owner = true
 position = Vector2(933, 1786)
 prompt_array = Array[String](["Welcome to Wordlock!", "This hub area provides a shop 
 and training area.

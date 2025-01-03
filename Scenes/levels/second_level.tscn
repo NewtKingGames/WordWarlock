@@ -106,7 +106,7 @@ size = Vector2(40, 20)
 [sub_resource type="Resource" id="Resource_5iy17"]
 script = ExtResource("17_1xmy7")
 level_name = 0
-transition_reason = 0
+transition_reason = 1
 
 [node name="Level" instance=ExtResource("1_fm0cg")]
 material = SubResource("ShaderMaterial_dkvn6")
@@ -123,7 +123,7 @@ layer_4/tile_data = PackedInt32Array(-327680, 131072, 6, -327679, 131072, 6, -32
 scale = Vector2(51.337, 28.1635)
 
 [node name="Player" parent="." index="4"]
-position = Vector2(2782, -12)
+position = Vector2(3368, -27)
 
 [node name="DarkeningLight" parent="." index="5"]
 energy = 0.65
@@ -274,7 +274,7 @@ scale = Vector2(-17.67, -9.84955)
 shape = SubResource("RectangleShape2D_wbq7g")
 
 [node name="BlueLockFireAnimationParent" parent="." index="13" instance=ExtResource("3_vhbtc")]
-position = Vector2(2703, 350)
+position = Vector2(2685, -208)
 auto_start = true
 knock_back_magnitude = 1200.0
 num_fire_x = 3
@@ -282,7 +282,7 @@ num_fire_y = 6
 fire_color_enum = 1
 
 [node name="GreenLockFireAnimationParent" parent="." index="14" instance=ExtResource("3_vhbtc")]
-position = Vector2(2845, 350)
+position = Vector2(2827, -208)
 auto_start = true
 knock_back_magnitude = 1200.0
 num_fire_x = 3
@@ -297,7 +297,6 @@ texture = ExtResource("14_kgm6w")
 [node name="DoorWithLock" parent="." index="16" instance=ExtResource("15_24hfh")]
 position = Vector2(3392, -192)
 level_transition_context = SubResource("Resource_5iy17")
-unlock_text = "KNOCK"
 
 [node name="Torch" parent="." index="17" instance=ExtResource("2_gdgjb")]
 position = Vector2(3233, -99)

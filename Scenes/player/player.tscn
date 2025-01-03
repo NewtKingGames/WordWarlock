@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=69 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -97,6 +97,26 @@ region = Rect2(192, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_v6oeg"]
 atlas = ExtResource("4_fvahh")
 region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sk4s"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(256, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4qvw"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(192, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wkas"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(128, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hbcn"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(64, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5qrs"]
+atlas = ExtResource("4_fvahh")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6c3dh"]
 atlas = ExtResource("4_fvahh")
@@ -233,6 +253,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sk4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4qvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wkas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hbcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5qrs")
+}],
+"loop": false,
+"name": &"reanimate",
 "speed": 8.0
 }, {
 "frames": [{
@@ -392,7 +432,7 @@ script = ExtResource("1_gp0yp")
 material = SubResource("ShaderMaterial_30it8")
 position = Vector2(0, -7.75)
 sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"idle"
+animation = &"reanimate"
 autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
