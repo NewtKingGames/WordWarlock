@@ -1,6 +1,8 @@
 extends Node2D
 
-@export var scene_to_take_player_to: PackedScene
+@export var level_transition_context: LevelTransitionContext
+@export var unlock_text: String = "KNOCK"
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var teleport_area: Area2D = $TeleportArea
 @onready var walk_up_area: Area2D = $WalkUpArea
@@ -8,7 +10,6 @@ extends Node2D
 @onready var unlock_noise: AudioStreamPlayer2D = $UnlockNoise
 @onready var open_noise: AudioStreamPlayer2D = $OpenNoise
 
-@export var unlock_text: String = "KNOCK"
 var is_door_opened: bool = false
 
 func _ready():
@@ -42,5 +43,5 @@ func lower_door():
 		animated_sprite_2d.play("unlock")
 
 func take_player_to_new_scene():
-	if scene_to_take_player_to:
-		GlobalCanvasLayer.change_scene(scene_to_take_player_to)
+	if level_transition_context:
+		GlobalCanvasLayer.change_scene(level_transition_context)

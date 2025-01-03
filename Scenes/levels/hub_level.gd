@@ -1,8 +1,8 @@
 extends Node2D
 
 
-# TODO - this should have an init function instead
-var is_player_returning_from_level: bool = false
+# TODO - this should have an init function to allow for it to be passed in to constructor
+var level_transition_context: LevelTransitionContext
 
 @onready var book_case_tile_slider_left: TileSlider = $BookCaseTileSliderLeft
 @onready var book_case_tile_slider_right: TileSlider = $BookCaseTileSliderRight
@@ -13,7 +13,7 @@ var player: Player
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as Player
-	if is_player_returning_from_level:
+	if level_transition_context and level_transition_context.transition_reason == LevelTransitionContext.TRANSITION_REASON.LEVEL_COMPLETED:
 		player.global_position = player_spawn_return_from_level.global_position
 		# Lock player controls
 		player.toggle_player_input(false)

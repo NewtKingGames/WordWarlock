@@ -1,9 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://blv5bb1hvo01r"]
+[gd_scene load_steps=24 format=3 uid="uid://blv5bb1hvo01r"]
 
 [ext_resource type="Texture2D" uid="uid://0p2yrl5gmio3" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_fullyopen.png" id="1_bxvkj"]
 [ext_resource type="Script" path="res://Scenes/objects/door_with_lock.gd" id="1_oseif"]
 [ext_resource type="Texture2D" uid="uid://hwxjimasjogc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/tiles/wall/door_spritesheet.png" id="1_ufa6v"]
-[ext_resource type="PackedScene" uid="uid://d08xojooaxuao" path="res://Scenes/levels/test_level.tscn" id="2_lt621"]
 [ext_resource type="FontFile" uid="uid://dps78ri75duno" path="res://Font/PixelOperator8.ttf" id="5_g7qpq"]
 [ext_resource type="AudioStream" uid="uid://bvyhkc26uufm7" path="res://Sounds/DoorDing.wav" id="6_bn1qq"]
 
@@ -144,7 +143,6 @@ size = Vector2(19, 12.5011)
 [node name="DoorWithLock" type="Node2D"]
 scale = Vector2(4, 4)
 script = ExtResource("1_oseif")
-scene_to_take_player_to = ExtResource("2_lt621")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xma44")

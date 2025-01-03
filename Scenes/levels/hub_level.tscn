@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6a10q4q0e11e"]
+[gd_scene load_steps=13 format=3 uid="uid://6a10q4q0e11e"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_k3s2w"]
 [ext_resource type="TileSet" uid="uid://ktkipmj84kfd" path="res://Scenes/levels/test_level.tres" id="2_1qgbe"]
@@ -7,9 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://blv5bb1hvo01r" path="res://Scenes/objects/door_with_lock.tscn" id="4_pghoj"]
 [ext_resource type="PackedScene" uid="uid://ch2m7o7f8oyh8" path="res://Scenes/areas/spell_stack_toggle_area.tscn" id="5_gnpub"]
 [ext_resource type="PackedScene" uid="uid://b80l514pmvd3d" path="res://Scenes/enemies/target_dummy.tscn" id="6_2hxde"]
+[ext_resource type="Script" path="res://Scripts/ContextObjects/level_transition_context.gd" id="6_uh1hv"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="7_sfmrn"]
 [ext_resource type="PackedScene" uid="uid://bwntle5lhlhw5" path="res://Scenes/ui/dialogue/dialogue_player.tscn" id="8_4deks"]
 [ext_resource type="PackedScene" uid="uid://8oaumkerf2fg" path="res://Scenes/objects/tile_slider.tscn" id="9_3nffi"]
+
+[sub_resource type="Resource" id="Resource_4qfis"]
+script = ExtResource("6_uh1hv")
+level_name = 2
+transition_reason = 3
 
 [node name="HubLevel" instance=ExtResource("1_k3s2w")]
 position = Vector2(-6, 2)
@@ -38,6 +44,8 @@ layer_4/tile_data = PackedInt32Array(851987, 262144, 5, 917523, 262144, 6, 85197
 
 [node name="DoorWithLock" parent="." index="4" instance=ExtResource("4_pghoj")]
 position = Vector2(936, 571)
+level_transition_context = SubResource("Resource_4qfis")
+unlock_text = "KNOCK"
 
 [node name="Player" parent="." index="6"]
 position = Vector2(938, 2471)
