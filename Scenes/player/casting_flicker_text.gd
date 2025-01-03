@@ -9,9 +9,9 @@ var drain_light: bool = true
 var outer_light_range: float = 0.1
 var inner_light_range: float = 0.06
 
-var target_hum_pitch: float = 1.0
-var target_hum_pitch_cap_without_match: float = 2.5
-var target_hum_pitch_when_matching: float = 3.0
+var target_hum_pitch: float = 0.8
+var target_hum_pitch_cap_without_match: float = 1.5
+var target_hum_pitch_when_matching: float = 2.0
 
 var strength: float = 0.0
 @onready var hum_audio: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
@@ -40,11 +40,12 @@ func _process(delta: float) -> void:
 	#print(energy)
 
 func _on_current_string_typed(string: String) -> void:
-	#target_hum_pitch = clampf(target_hum_pitch + 0.25, 1, target_hum_pitch_cap_without_match) 
+	target_hum_pitch = clampf(target_hum_pitch + 0.1, 1, 1.5) 
 	flicker_light()
 
 func _on_current_string_matches(string: String) -> void:
-	target_hum_pitch = target_hum_pitch_when_matching + (target_hum_pitch * randf_range(-.1, 0.1))
+	#target_hum_pitch = target_hum_pitch_when_matching + (target_hum_pitch * randf_range(-.1, 0.1))
+	target_hum_pitch = target_hum_pitch_when_matching
 	flash_light()
 
 func _on_player_exited_casting_state() -> void:
@@ -52,7 +53,7 @@ func _on_player_exited_casting_state() -> void:
 	turn_off_light()
 	get_tree().create_timer(0.15).timeout.connect(
 		func(): 
-			target_hum_pitch = 1
+			target_hum_pitch = 0.8
 			hum_audio.stop()
 	)
 

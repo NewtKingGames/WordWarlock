@@ -212,7 +212,7 @@ func _on_cast_spell_state_changed(is_casting: bool, typed_string, spell_scene):
 		# Handling state exit
 		slowdown_effect_stop()
 
-## Holdover function to help get new code working without refactoring the entire spell resource
+# Holdover function to help get new code working without refactoring the entire spell resource
 func _on_handle_spell(spell: Spell) -> void:
 	state_machine.on_outside_transition("idle")
 	equip_and_cast_spell_scene(GlobalSpells.get_spell_scene_for_string(spell.spell_name))

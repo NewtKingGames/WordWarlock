@@ -392,10 +392,8 @@ script = ExtResource("1_gp0yp")
 material = SubResource("ShaderMaterial_30it8")
 position = Vector2(0, -7.75)
 sprite_frames = SubResource("SpriteFrames_brvva")
-animation = &"shoot_spell"
+animation = &"idle"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_435rg")
@@ -539,6 +537,7 @@ script = ExtResource("21_yu25m")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CastingRelatedLights"]
 stream = ExtResource("22_mq4vh")
 volume_db = -9.0
+pitch_scale = 0.8
 
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="." method="_on_cast_spell_state_changed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="Keyboard" method="_on_cast_spell_state_changed"]

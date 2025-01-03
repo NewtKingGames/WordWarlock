@@ -9,7 +9,7 @@ func _ready() -> void:
 	
 func _on_body_entered(body: Node2D) -> void:
 	if is_active:
-		Events.start_curse.emit(Curse.CURSE_TYPE.FROZEN_KEY)
+		Events.start_curse.emit(Curse.CURSE_TYPE.BLIND_KEYS)
 		is_active = false
 
 func stop_curse() -> void:

@@ -53,20 +53,21 @@ func play_slide_effects() -> void:
 func stop_slide_effects() -> void:
 	shake_offset = 0.0
 
-func shake(thing: Node2D, strength: float, duration: float = 0.2) -> void:
-	print("shaking my tween")
-	if not thing:
-		return
-	var orig_pos := thing.position
-	var shake_count := 10
-	var tween := create_tween()
-	for i in shake_count:
-		var shake_offset := Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
-		var target := orig_pos + strength * shake_offset
-		# Every other position, put it back at the original position
-		if i % 2 == 0:
-			target = orig_pos
-		tween.tween_property(thing, "position", target, duration/float(shake_count))
-		# Get's weaker and weaker
-		strength *= 0.75
-	tween.finished.connect(func(): thing.position = orig_pos)
+# This can be deleted, borrowed code from the slay the spire tutorial
+#func shake(thing: Node2D, strength: float, duration: float = 0.2) -> void:
+	#print("shaking my tween")
+	#if not thing:
+		#return
+	#var orig_pos := thing.position
+	#var shake_count := 10
+	#var tween := create_tween()
+	#for i in shake_count:
+		#var shake_offset := Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+		#var target := orig_pos + strength * shake_offset
+		## Every other position, put it back at the original position
+		#if i % 2 == 0:
+			#target = orig_pos
+		#tween.tween_property(thing, "position", target, duration/float(shake_count))
+		## Get's weaker and weaker
+		#strength *= 0.75
+	#tween.finished.connect(func(): thing.position = orig_pos)

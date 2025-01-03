@@ -5,7 +5,7 @@
 
 [sub_resource type="Animation" id="Animation_ni3ih"]
 resource_name = "activate_spikes"
-length = 0.500008
+length = 0.666675
 step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -14,10 +14,10 @@ tracks/0/path = NodePath("SpikeSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 3, 3, 5, 6, 6, 7]
+"values": [0, 3, 3, 5, 6, 6, 7, 7, 7]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -26,7 +26,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0.666667),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -102,6 +102,7 @@ autoplay = "none"
 [node name="SpikeSprite" type="Sprite2D" parent="."]
 texture = ExtResource("12_tnkvt")
 hframes = 10
+frame = 7
 
 [node name="HurtBox" type="Area2D" parent="."]
 scale = Vector2(0.798953, 0.795442)
