@@ -17,6 +17,8 @@ func _ready() -> void:
 		# TODO - put player in correct position - you should add a Marker2D
 		# Hide player sprite
 		player.visible = false
+		# Let things sit for a blip
+		await get_tree().create_timer(0.5).timeout
 		# Open Doors
 		book_case_tile_slider_left.slide_out()
 		await book_case_tile_slider_right.slide_out()

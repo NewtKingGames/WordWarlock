@@ -24,7 +24,6 @@ func _ready():
 	Events.clear_typed_string.connect(_on_clear_typed_string)
 
 func Enter():
-	print("we've entered the cast state")
 	# new signal
 	cast_spell_state_changed.emit(true, null, null)
 	# new global signal
@@ -35,7 +34,6 @@ func Enter():
 	casting_text_parent.visible = true
 
 func Exit():
-	print("exit")
 	casting_text_parent.visible = false
 	var casted_spell = String(Globals.current_player_typed_string)
 	var spell_scene: PackedScene = GlobalSpells.get_spell_scene_for_string(casted_spell)

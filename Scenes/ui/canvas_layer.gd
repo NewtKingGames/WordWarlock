@@ -9,6 +9,8 @@ func change_scene(target_scene: PackedScene) -> void:
 	await tween_fade.finished
 	await get_tree().create_timer(.5).timeout
 	get_tree().change_scene_to_packed(target_scene)
+	#var scene = target_scene.instantiate()
+	#get_tree().current_scene = scene
 	var tween_fade_in: Tween = create_tween()
 	tween_fade_in.tween_property($ColorRect, "color", Color(0,0,0,0), 1)
 	Globals.player_walk_speed = Globals.player_base_walk_speed

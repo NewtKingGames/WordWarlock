@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cpr0y5k8k2kgj"]
+[gd_scene load_steps=64 format=3 uid="uid://cpr0y5k8k2kgj"]
 
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="1_435rg"]
 [ext_resource type="Shader" path="res://Scenes/player/player_haste.gdshader" id="1_fvxyb"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dh8sx7dfyds71" path="res://Sprites/288x288 textures (59).png" id="20_2etts"]
 [ext_resource type="Script" path="res://Scenes/player/casting_flicker_text.gd" id="21_yu25m"]
 [ext_resource type="PackedScene" uid="uid://bi6b5ug46r344" path="res://Scenes/ui/aim_lock_on_reticle.tscn" id="22_7irsn"]
+[ext_resource type="AudioStream" uid="uid://wpky4ly1wouu" path="res://Sounds/magical-spinning.mp3" id="22_mq4vh"]
 [ext_resource type="PackedScene" uid="uid://bata6nhuga2rj" path="res://Scenes/ui/casting_text_parent.tscn" id="24_msl8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_30it8"]
@@ -531,10 +532,13 @@ texture = ExtResource("9_h1ujj")
 texture_scale = 0.25
 
 [node name="CastingFlickerLight" type="PointLight2D" parent="CastingRelatedLights"]
-energy = 0.1
+color = Color(1, 0, 0, 1)
 texture = ExtResource("9_h1ujj")
-texture_scale = 0.3
 script = ExtResource("21_yu25m")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CastingRelatedLights"]
+stream = ExtResource("22_mq4vh")
+volume_db = -9.0
 
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="." method="_on_cast_spell_state_changed"]
 [connection signal="cast_spell_state_changed" from="StateMachine/Cast" to="Keyboard" method="_on_cast_spell_state_changed"]

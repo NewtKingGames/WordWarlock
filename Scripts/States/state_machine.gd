@@ -17,11 +17,11 @@ func _ready():
 		current_state = initial_state
 
 func _process(delta: float):
-	if current_state:
+	if current_state and input_enabled:
 		current_state.Update(delta)
 	
 func _physics_process(delta: float):
-	if current_state:
+	if current_state and input_enabled:
 		current_state.Physics_Update(delta)
 
 func _input(event: InputEvent):

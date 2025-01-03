@@ -35,7 +35,7 @@ func slide_out() -> void:
 	play_slide_effects()
 	var destination_global_position: Vector2 = starting_global_position + (slide_direction*slide_magnitude)
 	slide_tween = create_tween()
-	slide_tween.tween_property(self, "global_position", destination_global_position, slide_out_time)
+	slide_tween.tween_property(self, "global_position", destination_global_position, slide_out_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await slide_tween.finished
 	stop_slide_effects()
 
@@ -43,7 +43,7 @@ func slide_back() -> void:
 	slide_back_sound.play()
 	play_slide_effects()
 	slide_tween = create_tween()
-	slide_tween.tween_property(self, "global_position", starting_global_position, slide_back_time)
+	slide_tween.tween_property(self, "global_position", starting_global_position, slide_back_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await slide_tween.finished
 	stop_slide_effects()
 

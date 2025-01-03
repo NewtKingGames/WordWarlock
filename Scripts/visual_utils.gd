@@ -4,7 +4,6 @@
 extends Node
 
 func fade_in_node(node: Node2D, duration: float=1.0) -> void:
-	print(duration)
 	var tween: Tween = create_tween()
 	modulate_node(node, duration, Color(1,1,1,1), tween)
 
