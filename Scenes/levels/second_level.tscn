@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cchfataq1nnxf"]
+[gd_scene load_steps=36 format=3 uid="uid://cchfataq1nnxf"]
 
 [ext_resource type="PackedScene" uid="uid://bldyigqbdrbpm" path="res://Scenes/levels/level.tscn" id="1_fm0cg"]
 [ext_resource type="PackedScene" uid="uid://dhx6a23hru8ou" path="res://Scenes/objects/torch.tscn" id="2_gdgjb"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scenes/levels/north_room_curse_handler.gd" id="13_pu7oq"]
 [ext_resource type="Texture2D" uid="uid://b6nf2grarfmpc" path="res://Sprites/v1.1 dungeon crawler 16X16 pixel pack/props_itens/chest_closed_anim_f0.png" id="14_kgm6w"]
 [ext_resource type="PackedScene" uid="uid://blv5bb1hvo01r" path="res://Scenes/objects/door_with_lock.tscn" id="15_24hfh"]
+[ext_resource type="PackedScene" uid="uid://6a10q4q0e11e" path="res://Scenes/levels/hub_level.tscn" id="16_1ufnb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dkvn6"]
 
@@ -117,7 +118,7 @@ layer_4/tile_data = PackedInt32Array(-327680, 131072, 6, -327679, 131072, 6, -32
 scale = Vector2(51.337, 28.1635)
 
 [node name="Player" parent="." index="4"]
-position = Vector2(2445, -47)
+position = Vector2(3393, -54)
 
 [node name="DarkeningLight" parent="." index="5"]
 energy = 0.65
@@ -290,6 +291,7 @@ texture = ExtResource("14_kgm6w")
 
 [node name="DoorWithLock" parent="." index="16" instance=ExtResource("15_24hfh")]
 position = Vector2(3392, -192)
+scene_to_take_player_to = ExtResource("16_1ufnb")
 
 [node name="Torch" parent="." index="17" instance=ExtResource("2_gdgjb")]
 position = Vector2(3233, -99)

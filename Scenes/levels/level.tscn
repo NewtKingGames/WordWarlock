@@ -32,7 +32,7 @@ _data = {
 "distort": SubResource("Animation_bkd6d")
 }
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" groups=["level"]]
 position = Vector2(0, 2)
 
 [node name="TileMap" type="TileMap" parent="."]

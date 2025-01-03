@@ -1,17 +1,20 @@
 extends Node2D
 
 
-var is_player_returning_from_level: bool = true
+# TODO - this should have an init function instead
+var is_player_returning_from_level: bool = false
 
 @onready var book_case_tile_slider_left: TileSlider = $BookCaseTileSliderLeft
 @onready var book_case_tile_slider_right: TileSlider = $BookCaseTileSliderRight
 
 
 var player: Player
+@onready var player_spawn_return_from_level: Marker2D = %PlayerSpawn_ReturnFromLevel
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as Player
 	if is_player_returning_from_level:
+		player.global_position = player_spawn_return_from_level.global_position
 		# Lock player controls
 		player.toggle_player_input(false)
 		# TODO - put player in correct position - you should add a Marker2D

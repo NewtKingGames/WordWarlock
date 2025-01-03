@@ -40,7 +40,7 @@ layer_4/tile_data = PackedInt32Array(851987, 262144, 5, 917523, 262144, 6, 85197
 position = Vector2(936, 571)
 
 [node name="Player" parent="." index="6"]
-position = Vector2(931, 1664)
+position = Vector2(938, 2471)
 
 [node name="LevelMusic" parent="Player" index="14"]
 stream = ExtResource("3_dmatl")
@@ -146,6 +146,10 @@ position = Vector2(968, 1755)
 slide_direction = Vector2(1, 2.08165e-12)
 slide_out_time = 1.9
 slide_back_time = 1.0
+
+[node name="PlayerSpawn_ReturnFromLevel" type="Marker2D" parent="." index="33"]
+unique_name_in_owner = true
+position = Vector2(936, 1643)
 
 [editable path="CanvasLayer"]
 [editable path="IntroDialoguePlayer"]
