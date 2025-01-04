@@ -74,3 +74,10 @@ var player_health: int = 4:
 				# Reset player health after restarting the game
 				player_health = 4
 				player_health_change.emit(player_health)
+
+func is_single_alphabetical_key(string: String) -> bool:
+	print(string)
+	print(string.unicode_at(0))
+	if string.length() != 1:
+		return false
+	return string.unicode_at(0) >= 65 and string.unicode_at(0) <= 90

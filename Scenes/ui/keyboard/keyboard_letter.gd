@@ -1,14 +1,14 @@
 class_name KeyboardLetter
 extends Node2D
 
+signal ice_broken
+
 @onready var letter_sprite = $LetterSprite
 @onready var letter_sprite_pressed = $LetterSpritePressed
 # This get's set by the parent 'keyboard' upon initialization in set_keyboard_letter
 @export var letter_string: String = ""
 @export var letter_num: int
 
-
-#
 var KEYBOARD_FROZEN_SCENE: PackedScene = preload("res://Scenes/ui/keyboard/keyboard_letter_frozen.tscn")
 var keyboard_letter_frozen: KeyboardLetterFrozen
 var letter_frozen: bool = false
@@ -32,12 +32,6 @@ func _ready():
 	# Allows for special keys
 	if letter_string != "":
 		set_keyboard_letter(letter_string, letter_num)
-	## temporary random to test inactive letters
-	#var random_num = randi_range(0, 1)
-	#if random_num == 0:
-		#letter_active = false
-	#if random_num == 1:
-		#letter_active = true
 
 func set_keyboard_letter(letter: String, letter_num: int):
 	letter_string = letter
@@ -58,6 +52,7 @@ func key_pressed() -> String:
 	)
 	return letter_string
 
+# Sticks the key down after pressing
 func key_pressed_stick_key() -> void:
 	letter_sprite.visible = false
 	letter_sprite_pressed.visible = true
@@ -74,5 +69,6 @@ func freeze_letter() -> void:
 		func():
 			letter_active = true
 			letter_frozen = false
+			ice_broken.emit()
 	)
 	add_child(keyboard_letter_frozen)

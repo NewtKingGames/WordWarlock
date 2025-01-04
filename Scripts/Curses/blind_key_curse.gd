@@ -5,6 +5,7 @@ extends Curse
 
 func _init() -> void:
 	name = "BLIND KEYS"
+	curse_type = CURSE_TYPE.BLIND_KEYS
 	primary_color = Color("#A1A592")
 	secondary_color = Color("#5C697A")
 	

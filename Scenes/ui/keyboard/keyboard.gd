@@ -13,6 +13,7 @@ var letter_dictionary = {}
 
 var is_highlight_on: bool = false
 var highlight_tweens: Array[Tween] = []
+var keyboard_frozen: bool = false
 
 # TODO - consider using a global variable for the players current typed word...
 var length_current_string: int = 0
@@ -33,6 +34,8 @@ func _ready():
 	Events.current_string_matches.connect(_on_current_string_matches)
 	Events.current_string_typed.connect(_on_player_typed_string)
 	Events.player_exited_casting_state.connect(_on_casting_state_exited)
+	# In order to support the frozen keyboard curse functionality we need to subscribe to any alphabetical key's 'ice_broken' signal
+	letter_dictionary["A"].ice_broken.connect(_on_letter_ice_broken)
 
 # This is where we change the visibllity
 func _on_cast_spell_state_changed(is_casting_active: bool, typed_string, spell_scene):
@@ -47,9 +50,15 @@ func key_pressed(letter_input: String) -> String:
 	if not letter_dictionary.has(letter_input):
 		return ""
 	typing_noises.play_typing_noise_pitch_modifier(Globals.current_player_typed_string.length())
-	var letter: KeyboardLetter = letter_dictionary[letter_input]
-	# key_pressed returns "" if the letter is inactive
-	return letter.key_pressed()
+	if keyboard_frozen and Globals.is_single_alphabetical_key(letter_input):
+		# Press every alphabetical key on the keyboard
+		for letter in letters.get_children():
+			letter.key_pressed()
+		return ""
+	else:
+		var letter: KeyboardLetter = letter_dictionary[letter_input]
+		# key_pressed returns "" if the letter is inactive
+		return letter.key_pressed()
 
 func disable_random_key() -> KeyboardLetter:
 	var letter_node: KeyboardLetter = get_random_active_key()
@@ -60,6 +69,13 @@ func freeze_random_key() -> KeyboardLetter:
 	var letter_node: KeyboardLetter = get_random_unfrozen_key()
 	letter_node.freeze_letter()
 	return letter_node
+
+# Freezes all letters A-Z
+func freeze_keyboard() -> void:
+	keyboard_frozen = true
+	for keyboard_letter in letters.get_children():
+		keyboard_letter = keyboard_letter as KeyboardLetter
+		keyboard_letter.freeze_letter()
 
 
 func get_random_unfrozen_key() -> KeyboardLetter:
@@ -123,3 +139,6 @@ func highlight_letters(keyboard_letters: Array[KeyboardLetter]) -> void:
 		#highlight_tweens.append(scale_tween)
 	
 	#keyboard_letter.modulate = Color(0.93, 0.755, 0.149)
+
+func _on_letter_ice_broken() -> void:
+	keyboard_frozen = false
